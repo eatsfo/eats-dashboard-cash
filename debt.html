@@ -1,0 +1,40 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>차입금 — 외식BG</title>
+<style>
+:root{--blue:#0066cc;--ink:#1d1d1f;--sub:#6e6e73;--line:#e5e5ea;--bg:#fbfbfd}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);padding:28px;font-variant-numeric:tabular-nums}
+h1{font-size:22px;font-weight:700;letter-spacing:-.4px}
+.sub{font-size:13px;color:var(--sub);margin:6px 0 22px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.card .lab{font-size:11px;font-weight:600;color:var(--sub);letter-spacing:.3px}
+.card .val{font-size:24px;font-weight:700;margin-top:6px;letter-spacing:-.5px}
+.card .cap{font-size:11px;color:var(--sub);margin-top:4px}
+.up{color:#dc2626} .dn{color:#0066cc}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:13px}
+th{text-align:left;font-size:11px;font-weight:600;color:var(--sub);padding:10px 14px;border-bottom:1px solid var(--line);background:#fafafa}
+td{padding:10px 14px;border-bottom:1px solid #f0f0f3}
+tr:last-child td{border-bottom:none}
+.num{text-align:right}
+.note{margin-top:22px;background:#f0f7ff;border-radius:14px;padding:14px 16px;font-size:12.5px;color:#1d1d1f;line-height:1.65}
+.note b{color:var(--blue)}
+h2{font-size:15px;font-weight:700;margin:26px 0 10px;letter-spacing:-.2px}
+</style></head><body>
+<h1>차입금</h1>
+<div class="sub">차입 잔액·만기 스케줄 — 언제 얼마를 갚거나 갈아타야 하는가 · 기준월 예시 — 실제 데이터로 교체하세요</div>
+<div class="cards">
+<div class="card"><div class="lab">차입 잔액</div><div class="val">498억</div><div class="cap">전월 512억 → −14억</div></div><div class="card"><div class="lab">3개월 내 만기</div><div class="val">85억</div><div class="cap">9월 집중 60억</div></div><div class="card"><div class="lab">가중평균 금리</div><div class="val">4.3%</div><div class="cap">전년 +0.2%p</div></div>
+</div>
+<h2>만기 스케줄</h2>
+<table>
+<thead><tr><th>차입처</th><th>잔액</th><th>금리</th><th>만기</th><th>계획</th></tr></thead>
+<tbody>
+<tr><td>○○은행 시설자금</td><td class="num">120억</td><td class="num">4.1%</td><td class="num">2026-09</td><td class="num">차환 협의 중</td></tr>
+<tr><td>○○은행 운영자금</td><td class="num">60억</td><td class="num">4.5%</td><td class="num">2026-09</td><td class="num">상환 검토</td></tr>
+<tr><td>○○캐피탈</td><td class="num">45억</td><td class="num">5.2%</td><td class="num">2027-03</td><td class="num">고금리 — 우선 상환 후보</td></tr>
+</tbody>
+</table>
+<div class="note"><b>이 페이지의 미션</b> — 만기 도래 전 상환 vs 차환을 결정할 수 있게, 만기·금리·계획을 한 표로 관리합니다. 결정 데드라인(만기 D-60)을 넘기지 않는 것이 핵심입니다.<br>
+위 숫자는 전부 <b>양식 예시</b>입니다. 매월 실제 값으로 바꾸고, 표·차트는 자유롭게 늘리세요. 디자인 규칙은 이 저장소의 CLAUDE.md가 자동 적용해 줍니다 (Claude Code로 작업 시).</div>
+</body></html>

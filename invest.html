@@ -1,0 +1,40 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>투자심의 — 외식BG</title>
+<style>
+:root{--blue:#0066cc;--ink:#1d1d1f;--sub:#6e6e73;--line:#e5e5ea;--bg:#fbfbfd}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);padding:28px;font-variant-numeric:tabular-nums}
+h1{font-size:22px;font-weight:700;letter-spacing:-.4px}
+.sub{font-size:13px;color:var(--sub);margin:6px 0 22px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.card .lab{font-size:11px;font-weight:600;color:var(--sub);letter-spacing:.3px}
+.card .val{font-size:24px;font-weight:700;margin-top:6px;letter-spacing:-.5px}
+.card .cap{font-size:11px;color:var(--sub);margin-top:4px}
+.up{color:#dc2626} .dn{color:#0066cc}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:13px}
+th{text-align:left;font-size:11px;font-weight:600;color:var(--sub);padding:10px 14px;border-bottom:1px solid var(--line);background:#fafafa}
+td{padding:10px 14px;border-bottom:1px solid #f0f0f3}
+tr:last-child td{border-bottom:none}
+.num{text-align:right}
+.note{margin-top:22px;background:#f0f7ff;border-radius:14px;padding:14px 16px;font-size:12.5px;color:#1d1d1f;line-height:1.65}
+.note b{color:var(--blue)}
+h2{font-size:15px;font-weight:700;margin:26px 0 10px;letter-spacing:-.2px}
+</style></head><body>
+<h1>투자심의</h1>
+<div class="sub">신규 출점·리뉴얼 투자안 심의 현황 · 기준월 예시 — 실제 데이터로 교체하세요</div>
+<div class="cards">
+<div class="card"><div class="lab">심의 대기</div><div class="val">3건</div><div class="cap">이번 달 접수</div></div><div class="card"><div class="lab">승인 누적(26년)</div><div class="val">12건</div><div class="cap">투자액 96억</div></div><div class="card"><div class="lab">평균 요구수익률</div><div class="val">20%</div><div class="cap">신규 허들 ROTC</div></div>
+</div>
+<h2>심의 안건</h2>
+<table>
+<thead><tr><th>안건</th><th>투자액</th><th>예상 월매출</th><th>예상 ROTC</th><th>회수기간</th><th>판정</th></tr></thead>
+<tbody>
+<tr><td>애슐리 ○○점 신규</td><td class="num">18억</td><td class="num">4.2억</td><td class="num">24%</td><td class="num">3.1년</td><td class="num">심의 중</td></tr>
+<tr><td>피자몰 ○○점 리뉴얼</td><td class="num">6억</td><td class="num">2.1억</td><td class="num">31%</td><td class="num">2.2년</td><td class="num">승인</td></tr>
+<tr><td>로운 ○○점 신규</td><td class="num">14억</td><td class="num">3.0억</td><td class="num">17%</td><td class="num">4.0년</td><td class="num">보류 — 허들 미달</td></tr>
+</tbody>
+</table>
+<div class="note"><b>이 페이지의 미션</b> — 들어온 투자안을 한 표에서 심의하고, 요구수익률(ROTC 20%) 기준으로 승인·보류를 기록합니다. 결정과 사유가 남는 것이 핵심입니다.<br>
+위 숫자는 전부 <b>양식 예시</b>입니다. 매월 실제 값으로 바꾸고, 표·차트는 자유롭게 늘리세요. 디자인 규칙은 이 저장소의 CLAUDE.md가 자동 적용해 줍니다 (Claude Code로 작업 시).</div>
+</body></html>
