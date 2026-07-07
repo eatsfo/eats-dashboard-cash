@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CAPEX 관리 — 외식사업부</title>
+<title>CAPEX — 외식사업부</title>
 <style>
   :root{
     --bg:#edeff3; --card:#ffffff; --parchment:#f5f5f7;
@@ -17,68 +17,260 @@
     font-family:-apple-system,'SF Pro Text','Inter',system-ui,'Pretendard','Malgun Gothic',sans-serif;
     font-feature-settings:"ss03"; -webkit-font-smoothing:antialiased; line-height:1.55; }
   .wrap{ max-width:1100px; margin:0 auto; padding:24px 22px 60px; }
-  header.top{ display:flex; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+  header.top{ display:flex; align-items:center; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
   header.top h1{ font-size:26px; font-weight:600; letter-spacing:-.5px; margin:0; }
   .tag{ background:var(--accent-bg); color:var(--accent); font-size:12px; font-weight:600; padding:3px 11px; border-radius:9999px; }
+  a.back{ color:var(--sub); text-decoration:none; font-size:13px; }
+  .story{ color:var(--sub); font-size:13px; margin:0 0 20px; }
+  .story b{ color:var(--ink); }
   .panel{ background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px 20px; margin-bottom:20px; }
-  .panel h2{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .panel h2{ font-size:15px; font-weight:600; margin:0 0 4px; }
+  .panel .sub{ color:var(--sub); font-size:12px; margin:0 0 12px; }
   .mnote{ color:var(--sub); font-size:12px; }
-  .insight{ background:#f4f8fc; border:1px solid #e3eaf2; border-radius:12px; padding:11px 14px; font-size:13px; }
+  .insight{ background:#f4f8fc; border:1px solid #e3eaf2; border-radius:12px; padding:11px 14px; font-size:13px; margin-top:12px; }
   .insight .ttl{ font-weight:700; color:var(--accent); margin-right:6px; }
   table{ width:100%; border-collapse:collapse; font-size:12px; font-variant-numeric:tabular-nums; }
   th,td{ padding:6px 10px; border-bottom:1px solid var(--line); text-align:right; }
   th:first-child,td:first-child{ text-align:left; }
   thead th{ background:var(--parchment); color:var(--ink); font-weight:600; }
+  tr.tot td{ background:var(--parchment); font-weight:600; }
   .up{ color:var(--bad-d); font-weight:600; }  .dn{ color:var(--good-d); font-weight:600; }
   .kv{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
   .kv .k{ background:var(--parchment); border-radius:12px; padding:9px 13px; font-size:12px; color:var(--sub); }
   .kv .k b{ display:block; color:var(--ink); font-size:17px; font-weight:600; margin-top:2px; font-variant-numeric:tabular-nums; }
-  .badge{ background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:2px 9px; border-radius:9999px; }
-  a.back{ color:var(--sub); text-decoration:none; font-size:13px; }
+  .kv .k small{ display:block; color:var(--faint); font-size:11px; margin-top:2px; }
+  .badge{ display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:9999px; }
+  .badge.ok{ background:#e7f6ec; color:var(--good-d); }
+  .badge.no{ background:#fdecec; color:var(--bad-d); }
+  .bar{ position:relative; height:8px; background:var(--parchment); border-radius:9999px; overflow:hidden; min-width:70px; }
+  .bar i{ position:absolute; left:0; top:0; height:100%; background:var(--accent); border-radius:9999px; }
+  .bar i.warn{ background:var(--warn); }
+  .bar i.bad{ background:var(--bad); }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:760px){ .grid2{ grid-template-columns:1fr; } }
+  .lever{ margin-bottom:14px; }
+  .lever .lt{ display:flex; justify-content:space-between; align-items:baseline; font-size:13px; margin-bottom:4px; }
+  .lever .lv{ font-weight:600; color:var(--accent); font-variant-numeric:tabular-nums; }
+  input[type=range]{ width:100%; accent-color:var(--accent); height:5px; }
+  .resline{ display:flex; align-items:baseline; gap:8px; margin:6px 0; font-size:13px; }
+  .resline b{ font-size:22px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.5px; }
+  .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>CAPEX 관리</h1>
-    <span class="tag">외식사업부 · CAPEX 담당</span>
+    <h1>CAPEX</h1>
+    <span class="tag">외식사업부 · 기준 2026.05</span>
     <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
   </header>
+  <p class="story">현재 페이스(ACT) 영업이익 <b>594억</b>. 올해 CAPEX <b>251억</b>으로 <b>추가 영업이익 +100~200억</b>을 만들어야 합니다.
+    이 페이지는 <b>돈이 계획대로 나가고 있는지 → 남은 돈으로 몇 개를 열 수 있는지 → 열면 실제로 벌리는지</b>를 추적합니다.</p>
 
-  <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- ⬇⬇⬇  여기서부터 클로드코드로 자유롭게 만들어 나가세요  ⬇⬇⬇  -->
-  <!--  아래 예시(👋·표·지표)는 스타일 참고용이니, 실제 내용으로 바꾸거나 지우세요. -->
-  <!-- ════════════════════════════════════════════════════════════ -->
-
+  <!-- ① 앵커 KPI -->
   <div class="panel">
-    <h2>👋 CAPEX 담당 전용 페이지</h2>
-    <div class="mnote">이 페이지는 <b>CAPEX 담당자</b>가 전권으로 관리합니다. 클로드코드에게
-      <b>"CAPEX 페이지를 이렇게 만들어줘"</b>라고 말하면서 채워 나가세요. 저장·업로드하면 약 1분 뒤 사이트에 자동 반영됩니다.</div>
+    <h2>① 올해의 숫자 — CAPEX가 답해야 할 목표</h2>
+    <p class="sub">하반기롤링플랜(예산설정) · 씨드머니 기준 CAPEX 예산 · 26.05 누적</p>
+    <div class="kv">
+      <div class="k">영업이익 현재 페이스(ACT)<b>594억</b><small>롤링플랜 연간 전망</small></div>
+      <div class="k">목표 추가 영업이익<b>+100~200억</b><small>신규 투자로 — 주력은 애슐리</small></div>
+      <div class="k">CAPEX 한도(연)<b>251억</b><small>신규 204 · 리뉴얼 30 · 유지보수 17</small></div>
+      <div class="k">집행 누적(5월)<b>124.3억</b><small>소진율 49% (연 경과 42%)</small></div>
+      <div class="k">잔여<b>127.0억</b><small>신규 100.9 · 리뉴얼 20.3 · 유보 5.8</small></div>
+    </div>
+    <div class="insight"><span class="ttl">💡 결론</span>연 경과(42%)보다 집행(49%)이 빠름 — 남은 7개월은 <b>잔여 127억</b>으로 추가 영업이익 +100~200억의 신규 기여분을 만들어야 함. 아래 ③·④에서 "몇 개, 어디에"를 판정.</div>
   </div>
 
+  <!-- ② 예산 vs 집행 -->
   <div class="panel">
-    <h2>예시 — 표 (지우고 실제 데이터로)</h2>
+    <h2>② 예산 vs 집행 — 브랜드 × 신규/리뉴얼/유지보수</h2>
+    <p class="sub">씨드머니 기준 예산(연) 대비 26.05 누적 집행 · 단위 억원 · 출처 L108 CAPEX상세 [요약]</p>
     <table>
-      <thead><tr><th>항목</th><th>전월</th><th>당월</th><th>증감</th></tr></thead>
+      <thead><tr><th>브랜드</th><th>예산(연)</th><th>신규</th><th>리뉴얼</th><th>유지보수</th><th>집행</th><th>잔액</th><th style="width:110px">소진율</th></tr></thead>
+      <tbody id="budgetBody"></tbody>
+    </table>
+    <div class="insight"><span class="ttl">💡 결론</span>신규 집행 103.2억의 <b>77%가 애슐리(79.7억)</b>. 로운은 예산 43.5억 중 6.0억만 집행(14%) — 하반기 예정지(동부산·부천역사)에 배정된 몫인지 확인 필요. 베이커리·더카페·프차는 <b>예산 초과</b> — 소액이지만 통제 밖 지출.</div>
+  </div>
+
+  <!-- ③ 계산기 -->
+  <div class="panel">
+    <h2>③ 몇 개를 열어야 하나 — 신규 출점 계산기</h2>
+    <p class="sub">기본값은 24·25년 오픈 87개점의 <b>실측</b>(매장당 CAPEX 8.2억 · 월이익 0.66억, 애슐리 기준). 슬라이더로 가정을 바꿔보세요.</p>
+    <div class="grid2">
+      <div>
+        <div class="lever"><div class="lt"><span>목표 추가 영업이익(연)</span><span class="lv"><span id="vTarget">150</span>억</span></div>
+          <input type="range" id="sTarget" min="50" max="250" value="150" step="10"></div>
+        <div class="lever"><div class="lt"><span>매장당 CAPEX</span><span class="lv"><span id="vCapex">8.2</span>억</span></div>
+          <input type="range" id="sCapex" min="3" max="12" value="8.2" step="0.1"></div>
+        <div class="lever"><div class="lt"><span>매장당 월 영업이익</span><span class="lv"><span id="vMoi">0.66</span>억</span></div>
+          <input type="range" id="sMoi" min="0.2" max="1.2" value="0.66" step="0.02"></div>
+        <div class="mnote">참고: 실측 0.66억/월 · 승인목표는 0.9억/월 — 목표대로면 슬라이더를 0.9로.</div>
+      </div>
+      <div>
+        <div class="resline"><span>필요 오픈</span><b id="rNeed">—</b><span>개 (연환산 기준)</span></div>
+        <div class="resline"><span>잔여 신규예산 100.9억으로 가능</span><b id="rCan">—</b><span>개</span></div>
+        <div class="resline"><span id="rGapLabel">부족 예산</span><b id="rGap">—</b><span>억 <span id="rBadge" class="badge">—</span></span></div>
+        <div class="mnote" id="rNote"></div>
+      </div>
+    </div>
+    <div class="insight"><span class="ttl">💡 결론</span><span id="calcInsight"></span></div>
+  </div>
+
+  <!-- ④ 하반기 예정지 -->
+  <div class="panel">
+    <h2>④ 하반기 오픈 예정지 — 이대로면 목표 달성?</h2>
+    <p class="sub">투자심의 승인(O)·미오픈 안건 16건 · 목표매출×목표이익률로 기여 계산 · 출처 투자심의리스트 26.06.23</p>
+    <table>
+      <thead><tr><th>안건</th><th>브랜드</th><th>오픈예정</th><th>투자비</th><th>월매출 목표</th><th>이익률</th><th>월이익</th><th>연환산 기여</th><th>26년 내 기여</th></tr></thead>
+      <tbody id="pipeBody"></tbody>
+    </table>
+    <div class="kv" style="margin-top:12px">
+      <div class="k">예정지 투자비 합계<b id="pCapex">—</b><small>잔여 예산 127억 대비</small></div>
+      <div class="k">연환산 기여 합계<b id="pRun">—</b><small>목표 +100~200억 구간 판정</small></div>
+      <div class="k">26년 내 기여<b id="pYear">—</b><small>오픈월~12월 실제 반영분</small></div>
+      <div class="k">목표 상단(200억) 대비<b id="pGap">—</b><small>연환산 기준</small></div>
+    </div>
+    <div class="insight"><span class="ttl">💡 결론</span><span id="pipeInsight"></span></div>
+  </div>
+
+  <!-- ⑤ 성적표 -->
+  <div class="panel">
+    <h2>⑤ 오픈매장 성적표 — 약속대로 벌리고 있나</h2>
+    <p class="sub">24·25년 오픈 87개점 · 26.05 기준 갱신(신규오픈점피드백 2605) · 단위 억원</p>
+    <div class="kv" style="margin-bottom:12px">
+      <div class="k">누적 투자(보증금+공사비)<b>478억</b><small>승인 대비 CAPEX 달성율 128% — 초과집행 관행</small></div>
+      <div class="k">월 영업이익<b>36.2억</b><small>연환산 435억 — 회사 신규성장 엔진</small></div>
+      <div class="k">투자 회수 완료<b>52 / 87개</b><small>60%</small></div>
+      <div class="k">적자 매장<b>9개</b><small>리미니 2 · 로운 2 · 델리 2 등 — 정리 검토 대상</small></div>
+    </div>
+    <table>
+      <thead><tr><th>브랜드</th><th>매장수</th><th>투자</th><th>월매출</th><th>월이익</th><th>매장당 CAPEX</th><th>매장당 월이익</th><th>회수완료</th><th>적자</th></tr></thead>
       <tbody>
-        <tr><td>신규출점 CAPEX</td><td>18.2억</td><td>21.5억</td><td class="dn">+3.3억</td></tr>
-        <tr><td>유지보수 재투자율</td><td>2.4배</td><td>2.6배</td><td class="up">+0.2배</td></tr>
+        <tr><td>애슐리퀸즈</td><td>48</td><td>391.2</td><td>189.8</td><td>31.6</td><td>8.15</td><td>0.66</td><td>37</td><td>1</td></tr>
+        <tr><td>월드델리</td><td>13</td><td>36.0</td><td>30.6</td><td>1.4</td><td>2.77</td><td>0.11</td><td>4</td><td>2</td></tr>
+        <tr><td>로운</td><td>5</td><td>22.9</td><td>12.8</td><td>1.7</td><td>4.58</td><td>0.34</td><td>1</td><td>2</td></tr>
+        <tr><td>피자몰</td><td>13</td><td>13.8</td><td>8.3</td><td>1.2</td><td>1.06</td><td>0.09</td><td>8</td><td>1</td></tr>
+        <tr><td>리미니</td><td>6</td><td>13.0</td><td>4.4</td><td>0.3</td><td>2.16</td><td>0.06</td><td>2</td><td>2</td></tr>
+        <tr><td>기타(테루·뺑드)</td><td>2</td><td>1.1</td><td>0.4</td><td>0.0</td><td>0.55</td><td>0.00</td><td>0</td><td>1</td></tr>
+        <tr class="tot"><td>합계</td><td>87</td><td>477.8</td><td>246.3</td><td>36.2</td><td>5.49</td><td>0.42</td><td>52</td><td>9</td></tr>
       </tbody>
     </table>
+    <div class="insight"><span class="ttl">💡 결론</span>신규점 이익의 <b>87%가 애슐리</b>(31.6/36.2억). CAPEX는 승인 대비 <b>+28% 초과집행이 관행</b> — ④의 예정지 투자비도 실집행은 1.28배로 보고 잔여 예산과 대조 필요. 적자 9개점은 폐점 시 <b>사용자본 회수</b>로 반영.</div>
   </div>
 
+  <!-- ⑥ 방향 -->
   <div class="panel">
-    <h2>예시 — 핵심 지표 + 결론</h2>
-    <div class="kv">
-      <div class="k">영업현금흐름<b>21.5억</b></div>
-      <div class="k">순차입금<b>312억</b></div>
-      <div class="k">평균 회수기간(Payback)<b>3.4배</b></div>
-    </div>
-    <div class="insight" style="margin-top:12px"><span class="ttl">💡 결론</span>여기에 "그래서 무엇을 결정해야 하는지"를 한 줄로 적습니다 (예: 영업현금 +3.3억이지만 차입 만기 D-90 도래 — 상환 vs 리파이낸싱 결정 시한).</div>
+    <h2>⑥ 움직여야 할 방향 — CAPEX 1억이 버는 연 영업이익</h2>
+    <p class="sub">매장당 연이익 ÷ 매장당 CAPEX (24·25 오픈 실적 기준) · 단순 회수기간 병기</p>
+    <table>
+      <thead><tr><th>브랜드</th><th style="width:220px">CAPEX 효율(연)</th><th>수익률</th><th>단순 회수기간</th><th>가이드</th></tr></thead>
+      <tbody>
+        <tr><td>피자몰</td><td><div class="bar"><i style="width:100%"></i></div></td><td>105%</td><td>11개월</td><td class="dn">▲ 소액·고효율 — 월 1~2점 페이스 유지</td></tr>
+        <tr><td>애슐리</td><td><div class="bar"><i style="width:92%"></i></div></td><td>97%</td><td>12개월</td><td class="dn">▲ 추가이익 목표의 주력 — 신규예산 우선 배정</td></tr>
+        <tr><td>로운</td><td><div class="bar"><i style="width:85%"></i></div></td><td>89%</td><td>13개월</td><td>예산 43억 중 집행 14% — 하반기 2건으로 소화</td></tr>
+        <tr><td>월드델리</td><td><div class="bar"><i class="warn" style="width:45%"></i></div></td><td>48%</td><td>25개월</td><td class="up">▼ 속도 조절 — 소형·저이익</td></tr>
+        <tr><td>리미니</td><td><div class="bar"><i class="bad" style="width:31%"></i></div></td><td>33%</td><td>37개월</td><td class="up">▼ 신규 중단 검토 — 6개 중 적자 2</td></tr>
+      </tbody>
+    </table>
+    <div class="insight"><span class="ttl">💡 결론</span>잔여 신규예산 101억은 <b>애슐리·피자몰(효율 ~100%)</b>에 집중하는 것이 추가 +100~200억 목표의 최단 경로. 리미니·월드델리 신규는 회수 2~3년 — 보류하고 그 몫을 애슐리 1~2점으로 돌리면 <b>연 +8~16억</b> 추가.</div>
   </div>
 
-  <!-- ⬆⬆⬆  위 예시들은 지우고 실제 내용으로 채우세요  ⬆⬆⬆ -->
-
+  <div class="src">
+    데이터 기준 2026.05 · 원천: 하반기롤링플랜_예산설정(ACT 목표) · L108_추가 CAPEX 점포 CAPEX상세_2605(예산·집행) · ★★EATS 신규오픈점피드백 2605 갱신본(오픈매장 실적) · (외식BG)투자심의리스트_2026-06-23(하반기 예정지)<br>
+    갱신 방법: 클로드코드에게 "capex 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 이 페이지의 숫자를 교체합니다.
+  </div>
 </div>
+
+<script>
+// ═══ 데이터 (2026.05 기준 — 갱신 시 이 블록만 교체) ═══
+var BUDGET = [ // [브랜드, 예산연간, 신규집행, 리뉴얼집행, 유지보수집행, 집행합, 잔액]
+  ["애슐리",141.0,79.65,5.89,8.15,93.68,47.32],
+  ["델리",25.6,5.52,0,0.20,5.72,19.88],
+  ["로운",43.5,1.74,2.66,1.64,6.03,37.47],
+  ["피자몰",10.0,3.22,0,1.12,4.33,5.67],
+  ["리미니",0.71,0.01,0,0.14,0.15,0.56],
+  ["베이커리",0.30,0,1.13,0.12,1.26,-0.96],
+  ["더카페",0.10,0.28,0,0,0.28,-0.18],
+  ["프랜차이즈",0.09,0.02,0,0.11,0.12,-0.04],
+  ["기타(CK등)",30.0,12.72,0,0,12.72,17.28]
+];
+var PIPE = [ // [안건, 브랜드, 오픈월, 투자비(백만), 월매출목표(백만), 이익률%]
+  ["NC송파 면적확장","애슐리",6,1150,900,23],
+  ["잠실롯데캐슬 리뉴얼","애슐리",12,1050,1000,28],
+  ["부천역사","애슐리",10,1050,800,21],
+  ["롯데백화점 영등포","애슐리",7,850,500,16],
+  ["롯데몰 수지 이동","애슐리",8,820,550,17],
+  ["파주 신세계아울렛","애슐리",10,790,450,15],
+  ["수유역","애슐리",10,620,400,15],
+  ["부천역사","로운",10,520,300,16],
+  ["롯데아울렛 동부산","로운",10,400,320,18],
+  ["NC송파","자연별곡",6,400,270,10],
+  ["응암 이마트","자연별곡",7,300,240,11],
+  ["AK분당 이동","프랑제리",6,230,250,15],
+  ["김해 이마트","피자몰",9,180,150,12],
+  ["강남 확장리뉴얼","리미니",6,170,170,17.4],
+  ["광교 아브뉴프랑","피자몰",7,130,80,15],
+  ["천안 서북 이마트","피자몰",10,110,80,10]
+];
+var REMAIN_NEW = 100.9, TARGET_LO = 100, TARGET_HI = 200;
+
+function $(id){ return document.getElementById(id); }
+function f1(x){ return (Math.round(x*10)/10).toLocaleString(); }
+
+// ② 예산 테이블
+(function(){
+  var h="", t=[0,0,0,0,0,0];
+  BUDGET.forEach(function(r){
+    var rate = r[1]>0 ? r[5]/r[1] : null;
+    var w = rate===null?100:Math.min(100,Math.round(rate*100));
+    var cls = rate===null||rate>1 ? "bad" : (rate>0.6 ? "warn" : "");
+    var rateTxt = rate===null ? "예산없음" : Math.round(rate*100)+"%";
+    for(var i=1;i<=6;i++) t[i-1]+=r[i];
+    h+="<tr><td>"+r[0]+"</td><td>"+f1(r[1])+"</td><td>"+f1(r[2])+"</td><td>"+f1(r[3])+"</td><td>"+f1(r[4])+"</td><td>"+f1(r[5])+"</td><td class='"+(r[6]<0?"up":"")+"'>"+f1(r[6])+"</td>"+
+       "<td><div class='bar'><i class='"+cls+"' style='width:"+w+"%'></i></div><span class='mnote'>"+rateTxt+"</span></td></tr>";
+  });
+  h+="<tr class='tot'><td>합계</td><td>"+f1(t[0])+"</td><td>"+f1(t[1])+"</td><td>"+f1(t[2])+"</td><td>"+f1(t[3])+"</td><td>"+f1(t[4])+"</td><td>"+f1(t[5])+"</td><td>"+Math.round(t[4]/t[0]*100)+"%</td></tr>";
+  $("budgetBody").innerHTML=h;
+})();
+
+// ③ 계산기
+function calc(){
+  var target=+$("sTarget").value, capex=+$("sCapex").value, moi=+$("sMoi").value;
+  $("vTarget").textContent=target; $("vCapex").textContent=capex.toFixed(1); $("vMoi").textContent=moi.toFixed(2);
+  var need=Math.ceil(target/(moi*12));
+  var can=Math.floor(REMAIN_NEW/capex);
+  var needBudget=need*capex, gap=needBudget-REMAIN_NEW;
+  $("rNeed").textContent=need; $("rCan").textContent=can;
+  var ok=gap<=0;
+  $("rGapLabel").textContent=ok?"예산 여유":"부족 예산";
+  $("rGap").textContent=f1(Math.abs(gap));
+  var b=$("rBadge"); b.textContent=ok?"예산 내 달성 가능":"예산 초과"; b.className="badge "+(ok?"ok":"no");
+  $("rNote").textContent="하반기(7월~) 오픈 가정 시 26년 내 실제 기여는 "+need+"개 × "+moi.toFixed(2)+"억 × ~6개월 = 약 "+f1(need*moi*6)+"억 (연환산 "+f1(need*moi*12)+"억).";
+  $("calcInsight").innerHTML="이 가정으로 목표 +"+target+"억 = <b>"+need+"개</b> 필요 vs 잔여 예산으로 <b>"+can+"개</b> 가능"+(ok?" — 예산 내 달성 가능.":" — <b>"+f1(gap)+"억 부족</b>. 매장당 이익을 승인목표(0.9억)로 끌어올리면 필요 개수가 "+Math.ceil(target/(0.9*12))+"개로 줄어듦 — 개수 늘리기보다 <b>기존 신규점 이익률 회복(달성율 73%→100%)</b>이 더 싼 레버.");
+}
+["sTarget","sCapex","sMoi"].forEach(function(id){ $(id).addEventListener("input",calc); });
+
+// ④ 예정지
+(function(){
+  var h="",tc=0,tr=0,ty=0;
+  PIPE.forEach(function(p){
+    var moi=p[4]*p[5]/100;             // 월이익(백만)
+    var run=moi*12/100;                 // 연환산(억)
+    var months=Math.max(0,13-Math.max(p[2],6)); // 26년 내 기여 개월(6월 이후)
+    var inyear=moi*months/100;          // 억
+    tc+=p[3]; tr+=run; ty+=inyear;
+    h+="<tr><td>"+p[0]+"</td><td>"+p[1]+"</td><td>"+p[2]+"월</td><td>"+f1(p[3]/100)+"억</td><td>"+f1(p[4]/100)+"억</td><td>"+p[5]+"%</td><td>"+f1(moi/100)+"억</td><td>"+f1(run)+"억</td><td>"+f1(inyear)+"억</td></tr>";
+  });
+  $("pipeBody").innerHTML=h;
+  $("pCapex").textContent=f1(tc/100)+"억";
+  $("pRun").textContent="+"+f1(tr)+"억";
+  $("pYear").textContent="+"+f1(ty)+"억";
+  $("pGap").textContent=(tr>=TARGET_HI?"+":"−")+f1(Math.abs(TARGET_HI-tr))+"억";
+  var band = tr>=TARGET_HI?"목표 상단(200억)까지 통과":(tr>=TARGET_LO?"목표 하단(100억) 통과 · 상단 미달":"목표 하단(100억) 미달");
+  $("pipeInsight").innerHTML="예정지 16건 전부 오픈 시 연환산 <b>+"+f1(tr)+"억</b> — "+band+". 목표 상단(200억)까지 <b>"+f1(Math.abs(TARGET_HI-tr))+"억 "+(tr>=TARGET_HI?"초과":"남음")+"</b>이고, 26년 내 실제 반영은 <b>+"+f1(ty)+"억</b>뿐(대부분 4Q 오픈). 부족분은 ③의 애슐리 추가 출점 또는 기존점 이익률 회복으로. 단, 투자비 "+f1(tc/100)+"억에 초과집행 관행(+28%)을 얹으면 <b>~"+f1(tc/100*1.28)+"억</b> — 잔여 127억을 넘어설 수 있어 4Q 안건은 선별 필요.";
+})();
+
+calc();
+</script>
 </body>
 </html>
