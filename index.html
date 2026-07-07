@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>현금 분석 — 외식사업부</title>
+<title>현금·씨드머니 — 외식사업부</title>
 <style>
   :root{
     --bg:#edeff3; --card:#ffffff; --parchment:#f5f5f7;
@@ -17,68 +17,244 @@
     font-family:-apple-system,'SF Pro Text','Inter',system-ui,'Pretendard','Malgun Gothic',sans-serif;
     font-feature-settings:"ss03"; -webkit-font-smoothing:antialiased; line-height:1.55; }
   .wrap{ max-width:1100px; margin:0 auto; padding:24px 22px 60px; }
-  header.top{ display:flex; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+  header.top{ display:flex; align-items:center; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
   header.top h1{ font-size:26px; font-weight:600; letter-spacing:-.5px; margin:0; }
   .tag{ background:var(--accent-bg); color:var(--accent); font-size:12px; font-weight:600; padding:3px 11px; border-radius:9999px; }
+  a.back{ color:var(--sub); text-decoration:none; font-size:13px; }
+  .story{ color:var(--sub); font-size:13px; margin:0 0 20px; }
+  .story b{ color:var(--ink); }
   .panel{ background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px 20px; margin-bottom:20px; }
-  .panel h2{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .panel h2{ font-size:15px; font-weight:600; margin:0 0 4px; }
+  .panel .sub{ color:var(--sub); font-size:12px; margin:0 0 12px; }
   .mnote{ color:var(--sub); font-size:12px; }
-  .insight{ background:#f4f8fc; border:1px solid #e3eaf2; border-radius:12px; padding:11px 14px; font-size:13px; }
+  .insight{ background:#f4f8fc; border:1px solid #e3eaf2; border-radius:12px; padding:11px 14px; font-size:13px; margin-top:12px; }
   .insight .ttl{ font-weight:700; color:var(--accent); margin-right:6px; }
   table{ width:100%; border-collapse:collapse; font-size:12px; font-variant-numeric:tabular-nums; }
   th,td{ padding:6px 10px; border-bottom:1px solid var(--line); text-align:right; }
   th:first-child,td:first-child{ text-align:left; }
   thead th{ background:var(--parchment); color:var(--ink); font-weight:600; }
+  tr.tot td{ background:var(--parchment); font-weight:600; }
   .up{ color:var(--bad-d); font-weight:600; }  .dn{ color:var(--good-d); font-weight:600; }
   .kv{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
   .kv .k{ background:var(--parchment); border-radius:12px; padding:9px 13px; font-size:12px; color:var(--sub); }
   .kv .k b{ display:block; color:var(--ink); font-size:17px; font-weight:600; margin-top:2px; font-variant-numeric:tabular-nums; }
-  .badge{ background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:2px 9px; border-radius:9999px; }
-  a.back{ color:var(--sub); text-decoration:none; font-size:13px; }
+  .kv .k small{ display:block; color:var(--faint); font-size:11px; margin-top:2px; }
+  .ox{ display:inline-block; width:20px; height:20px; line-height:20px; text-align:center; border-radius:9999px; font-size:11px; font-weight:700; }
+  .ox.o{ background:#e7f6ec; color:var(--good-d); }
+  .ox.x{ background:#fdecec; color:var(--bad-d); }
+  /* 분해 스택바 */
+  .stack{ display:flex; height:34px; border-radius:9999px; overflow:hidden; margin:10px 0 4px; }
+  .stack i{ display:block; height:100%; position:relative; }
+  .stack i + i{ border-left:2px solid #fff; }
+  .stacklg{ display:flex; flex-wrap:wrap; gap:12px; font-size:11.5px; color:var(--sub); margin-top:8px; }
+  .stacklg .sw{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:4px; vertical-align:-1px; }
+  /* 산점도 */
+  .scatter{ position:relative; height:380px; margin:26px 8px 8px; border-left:1px solid var(--line2); border-bottom:1px solid var(--line2); }
+  .q{ position:absolute; font-size:10.5px; color:var(--faint); }
+  .qline-x{ position:absolute; left:0; right:0; height:0; border-top:1.5px dashed var(--line2); }
+  .qline-y{ position:absolute; top:0; bottom:0; width:0; border-left:1.5px dashed var(--line2); }
+  .dot{ position:absolute; border-radius:50%; background:rgba(0,102,204,.72); border:2px solid #fff; transform:translate(-50%,50%); }
+  .dot.neg{ background:rgba(220,38,38,.72); }
+  .dot-lb{ position:absolute; font-size:11px; color:var(--ink); transform:translate(-50%,50%); white-space:nowrap; font-weight:600; }
+  .ax{ position:absolute; font-size:10.5px; color:var(--faint); }
+  /* 시뮬 */
+  .lever{ margin-bottom:12px; }
+  .lever .lt{ display:flex; justify-content:space-between; align-items:baseline; font-size:13px; margin-bottom:2px; }
+  .lever .lv{ font-weight:600; color:var(--accent); font-variant-numeric:tabular-nums; }
+  .lever .eff{ color:var(--faint); font-size:11px; margin-left:6px; font-weight:400; }
+  input[type=range]{ width:100%; accent-color:var(--accent); height:5px; }
+  .grid2{ display:grid; grid-template-columns:1.1fr 1fr; gap:18px; }
+  @media (max-width:760px){ .grid2{ grid-template-columns:1fr; } }
+  .resline{ display:flex; align-items:baseline; gap:8px; margin:6px 0; font-size:13px; }
+  .resline b{ font-size:22px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.5px; }
+  .badge{ display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:9999px; }
+  .badge.ok{ background:#e7f6ec; color:var(--good-d); }
+  .badge.no{ background:#fdecec; color:var(--bad-d); }
+  .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>현금 분석</h1>
-    <span class="tag">외식사업부 · 현금 담당</span>
+    <h1>현금 · 씨드머니</h1>
+    <span class="tag">외식사업부 · 기준 2026.05</span>
     <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
   </header>
+  <p class="story">브랜드가 <b>스스로 번 현금(씨드머니)</b>으로만 다음 투자를 하는 구조.
+    이 페이지는 <b>누가 현금을 만들고 있는지 → 사용자본이 어디에 잠겨 있는지 → 어디로 옮겨야 하는지</b>를 답합니다.</p>
 
-  <!-- ════════════════════════════════════════════════════════════ -->
-  <!-- ⬇⬇⬇  여기서부터 클로드코드로 자유롭게 만들어 나가세요  ⬇⬇⬇  -->
-  <!--  아래 예시(👋·표·지표)는 스타일 참고용이니, 실제 내용으로 바꾸거나 지우세요. -->
-  <!-- ════════════════════════════════════════════════════════════ -->
-
+  <!-- ① 시드머니 현황판 -->
   <div class="panel">
-    <h2>👋 현금 담당 전용 페이지</h2>
-    <div class="mnote">이 페이지는 <b>현금 담당자</b>가 전권으로 관리합니다. 클로드코드에게
-      <b>"현금 페이지를 이렇게 만들어줘"</b>라고 말하면서 채워 나가세요. 저장·업로드하면 약 1분 뒤 사이트에 자동 반영됩니다.</div>
-  </div>
-
-  <div class="panel">
-    <h2>예시 — 표 (지우고 실제 데이터로)</h2>
+    <h2>① 시드머니 현황판 — 브랜드별 창출현금과 사용가능 잔고</h2>
+    <p class="sub">26년 5월 누적 · 단위 억원 · 잔고 = 기초 + 당해(창출현금의 50%) − 성장엔진 − 배당 · 출처 현금시드머니 260615</p>
+    <div class="kv" style="margin-bottom:12px">
+      <div class="k">법인 창출현금 (5월 누적)<b>108.0억</b><small>영업이익 134.1 + 감가 77.3 − CAPEX 124.3 − 이자·세금 등</small></div>
+      <div class="k">법인 사용가능 잔고<b>234.8억</b><small>기초 201.1 + 당해 33.7</small></div>
+      <div class="k">시드머니 보유(O)<b>7 / 10 브랜드</b><small>X: 델리 · 자연별곡 · 파이낸스</small></div>
+      <div class="k">사용자본<b>1,005억</b><small>투자자본 5,030억 중 실사용</small></div>
+    </div>
     <table>
-      <thead><tr><th>항목</th><th>전월</th><th>당월</th><th>증감</th></tr></thead>
+      <thead><tr><th>브랜드</th><th>사용자본</th><th>영업이익(누적)</th><th>창출현금(누적)</th><th>시드머니</th><th>기초</th><th>당해(50%)</th><th>사용가능 잔고</th></tr></thead>
       <tbody>
-        <tr><td>영업활동 현금흐름</td><td>18.2억</td><td>21.5억</td><td class="dn">+3.3억</td></tr>
-        <tr><td>순차입금 / EBITDA</td><td>2.4배</td><td>2.6배</td><td class="up">+0.2배</td></tr>
+        <tr><td>애슐리</td><td>635</td><td>125.1</td><td>108.7</td><td><span class="ox o">O</span></td><td>182.5</td><td>54.3</td><td class="dn">236.8</td></tr>
+        <tr><td>로운</td><td>52</td><td>6.5</td><td>11.3</td><td><span class="ox o">O</span></td><td>0.1</td><td>5.7</td><td class="dn">5.8</td></tr>
+        <tr><td>피자몰</td><td>19</td><td>9.2</td><td>10.8</td><td><span class="ox o">O</span></td><td>7.5</td><td>5.4</td><td class="dn">12.9</td></tr>
+        <tr><td>리미니</td><td>31</td><td>4.5</td><td>9.1</td><td><span class="ox o">O</span></td><td>7.7</td><td>4.6</td><td class="dn">12.2</td></tr>
+        <tr><td>프차</td><td>-9</td><td>3.1</td><td>4.1</td><td><span class="ox o">O</span></td><td>2.7</td><td>2.0</td><td class="dn">4.8</td></tr>
+        <tr><td>카페</td><td>17</td><td>1.9</td><td>2.0</td><td><span class="ox o">O</span></td><td>0.9</td><td>1.0</td><td class="dn">1.9</td></tr>
+        <tr><td>프랑제리</td><td>19</td><td>-0.9</td><td>1.8</td><td><span class="ox o">O</span></td><td>-0.6</td><td>0.9</td><td class="dn">0.3</td></tr>
+        <tr><td>델리</td><td>83</td><td>1.4</td><td>0.7</td><td><span class="ox x">X</span></td><td>-0.6</td><td>0.3</td><td class="up">-0.2</td></tr>
+        <tr><td>자연별곡</td><td>3</td><td>-1.0</td><td>-6.9</td><td><span class="ox x">X</span></td><td>0.9</td><td>-6.9</td><td class="up">-6.0</td></tr>
+        <tr><td>파이낸스</td><td>155</td><td>-15.7</td><td>-33.7</td><td><span class="ox x">X</span></td><td>–</td><td>-33.7</td><td class="up">-33.7</td></tr>
+        <tr class="tot"><td>법인</td><td>1,005</td><td>134.1</td><td>108.0</td><td><span class="ox o">O</span></td><td>201.1</td><td>33.7</td><td>234.8</td></tr>
       </tbody>
     </table>
+    <div class="insight"><span class="ttl">💡 결론</span>법인 잔고 234.8억 중 <b>애슐리가 236.8억</b> — 사실상 애슐리 혼자 법인의 곳간. 델리(-0.2)·자연별곡(-6.0)·파이낸스(-33.7)는 <b>남의 씨드머니로 사는 상태</b> — 신규 투자 전 자체 현금 창출 회복이 선행 조건.</div>
   </div>
 
+  <!-- ② 사용자본 분해 -->
   <div class="panel">
-    <h2>예시 — 핵심 지표 + 결론</h2>
-    <div class="kv">
-      <div class="k">영업현금흐름<b>21.5억</b></div>
-      <div class="k">순차입금<b>312억</b></div>
-      <div class="k">이자보상배율<b>3.4배</b></div>
+    <h2>② 사용자본은 어디에 잠겨 있나 — 구성요소 분해</h2>
+    <p class="sub">재무식 사용자본 1,048억(자본 769 + 순차입금 279) 기준 · 단위 억원 · <b>보증금·유형자산 순액은 2605 재무제표로 확정 필요(개산)</b></p>
+    <div class="stack" id="stack"></div>
+    <div class="stacklg" id="stacklg"></div>
+    <div class="kv" style="margin-top:14px">
+      <div class="k">사용자본 한도(게이트)<b>1,000억</b><small>현재 1,048억 — 48억 초과</small></div>
+      <div class="k">작년 대비<b>+60억</b><small>연간 관리 목표</small></div>
+      <div class="k">리스제외 감가(연)<b>180억</b><small>자연 감소분</small></div>
+      <div class="k">순증 여력(연)<b>250억</b><small>감가 180억만큼 CAPEX 써도 자본 불변 — 250억이 실탄</small></div>
     </div>
-    <div class="insight" style="margin-top:12px"><span class="ttl">💡 결론</span>여기에 "그래서 무엇을 결정해야 하는지"를 한 줄로 적습니다 (예: 영업현금 +3.3억이지만 차입 만기 D-90 도래 — 상환 vs 리파이낸싱 결정 시한).</div>
+    <div class="insight"><span class="ttl">💡 결론</span>1,048억 중 <b>유형·사용권자산이 약 600억(57%)</b> — 사용자본 관리 = 사실상 CAPEX 관리. 운전자본(재고+채권−채무) 362억은 회전 개선 여지: 재고 196억을 목표(≤180억)로 줄이면 <b>약 16억 현금 확보</b>. 폐점 시 보증금·자산 회수는 사용자본 차감으로 반영.</div>
   </div>
 
-  <!-- ⬆⬆⬆  위 예시들은 지우고 실제 내용으로 채우세요  ⬆⬆⬆ -->
+  <!-- ③ 자본 배분 맵 -->
+  <div class="panel">
+    <h2>③ 자본 배분 보드 — 어느 브랜드에 돈을 더 주고, 어디서 회수하나</h2>
+    <p class="sub">가로 = 사용자본(억) · 세로 = ROTC(26년 전망, %) · 원 크기 = 창출현금(5월 누적) · <span style="color:var(--bad-d)">빨간 원 = 창출현금 적자</span> · 자연별곡·프차는 자본 특성상 제외</p>
+    <div class="scatter" id="scatter"></div>
+    <div class="insight"><span class="ttl">💡 결론</span>이 맵의 성적표는 <b>"좌상 방향 이동"</b> — 같은 효율이면 자본을 가볍게, 같은 자본이면 효율을 높게. <b>우하단(자본 많고 효율 낮음)이 회수 1순위</b>: 파이낸스(155억·적자)가 유일하게 그 구역에 있고, 델리(83억·24%)가 경계선. 좌상단의 피자몰·리미니는 자본을 더 줘도 되는 곳 — 아래 ④에서 배분해 보세요.</div>
+  </div>
 
+  <!-- ④ 배분 시뮬 -->
+  <div class="panel">
+    <h2>④ 배분 시뮬레이터 — 잔여 실탄 127억을 어디에?</h2>
+    <p class="sub">브랜드별 추가 CAPEX 배분 → 예상 추가 연이익 계산 · 효율 = 24·25 오픈점 실측(capex 페이지 ⑥) · 단위 억원</p>
+    <div class="grid2">
+      <div id="levers"></div>
+      <div>
+        <div class="resline"><span>배분 합계</span><b id="aSum">0</b><span>억 / 127억 <span id="aBadge" class="badge ok">한도 내</span></span></div>
+        <div class="resline"><span>예상 추가 연 영업이익</span><b id="aOi">0</b><span>억</span></div>
+        <div class="resline"><span>배분 후 법인 ROTC(전망)</span><b id="aRotc">59</b><span>%</span></div>
+        <div class="mnote" id="aNote" style="margin-top:8px"></div>
+      </div>
+    </div>
+    <div class="insight"><span class="ttl">💡 결론</span><span id="simInsight">슬라이더를 움직여 배분해 보세요 — 같은 127억이라도 어디에 두느냐에 따라 추가 연이익이 40억 이상 갈립니다.</span></div>
+  </div>
+
+  <div class="src">
+    데이터 기준 2026.05 · 원천: ★★외식_현금시드머니_260615(①·③ 사용자본·창출현금·잔고) · 하반기롤링플랜(ROTC 전망) · L108 재무제표(② 분해 — 개산치 포함) · 신규오픈점피드백 2605(④ 효율)<br>
+    갱신 방법: 클로드코드에게 "현금 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 숫자를 교체합니다.
+  </div>
 </div>
+
+<script>
+// ═══ 데이터 (2026.05 기준 — 갱신 시 이 블록만 교체) ═══
+// ② 분해 [이름, 금액(억), 색, 개산여부]
+var COMP = [
+  ["유형·사용권자산(순)", 600, "#0066cc", true],
+  ["매출채권", 437, "#4d94db", false],
+  ["재고", 196, "#8db8e6", false],
+  ["보증금", 100, "#bcd4ee", true],
+  ["매입채무 등", -285, "#d2d2d7", false]   // 합계 1,048 맞춤(채무 271+기타 14)
+];
+// ③ 산점도 [브랜드, 사용자본(억), ROTC전망(%), 창출현금(억)]
+var MAP = [
+  ["애슐리", 635, 91, 108.7],
+  ["파이낸스", 155, -34, -33.7],
+  ["델리", 83, 24, 0.7],
+  ["로운", 52, 58, 11.3],
+  ["리미니", 31, 74, 9.1],
+  ["피자몰", 19, 221, 10.8],
+  ["카페", 17, 29, 2.0],
+  ["프랑제리", 19, 11, 1.8]
+];
+// ④ 시뮬 [브랜드, 실측효율(연이익/CAPEX)]
+var EFF = [ ["애슐리",0.97], ["피자몰",1.05], ["로운",0.89], ["델리(월드델리)",0.48], ["리미니",0.33] ];
+var BUDGET = 127, BASE_OI = 594, BASE_CAP = 1005;
+
+function $(id){ return document.getElementById(id); }
+function f1(x){ return (Math.round(x*10)/10).toLocaleString(); }
+
+// ② 스택바
+(function(){
+  var tot = COMP.reduce(function(s,c){ return s + Math.abs(c[1]); }, 0);
+  var h="", lg="";
+  COMP.forEach(function(c){
+    var w = Math.abs(c[1])/tot*100;
+    h += '<i style="width:'+w+'%;background:'+c[2]+'" title="'+c[0]+' '+c[1]+'억'+(c[3]?' (개산)':'')+'"></i>';
+    lg += '<span><span class="sw" style="background:'+c[2]+'"></span>'+c[0]+' <b style="color:var(--ink)">'+(c[1]<0?'−':'')+Math.abs(c[1])+'</b>'+(c[3]?'<span style="color:var(--warn)">*</span>':'')+'</span>';
+  });
+  $("stack").innerHTML=h;
+  $("stacklg").innerHTML=lg+'<span style="color:var(--warn)">* 개산 — 재무제표 확정 필요</span>';
+})();
+
+// ③ 산점도 (x=사용자본 0~700, y=ROTC -60~240)
+(function(){
+  var X0=0, X1=700, Y0=-60, Y1=240;
+  function px(v){ return (v-X0)/(X1-X0)*100; }
+  function py(v){ return (v-Y0)/(Y1-Y0)*100; }
+  var h='';
+  // 사분면: y=20%(목표), x=100억
+  h += '<div class="qline-x" style="bottom:'+py(20)+'%"></div>';
+  h += '<div class="qline-y" style="left:'+px(100)+'%"></div>';
+  h += '<div class="q" style="left:6px; top:4px">적은 자본 × 고효율 — <b>더 투자</b></div>';
+  h += '<div class="q" style="right:6px; top:4px">큰 자본 × 고효율 — 유지·증식</div>';
+  h += '<div class="q" style="left:6px; bottom:4px">저효율 — 효율 먼저</div>';
+  h += '<div class="q" style="right:6px; bottom:4px; color:var(--bad-d)">큰 자본 × 저효율 — <b>회수·재배치 1순위</b></div>';
+  h += '<div class="ax" style="left:'+px(100)+'%; bottom:-18px; transform:translateX(-50%)">100억</div>';
+  h += '<div class="ax" style="right:0; bottom:-18px">사용자본 →</div>';
+  h += '<div class="ax" style="left:-4px; bottom:'+py(20)+'%; transform:translate(-100%,50%)">20%</div>';
+  h += '<div class="ax" style="left:-4px; top:0; transform:translate(-100%,0)">ROTC ↑</div>';
+  MAP.forEach(function(m){
+    var d = 10 + Math.sqrt(Math.abs(m[3]))*3.2;
+    var neg = m[3] < 0;
+    h += '<div class="dot'+(neg?' neg':'')+'" title="'+m[0]+' — 사용자본 '+m[1]+'억 · ROTC '+m[2]+'% · 창출현금 '+m[3]+'억" style="left:'+px(m[1])+'%; bottom:'+py(m[2])+'%; width:'+d+'px; height:'+d+'px"></div>';
+    var lbPos = m[2] > 180 ? 'bottom:calc('+py(m[2])+'% - '+(d/2+16)+'px)' : 'bottom:calc('+py(m[2])+'% + '+(d/2+3)+'px)';
+    h += '<div class="dot-lb" style="left:'+px(m[1])+'%; '+lbPos+'">'+m[0]+'</div>';
+  });
+  $("scatter").innerHTML=h;
+})();
+
+// ④ 시뮬
+(function(){
+  var h='';
+  EFF.forEach(function(e,i){
+    h += '<div class="lever"><div class="lt"><span>'+e[0]+'<span class="eff">효율 '+Math.round(e[1]*100)+'%/년</span></span><span class="lv"><span id="v'+i+'">0</span>억</span></div>'
+      + '<input type="range" id="s'+i+'" min="0" max="90" value="0" step="5"></div>';
+  });
+  $("levers").innerHTML=h;
+  function calc(){
+    var sum=0, oi=0;
+    EFF.forEach(function(e,i){
+      var v = +$("s"+i).value;
+      $("v"+i).textContent = v;
+      sum += v; oi += v*e[1];
+    });
+    $("aSum").textContent = f1(sum);
+    $("aOi").textContent = "+"+f1(oi);
+    var over = sum > BUDGET;
+    var b=$("aBadge"); b.textContent = over ? (f1(sum-BUDGET)+"억 초과") : "한도 내"; b.className="badge "+(over?"no":"ok");
+    var rotc = (BASE_OI + oi) / (BASE_CAP + sum) * 100;
+    $("aRotc").textContent = f1(rotc);
+    $("aNote").textContent = "가정: 배분액은 실측 효율(연이익/CAPEX)로 즉시 연환산 기여 · 법인 ROTC = (594+추가이익) ÷ (1,005+배분).";
+    if (sum > 0) $("simInsight").innerHTML = "현재 배분 "+f1(sum)+"억 → 추가 연이익 <b>+"+f1(oi)+"억</b>, 법인 ROTC "+f1(rotc)+"%. 같은 금액을 전부 피자몰·애슐리(효율 ~100%)에 두면 +"+f1(sum*1.0)+"억, 전부 리미니(33%)에 두면 +"+f1(sum*0.33)+"억 — <b>배분이 곧 이익</b>.";
+  }
+  EFF.forEach(function(e,i){ $("s"+i).addEventListener("input",calc); });
+  calc();
+})();
+</script>
+<script type="application/json" id="fable-data">
+{"asof":"2026-05-31","kpi":{"법인_창출현금_5월누적(억)":108.0,"법인_사용가능잔고(억)":234.8,"시드머니_보유브랜드":"7/10","사용자본_관리식(억)":1005,"사용자본_재무식(억)":1048,"사용자본_게이트(억)":1000},"risks":["재무식 사용자본 1,048억 — 게이트(1,000억) 48억 초과","파이낸스 창출현금 -33.7억·잔고 -33.7억 (자본 155억 잠김, 회수·재배치 1순위)","델리(-0.2억)·자연별곡(-6.0억) 시드머니 X — 자체 현금 창출 미회복"],"decisions":["잔여 실탄 127억 브랜드 배분 — 피자몰·애슐리(효율 ~100%) 집중 여부","파이낸스 사용자본 155억 회수/구조 검토 — 하반기 자본배분 회의","재고 196억 → 180억 감축(현금 +16억) 여부","보증금·유형자산 순액 재무제표 확정(② 개산치 대체)"]}
+</script>
 </body>
 </html>

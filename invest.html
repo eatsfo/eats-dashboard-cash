@@ -1,40 +1,197 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>투자심의 — 외식BG</title>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>투자심의 · 요약 — 외식사업부</title>
 <style>
-:root{--blue:#0066cc;--ink:#1d1d1f;--sub:#6e6e73;--line:#e5e5ea;--bg:#fbfbfd}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);padding:28px;font-variant-numeric:tabular-nums}
-h1{font-size:22px;font-weight:700;letter-spacing:-.4px}
-.sub{font-size:13px;color:var(--sub);margin:6px 0 22px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:22px}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px}
-.card .lab{font-size:11px;font-weight:600;color:var(--sub);letter-spacing:.3px}
-.card .val{font-size:24px;font-weight:700;margin-top:6px;letter-spacing:-.5px}
-.card .cap{font-size:11px;color:var(--sub);margin-top:4px}
-.up{color:#dc2626} .dn{color:#0066cc}
-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:13px}
-th{text-align:left;font-size:11px;font-weight:600;color:var(--sub);padding:10px 14px;border-bottom:1px solid var(--line);background:#fafafa}
-td{padding:10px 14px;border-bottom:1px solid #f0f0f3}
-tr:last-child td{border-bottom:none}
-.num{text-align:right}
-.note{margin-top:22px;background:#f0f7ff;border-radius:14px;padding:14px 16px;font-size:12.5px;color:#1d1d1f;line-height:1.65}
-.note b{color:var(--blue)}
-h2{font-size:15px;font-weight:700;margin:26px 0 10px;letter-spacing:-.2px}
-</style></head><body>
-<h1>투자심의</h1>
-<div class="sub">신규 출점·리뉴얼 투자안 심의 현황 · 기준월 예시 — 실제 데이터로 교체하세요</div>
-<div class="cards">
-<div class="card"><div class="lab">심의 대기</div><div class="val">3건</div><div class="cap">이번 달 접수</div></div><div class="card"><div class="lab">승인 누적(26년)</div><div class="val">12건</div><div class="cap">투자액 96억</div></div><div class="card"><div class="lab">평균 요구수익률</div><div class="val">20%</div><div class="cap">신규 허들 ROTC</div></div>
+  :root{
+    --bg:#edeff3; --card:#ffffff; --parchment:#f5f5f7;
+    --ink:#1d1d1f; --sub:#6e6e73; --faint:#86868b;
+    --line:#e0e0e0; --line2:#d2d2d7;
+    --accent:#0066cc; --accent-bg:#e8f1fc;
+    --good:#16a34a; --good-d:#15803d; --bad:#dc2626; --bad-d:#b91c1c; --warn:#d97706;
+  }
+  *{ box-sizing:border-box }
+  body{ margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,'SF Pro Text','Inter',system-ui,'Pretendard','Malgun Gothic',sans-serif;
+    font-feature-settings:"ss03"; -webkit-font-smoothing:antialiased; line-height:1.55; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:24px 22px 60px; }
+  header.top{ display:flex; align-items:center; gap:12px; margin-bottom:6px; flex-wrap:wrap; }
+  header.top h1{ font-size:26px; font-weight:600; letter-spacing:-.5px; margin:0; }
+  .tag{ background:var(--accent-bg); color:var(--accent); font-size:12px; font-weight:600; padding:3px 11px; border-radius:9999px; }
+  a.back{ color:var(--sub); text-decoration:none; font-size:13px; }
+  .story{ color:var(--sub); font-size:13px; margin:0 0 20px; }
+  .story b{ color:var(--ink); }
+  .panel{ background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px 20px; margin-bottom:20px; }
+  .panel h2{ font-size:15px; font-weight:600; margin:0 0 4px; }
+  .panel .sub{ color:var(--sub); font-size:12px; margin:0 0 12px; }
+  .mnote{ color:var(--sub); font-size:12px; }
+  .insight{ background:#f4f8fc; border:1px solid #e3eaf2; border-radius:12px; padding:11px 14px; font-size:13px; margin-top:12px; }
+  .insight .ttl{ font-weight:700; color:var(--accent); margin-right:6px; }
+  table{ width:100%; border-collapse:collapse; font-size:12px; font-variant-numeric:tabular-nums; }
+  th,td{ padding:7px 10px; border-bottom:1px solid var(--line); text-align:right; }
+  th:first-child,td:first-child{ text-align:left; }
+  td.l{ text-align:left; }
+  thead th{ background:var(--parchment); color:var(--ink); font-weight:600; }
+  .up{ color:var(--bad-d); font-weight:600; }  .dn{ color:var(--good-d); font-weight:600; }
+  .badge{ display:inline-block; font-size:11px; font-weight:600; padding:2px 10px; border-radius:9999px; }
+  .badge.ok{ background:#e7f6ec; color:var(--good-d); }
+  .badge.no{ background:#fdecec; color:var(--bad-d); }
+  .badge.mid{ background:#fdf3e3; color:var(--warn); }
+  .badge.na{ background:var(--parchment); color:var(--faint); }
+  /* 6대질문 */
+  .qgrid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:820px){ .qgrid{ grid-template-columns:1fr; } }
+  .qcard{ background:var(--parchment); border-radius:12px; padding:12px 15px; }
+  .qcard .qt{ display:flex; align-items:baseline; gap:8px; font-size:13px; font-weight:600; margin-bottom:6px; }
+  .qcard .qn{ color:var(--accent); font-weight:700; }
+  .qcard .qb{ margin-left:auto; }
+  .qcard ul{ margin:0; padding-left:0; list-style:none; font-size:12px; color:var(--sub); }
+  .qcard li{ margin:3px 0; display:flex; justify-content:space-between; gap:10px; }
+  .qcard li b{ color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  /* 3부 요약 카드 */
+  .pages{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+  a.pcard{ display:block; background:var(--parchment); border-radius:12px; padding:13px 15px; text-decoration:none; color:var(--ink); border:1px solid transparent; }
+  a.pcard:hover{ border-color:var(--accent); background:var(--accent-bg); }
+  .pcard .pt{ font-size:13px; font-weight:600; color:var(--accent); margin-bottom:6px; }
+  .pcard .pv{ font-size:20px; font-weight:600; letter-spacing:-.5px; font-variant-numeric:tabular-nums; }
+  .pcard .pd{ font-size:11.5px; color:var(--sub); margin-top:4px; line-height:1.5; }
+  .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>투자심의 · 요약</h1>
+    <span class="tag">외식사업부 · 기준 2026.05</span>
+    <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
+  </header>
+  <p class="story">투자 원칙: <b>사내은행 사전 자가점검 6대 질문</b>에 답이 되어야 돈이 나간다. 허들 ROTC <b>최소 10% · 목표 20%</b>.
+    아래 점검판은 각 분석 페이지(ROTC·현금·CAPEX)의 실제 숫자로 자동 채워집니다.</p>
+
+  <!-- ① 6대 질문 점검판 -->
+  <div class="panel">
+    <h2>① 투자원칙 6대 질문 — 사전 자가점검판</h2>
+    <p class="sub">[외식] CFO 시스템 · 사내은행 사전 자가점검 기준 · 26.05 데이터 자동 집계</p>
+    <div class="qgrid">
+      <div class="qcard">
+        <div class="qt"><span class="qn">Q1</span>지난 1년 투자 실행 결과는?<span class="qb"><span class="badge mid">△ 일부 미달</span></span></div>
+        <ul>
+          <li>월매출 달성율 (87개점) <b>91%</b></li>
+          <li>월영업이익 달성율 <b class="up">73%</b></li>
+          <li>CAPEX 달성율(승인 대비) <b class="up">128% 초과</b></li>
+          <li>투자 회수 완료 <b>52 / 87개 (60%)</b></li>
+          <li>평당 인테리어 비용 <b style="color:var(--warn)">확인 필요</b></li>
+        </ul>
+      </div>
+      <div class="qcard">
+        <div class="qt"><span class="qn">Q2</span>브랜드 질적 KPI는 성장 중인가?<span class="qb"><span class="badge ok">O 성장</span></span></div>
+        <ul>
+          <li>전사 매출 전년비 (26.05) <b class="dn">+15%</b></li>
+          <li>자본회전 (매출/사용자본) <b>6.2회</b></li>
+          <li>법인 ROTC 47% → <b class="dn">59% (+12%p)</b></li>
+          <li>동일매장 성장률 <b style="color:var(--warn)">확인 필요</b></li>
+        </ul>
+      </div>
+      <div class="qcard">
+        <div class="qt"><span class="qn">Q3</span>부실매장은 정리되었나?<span class="qb"><span class="badge no">X 9개 잔존</span></span></div>
+        <ul>
+          <li>적자 신규점 (24·25 오픈) <b class="up">9개 (목표 0개)</b></li>
+          <li>리미니 2 · 로운 2 · 델리 2 · 기타 3</li>
+          <li>적자 브랜드 <b class="up">자연별곡 · 파이낸스</b></li>
+          <li>폐점 시 사용자본 회수 반영 원칙</li>
+        </ul>
+      </div>
+      <div class="qcard">
+        <div class="qt"><span class="qn">Q4</span>평당공사비 기준(30/50/80) 충족?<span class="qb"><span class="badge na">기준 확인 필요</span></span></div>
+        <ul>
+          <li>30/50/80 기준 정의 <b style="color:var(--warn)">담당 확인 필요</b></li>
+          <li>참고: 매장당 CAPEX 실측 <b>애슐리 8.15억</b></li>
+          <li>CAPEX 초과집행 관행 <b class="up">+28%</b> — 예가 관리 필요</li>
+        </ul>
+      </div>
+      <div class="qcard">
+        <div class="qt"><span class="qn">Q5</span>투자할 현금(시드머니)은 준비됐나?<span class="qb"><span class="badge ok">O 234.8억</span></span></div>
+        <ul>
+          <li>법인 사용가능 잔고 <b class="dn">234.8억 &gt; 0</b></li>
+          <li>시드머니 보유 <b>7 / 10 브랜드</b></li>
+          <li>X 브랜드: <b class="up">델리 · 자연별곡 · 파이낸스</b> — 해당 브랜드 신규투자 불가 원칙</li>
+        </ul>
+      </div>
+      <div class="qcard">
+        <div class="qt"><span class="qn">Q6</span>계약상 리스크는 체크되었나?<span class="qb"><span class="badge na">안건별 수기</span></span></div>
+        <ul>
+          <li>계약구조 · 보증금담보 · 철수조건</li>
+          <li>정성 항목 — 안건별 심의 시 체크</li>
+          <li>참고: 임차 계약기간 1년 단기 매장 다수(피드백 파일 X열)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="insight"><span class="ttl">💡 결론</span>6문 중 <b>O 2개(Q2·Q5) · △ 1개(Q1) · X 1개(Q3) · 미점검 2개(Q4·Q6)</b>.
+      돈은 있다(잔고 234.8억) — 막히는 건 <b>Q3 부실매장 9개 정리</b>와 <b>Q1 이익 달성율 73%</b>. 신규 승인보다 이 둘의 회복이 먼저라는 게 이번 달 점검판의 답.</div>
+  </div>
+
+  <!-- ② 3부 요약 -->
+  <div class="panel">
+    <h2>② BS분석 요약 — 상세는 각 페이지로</h2>
+    <p class="sub">카드를 누르면 해당 분석 페이지로 이동합니다</p>
+    <div class="pages">
+      <a class="pcard" href="rotc.html">
+        <div class="pt">ROTC — 자본이 일하는가</div>
+        <div class="pv">47% → 59%</div>
+        <div class="pd">법인 ROTC(관리식) 전년比 +12%p · 목표 20% 통과<br>▲ 피자몰 221% · 애슐리 91% / ▼ 카페 둔화 · 파이낸스 적자</div>
+      </a>
+      <a class="pcard" href="index.html">
+        <div class="pt">현금·씨드머니 — 실탄이 있는가</div>
+        <div class="pv">잔고 234.8억</div>
+        <div class="pd">창출현금 108억(5월 누적) · 시드머니 O 7/10<br>사용자본 1,048억 — 게이트(1,000억) 48억 초과</div>
+      </a>
+      <a class="pcard" href="capex.html">
+        <div class="pt">CAPEX — 계획대로 나가는가</div>
+        <div class="pv">124.3 / 251억</div>
+        <div class="pd">소진율 49% · 잔여 127억<br>예정지 16건 연환산 +146억 — 목표 하단 통과·상단 미달</div>
+      </a>
+    </div>
+    <div class="insight"><span class="ttl">💡 결론</span>세 페이지의 한 줄 종합: <b>"벌 자격(ROTC↑)과 실탄(234.8억)은 있는데, 남은 127억의 배분과 부실 9개점 정리가 하반기 승부처."</b></div>
+  </div>
+
+  <!-- ③ 심의 안건 현황 -->
+  <div class="panel">
+    <h2>③ 심의 안건 현황 — 승인 후 어디까지 왔나</h2>
+    <p class="sub">26년 투자심의(외식) 주요 안건 · 출처 투자심의리스트 26.06.23 · 단위 억원</p>
+    <table>
+      <thead><tr><th>안건</th><th>브랜드</th><th>투자비</th><th>월매출 목표</th><th>이익률</th><th>회수목표</th><th>승인</th><th>현황</th></tr></thead>
+      <tbody>
+        <tr><td class="l">피자몰 이마트 다산</td><td>피자몰</td><td>1.3</td><td>1.0</td><td>15%</td><td>8개월</td><td><span class="badge ok">O</span></td><td class="dn">6/26 오픈 ✓</td></tr>
+        <tr><td class="l">자연별곡 평촌 부분리뉴얼</td><td>자연별곡</td><td>0.7</td><td>2.0</td><td>8%</td><td>6개월</td><td><span class="badge ok">O</span></td><td class="dn">4/30 오픈 ✓</td></tr>
+        <tr><td class="l">애슐리 NC송파 면적확장</td><td>애슐리</td><td>11.5</td><td>9.0</td><td>23%</td><td>5개월</td><td><span class="badge ok">O</span></td><td>진행 중 (6월~)</td></tr>
+        <tr><td class="l">애슐리 롯데백화점 영등포</td><td>애슐리</td><td>8.5</td><td>5.0</td><td>16%</td><td>11개월</td><td><span class="badge ok">O</span></td><td>진행 중 (7월~)</td></tr>
+        <tr><td class="l">애슐리 롯데몰 수지 이동</td><td>애슐리</td><td>8.2</td><td>5.5</td><td>17%</td><td>8개월</td><td><span class="badge ok">O</span></td><td>진행 중 (8월~)</td></tr>
+        <tr><td class="l">애슐리 파주 신세계아울렛</td><td>애슐리</td><td>7.9</td><td>4.5</td><td>15%</td><td>11개월</td><td><span class="badge ok">O</span></td><td>진행 중 (10월~)</td></tr>
+        <tr><td class="l">애슐리 수유역</td><td>애슐리</td><td>6.2</td><td>4.0</td><td>15%</td><td>9개월</td><td><span class="badge ok">O</span></td><td>진행 중 (10월~)</td></tr>
+        <tr><td class="l">애슐리 잠실롯데캐슬 리뉴얼</td><td>애슐리</td><td>10.5</td><td>10.0</td><td>28%</td><td>4개월</td><td><span class="badge ok">O</span></td><td>진행 중 (12월~)</td></tr>
+        <tr><td class="l">애슐리 부천역사</td><td>애슐리</td><td>10.5</td><td>8.0</td><td>21%</td><td>–</td><td><span class="badge ok">O</span></td><td>진행 중 (10월~)</td></tr>
+        <tr><td class="l">로운 부천역사 · 롯데 동부산</td><td>로운</td><td>9.2</td><td>6.2</td><td>16~18%</td><td>9개월~</td><td><span class="badge ok">O</span></td><td>진행 중 (10월~)</td></tr>
+        <tr><td class="l">자연별곡 NC송파 · 응암 이마트</td><td>자연별곡</td><td>7.0</td><td>5.1</td><td>10~11%</td><td>13개월~</td><td><span class="badge mid">O·재심의</span></td><td>진행 중 (6~7월)</td></tr>
+        <tr><td class="l">피자몰 광교·김해·천안 3건</td><td>피자몰</td><td>4.2</td><td>3.1</td><td>10~15%</td><td>10개월~</td><td><span class="badge ok">O</span></td><td>진행 중 (7~10월)</td></tr>
+        <tr><td class="l">리미니 강남 확장리뉴얼</td><td>리미니</td><td>1.7</td><td>1.7</td><td>17.4%</td><td>12개월</td><td><span class="badge ok">O</span></td><td>진행 중 (6월~)</td></tr>
+        <tr><td class="l">프랑제리 AK분당 이동</td><td>프랑제리</td><td>2.3</td><td>2.5</td><td>15%</td><td>8개월</td><td><span class="badge ok">O</span></td><td>진행 중 (5월~, 지연)</td></tr>
+        <tr><td class="l">로운 롯데 동부산 (1·2차)</td><td>로운</td><td>5.2</td><td>3.2</td><td>13.5%</td><td>10개월</td><td><span class="badge no">X 부결</span></td><td>–</td></tr>
+        <tr><td class="l">애슐리 부천역사(1차) · 로운 현대가산</td><td>복수</td><td>14.4</td><td>9.5</td><td>16~18%</td><td>–</td><td><span class="badge no">X 부결</span></td><td>–</td></tr>
+      </tbody>
+    </table>
+    <div class="insight"><span class="ttl">💡 결론</span>승인 안건의 회수목표는 4~13개월로 허들 안 — 관건은 <b>실행 시점</b>: 대부분 4Q 오픈이라 26년 이익 기여는 제한적(연환산 +146억 vs 26년 내 +49억, capex ④). 부결 재상신 안건(동부산)은 투자비가 500→520억(백만)으로 오히려 증가 — 재상신 시 조건 개선 원칙 필요.</div>
+  </div>
+
+  <div class="src">
+    데이터 기준 2026.05 · 원천: 신규오픈점피드백 2605(Q1·Q3) · AMIS 종합판 2605(Q2) · 현금시드머니 260615(Q5) · 투자심의리스트 26.06.23(③) · 각 상세는 rotc/index/capex 페이지<br>
+    갱신 방법: 클로드코드에게 "요약 페이지 26○○로 갱신해줘" — 3개 분석 페이지와 함께 숫자를 동기화합니다.
+  </div>
 </div>
-<h2>심의 안건</h2>
-<table>
-<thead><tr><th>안건</th><th>투자액</th><th>예상 월매출</th><th>예상 ROTC</th><th>회수기간</th><th>판정</th></tr></thead>
-<tbody>
-<tr><td>애슐리 ○○점 신규</td><td class="num">18억</td><td class="num">4.2억</td><td class="num">24%</td><td class="num">3.1년</td><td class="num">심의 중</td></tr>
-<tr><td>피자몰 ○○점 리뉴얼</td><td class="num">6억</td><td class="num">2.1억</td><td class="num">31%</td><td class="num">2.2년</td><td class="num">승인</td></tr>
-<tr><td>로운 ○○점 신규</td><td class="num">14억</td><td class="num">3.0억</td><td class="num">17%</td><td class="num">4.0년</td><td class="num">보류 — 허들 미달</td></tr>
-</tbody>
-</table>
-<div class="note"><b>이 페이지의 미션</b> — 들어온 투자안을 한 표에서 심의하고, 요구수익률(ROTC 20%) 기준으로 승인·보류를 기록합니다. 결정과 사유가 남는 것이 핵심입니다.<br>
-위 숫자는 전부 <b>양식 예시</b>입니다. 매월 실제 값으로 바꾸고, 표·차트는 자유롭게 늘리세요. 디자인 규칙은 이 저장소의 CLAUDE.md가 자동 적용해 줍니다 (Claude Code로 작업 시).</div>
-</body></html>
+
+<script type="application/json" id="fable-data">
+{"asof":"2026-05-31","kpi":{"6대질문_통과":"O2·△1·X1·미점검2","법인_ROTC_26전망(%)":59,"시드머니_잔고(억)":234.8,"CAPEX_소진율(%)":49,"신규점_이익달성율(%)":73,"적자_신규점(개)":9},"risks":["Q3 부실매장 9개 미정리(목표 0) — 신규 승인의 선행조건 미충족","Q1 영업이익 달성율 73%·CAPEX 초과집행 128% — 심의 예가 신뢰도 저하","승인 안건 대부분 4Q 오픈 — 26년 이익 기여 제한(+49억)"],"decisions":["부실 9개점 정리 계획 확정(폐점 시 사용자본 회수 반영) — 3분기","Q4 평당공사비 30/50/80 기준 정의 확인 및 자동 점검 연결","재상신 안건 조건개선 원칙(동부산 사례) 심의 규정화"]}
+</script>
+</body>
+</html>
