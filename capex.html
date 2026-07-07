@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAPEX 관리 — 외식사업부</title>
+<style>
+  :root{
+    --bg:#edeff3; --card:#ffffff; --parchment:#f5f5f7;
+    --ink:#1d1d1f; --sub:#6e6e73; --faint:#86868b;
+    --line:#e0e0e0; --line2:#d2d2d7;
+    --accent:#0066cc; --accent-bg:#e8f1fc;
+    --good:#16a34a; --good-d:#15803d; --bad:#dc2626; --bad-d:#b91c1c; --warn:#d97706;
+  }
+  *{ box-sizing:border-box }
+  body{ margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,'SF Pro Text','Inter',system-ui,'Pretendard','Malgun Gothic',sans-serif;
+    font-feature-settings:"ss03"; -webkit-font-smoothing:antialiased; line-height:1.55; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:24px 22px 60px; }
+  header.top{ display:flex; align-items:center; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+  header.top h1{ font-size:26px; font-weight:600; letter-spacing:-.5px; margin:0; }
+  .tag{ background:var(--accent-bg); color:var(--accent); font-size:12px; font-weight:600; padding:3px 11px; border-radius:9999px; }
+  .panel{ background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px 20px; margin-bottom:20px; }
+  .panel h2{ font-size:15px; font-weight:600; margin:0 0 10px; }
+  .mnote{ color:var(--sub); font-size:12px; }
+  .insight{ background:#f4f8fc; border:1px solid #e3eaf2; border-radius:12px; padding:11px 14px; font-size:13px; }
+  .insight .ttl{ font-weight:700; color:var(--accent); margin-right:6px; }
+  table{ width:100%; border-collapse:collapse; font-size:12px; font-variant-numeric:tabular-nums; }
+  th,td{ padding:6px 10px; border-bottom:1px solid var(--line); text-align:right; }
+  th:first-child,td:first-child{ text-align:left; }
+  thead th{ background:var(--parchment); color:var(--ink); font-weight:600; }
+  .up{ color:var(--bad-d); font-weight:600; }  .dn{ color:var(--good-d); font-weight:600; }
+  .kv{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+  .kv .k{ background:var(--parchment); border-radius:12px; padding:9px 13px; font-size:12px; color:var(--sub); }
+  .kv .k b{ display:block; color:var(--ink); font-size:17px; font-weight:600; margin-top:2px; font-variant-numeric:tabular-nums; }
+  .badge{ background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:2px 9px; border-radius:9999px; }
+  a.back{ color:var(--sub); text-decoration:none; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>CAPEX 관리</h1>
+    <span class="tag">외식사업부 · CAPEX 담당</span>
+    <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
+  </header>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- ⬇⬇⬇  여기서부터 클로드코드로 자유롭게 만들어 나가세요  ⬇⬇⬇  -->
+  <!--  아래 예시(👋·표·지표)는 스타일 참고용이니, 실제 내용으로 바꾸거나 지우세요. -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+
+  <div class="panel">
+    <h2>👋 CAPEX 담당 전용 페이지</h2>
+    <div class="mnote">이 페이지는 <b>CAPEX 담당자</b>가 전권으로 관리합니다. 클로드코드에게
+      <b>"CAPEX 페이지를 이렇게 만들어줘"</b>라고 말하면서 채워 나가세요. 저장·업로드하면 약 1분 뒤 사이트에 자동 반영됩니다.</div>
+  </div>
+
+  <div class="panel">
+    <h2>예시 — 표 (지우고 실제 데이터로)</h2>
+    <table>
+      <thead><tr><th>항목</th><th>전월</th><th>당월</th><th>증감</th></tr></thead>
+      <tbody>
+        <tr><td>신규출점 CAPEX</td><td>18.2억</td><td>21.5억</td><td class="dn">+3.3억</td></tr>
+        <tr><td>유지보수 재투자율</td><td>2.4배</td><td>2.6배</td><td class="up">+0.2배</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h2>예시 — 핵심 지표 + 결론</h2>
+    <div class="kv">
+      <div class="k">영업현금흐름<b>21.5억</b></div>
+      <div class="k">순차입금<b>312억</b></div>
+      <div class="k">평균 회수기간(Payback)<b>3.4배</b></div>
+    </div>
+    <div class="insight" style="margin-top:12px"><span class="ttl">💡 결론</span>여기에 "그래서 무엇을 결정해야 하는지"를 한 줄로 적습니다 (예: 영업현금 +3.3억이지만 차입 만기 D-90 도래 — 상환 vs 리파이낸싱 결정 시한).</div>
+  </div>
+
+  <!-- ⬆⬆⬆  위 예시들은 지우고 실제 내용으로 채우세요  ⬆⬆⬆ -->
+
+</div>
+</body>
+</html>
