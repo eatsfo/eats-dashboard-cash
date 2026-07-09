@@ -29,6 +29,14 @@
   .mnote{ color:var(--sub); font-size:12px; }
   .insight{ background:#f4f8fc; border:1px solid #e3eaf2; border-radius:12px; padding:11px 14px; font-size:13px; margin-top:12px; }
   .insight .ttl{ font-weight:700; color:var(--accent); margin-right:6px; }
+  .formula{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; background:var(--parchment); border-radius:12px; padding:11px 15px; margin-bottom:12px; font-size:12.5px; }
+  .formula .fx{ font-variant-numeric:tabular-nums; }
+  .formula b{ color:var(--accent); font-weight:600; }
+  .formula .frac{ display:inline-flex; flex-direction:column; text-align:center; vertical-align:middle; margin:0 2px; }
+  .formula .frac span{ display:block; padding:0 6px; }
+  .formula .frac .num{ border-bottom:1.5px solid var(--line2); }
+  .formula .sep{ color:var(--line2); }
+  .formula .cap{ color:var(--faint); font-size:11px; }
   table{ width:100%; border-collapse:collapse; font-size:12px; font-variant-numeric:tabular-nums; }
   th,td{ padding:6px 10px; border-bottom:1px solid var(--line); text-align:right; }
   th:first-child,td:first-child{ text-align:left; }
@@ -91,6 +99,19 @@
   <div class="panel">
     <h2>② 브랜드별 ROTC — 작년 vs 올해 전망</h2>
     <p class="sub">사용자본·25년 영업이익 = 현금시드머니 · 26년 전망 = 롤링플랜 ACT · 단위 억원</p>
+    <div class="formula">
+      <span class="fx"><b>ROTC</b> = 마진 × 회전</span>
+      <span class="sep">│</span>
+      <span class="fx">마진 =
+        <span class="frac"><span class="num">영업이익</span><span>매출</span></span>
+      </span>
+      <span class="sep">│</span>
+      <span class="fx">회전 =
+        <span class="frac"><span class="num">매출</span><span>사용자본</span></span>
+      </span>
+      <span class="sep">│</span>
+      <span class="cap">→ 합치면 ROTC = 영업이익 ÷ 사용자본 (매출은 약분). 낮으면 <b style="color:var(--warn)">마진</b>이 문제인지 <b style="color:var(--warn)">회전</b>이 문제인지 구분.</span>
+    </div>
     <table>
       <thead><tr><th>브랜드</th><th>사용자본</th><th>25년 영업이익</th><th>25년 ROTC</th><th>26년 5월 누적</th><th>26년 전망(ACT)</th><th>26년 전망 ROTC</th><th>= 마진 × 회전</th><th>전년비</th><th>판정</th></tr></thead>
       <tbody>
