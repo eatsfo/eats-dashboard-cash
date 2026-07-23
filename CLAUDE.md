@@ -12,12 +12,12 @@
 - 신호등(의미색만): 초록 `#16a34a`/`#15803d`, 빨강 `#dc2626`/`#b91c1c`, 주황 `#d97706`.
 
 **규칙**
-- 카드/패널: `#fff` + `1px solid #e0e0e0` + `border-radius:18px` + **그림자 없음(box-shadow 금지)**.
+- 카드/패널: `#fff` + `1px solid #e0e0e0` + `border-radius:0`(각짐, 2026-07-23 애플 일관성 확정) + **그림자 없음(box-shadow 금지)**. 알약(버튼·칩·태그)만 예외.
 - 표 헤더: 배경 `#f5f5f7` + 잉크 글자 + `font-weight:600`.
 - 버튼·칩·태그: 알약 `border-radius:9999px`.
 - 숫자 셀: `font-variant-numeric:tabular-nums`.
 - 폰트: `-apple-system,'SF Pro Text','Inter',system-ui,'Pretendard','Malgun Gothic',sans-serif`.
-- 결론/인사이트 박스(`.insight`): 배경 `#f4f8fc` + `1px #e3eaf2` + `radius:12px`. 🚫 좌측 컬러바·비대칭 라운드 금지.
+- 결론/인사이트 박스(`.insight`): 배경 `#f4f8fc` + `1px #e3eaf2` + `radius:0`(패널과 동일). 🚫 좌측 컬러바·비대칭 라운드 금지.
 - **옛 색(인디고 `#4f46e5`, 슬레이트 `#0f172a`/`#64748b`/`#f8fafc`/`#eef0fe`/`#e7e9fb`/`#cbd5e1` 등)이 이미 있으면 위 애플 토큰으로 바꾼다.**
 
 ## 📊 내용 = 재무팀답게
