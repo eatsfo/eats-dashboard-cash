@@ -130,9 +130,9 @@
   <!-- ③ 자본 배분 맵 -->
   <div class="panel">
     <h2>③ 자본 배분 보드 — 어느 브랜드에 돈을 더 주고, 어디서 회수하나</h2>
-    <p class="sub">가로 = 사용자본(억) · 세로 = ROTC(26년 전망, %) · 원 크기 = 창출현금(5월 누적) · 브랜드 비교 목적 — 자연별곡·프차·파이낸스는 제외</p>
+    <p class="sub">가로 = 영업이익율(26년 전망, %) · 세로 = ROTC(26년 전망, %) · 원 크기 = 사용자본(억) · 분할선 = 법인 평균 · 대각선 = 법인 평균 회전(6.2회) 기준선(위=회전 빠름) · 브랜드 비교 목적 — 자연별곡·프차·파이낸스는 제외</p>
     <div class="scatter" id="scatter"></div>
-    <div class="insight"><span class="ttl">💡 결론</span>이 맵의 성적표는 <b>"좌상 방향 이동"</b> — 같은 효율이면 자본을 가볍게, 같은 자본이면 효율을 높게. 현재 <b>우하단(자본 많고 효율 낮음=회수 1순위)에 들어온 브랜드는 없음</b> — 애슐리는 자본이 크지만 효율 91%로 우상단(유지·증식). 좌상단의 피자몰·리미니는 자본을 더 줘도 되는 곳, 프랑제리(11%)만 좌하단(효율 먼저) — 아래 ④에서 배분해 보세요.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>옅은 <b>대각선 = 법인 평균 회전(6.2회) 기준선</b> — 브랜드가 이 선을 따라 <b>우상향</b>으로 늘어서, 법인 ROTC는 결국 <b>수익성(영업이익율)</b>이 좌우함을 보여줍니다. 선 <b>위</b>(회전 평균↑)는 피자몰·애슐리·리미니·로운, <b>아래</b>(회전 평균↓)는 델리·카페·프랑제리 — 델리는 이익율(4.5%), 카페는 회전(3.8)이 숙제(rotc ②). 가장 큰 원 <b>애슐리(635억)</b>가 우상단이라 큰 자본이 제 몫을 함 — 큰 원이 선 아래로 내려오면 회수 1순위인데 현재는 없음. 아래 ④에서 배분해 보세요.</div>
   </div>
 
   <!-- ④ 배분 시뮬 -->
@@ -152,7 +152,7 @@
   </div>
 
   <div class="src">
-    데이터 기준 2026.05 · 원천: ★★외식_현금시드머니_260615(①·③ 사용자본·창출현금·잔고) · 하반기롤링플랜(ROTC 전망) · L108 재무제표(② 분해 — 개산치 포함) · 신규오픈점피드백 2605(④ 효율)<br>
+    데이터 기준 2026.05 · 원천: ★★외식_현금시드머니_260615(①·③ 사용자본·창출현금·잔고) · 하반기롤링플랜(③ 영업이익율·ROTC 전망 — rotc ② 분해와 일치) · L108 재무제표(② 분해 — 개산치 포함) · 신규오픈점피드백 2605(④ 효율)<br>
     갱신 방법: 클로드코드에게 "현금 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 숫자를 교체합니다.
   </div>
 </div>
@@ -167,15 +167,15 @@ var COMP = [
   ["보증금", 100, "#bcd4ee", true],
   ["매입채무 등", -285, "#d2d2d7", false]   // 합계 1,048 맞춤(채무 271+기타 14)
 ];
-// ③ 산점도 [브랜드, 사용자본(억), ROTC전망(%), 창출현금(억)]
+// ③ 산점도 [브랜드, 영업이익율전망(%), ROTC전망(%), 사용자본(억), 창출현금(억)] — 영업이익율·ROTC 분해는 rotc ②와 일치
 var MAP = [
-  ["애슐리", 635, 91, 108.7],
-  ["델리", 83, 24, 0.7],
-  ["로운", 52, 58, 11.3],
-  ["리미니", 31, 74, 9.1],
-  ["피자몰", 19, 221, 10.8],
-  ["카페", 17, 29, 2.0],
-  ["프랑제리", 19, 11, 1.8]
+  ["애슐리", 12.2, 91, 635, 108.7],
+  ["델리", 4.5, 24, 83, 0.7],
+  ["로운", 7.9, 58, 52, 11.3],
+  ["리미니", 10.0, 74, 31, 9.1],
+  ["피자몰", 12.5, 221, 19, 10.8],
+  ["카페", 7.7, 29, 17, 2.0],
+  ["프랑제리", 2.1, 11, 19, 1.8]
 ];
 // ④ 시뮬 [브랜드, 실측효율(연이익/CAPEX)]
 var EFF = [ ["애슐리",0.97], ["피자몰",1.05], ["로운",0.89], ["델리(월드델리)",0.48], ["리미니",0.33] ];
@@ -197,27 +197,27 @@ function f1(x){ return (Math.round(x*10)/10).toLocaleString(); }
   $("stacklg").innerHTML=lg+'<span style="color:var(--warn)">* 개산 — 재무제표 확정 필요</span>';
 })();
 
-// ③ 산점도 (x=사용자본 0~700, y=ROTC 0~240)
+// ③ 산점도 (x=영업이익율 0~15%, y=ROTC 0~240%, 원크기=사용자본)
 (function(){
-  var X0=0, X1=700, Y0=0, Y1=240;
+  var X0=0, X1=15, Y0=0, Y1=240;
   function px(v){ return (v-X0)/(X1-X0)*100; }
   function py(v){ return (v-Y0)/(Y1-Y0)*100; }
+  var CX=9.5, CY=59; // 분할선 = 법인 평균(영업이익율 9.5% · ROTC 59%)
   var h='';
-  // 사분면: y=20%(목표), x=100억
-  h += '<div class="qline-x" style="bottom:'+py(20)+'%"></div>';
-  h += '<div class="qline-y" style="left:'+px(100)+'%"></div>';
-  h += '<div class="q" style="left:6px; top:4px">적은 자본 × 고효율 — <b>더 투자</b></div>';
-  h += '<div class="q" style="right:6px; top:4px">큰 자본 × 고효율 — 유지·증식</div>';
-  h += '<div class="q" style="left:6px; bottom:4px">저효율 — 효율 먼저</div>';
-  h += '<div class="q" style="right:6px; bottom:4px; color:var(--bad-d)">큰 자본 × 저효율 — <b>회수·재배치 1순위</b></div>';
-  h += '<div class="ax" style="left:'+px(100)+'%; bottom:-18px; transform:translateX(-50%)">100억</div>';
-  h += '<div class="ax" style="right:0; bottom:-18px">사용자본 →</div>';
-  h += '<div class="ax" style="left:-4px; bottom:'+py(20)+'%; transform:translate(-100%,50%)">20%</div>';
+  h += '<svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none"><line x1="0" y1="100" x2="100" y2="'+(100-py((CY/CX)*X1))+'" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.4" vector-effect="non-scaling-stroke"/></svg>';
+  h += '<div class="qline-x" style="bottom:'+py(CY)+'%"></div>';
+  h += '<div class="qline-y" style="left:'+px(CX)+'%"></div>';
+  h += '<div class="q" style="left:6px; top:4px">저이익율·고ROTC — 회전이 견인</div>';
+  h += '<div class="q" style="right:6px; top:4px">고이익율·고ROTC — <b>더 투자</b></div>';
+  h += '<div class="q" style="left:6px; bottom:4px">저이익율·저ROTC — 수익성 먼저</div>';
+  h += '<div class="q" style="right:6px; bottom:4px">고이익율·저ROTC — 회전 점검</div>';
+  h += '<div class="ax" style="left:'+px(CX)+'%; bottom:-18px; transform:translateX(-50%)">법인 9.5%</div>';
+  h += '<div class="ax" style="right:0; bottom:-18px">영업이익율(%) →</div>';
+  h += '<div class="ax" style="left:-4px; bottom:'+py(CY)+'%; transform:translate(-100%,50%)">법인 59%</div>';
   h += '<div class="ax" style="left:-4px; top:0; transform:translate(-100%,0)">ROTC ↑</div>';
   MAP.forEach(function(m){
-    var d = 10 + Math.sqrt(Math.abs(m[3]))*3.2;
-    var neg = m[3] < 0;
-    h += '<div class="dot'+(neg?' neg':'')+'" title="'+m[0]+' — 사용자본 '+m[1]+'억 · ROTC '+m[2]+'% · 창출현금 '+m[3]+'억" style="left:'+px(m[1])+'%; bottom:'+py(m[2])+'%; width:'+d+'px; height:'+d+'px"></div>';
+    var d = 8 + Math.sqrt(m[3])*1.3;
+    h += '<div class="dot" title="'+m[0]+' — 영업이익율 '+m[1]+'% · ROTC '+m[2]+'% · 사용자본 '+m[3]+'억 · 창출현금 '+m[4]+'억" style="left:'+px(m[1])+'%; bottom:'+py(m[2])+'%; width:'+d+'px; height:'+d+'px"></div>';
     var lbPos = m[2] > 180 ? 'bottom:calc('+py(m[2])+'% - '+(d/2+16)+'px)' : 'bottom:calc('+py(m[2])+'% + '+(d/2+3)+'px)';
     h += '<div class="dot-lb" style="left:'+px(m[1])+'%; '+lbPos+'">'+m[0]+'</div>';
   });
