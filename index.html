@@ -130,9 +130,9 @@
   <!-- ③ 자본 배분 맵 -->
   <div class="panel">
     <h2>③ 자본 배분 보드 — 어느 브랜드에 돈을 더 주고, 어디서 회수하나</h2>
-    <p class="sub">가로 = 영업이익율(26년 전망, %) · 세로 = ROTC(26년 전망, %) · 원 크기 = 사용자본(억) · 분할선 = 법인 평균 · 대각선 = 법인 평균 회전(6.2회) 기준선(위=회전 빠름) · 브랜드 비교 목적 — 자연별곡·프차·파이낸스는 제외</p>
+    <p class="sub">가로 = 영업이익율(26년 목표, %) · 세로 = ROTC(26년 목표, %) · 원 크기 = 사용자본(억) · 분할선 = 법인 평균 · 대각선 = 법인 평균 회전(6.1회) 기준선(위=회전 빠름) · 브랜드 비교 목적 — 자연별곡·프차·파이낸스는 제외</p>
     <div class="scatter" id="scatter"></div>
-    <div class="insight"><span class="ttl">💡 결론</span>옅은 <b>대각선 = 법인 평균 회전(6.2회) 기준선</b> — 브랜드가 이 선을 따라 <b>우상향</b>으로 늘어서, 법인 ROTC는 결국 <b>수익성(영업이익율)</b>이 좌우함을 보여줍니다. 선 <b>위</b>(회전 평균↑)는 피자몰·애슐리·리미니·로운, <b>아래</b>(회전 평균↓)는 델리·카페·프랑제리 — 델리는 이익율(4.5%), 카페는 회전(3.8)이 숙제(rotc ②). 가장 큰 원 <b>애슐리(635억)</b>가 우상단이라 큰 자본이 제 몫을 함 — 큰 원이 선 아래로 내려오면 회수 1순위인데 현재는 없음. 아래 ④에서 배분해 보세요.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>옅은 <b>대각선 = 법인 평균 회전(6.1회) 기준선</b> — 브랜드가 이 선을 따라 <b>우상향</b>으로 늘어서, 법인 ROTC는 결국 <b>수익성(영업이익율)</b>이 좌우함을 보여줍니다. 선 <b>위</b>(회전 평균↑)는 피자몰·애슐리·리미니·로운, <b>아래</b>(회전 평균↓)는 델리·카페·프랑제리 — 델리는 이익율(4.5%), 카페는 회전(3.5)이 숙제(rotc ②). 가장 큰 원 <b>애슐리(629.9억)</b>가 우상단이라 큰 자본이 제 몫을 함 — 큰 원이 선 아래로 내려오면 회수 1순위인데 현재는 없음. 아래 ④에서 배분해 보세요.</div>
   </div>
 
   <!-- ④ 배분 시뮬 -->
@@ -144,7 +144,7 @@
       <div>
         <div class="resline"><span>배분 합계</span><b id="aSum">0</b><span>억 / 106.6억 <span id="aBadge" class="badge ok">한도 내</span></span></div>
         <div class="resline"><span>예상 추가 연 영업이익</span><b id="aOi">0</b><span>억</span></div>
-        <div class="resline"><span>배분 후 법인 ROTC(전망)</span><b id="aRotc">59</b><span>%</span></div>
+        <div class="resline"><span>배분 후 법인 ROTC(목표)</span><b id="aRotc">59</b><span>%</span></div>
         <div class="mnote" id="aNote" style="margin-top:8px"></div>
       </div>
     </div>
@@ -152,7 +152,7 @@
   </div>
 
   <div class="src">
-    데이터 기준: ①(현금·잔고)·③(창출현금) = 2026.06 · ②분해·③(영업이익율·ROTC 전망)·④(효율)는 5월/전망 유지 · 원천: ★★외식_현금시드머니_260714(①·③ 사용자본·창출현금·잔고) · 하반기롤링플랜(③ 영업이익율·ROTC 전망 — rotc ② 분해와 일치) · L108 재무제표(② 분해 — 개산치 포함) · 신규오픈점피드백 2605(④ 효율)<br>
+    데이터 기준: ①(현금·잔고)·③(창출현금) = 2026.06 · ②분해·③(영업이익율·ROTC 목표)·④(효율)는 5월/목표 유지 · 원천: ★★외식_현금시드머니_260714(①·③ 사용자본·창출현금·잔고) · 하반기롤링플랜(③ 영업이익율·ROTC 목표 — rotc ② 분해와 일치) · L108 재무제표(② 분해 — 개산치 포함) · 신규오픈점피드백 2605(④ 효율)<br>
     갱신 방법: 클로드코드에게 "현금 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 숫자를 교체합니다.
   </div>
 </div>
@@ -167,15 +167,15 @@ var COMP = [
   ["보증금", 100, "#bcd4ee", true],
   ["매입채무 등", -285, "#d2d2d7", false]   // 합계 1,048 맞춤(채무 271+기타 14)
 ];
-// ③ 산점도 [브랜드, 영업이익율전망(%), ROTC전망(%), 사용자본(억), 창출현금(억)] — 영업이익율·ROTC 분해는 rotc ②와 일치
+// ③ 산점도 [브랜드, 영업이익율목표(%), ROTC목표(%), 사용자본(억), 창출현금(억)] — 영업이익율·ROTC 분해는 rotc ②와 일치
 var MAP = [
-  ["애슐리", 12.2, 91, 635, 150.9],
-  ["델리", 4.5, 24, 83, 3.4],
-  ["로운", 7.9, 58, 52, 15.3],
-  ["리미니", 10.0, 74, 31, 10.0],
-  ["피자몰", 12.5, 221, 19, 12.9],
-  ["카페", 7.7, 29, 17, 2.5],
-  ["프랑제리", 2.1, 11, 19, 2.7]
+  ["애슐리", 12.2, 91, 629.9, 150.9],
+  ["델리", 4.5, 23, 86.4, 3.4],
+  ["로운", 7.9, 51, 58.5, 15.3],
+  ["리미니", 10.0, 92, 25.0, 10.0],
+  ["피자몰", 12.5, 126, 33.4, 12.9],
+  ["카페", 7.7, 27, 18.7, 2.5],
+  ["프랑제리", 2.1, 12, 16.2, 2.7]
 ];
 // ④ 시뮬 [브랜드, 실측효율(연이익/CAPEX)]
 var EFF = [ ["애슐리",0.97], ["피자몰",1.05], ["로운",0.89], ["델리(월드델리)",0.48], ["리미니",0.33] ];
@@ -199,10 +199,10 @@ function f1(x){ return (Math.round(x*10)/10).toLocaleString(); }
 
 // ③ 산점도 (x=영업이익율 0~15%, y=ROTC 0~240%, 원크기=사용자본)
 (function(){
-  var X0=0, X1=15, Y0=0, Y1=240;
+  var X0=0, X1=15, Y0=0, Y1=140;
   function px(v){ return (v-X0)/(X1-X0)*100; }
   function py(v){ return (v-Y0)/(Y1-Y0)*100; }
-  var CX=9.5, CY=59; // 분할선 = 법인 평균(영업이익율 9.5% · ROTC 59%)
+  var CX=9.5, CY=58; // 분할선 = 법인 평균(영업이익율 9.5% · ROTC 58%)
   var h='';
   h += '<svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none"><line x1="0" y1="100" x2="100" y2="'+(100-py((CY/CX)*X1))+'" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.4" vector-effect="non-scaling-stroke"/></svg>';
   h += '<div class="qline-x" style="bottom:'+py(CY)+'%"></div>';
@@ -213,12 +213,12 @@ function f1(x){ return (Math.round(x*10)/10).toLocaleString(); }
   h += '<div class="q" style="right:6px; bottom:4px">고이익율·저ROTC — 회전 점검</div>';
   h += '<div class="ax" style="left:'+px(CX)+'%; bottom:-18px; transform:translateX(-50%)">법인 9.5%</div>';
   h += '<div class="ax" style="right:0; bottom:-18px">영업이익율(%) →</div>';
-  h += '<div class="ax" style="left:-4px; bottom:'+py(CY)+'%; transform:translate(-100%,50%)">법인 59%</div>';
+  h += '<div class="ax" style="left:-4px; bottom:'+py(CY)+'%; transform:translate(-100%,50%)">법인 58%</div>';
   h += '<div class="ax" style="left:-4px; top:0; transform:translate(-100%,0)">ROTC ↑</div>';
   MAP.forEach(function(m){
     var d = 8 + Math.sqrt(m[3])*1.3;
     h += '<div class="dot" title="'+m[0]+' — 영업이익율 '+m[1]+'% · ROTC '+m[2]+'% · 사용자본 '+m[3]+'억 · 창출현금 '+m[4]+'억" style="left:'+px(m[1])+'%; bottom:'+py(m[2])+'%; width:'+d+'px; height:'+d+'px"></div>';
-    var lbPos = m[2] > 180 ? 'bottom:calc('+py(m[2])+'% - '+(d/2+16)+'px)' : 'bottom:calc('+py(m[2])+'% + '+(d/2+3)+'px)';
+    var lbPos = m[2] > 110 ? 'bottom:calc('+py(m[2])+'% - '+(d/2+16)+'px)' : 'bottom:calc('+py(m[2])+'% + '+(d/2+3)+'px)';
     h += '<div class="dot-lb" style="left:'+px(m[1])+'%; '+lbPos+'">'+m[0]+'</div>';
   });
   $("scatter").innerHTML=h;
