@@ -81,7 +81,7 @@
     <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
   </header>
   <p class="story">브랜드별 투하자본수익률 — <b>자본이 일을 하고 있는가</b>. 법인 목표는 <b>ROTC 60~70%</b>.
-    ROTC가 낮을 때는 <b>영업이익율×회전 분해</b>로 "영업이익율 문제(수익성)"인지 "회전 문제(자본 과다)"인지 구분합니다.</p>
+    ROTC가 낮을 때는 <b>수익성(영업이익율)</b>과 <b>자본효율(회전)</b> 중 무엇이 문제인지 구분합니다.</p>
 
   <!-- ① 법인 -->
   <div class="panel">
@@ -90,11 +90,10 @@
     <div class="kv">
       <div class="k">26년 사용자본<b>1,026.8억</b><small>재무식 BS 기준 (26.06)</small></div>
       <div class="k">25년 ROTC<b>49%</b><small>영업이익 474억 ÷ 25년 사용자본 970.3억</small></div>
-      <div class="k">26년 목표 ROTC<b>58%</b><small>목표 594억(ACT) ÷ 1,026.8억</small></div>
-      <div class="k">전년 대비<b>+9%p</b><small>영업이익율 9.5% × 회전 6.1</small></div>
-      <div class="k">법인 목표 ROTC<b>60~70%</b><small>26년 목표 58% — 하단 근접</small></div>
+      <div class="k">현시점 연환산 ROTC<b>49%</b><small>6월 누적 251억 ×2 = 502억 ÷ 1,026.8억</small></div>
+      <div class="k">법인 목표 ROTC<b>60~70%</b><small>현재 페이스는 하단까지 갭</small></div>
     </div>
-    <div class="insight"><span class="ttl">💡 결론</span>법인 ROTC는 49%→58%로 개선 추세 — 자본을 <b>더 쓸 자격</b>은 확보. 문제는 배분: 아래 ②에서 브랜드별로 "더 줄 곳 / 회수할 곳"을 가립니다.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>현재 페이스(6월 누적 연환산) ROTC는 <b>49%</b>로 작년(49%)과 같은 수준 — <b>목표 60~70%</b>까진 하반기 이익 가속이 필요합니다. 브랜드별 "더 줄 곳 / 회수할 곳"은 아래 ②에서 가립니다.</div>
   </div>
 
   <!-- ② 브랜드 테이블 -->
@@ -102,34 +101,28 @@
     <h2>② 브랜드별 ROTC — 작년 vs 올해 목표</h2>
     <p class="sub">25년 사용자본 = 2512_BS_PL · 26년 사용자본·25년 영업이익 = 현금시드머니 · 26년 목표 = 롤링플랜 ACT · 단위 억원</p>
     <div class="formula">
-      <span class="fx"><b>ROTC</b> = 영업이익율 × 회전</span>
-      <span class="sep">│</span>
-      <span class="fx">영업이익율 =
-        <span class="frac"><span class="num">영업이익</span><span>매출</span></span>
+      <span class="fx"><b>ROTC</b> =
+        <span class="frac"><span class="num">영업이익</span><span>사용자본</span></span>
       </span>
       <span class="sep">│</span>
-      <span class="fx">회전 =
-        <span class="frac"><span class="num">매출</span><span>사용자본</span></span>
-      </span>
-      <span class="sep">│</span>
-      <span class="cap">→ 합치면 ROTC = 영업이익 ÷ 사용자본 (매출은 약분). 낮으면 <b style="color:var(--warn)">영업이익율</b>(수익성)이 문제인지 <b style="color:var(--warn)">회전</b>(자본효율)이 문제인지 구분.</span>
+      <span class="cap">자본 1원이 만든 영업이익. 낮으면 <b style="color:var(--warn)">수익성(영업이익율)</b>이 문제인지 <b style="color:var(--warn)">자본효율(회전)</b>이 문제인지 봅니다.</span>
     </div>
     <table>
       <thead>
         <tr><th rowspan="2">브랜드</th><th class="grp" colspan="3">25년 (결산)</th><th class="grp gb" colspan="5">26년</th><th rowspan="2" class="gb">전년비<br>(ROTC)</th><th rowspan="2">판정</th></tr>
-        <tr><th>사용자본</th><th>영업이익</th><th>ROTC</th><th class="gb">사용자본</th><th>6월 누적</th><th>목표(ACT)</th><th>목표 ROTC</th><th>= 영익율 × 회전</th></tr>
+        <tr><th>사용<br>자본</th><th>영업<br>이익</th><th>ROTC</th><th class="gb">사용<br>자본</th><th>6월<br>누적</th><th>목표<br>(ACT)</th><th>목표<br>ROTC</th><th>영업이익<br>÷ 사용자본</th></tr>
       </thead>
       <tbody>
-        <tr><td>애슐리</td><td>613.2</td><td>472</td><td>77%</td><td class="gb">629.9</td><td>227.4</td><td>576</td><td><b>91%</b></td><td>12.2% × 7.5</td><td class="gb dn">+14%p</td><td class="dn">▲ 더 투자 — 법인 이익의 주력</td></tr>
-        <tr><td>피자몰</td><td>18.3</td><td>22</td><td>121%</td><td class="gb">33.4</td><td>19.3</td><td>42</td><td><b>126%</b></td><td>12.5% × 10.1</td><td class="gb dn">+5%p</td><td class="dn">▲ 더 투자 — 소액자본·고효율</td></tr>
-        <tr><td>리미니</td><td>27.7</td><td>7</td><td>25%</td><td class="gb">25.0</td><td>8.7</td><td>23</td><td><b>92%</b></td><td>10.0% × 9.2</td><td class="gb dn">+67%p</td><td class="dn">▲ 회복 — 단, 신규점 성적은 저조(capex ⑥)</td></tr>
-        <tr><td>로운</td><td>48.7</td><td>10</td><td>21%</td><td class="gb">58.5</td><td>10.8</td><td>30</td><td><b>51%</b></td><td>7.9% × 6.5</td><td class="gb dn">+30%p</td><td class="dn">▲ 더 투자 — 하반기 2건 예정</td></tr>
-        <tr><td>델리</td><td>84.7</td><td>2</td><td>2%</td><td class="gb">86.4</td><td>6.3</td><td>20</td><td><b>23%</b></td><td>4.5% × 5.1</td><td class="gb dn">+21%p</td><td>개선 중 — 영업이익율 4.5%가 숙제</td></tr>
-        <tr><td>카페</td><td>16.5</td><td>8</td><td>50%</td><td class="gb">18.7</td><td>3.8</td><td>5</td><td><b>27%</b></td><td>7.7% × 3.5</td><td class="gb up">−23%p</td><td class="up">▼ 둔화 — 회전 3.5 점검</td></tr>
-        <tr><td>프랑제리</td><td>17.6</td><td>-1</td><td>-7%</td><td class="gb">16.2</td><td>-0.9</td><td>2</td><td><b>12%</b></td><td>2.1% × 5.7</td><td class="gb dn">+19%p</td><td>흑자 전환 초기(12%) — 회복 관찰</td></tr>
+        <tr><td>애슐리</td><td>613.2</td><td>472</td><td>77%</td><td class="gb">629.9</td><td>227.4</td><td>576</td><td><b>91%</b></td><td>576 ÷ 629.9</td><td class="gb dn">+14%p</td><td class="dn">▲ 더 투자 — 법인 이익의 주력</td></tr>
+        <tr><td>피자몰</td><td>18.3</td><td>22</td><td>121%</td><td class="gb">33.4</td><td>19.3</td><td>42</td><td><b>126%</b></td><td>42 ÷ 33.4</td><td class="gb dn">+5%p</td><td class="dn">▲ 더 투자 — 소액자본·고효율</td></tr>
+        <tr><td>리미니</td><td>27.7</td><td>7</td><td>25%</td><td class="gb">25.0</td><td>8.7</td><td>23</td><td><b>92%</b></td><td>23 ÷ 25.0</td><td class="gb dn">+67%p</td><td class="dn">▲ 회복 — 단, 신규점 성적은 저조(capex ⑥)</td></tr>
+        <tr><td>로운</td><td>48.7</td><td>10</td><td>21%</td><td class="gb">58.5</td><td>10.8</td><td>30</td><td><b>51%</b></td><td>30 ÷ 58.5</td><td class="gb dn">+30%p</td><td class="dn">▲ 더 투자 — 하반기 2건 예정</td></tr>
+        <tr><td>델리</td><td>84.7</td><td>2</td><td>2%</td><td class="gb">86.4</td><td>6.3</td><td>20</td><td><b>23%</b></td><td>20 ÷ 86.4</td><td class="gb dn">+21%p</td><td>개선 중 — 영업이익율 4.5%가 숙제</td></tr>
+        <tr><td>카페</td><td>16.5</td><td>8</td><td>50%</td><td class="gb">18.7</td><td>3.8</td><td>5</td><td><b>27%</b></td><td>5 ÷ 18.7</td><td class="gb up">−23%p</td><td class="up">▼ 둔화 — 회전 점검</td></tr>
+        <tr><td>프랑제리</td><td>17.6</td><td>-1</td><td>-7%</td><td class="gb">16.2</td><td>-0.9</td><td>2</td><td><b>12%</b></td><td>2 ÷ 16.2</td><td class="gb dn">+19%p</td><td>흑자 전환 초기(12%) — 회복 관찰</td></tr>
         <tr><td>자연별곡</td><td>0.9</td><td>0.1</td><td>11%</td><td class="gb">7.3</td><td>-3.9</td><td>-4</td><td>전환 중</td><td>–</td><td class="gb">전환 중</td><td>신규 컨셉 전환 중 — 기존점 철수·재오픈, 안정화 후 재평가</td></tr>
-        <tr><td>프차</td><td>-9.7</td><td>8</td><td>n/m</td><td class="gb">-7.2</td><td>6.6</td><td>14</td><td>n/m</td><td>12.5% × –</td><td class="gb">–</td><td>자본 음수 — ROTC 산정 제외</td></tr>
-        <tr class="tot"><td>법인</td><td>970.3</td><td>474</td><td>49%</td><td class="gb">1,026.8</td><td>251.0</td><td>594</td><td><b>58%</b></td><td>9.5% × 6.1</td><td class="gb dn">+9%p</td><td>개선 추세</td></tr>
+        <tr><td>프차</td><td>-9.7</td><td>8</td><td>n/m</td><td class="gb">-7.2</td><td>6.6</td><td>14</td><td>n/m</td><td>–</td><td class="gb">–</td><td>자본 음수 — ROTC 산정 제외</td></tr>
+        <tr class="tot"><td>법인</td><td>970.3</td><td>474</td><td>49%</td><td class="gb">1,026.8</td><td>251.0</td><td>594</td><td><b>58%</b></td><td>594 ÷ 1,026.8</td><td class="gb dn">+9%p</td><td>개선 추세</td></tr>
       </tbody>
     </table>
     <p class="mnote" style="margin-top:8px">※ 법인 총계는 파이낸스(지주·금융 부문, 사용자본 158.5억)를 포함합니다 — 브랜드가 아니라 ROTC 비교에서는 제외해, 위 브랜드 행 합계와는 차이가 있습니다.</p>
