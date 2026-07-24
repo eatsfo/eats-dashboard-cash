@@ -64,7 +64,7 @@
 <div class="wrap">
   <header class="top">
     <h1>투자심의 · 요약</h1>
-    <span class="tag">기준월 — 26년 6월</span>
+    <span class="tag" id="baseYmTag">기준월 — 26년 6월</span>
     <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
   </header>
   <p class="story">투자 원칙: <b>사내은행 사전 자가점검 6대 질문</b>에 답이 되어야 돈이 나간다. 법인 목표 <b>ROTC 60~70%</b>.
@@ -91,7 +91,7 @@
           <li>전사 매출 전년비 (26.05) <b class="dn">+15%</b></li>
           <li>자본회전 (매출/사용자본) <b>6.2회</b></li>
           <li>법인 ROTC 47% → <b class="dn">59% (+12%p)</b></li>
-          <li>동일매장 성장률 <b style="color:var(--warn)">확인 필요</b></li>
+          <li>동일매장 성장률 <b id="sssVal" style="color:var(--warn)">확인 필요</b></li>
         </ul>
       </div>
       <div class="qcard">
@@ -185,11 +185,29 @@
   </div>
 
   <div class="src">
-    데이터 기준: Q5(시드머니·잔고)·②CAPEX집행 = 2026.06 · Q1·Q2·Q3는 2605 유지(피드백·AMIS 6월판 없음) · 원천: 신규오픈점피드백 2605(Q1·Q3) · AMIS 종합판 2605(Q2·동매성) · 현금시드머니 260714(Q5) · CAPEX상세 2606 · 투자심의리스트 26.06.23(③) · 각 상세는 rotc/index/capex 페이지<br>
+    데이터 기준: Q5(시드머니·잔고)·②CAPEX집행 = 2026.06 · Q1·Q3는 2605 유지(피드백·AMIS 6월판 없음) · 원천: 신규오픈점피드백 2605(Q1·Q3) · AMIS 종합판 2605(Q2 매출·ROTC) · 동일매장 성장률=대시보드 실측 자동갱신(일자별매출 기준 sss_cum, AMIS 무관) · 현금시드머니 260714(Q5) · CAPEX상세 2606 · 투자심의리스트 26.06.23(③) · 각 상세는 rotc/index/capex 페이지<br>
     갱신 방법: 클로드코드에게 "요약 페이지 26○○로 갱신해줘" — 3개 분석 페이지와 함께 숫자를 동기화합니다.
   </div>
 </div>
 
+<script>
+// 동일매장 성장률 — 대시보드 검증 계산값(sss_cum) 자동 반영. 헤더 "기준월" 태그 텍스트로 대상 월 결정.
+(function(){
+  var tag = document.getElementById("baseYmTag"), el = document.getElementById("sssVal");
+  if (!tag || !el) return;
+  var m = (tag.textContent||"").match(/(\d{2})년\s*(\d{1,2})월/);
+  if (!m) return;
+  var ym = m[1] + String(m[2]).padStart(2,"0");   // "26년 6월" → "2606"
+  fetch("https://forecast.eats-board.com/api/sss").then(function(r){ return r.json(); }).then(function(d){
+    var idx = (d.months||[]).indexOf(ym);
+    var v = idx>=0 ? (d.sss||{})["법인"][idx] : null;
+    if (v==null) return;   // 값 없으면 "확인 필요" 유지
+    el.textContent = (v>=0?"+":"") + v.toFixed(1) + "%";
+    el.className = v>=0 ? "dn" : "up";   // 이 페이지 컨벤션: dn=양호(초록) · up=악화(빨강)
+    el.style.color = "";
+  }).catch(function(){});
+})();
+</script>
 <script type="application/json" id="fable-data">
 {"asof":"2026-06-30","kpi":{"6대질문_통과":"O2·△1·X1·미점검2","법인_ROTC_26전망(%)":59,"시드머니_잔고(억)":253.7,"CAPEX_소진율(%)":58,"신규점_이익달성율(%)":73,"적자_신규점(개)":9},"risks":["Q3 부실매장 9개 미정리(목표 0) — 신규 승인의 선행조건 미충족","Q1 영업이익 달성율 73%·CAPEX 초과집행 128% — 심의 예가 신뢰도 저하","승인 안건 대부분 4Q 오픈 — 26년 이익 기여 제한(+49억)"],"decisions":["부실 9개점 정리 계획 확정(폐점 시 사용자본 회수 반영) — 3분기","Q4 평당공사비 30/50/80 기준 정의 확인 및 자동 점검 연결","재상신 안건 조건개선 원칙(동부산 사례) 심의 규정화"]}
 </script>
