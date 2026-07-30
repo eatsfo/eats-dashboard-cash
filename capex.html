@@ -51,6 +51,7 @@
   .lever{ margin-bottom:14px; }
   .lever .lt{ display:flex; justify-content:space-between; align-items:baseline; font-size:13px; margin-bottom:4px; }
   .lever .lv{ font-weight:600; color:var(--accent); font-variant-numeric:tabular-nums; }
+  .lever .eff{ color:var(--faint); font-size:11px; margin-left:6px; font-weight:400; }
   input[type=range]{ width:100%; accent-color:var(--accent); height:5px; }
   .resline{ display:flex; align-items:baseline; gap:8px; margin:6px 0; font-size:13px; }
   .resline b{ font-size:22px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.5px; }
@@ -175,6 +176,22 @@
     <div class="insight"><span class="ttl">💡 결론</span>잔여 신규예산 83.2억은 <b>애슐리·피자몰(효율 ~100%)</b>에 집중하는 것이 추가 +100~200억 목표의 최단 경로. 리미니·월드델리 신규는 회수 2~3년 — 보류하고 그 몫을 애슐리 1~2점으로 돌리면 <b>연 +8~16억</b> 추가.</div>
   </div>
 
+  <!-- ⑦ 배분 시뮬레이터 -->
+  <div class="panel">
+    <h2>⑦ 배분 시뮬레이터 — 잔여 실탄 106.6억을 어디에?</h2>
+    <p class="sub">브랜드별 추가 CAPEX 배분 → 예상 추가 연이익 계산 · 효율 = 24·25 오픈점 실측(위 ⑥) · 법인 ROTC 영향까지 확인 · 단위 억원</p>
+    <div class="grid2">
+      <div id="levers"></div>
+      <div>
+        <div class="resline"><span>배분 합계</span><b id="aSum">0</b><span>억 / 106.6억 <span id="aBadge" class="badge ok">한도 내</span></span></div>
+        <div class="resline"><span>예상 추가 연 영업이익</span><b id="aOi">0</b><span>억</span></div>
+        <div class="resline"><span>배분 후 법인 ROTC(목표)</span><b id="aRotc">58</b><span>%</span></div>
+        <div class="mnote" id="aNote" style="margin-top:8px"></div>
+      </div>
+    </div>
+    <div class="insight"><span class="ttl">💡 결론</span><span id="simInsight">슬라이더를 움직여 배분해 보세요 — 같은 106.6억이라도 어디에 두느냐에 따라 추가 연이익이 30억 이상 갈립니다.</span></div>
+  </div>
+
   <div class="src">
     데이터 기준: ①② CAPEX 예산·집행 = 2026.06 · ⑤⑥ 오픈매장 실적은 2605 유지(6월판 없음) · 원천: 하반기롤링플랜_예산설정(ACT 목표) · L108_추가 CAPEX 점포 CAPEX상세_2606(예산·집행) · ★★EATS 신규오픈점피드백 2605 갱신본(오픈매장 실적) · (외식BG)투자심의리스트_2026-06-23(하반기 예정지)<br>
     갱신 방법: 클로드코드에게 "capex 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 이 페이지의 숫자를 교체합니다.
@@ -271,6 +288,36 @@ function calc(){
 })();
 
 calc();
+
+// ⑦ 배분 시뮬레이터 [브랜드, 실측효율(연이익/CAPEX)] — ALLOC_CAP = 잔여 실탄(②의 BUDGET 배열과 다른 값이라 이름 분리)
+var EFF = [ ["애슐리",0.97], ["피자몰",1.05], ["로운",0.89], ["델리(월드델리)",0.48], ["리미니",0.33] ];
+var ALLOC_CAP = 106.6, BASE_OI = 594, BASE_CAP = 1026.8;
+(function(){
+  var h='';
+  EFF.forEach(function(e,i){
+    h += '<div class="lever"><div class="lt"><span>'+e[0]+'<span class="eff">효율 '+Math.round(e[1]*100)+'%/년</span></span><span class="lv"><span id="v'+i+'">0</span>억</span></div>'
+      + '<input type="range" id="s'+i+'" min="0" max="90" value="0" step="5"></div>';
+  });
+  $("levers").innerHTML=h;
+  function allocCalc(){
+    var sum=0, oi=0;
+    EFF.forEach(function(e,i){
+      var v = +$("s"+i).value;
+      $("v"+i).textContent = v;
+      sum += v; oi += v*e[1];
+    });
+    $("aSum").textContent = f1(sum);
+    $("aOi").textContent = "+"+f1(oi);
+    var over = sum > ALLOC_CAP;
+    var b=$("aBadge"); b.textContent = over ? (f1(sum-ALLOC_CAP)+"억 초과") : "한도 내"; b.className="badge "+(over?"no":"ok");
+    var rotc = (BASE_OI + oi) / (BASE_CAP + sum) * 100;
+    $("aRotc").textContent = f1(rotc);
+    $("aNote").textContent = "가정: 배분액은 실측 효율(연이익/CAPEX)로 즉시 연환산 기여 · 법인 ROTC = (594+추가이익) ÷ (1,026.8+배분).";
+    if (sum > 0) $("simInsight").innerHTML = "현재 배분 "+f1(sum)+"억 → 추가 연이익 <b>+"+f1(oi)+"억</b>, 법인 ROTC "+f1(rotc)+"%. 같은 금액을 전부 피자몰·애슐리(효율 ~100%)에 두면 +"+f1(sum*1.0)+"억, 전부 리미니(33%)에 두면 +"+f1(sum*0.33)+"억 — <b>배분이 곧 이익</b>.";
+  }
+  EFF.forEach(function(e,i){ $("s"+i).addEventListener("input",allocCalc); });
+  allocCalc();
+})();
 </script>
 <script type="application/json" id="fable-data">
 {"asof":"2026-06-30","kpi":{"영업이익_현재페이스_ACT(억)":594,"목표_추가영업이익(억)_하단":100,"목표_추가영업이익(억)_상단":200,"CAPEX_연간한도(억)":251.3,"CAPEX_집행누적(억)":145.7,"CAPEX_잔여(억)":106.6},"risks":["하반기 예정지 16건 전부 오픈해도 연환산 +146억 — 목표 상단(200억) 대비 54억 부족, 26년 내 실제 반영은 +49억뿐(대부분 4Q 오픈)","CAPEX 승인 대비 +28% 초과집행 관행 — 예정지 투자비 88억의 실집행은 ~112억으로 잔여 예산(106.6억)에 근접·초과","신규점 87개 중 적자 9개(리미니 2·로운 2·델리 2 등) — 폐점 시 사용자본 회수 반영 필요(⑤⑥ 2605 기준)"],"decisions":["잔여 신규예산 83.2억 배분 — 애슐리·피자몰(CAPEX 효율 ~100%) 집중 여부 — 3분기 내","4Q 오픈 안건 선별(초과집행 감안 시 예산 초과 가능) — 3분기 내","리미니·월드델리 신규 출점 보류 여부(회수 2~3년)"]}

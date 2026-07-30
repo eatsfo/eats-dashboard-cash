@@ -42,34 +42,6 @@
   .ox{ display:inline-block; width:20px; height:20px; line-height:20px; text-align:center; border-radius:9999px; font-size:11px; font-weight:700; }
   .ox.o{ background:#e7f6ec; color:var(--good-d); }
   .ox.x{ background:#fdecec; color:var(--bad-d); }
-  /* 분해 스택바 */
-  .stack{ display:flex; height:34px; border-radius:9999px; overflow:hidden; margin:10px 0 4px; }
-  .stack i{ display:block; height:100%; position:relative; }
-  .stack i + i{ border-left:2px solid #fff; }
-  .stacklg{ display:flex; flex-wrap:wrap; gap:12px; font-size:11.5px; color:var(--sub); margin-top:8px; }
-  .stacklg .sw{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:4px; vertical-align:-1px; }
-  /* 산점도 */
-  .scatter{ position:relative; height:380px; margin:26px 8px 8px; border-left:1px solid var(--line2); border-bottom:1px solid var(--line2); }
-  .q{ position:absolute; font-size:10.5px; color:var(--faint); }
-  .qline-x{ position:absolute; left:0; right:0; height:0; border-top:1.5px dashed var(--line2); }
-  .qline-y{ position:absolute; top:0; bottom:0; width:0; border-left:1.5px dashed var(--line2); }
-  .dot{ position:absolute; border-radius:50%; background:rgba(0,102,204,.72); border:2px solid #fff; transform:translate(-50%,50%); }
-  .dot.neg{ background:rgba(220,38,38,.72); }
-  .dot-lb{ position:absolute; font-size:11px; color:var(--ink); transform:translate(-50%,50%); white-space:nowrap; font-weight:600; }
-  .ax{ position:absolute; font-size:10.5px; color:var(--faint); }
-  /* 시뮬 */
-  .lever{ margin-bottom:12px; }
-  .lever .lt{ display:flex; justify-content:space-between; align-items:baseline; font-size:13px; margin-bottom:2px; }
-  .lever .lv{ font-weight:600; color:var(--accent); font-variant-numeric:tabular-nums; }
-  .lever .eff{ color:var(--faint); font-size:11px; margin-left:6px; font-weight:400; }
-  input[type=range]{ width:100%; accent-color:var(--accent); height:5px; }
-  .grid2{ display:grid; grid-template-columns:1.1fr 1fr; gap:18px; }
-  @media (max-width:760px){ .grid2{ grid-template-columns:1fr; } }
-  .resline{ display:flex; align-items:baseline; gap:8px; margin:6px 0; font-size:13px; }
-  .resline b{ font-size:22px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.5px; }
-  .badge{ display:inline-block; font-size:11px; font-weight:600; padding:2px 9px; border-radius:9999px; }
-  .badge.ok{ background:#e7f6ec; color:var(--good-d); }
-  .badge.no{ background:#fdecec; color:var(--bad-d); }
   .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
 </style>
 </head>
@@ -81,11 +53,12 @@
     <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
   </header>
   <p class="story">브랜드가 <b>스스로 번 현금(씨드머니)</b>으로만 다음 투자를 하는 구조.
-    이 페이지는 <b>누가 현금을 만들고 있는지 → 사용자본이 어디에 잠겨 있는지 → 어디로 옮겨야 하는지</b>를 답합니다.</p>
+    이 페이지는 <b>누가 현금을 만들고 있고, 지금 쓸 수 있는 돈이 얼마인지</b>를 답합니다.
+    자본이 어디에 잠겨 있고 얼마를 버는지는 <a href="rotc.html" style="color:var(--accent); text-decoration:none">사용자본 페이지</a>, 그 돈을 어디에 쓸지는 <a href="capex.html" style="color:var(--accent); text-decoration:none">CAPEX 페이지</a>에서 봅니다.</p>
 
-  <!-- ① 시드머니 현황판 -->
+  <!-- 시드머니 현황판 -->
   <div class="panel">
-    <h2>① 시드머니 현황판 — 브랜드별 창출현금과 사용가능 잔고</h2>
+    <h2>시드머니 현황판 — 브랜드별 창출현금과 사용가능 잔고</h2>
     <p class="sub">26년 6월 누적 · 단위 억원 · 잔고 = 기초 + 당해(창출현금의 50%) − 성장엔진 − 배당 · 출처 현금시드머니 260714</p>
     <div class="kv" style="margin-bottom:12px">
       <div class="k">법인 창출현금 (6월 누적)<b>111.7억</b><small>영업이익 251.0 + 감가 93.2 − CAPEX 146.1 − 이자·세금 등</small></div>
@@ -112,139 +85,15 @@
     <div class="insight"><span class="ttl">💡 결론</span>법인 잔고 232.4억 중 <b>애슐리가 241.1억</b> — 사실상 애슐리 혼자 법인의 곳간. 자연별곡(-8.5)·파이낸스(-39.7)는 <b>남의 씨드머니로 사는 상태</b> — 신규 투자 전 자체 현금 창출 회복이 선행 조건. 델리는 6월 <b>흑자 전환(+0.6)</b>으로 시드머니 확보.</div>
   </div>
 
-  <!-- ② 사용자본 분해 -->
-  <div class="panel">
-    <h2>② 사용자본은 어디에 잠겨 있나 — 전년 대비 무엇이 늘었나</h2>
-    <p class="sub">재무식 사용자본(자본+순차입금) · 26.06 vs 25.06 전년동월 · 원천 L108 재무제표 2606 보고 · 단위 억원 · 운전자본 = 재고 + 매출채권 − 매입채무</p>
-    <table>
-      <thead><tr><th>구성요소</th><th>25.06</th><th>26.06</th><th>증감</th><th class="l" style="text-align:left">내용</th></tr></thead>
-      <tbody>
-        <tr><td><b>유무형·사용권자산</b></td><td>889.3</td><td>933.2</td><td class="up">+43.9</td><td style="text-align:left">신규출점·리뉴얼 CAPEX — 증가분의 절반</td></tr>
-        <tr><td><b>운전자본</b> (재고+채권−채무)</td><td>398.3</td><td>394.6</td><td class="dn">−3.7</td><td style="text-align:left">총액은 선방 — 단, 아래 구성은 갈림</td></tr>
-        <tr><td style="padding-left:26px; color:var(--sub)">· 재고자산</td><td>185.5</td><td>200.3</td><td class="up">+14.9</td><td style="text-align:left">운영 허들(180억) 20.3억 초과</td></tr>
-        <tr><td style="padding-left:26px; color:var(--sub)">· 순매출채권 (채권−채무)</td><td>212.8</td><td>194.3</td><td class="dn">−18.5</td><td style="text-align:left">채권 486.9→449.4 · 채무 274.0→255.1</td></tr>
-        <tr><td><b>보증금</b></td><td>113.9</td><td>117.7</td><td class="up">+3.8</td><td style="text-align:left">신규 매장 임차보증금</td></tr>
-        <tr><td><b>현금·단기금융상품</b></td><td>65.4</td><td>74.4</td><td class="up">+9.0</td><td style="text-align:left">현금성 자산</td></tr>
-        <tr><td><b>기타</b> (기타자산−비이자부채, 순)</td><td>-525.3</td><td>-497.6</td><td class="up">+27.7</td><td style="text-align:left">선급 등 기타자산 − 미지급금 등 차감</td></tr>
-        <tr class="tot"><td>사용자본</td><td>941.6</td><td>1,022.3</td><td class="up">+80.7 (+9%)</td><td style="text-align:left">자본 793.1 + 순차입금 229.2</td></tr>
-      </tbody>
-    </table>
-    <div class="kv" style="margin-top:14px">
-      <div class="k">사용자본 한도(게이트)<b>1,000억</b><small>현재 1,022.3억 — 22.3억 초과</small></div>
-      <div class="k">전년 대비<b>+80.7억</b><small>관리 목표 +60억 — 20.7억 상회</small></div>
-      <div class="k">리스제외 감가(연 환산)<b>190.4억</b><small>26년 상반기 실측 95.2억 × 2(추정)</small></div>
-      <div class="k">순증 여력(연)<b>250.4억</b><small>감가 190.4억 + 허용 순증 60억 — CAPEX 실탄</small></div>
-    </div>
-    <div class="insight"><span class="ttl">💡 결론</span>전년비 <b>+80.7억</b>의 주범은 <b>유무형·사용권 +43.9(CAPEX)</b>. <b>운전자본은 −3.7로 총액 선방</b>했지만 내용은 갈림 — 재고 +14.9(허들 180억을 20.3억 초과) vs 순매출채권 −18.5(개선). 재고를 목표(≤180억)로 줄이면 <b>약 20억 현금 확보</b>. 게이트(1,000억) 22.3억 초과 — 하반기 폐점·회수분 반영이 관건. <span style="color:var(--faint)">※ ①·③의 사용자본(1,026.8억, 시드머니 BS)과는 집계 기준 차이로 소폭 다름.</span></div>
-  </div>
-
-  <!-- ③ 자본 배분 맵 -->
-  <div class="panel">
-    <h2>③ 자본 배분 보드 — 어느 브랜드에 돈을 더 주고, 어디서 회수하나</h2>
-    <p class="sub">가로 = 영업이익율(26년 목표, %) · 세로 = ROTC(26년 목표, %) · 원 크기 = 사용자본(억) · 분할선 = 법인 평균 · 대각선 = 법인 평균 회전(6.1회) 기준선(위=회전 빠름) · 브랜드 비교 목적 — 자연별곡·프차·파이낸스는 제외</p>
-    <div class="scatter" id="scatter"></div>
-    <div class="insight"><span class="ttl">💡 결론</span>옅은 <b>대각선 = 법인 평균 회전(6.1회) 기준선</b> — 브랜드가 이 선을 따라 <b>우상향</b>으로 늘어서, 법인 ROTC는 결국 <b>수익성(영업이익율)</b>이 좌우함을 보여줍니다. 선 <b>위</b>(회전 평균↑)는 피자몰·애슐리·리미니·로운, <b>아래</b>(회전 평균↓)는 델리·카페·프랑제리 — 델리는 이익율(4.5%), 카페는 회전(3.5)이 숙제(rotc ②). 가장 큰 원 <b>애슐리(629.9억)</b>가 우상단이라 큰 자본이 제 몫을 함 — 큰 원이 선 아래로 내려오면 회수 1순위인데 현재는 없음. 아래 ④에서 배분해 보세요.</div>
-  </div>
-
-  <!-- ④ 배분 시뮬 -->
-  <div class="panel">
-    <h2>④ 배분 시뮬레이터 — 잔여 실탄 106.6억을 어디에?</h2>
-    <p class="sub">브랜드별 추가 CAPEX 배분 → 예상 추가 연이익 계산 · 효율 = 24·25 오픈점 실측(capex 페이지 ⑥) · 단위 억원</p>
-    <div class="grid2">
-      <div id="levers"></div>
-      <div>
-        <div class="resline"><span>배분 합계</span><b id="aSum">0</b><span>억 / 106.6억 <span id="aBadge" class="badge ok">한도 내</span></span></div>
-        <div class="resline"><span>예상 추가 연 영업이익</span><b id="aOi">0</b><span>억</span></div>
-        <div class="resline"><span>배분 후 법인 ROTC(목표)</span><b id="aRotc">58</b><span>%</span></div>
-        <div class="mnote" id="aNote" style="margin-top:8px"></div>
-      </div>
-    </div>
-    <div class="insight"><span class="ttl">💡 결론</span><span id="simInsight">슬라이더를 움직여 배분해 보세요 — 같은 106.6억이라도 어디에 두느냐에 따라 추가 연이익이 30억 이상 갈립니다.</span></div>
-  </div>
-
   <div class="src">
-    데이터 기준: ①(현금·잔고)·②(분해)·③(창출현금) = 2026.06 · ③(영업이익율·ROTC 목표)·④(효율)는 목표/2605 유지 · 원천: ★★외식_현금시드머니_260714(①·③ 사용자본·창출현금·잔고) · L108_이랜드이츠_재무제표_2606_보고(② 분해 — 전년동월비 확정치) · 하반기롤링플랜(③ 영업이익율·ROTC 목표 — rotc ② 분해와 일치) · 신규오픈점피드백 2605(④ 효율)<br>
-    갱신 방법: 클로드코드에게 "현금 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 숫자를 교체합니다.
+    데이터 기준 2026.06 · 원천: ★★외식_현금시드머니_260714(사용자본·영업이익·창출현금·기초·당해·잔고)<br>
+    갱신 방법: 클로드코드에게 "현금 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 숫자를 교체합니다.<br>
+    2026-07-28 개편: 사용자본 분해·자본배분 보드는 <b>사용자본 페이지</b>로, 배분 시뮬레이터는 <b>CAPEX 페이지 ⑦</b>로 이동했습니다.
   </div>
 </div>
 
-<script>
-// ═══ 데이터 (2026.05 기준 — 갱신 시 이 블록만 교체) ═══
-// ② 분해는 HTML 표(전년동월비, L108 재무제표 2606 보고)로 직접 기재 — JS 데이터 없음
-// ③ 산점도 [브랜드, 영업이익율목표(%), ROTC목표(%), 사용자본(억), 창출현금(억)] — 영업이익율·ROTC 분해는 rotc ②와 일치
-var MAP = [
-  ["애슐리", 12.2, 91, 629.9, 117.3],
-  ["델리", 4.5, 23, 86.4, 2.4],
-  ["로운", 7.9, 51, 58.5, 12.4],
-  ["리미니", 10.0, 92, 25.0, 8.5],
-  ["피자몰", 12.5, 126, 33.4, 11.6],
-  ["카페", 7.7, 27, 18.7, 2.2],
-  ["프랑제리", 2.1, 12, 16.2, 1.7]
-];
-// ④ 시뮬 [브랜드, 실측효율(연이익/CAPEX)]
-var EFF = [ ["애슐리",0.97], ["피자몰",1.05], ["로운",0.89], ["델리(월드델리)",0.48], ["리미니",0.33] ];
-var BUDGET = 106.6, BASE_OI = 594, BASE_CAP = 1026.8;
-
-function $(id){ return document.getElementById(id); }
-function f1(x){ return (Math.round(x*10)/10).toLocaleString(); }
-
-// ③ 산점도 (x=영업이익율 0~15%, y=ROTC 0~240%, 원크기=사용자본)
-(function(){
-  var X0=0, X1=15, Y0=0, Y1=140;
-  function px(v){ return (v-X0)/(X1-X0)*100; }
-  function py(v){ return (v-Y0)/(Y1-Y0)*100; }
-  var CX=9.5, CY=58; // 분할선 = 법인 평균(영업이익율 9.5% · ROTC 58%)
-  var h='';
-  h += '<svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none"><line x1="0" y1="100" x2="100" y2="'+(100-py((CY/CX)*X1))+'" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.4" vector-effect="non-scaling-stroke"/></svg>';
-  h += '<div class="qline-x" style="bottom:'+py(CY)+'%"></div>';
-  h += '<div class="qline-y" style="left:'+px(CX)+'%"></div>';
-  h += '<div class="q" style="left:6px; top:4px">저이익율·고ROTC — 회전이 견인</div>';
-  h += '<div class="q" style="right:6px; top:4px">고이익율·고ROTC — <b>더 투자</b></div>';
-  h += '<div class="q" style="left:6px; bottom:4px">저이익율·저ROTC — 수익성 먼저</div>';
-  h += '<div class="q" style="right:6px; bottom:4px">고이익율·저ROTC — 회전 점검</div>';
-  h += '<div class="ax" style="left:'+px(CX)+'%; bottom:-18px; transform:translateX(-50%)">법인 9.5%</div>';
-  h += '<div class="ax" style="right:0; bottom:-18px">영업이익율(%) →</div>';
-  h += '<div class="ax" style="left:-4px; bottom:'+py(CY)+'%; transform:translate(-100%,50%)">법인 58%</div>';
-  h += '<div class="ax" style="left:-4px; top:0; transform:translate(-100%,0)">ROTC ↑</div>';
-  MAP.forEach(function(m){
-    var d = 8 + Math.sqrt(m[3])*1.3;
-    h += '<div class="dot" title="'+m[0]+' — 영업이익율 '+m[1]+'% · ROTC '+m[2]+'% · 사용자본 '+m[3]+'억 · 창출현금 '+m[4]+'억" style="left:'+px(m[1])+'%; bottom:'+py(m[2])+'%; width:'+d+'px; height:'+d+'px"></div>';
-    var lbPos = m[2] > 110 ? 'bottom:calc('+py(m[2])+'% - '+(d/2+16)+'px)' : 'bottom:calc('+py(m[2])+'% + '+(d/2+3)+'px)';
-    h += '<div class="dot-lb" style="left:'+px(m[1])+'%; '+lbPos+'">'+m[0]+'</div>';
-  });
-  $("scatter").innerHTML=h;
-})();
-
-// ④ 시뮬
-(function(){
-  var h='';
-  EFF.forEach(function(e,i){
-    h += '<div class="lever"><div class="lt"><span>'+e[0]+'<span class="eff">효율 '+Math.round(e[1]*100)+'%/년</span></span><span class="lv"><span id="v'+i+'">0</span>억</span></div>'
-      + '<input type="range" id="s'+i+'" min="0" max="90" value="0" step="5"></div>';
-  });
-  $("levers").innerHTML=h;
-  function calc(){
-    var sum=0, oi=0;
-    EFF.forEach(function(e,i){
-      var v = +$("s"+i).value;
-      $("v"+i).textContent = v;
-      sum += v; oi += v*e[1];
-    });
-    $("aSum").textContent = f1(sum);
-    $("aOi").textContent = "+"+f1(oi);
-    var over = sum > BUDGET;
-    var b=$("aBadge"); b.textContent = over ? (f1(sum-BUDGET)+"억 초과") : "한도 내"; b.className="badge "+(over?"no":"ok");
-    var rotc = (BASE_OI + oi) / (BASE_CAP + sum) * 100;
-    $("aRotc").textContent = f1(rotc);
-    $("aNote").textContent = "가정: 배분액은 실측 효율(연이익/CAPEX)로 즉시 연환산 기여 · 법인 ROTC = (594+추가이익) ÷ (1,026.8+배분).";
-    if (sum > 0) $("simInsight").innerHTML = "현재 배분 "+f1(sum)+"억 → 추가 연이익 <b>+"+f1(oi)+"억</b>, 법인 ROTC "+f1(rotc)+"%. 같은 금액을 전부 피자몰·애슐리(효율 ~100%)에 두면 +"+f1(sum*1.0)+"억, 전부 리미니(33%)에 두면 +"+f1(sum*0.33)+"억 — <b>배분이 곧 이익</b>.";
-  }
-  EFF.forEach(function(e,i){ $("s"+i).addEventListener("input",calc); });
-  calc();
-})();
-</script>
 <script type="application/json" id="fable-data">
-{"asof":"2026-06-30","kpi":{"법인_창출현금_6월누적(억)":111.7,"법인_사용가능잔고(억)":232.4,"시드머니_보유브랜드":"8/9(파이낸스 제외)","사용자본_시드머니BS(억)":1026.8,"사용자본_L108재무제표(억)":1022.3,"사용자본_전년동월비(억)":80.7,"운전자본(억)":394.6,"사용자본_게이트(억)":1000},"risks":["사용자본 1,022.3억 — 게이트(1,000억) 22.3억 초과·전년동월비 +80.7억(+9%, 관리목표 +60억 상회)","증가분의 절반이 유무형·사용권자산 +43.9억(CAPEX) — 운전자본은 −3.7억 선방이나 재고 +14.9억(허들 초과)","자연별곡(-8.5억)·파이낸스(-39.7억) 시드머니 X — 자체 현금 창출 미회복"],"decisions":["잔여 실탄 106.6억 브랜드 배분 — 피자몰·애슐리(효율 ~100%) 집중 여부","재고 200.3억 → 180억 감축(현금 +20억) 여부","게이트 초과 22.3억 — 하반기 폐점·자산 회수 계획 확정"]}
+{"asof":"2026-06-30","kpi":{"법인_창출현금_6월누적(억)":111.7,"법인_사용가능잔고(억)":232.4,"애슐리_사용가능잔고(억)":241.1,"시드머니_보유브랜드":"8/9(파이낸스 제외)","사용자본_시드머니BS(억)":1026.8},"risks":["법인 잔고 232.4억 중 애슐리가 241.1억 — 사실상 애슐리 단독 곳간, 브랜드 편중","자연별곡(-8.5억)·파이낸스(-39.7억) 창출현금 마이너스 — 남의 씨드머니로 운영 중","델리 잔고 0.6억 — 6월 흑자전환했으나 여력 미미"],"decisions":["자연별곡 신규투자 불가 유지 여부(창출현금 회복 전) — 3분기","애슐리 편중 잔고의 브랜드 재배분 원칙 확정 — CAPEX 페이지 ⑦ 배분 시뮬 참조"]}
 </script>
 </body>
 </html>
