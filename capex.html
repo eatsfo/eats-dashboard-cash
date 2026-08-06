@@ -33,6 +33,8 @@
   th,td{ padding:6px 10px; border-bottom:1px solid var(--line); text-align:right; }
   th:first-child,td:first-child{ text-align:left; }
   thead th{ background:var(--parchment); color:var(--ink); font-weight:600; }
+  thead th.grp{ text-align:center; border-bottom:1px solid var(--line2); }
+  .gb{ border-left:1.5px solid var(--line2); }
   tr.tot td{ background:var(--parchment); font-weight:600; }
   .up{ color:var(--bad-d); font-weight:600; }  .dn{ color:var(--good-d); font-weight:600; }
   .kv{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
@@ -65,32 +67,36 @@
     <span class="tag">기준월 — 26년 6월</span>
     <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
   </header>
-  <p class="story">현재 페이스(ACT) 영업이익 <b>594억</b>. 올해 CAPEX <b>251억</b>으로 <b>추가 영업이익 +100~200억</b>을 만들어야 합니다.
+  <p class="story">현재 페이스(ACT) 영업이익 <b>594억</b>. 올해 CAPEX <b>250억</b>으로 <b>추가 영업이익 +100~200억</b>을 만들어야 합니다.
     이 페이지는 <b>돈이 계획대로 나가고 있는지 → 남은 돈으로 몇 개를 열 수 있는지 → 열면 실제로 벌리는지</b>를 추적합니다.</p>
 
   <!-- ① 앵커 KPI -->
   <div class="panel">
     <h2>① 올해의 숫자 — CAPEX가 답해야 할 목표</h2>
-    <p class="sub">하반기롤링플랜(예산설정) · 씨드머니 기준 CAPEX 예산 · 집행 26.06 누적</p>
+    <p class="sub">하반기롤링플랜(ACT 목표) · 씨드머니 기준 CAPEX 한도(260730 개정) · 집행 26.06 누적</p>
     <div class="kv">
       <div class="k">영업이익 현재 페이스(ACT)<b>594억</b><small>롤링플랜 연간 목표</small></div>
       <div class="k">목표 추가 영업이익<b>+100~200억</b><small>신규 투자로 — 주력은 애슐리</small></div>
-      <div class="k">CAPEX 한도(연)<b>251억</b><small>신규 204 · 리뉴얼 30 · 유지보수 17</small></div>
-      <div class="k">집행 누적(6월)<b>145.7억</b><small>소진율 58% (연 경과 50%)</small></div>
-      <div class="k">잔여<b>106.6억</b><small>신규 83.2 · 리뉴얼 20.3 · 유보 3.0</small></div>
+      <div class="k">CAPEX 한도(연)<b>250억</b><small>신규 203.5 · 리뉴얼 29.0 · 유지보수 17.4</small></div>
+      <div class="k">집행 누적(6월)<b>146.1억</b><small>소진율 58% (연 경과 50%)</small></div>
+      <div class="k">잔여 한도<b>100.3억</b><small>신규 81.3 · 리뉴얼 17.5 · 유지보수 3.2</small></div>
     </div>
-    <div class="insight"><span class="ttl">💡 결론</span>연 경과(50%)와 집행(58%)이 나란함 — 남은 6개월은 <b>잔여 106.6억</b>으로 추가 영업이익 +100~200억의 신규 기여분을 만들어야 함. 아래 ③·④에서 "몇 개, 어디에"를 판정.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>연 경과(50%)와 집행(58%)이 나란함 — 남은 6개월은 <b>잔여 100.3억</b>으로 추가 영업이익 +100~200억의 신규 기여분을 만들어야 함. 7월 한도 개정으로 <b>애슐리에 재원이 집중</b>됐으니(②), 아래 ③·④에서 "몇 개, 어디에"를 판정.</div>
   </div>
 
   <!-- ② 예산 vs 집행 -->
   <div class="panel">
-    <h2>② 예산 vs 집행 — 브랜드 × 신규/리뉴얼/유지보수</h2>
-    <p class="sub">씨드머니 기준 예산(연) 대비 26.06 누적 집행 · 단위 억원 · 출처 L108 CAPEX상세_2606 [요약]</p>
+    <h2>② 씨드머니 한도 vs 집행 — 브랜드 × 신규/리뉴얼/유지보수</h2>
+    <p class="sub">26년 씨드머니 기준 한도(연) 대비 26.06 누적 집행 · 단위 억원 · 출처 ★★관리용 신규점이사회승인내역관리_260730 [씨드머니]</p>
     <table>
-      <thead><tr><th>브랜드</th><th>예산(연)</th><th>신규</th><th>리뉴얼</th><th>유지보수</th><th>집행</th><th>잔액</th><th style="width:110px">소진율</th></tr></thead>
+      <thead>
+        <tr><th rowspan="2">브랜드</th><th class="grp" colspan="4">씨드머니 한도 (연)</th><th class="grp gb" colspan="4">집행 (26.6 누적)</th><th rowspan="2" class="gb">잔여<br>한도</th><th rowspan="2" style="width:100px">소진율</th></tr>
+        <tr><th>계</th><th>신규</th><th>리뉴얼</th><th>유지<br>보수</th><th class="gb">계</th><th>신규</th><th>리뉴얼</th><th>유지<br>보수</th></tr>
+      </thead>
       <tbody id="budgetBody"></tbody>
     </table>
-    <div class="insight"><span class="ttl">💡 결론</span>신규 집행 120.8억의 <b>78%가 애슐리(93.8억)</b>. 로운은 예산 43.5억 중 7.9억만 집행(18%) — 하반기 예정지(동부산·부천역사)에 배정된 몫인지 확인 필요. 베이커리·더카페·프차는 <b>예산 초과</b> — 소액이지만 통제 밖 지출.</div>
+    <p class="mnote" style="margin-top:8px">※ 자연별곡은 한도 9.7억이 배정돼 있으나 <b>시드머니 X(창출현금 −9.4억)</b> 상태로 원자료에 잔여한도가 비어 있어 합계에서 제외했습니다 — 집행 6.0억은 이미 나간 금액입니다.</p>
+    <div class="insight"><span class="ttl">💡 결론</span>7월 한도 개정으로 <b>애슐리 141→174.9억(+33.9)</b>, 반대로 <b>델리 25.6→6.0 · 로운 43.5→27.9</b>로 축소 — 신규 재원이 애슐리로 집중됐습니다. 신규 집행 120.8억의 <b>78%가 애슐리(93.8)</b>이고, <b>로운은 한도 27.9억 중 1.8억(6%)만 집행</b> — 하반기 예정지(동부산·부천역사)로 소화할지 확인 필요. <b>카페·프랜차이즈는 한도 초과</b>(소액이나 통제 밖), 델리는 잔여 0.2억으로 사실상 소진.</div>
   </div>
 
   <!-- ③ 계산기 -->
@@ -109,7 +115,7 @@
       </div>
       <div>
         <div class="resline"><span>필요 오픈</span><b id="rNeed">—</b><span>개 (연환산 기준)</span></div>
-        <div class="resline"><span>잔여 신규예산 83.2억으로 가능</span><b id="rCan">—</b><span>개</span></div>
+        <div class="resline"><span>잔여 신규예산 81.3억으로 가능</span><b id="rCan">—</b><span>개</span></div>
         <div class="resline"><span id="rGapLabel">부족 예산</span><b id="rGap">—</b><span>억 <span id="rBadge" class="badge">—</span></span></div>
         <div class="mnote" id="rNote"></div>
       </div>
@@ -126,7 +132,7 @@
       <tbody id="pipeBody"></tbody>
     </table>
     <div class="kv" style="margin-top:12px">
-      <div class="k">예정지 투자비 합계<b id="pCapex">—</b><small>잔여 예산 106.6억 대비</small></div>
+      <div class="k">예정지 투자비 합계<b id="pCapex">—</b><small>잔여 예산 100.3억 대비</small></div>
       <div class="k">연환산 기여 합계<b id="pRun">—</b><small>목표 +100~200억 구간 판정</small></div>
       <div class="k">26년 내 기여<b id="pYear">—</b><small>오픈월~12월 실제 반영분</small></div>
       <div class="k">목표 상단(200억) 대비<b id="pGap">—</b><small>연환산 기준</small></div>
@@ -173,44 +179,48 @@
         <tr><td>리미니</td><td><div class="bar"><i class="bad" style="width:31%"></i></div></td><td>33%</td><td>37개월</td><td class="up">▼ 신규 중단 검토 — 6개 중 적자 2</td></tr>
       </tbody>
     </table>
-    <div class="insight"><span class="ttl">💡 결론</span>잔여 신규예산 83.2억은 <b>애슐리·피자몰(효율 ~100%)</b>에 집중하는 것이 추가 +100~200억 목표의 최단 경로. 리미니·월드델리 신규는 회수 2~3년 — 보류하고 그 몫을 애슐리 1~2점으로 돌리면 <b>연 +8~16억</b> 추가.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>잔여 신규예산 81.3억은 <b>애슐리·피자몰(효율 ~100%)</b>에 집중하는 것이 추가 +100~200억 목표의 최단 경로. 리미니·월드델리 신규는 회수 2~3년 — 보류하고 그 몫을 애슐리 1~2점으로 돌리면 <b>연 +8~16억</b> 추가.</div>
   </div>
 
   <!-- ⑦ 배분 시뮬레이터 -->
   <div class="panel">
-    <h2>⑦ 배분 시뮬레이터 — 잔여 실탄 106.6억을 어디에?</h2>
+    <h2>⑦ 배분 시뮬레이터 — 잔여 실탄 100.3억을 어디에?</h2>
     <p class="sub">브랜드별 추가 CAPEX 배분 → 예상 추가 연이익 계산 · 효율 = 24·25 오픈점 실측(위 ⑥) · 법인 ROTC 영향까지 확인 · 단위 억원</p>
     <div class="grid2">
       <div id="levers"></div>
       <div>
-        <div class="resline"><span>배분 합계</span><b id="aSum">0</b><span>억 / 106.6억 <span id="aBadge" class="badge ok">한도 내</span></span></div>
+        <div class="resline"><span>배분 합계</span><b id="aSum">0</b><span>억 / 100.3억 <span id="aBadge" class="badge ok">한도 내</span></span></div>
         <div class="resline"><span>예상 추가 연 영업이익</span><b id="aOi">0</b><span>억</span></div>
         <div class="resline"><span>배분 후 법인 ROTC(목표)</span><b id="aRotc">58</b><span>%</span></div>
         <div class="mnote" id="aNote" style="margin-top:8px"></div>
       </div>
     </div>
-    <div class="insight"><span class="ttl">💡 결론</span><span id="simInsight">슬라이더를 움직여 배분해 보세요 — 같은 106.6억이라도 어디에 두느냐에 따라 추가 연이익이 30억 이상 갈립니다.</span></div>
+    <div class="insight"><span class="ttl">💡 결론</span><span id="simInsight">슬라이더를 움직여 배분해 보세요 — 같은 100.3억이라도 어디에 두느냐에 따라 추가 연이익이 30억 이상 갈립니다.</span></div>
   </div>
 
   <div class="src">
-    데이터 기준: ①② CAPEX 예산·집행 = 2026.06 · ⑤⑥ 오픈매장 실적은 2605 유지(6월판 없음) · 원천: 하반기롤링플랜_예산설정(ACT 목표) · L108_추가 CAPEX 점포 CAPEX상세_2606(예산·집행) · ★★EATS 신규오픈점피드백 2605 갱신본(오픈매장 실적) · (외식BG)투자심의리스트_2026-06-23(하반기 예정지)<br>
+    데이터 기준: ①② 씨드머니 한도·집행 = 2026.06(한도는 260730 개정본) · ⑤⑥ 오픈매장 실적은 2605 유지(6월판 없음) · 원천: <b>★★관리용 신규점이사회승인내역관리_260730 [씨드머니]</b>(브랜드별 한도·집행·잔여) · 하반기롤링플랜_예산설정(ACT 목표) · ★★EATS 신규오픈점피드백 2605 갱신본(오픈매장 실적) · (외식BG)투자심의리스트_2026-06-23(하반기 예정지)<br>
     갱신 방법: 클로드코드에게 "capex 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 이 페이지의 숫자를 교체합니다.
   </div>
 </div>
 
 <script>
 // ═══ 데이터 (2026.05 기준 — 갱신 시 이 블록만 교체) ═══
-var BUDGET = [ // [브랜드, 예산연간, 신규집행, 리뉴얼집행, 유지보수집행, 집행합, 잔액] — 26.06 누적(L108 CAPEX상세_2606)
-  ["애슐리",141.0,93.8,5.9,10.2,109.8,31.2],
-  ["델리",25.6,5.5,0,0.3,5.8,19.8],
-  ["로운",43.5,3.5,2.7,1.7,7.9,35.6],
-  ["피자몰",10.0,4.3,0,1.2,5.5,4.5],
-  ["리미니",1.7,0.0,0.9,0.4,1.4,0.3],
-  ["베이커리",0.30,0,1.1,0.4,1.5,-1.2],
-  ["더카페",0.10,0.3,0,0,0.3,-0.2],
-  ["프랜차이즈",0.09,0.0,0,0.1,0.1,-0.0],
-  ["기타(CK등)",30.0,13.4,0,0,13.4,16.6]
+// ② [브랜드, 한도계, 한도신규, 한도리뉴얼, 한도유지, 집행계, 집행신규, 집행리뉴얼, 집행유지, 잔여한도(null=미인정)]
+// 원천: ★★관리용 신규점이사회승인내역관리_260730 [씨드머니] 26년 블록 (한도 K~N · 집행 O~R · 잔액 D)
+var BUDGET = [
+  ["애슐리",     174.9, 141.5, 22.0, 11.4, 109.8, 93.8, 5.9, 10.2,  65.1],
+  ["로운",        27.9,  25.9,  0.0,  2.1,   1.8,  0.1, 0.0,  1.7,  26.1],
+  ["기타(CK등)",  13.7,  13.7,  0.0,  0.0,  13.4, 13.4, 0.0,  0.0,   0.3],
+  ["피자몰",      12.0,   9.8,  0.0,  2.2,   5.5,  4.3, 0.0,  1.2,   6.5],
+  ["자연별곡",     9.7,   4.8,  4.8,  0.0,   6.0,  3.4, 2.7,  0.0,  null],
+  ["델리",         6.0,   5.6,  0.0,  0.4,   5.8,  5.5, 0.0,  0.3,   0.2],
+  ["베이커리",     2.7,   2.3,  0.0,  0.4,   1.5,  0.0, 1.1,  0.4,   1.2],
+  ["리미니",       2.5,   0.0,  1.7,  0.8,   1.3,  0.0, 0.9,  0.4,   1.1],
+  ["카페",         0.5,   0.0,  0.5,  0.0,   0.7,  0.3, 0.4,  0.0,  -0.2],
+  ["프랜차이즈",   0.1,   0.0,  0.0,  0.1,   0.1,  0.0, 0.0,  0.1,  -0.0]
 ];
+var BUDGET_TOT = [250.0, 203.5, 29.0, 17.4, 146.1, 120.8, 11.0, 14.2, 100.3]; // 원자료 합계(자연별곡 잔여 제외)
 var PIPE = [ // [안건, 브랜드, 오픈월, 투자비(백만), 월매출목표(백만), 이익률%]
   ["NC송파 면적확장","애슐리",6,1150,900,23],
   ["잠실롯데캐슬 리뉴얼","애슐리",12,1050,1000,28],
@@ -229,24 +239,33 @@ var PIPE = [ // [안건, 브랜드, 오픈월, 투자비(백만), 월매출목�
   ["광교 아브뉴프랑","피자몰",7,130,80,15],
   ["천안 서북 이마트","피자몰",10,110,80,10]
 ];
-var REMAIN_NEW = 83.2, TARGET_LO = 100, TARGET_HI = 200;
+var REMAIN_NEW = 81.3, TARGET_LO = 100, TARGET_HI = 200;
 
 function $(id){ return document.getElementById(id); }
 function f1(x){ return (Math.round(x*10)/10).toLocaleString(); }
 
-// ② 예산 테이블
+// ② 씨드머니 한도 vs 집행 테이블
 (function(){
-  var h="", t=[0,0,0,0,0,0];
+  function cells(r,isTot){
+    var g=isTot?" gb":" gb";
+    return "<td>"+f1(r[1])+"</td><td>"+f1(r[2])+"</td><td>"+f1(r[3])+"</td><td>"+f1(r[4])+"</td>"+
+           "<td class='"+g.trim()+"'>"+f1(r[5])+"</td><td>"+f1(r[6])+"</td><td>"+f1(r[7])+"</td><td>"+f1(r[8])+"</td>";
+  }
+  var h="";
   BUDGET.forEach(function(r){
-    var rate = r[1]>0 ? r[5]/r[1] : null;
-    var w = rate===null?100:Math.min(100,Math.round(rate*100));
-    var cls = rate===null||rate>1 ? "bad" : (rate>0.6 ? "warn" : "");
-    var rateTxt = rate===null ? "예산없음" : Math.round(rate*100)+"%";
-    for(var i=1;i<=6;i++) t[i-1]+=r[i];
-    h+="<tr><td>"+r[0]+"</td><td>"+f1(r[1])+"</td><td>"+f1(r[2])+"</td><td>"+f1(r[3])+"</td><td>"+f1(r[4])+"</td><td>"+f1(r[5])+"</td><td class='"+(r[6]<0?"up":"")+"'>"+f1(r[6])+"</td>"+
+    var rate = r[1]>0 ? r[5]/r[1] : null;                       // 소진율 = 집행 ÷ 한도
+    var w = rate===null?0:Math.min(100,Math.round(rate*100));
+    var cls = (rate!==null&&rate>1) ? "bad" : (rate!==null&&rate>0.6 ? "warn" : "");
+    var rateTxt = rate===null ? "한도없음" : Math.round(rate*100)+"%";
+    var rem = r[9]===null ? "<span class='mnote'>–</span>" : f1(r[9]);
+    h+="<tr><td>"+r[0]+"</td>"+cells(r)+
+       "<td class='gb "+(r[9]!==null&&r[9]<0?"up":"")+"'>"+rem+"</td>"+
        "<td><div class='bar'><i class='"+cls+"' style='width:"+w+"%'></i></div><span class='mnote'>"+rateTxt+"</span></td></tr>";
   });
-  h+="<tr class='tot'><td>합계</td><td>"+f1(t[0])+"</td><td>"+f1(t[1])+"</td><td>"+f1(t[2])+"</td><td>"+f1(t[3])+"</td><td>"+f1(t[4])+"</td><td>"+f1(t[5])+"</td><td>"+Math.round(t[4]/t[0]*100)+"%</td></tr>";
+  var T=BUDGET_TOT;
+  h+="<tr class='tot'><td>합계</td><td>"+f1(T[0])+"</td><td>"+f1(T[1])+"</td><td>"+f1(T[2])+"</td><td>"+f1(T[3])+"</td>"+
+     "<td class='gb'>"+f1(T[4])+"</td><td>"+f1(T[5])+"</td><td>"+f1(T[6])+"</td><td>"+f1(T[7])+"</td>"+
+     "<td class='gb'>"+f1(T[8])+"</td><td>"+Math.round(T[4]/T[0]*100)+"%</td></tr>";
   $("budgetBody").innerHTML=h;
 })();
 
@@ -284,14 +303,14 @@ function calc(){
   $("pYear").textContent="+"+f1(ty)+"억";
   $("pGap").textContent=(tr>=TARGET_HI?"+":"−")+f1(Math.abs(TARGET_HI-tr))+"억";
   var band = tr>=TARGET_HI?"목표 상단(200억)까지 통과":(tr>=TARGET_LO?"목표 하단(100억) 통과 · 상단 미달":"목표 하단(100억) 미달");
-  $("pipeInsight").innerHTML="예정지 16건 전부 오픈 시 연환산 <b>+"+f1(tr)+"억</b> — "+band+". 목표 상단(200억)까지 <b>"+f1(Math.abs(TARGET_HI-tr))+"억 "+(tr>=TARGET_HI?"초과":"남음")+"</b>이고, 26년 내 실제 반영은 <b>+"+f1(ty)+"억</b>뿐(대부분 4Q 오픈). 부족분은 ③의 애슐리 추가 출점 또는 기존점 이익률 회복으로. 단, 투자비 "+f1(tc/100)+"억에 초과집행 관행(+28%)을 얹으면 <b>~"+f1(tc/100*1.28)+"억</b> — 잔여 106.6억을 넘어설 수 있어 4Q 안건은 선별 필요.";
+  $("pipeInsight").innerHTML="예정지 16건 전부 오픈 시 연환산 <b>+"+f1(tr)+"억</b> — "+band+". 목표 상단(200억)까지 <b>"+f1(Math.abs(TARGET_HI-tr))+"억 "+(tr>=TARGET_HI?"초과":"남음")+"</b>이고, 26년 내 실제 반영은 <b>+"+f1(ty)+"억</b>뿐(대부분 4Q 오픈). 부족분은 ③의 애슐리 추가 출점 또는 기존점 이익률 회복으로. 단, 투자비 "+f1(tc/100)+"억에 초과집행 관행(+28%)을 얹으면 <b>~"+f1(tc/100*1.28)+"억</b> — 잔여 100.3억을 넘어설 수 있어 4Q 안건은 선별 필요.";
 })();
 
 calc();
 
 // ⑦ 배분 시뮬레이터 [브랜드, 실측효율(연이익/CAPEX)] — ALLOC_CAP = 잔여 실탄(②의 BUDGET 배열과 다른 값이라 이름 분리)
 var EFF = [ ["애슐리",0.97], ["피자몰",1.05], ["로운",0.89], ["델리(월드델리)",0.48], ["리미니",0.33] ];
-var ALLOC_CAP = 106.6, BASE_OI = 594, BASE_CAP = 1026.8;
+var ALLOC_CAP = 100.3, BASE_OI = 594, BASE_CAP = 1026.8;
 (function(){
   var h='';
   EFF.forEach(function(e,i){
@@ -320,7 +339,7 @@ var ALLOC_CAP = 106.6, BASE_OI = 594, BASE_CAP = 1026.8;
 })();
 </script>
 <script type="application/json" id="fable-data">
-{"asof":"2026-06-30","kpi":{"영업이익_현재페이스_ACT(억)":594,"목표_추가영업이익(억)_하단":100,"목표_추가영업이익(억)_상단":200,"CAPEX_연간한도(억)":251.3,"CAPEX_집행누적(억)":145.7,"CAPEX_잔여(억)":106.6},"risks":["하반기 예정지 16건 전부 오픈해도 연환산 +146억 — 목표 상단(200억) 대비 54억 부족, 26년 내 실제 반영은 +49억뿐(대부분 4Q 오픈)","CAPEX 승인 대비 +28% 초과집행 관행 — 예정지 투자비 88억의 실집행은 ~112억으로 잔여 예산(106.6억)에 근접·초과","신규점 87개 중 적자 9개(리미니 2·로운 2·델리 2 등) — 폐점 시 사용자본 회수 반영 필요(⑤⑥ 2605 기준)"],"decisions":["잔여 신규예산 83.2억 배분 — 애슐리·피자몰(CAPEX 효율 ~100%) 집중 여부 — 3분기 내","4Q 오픈 안건 선별(초과집행 감안 시 예산 초과 가능) — 3분기 내","리미니·월드델리 신규 출점 보류 여부(회수 2~3년)"]}
+{"asof":"2026-06-30","kpi":{"영업이익_현재페이스_ACT(억)":594,"목표_추가영업이익(억)_하단":100,"목표_추가영업이익(억)_상단":200,"CAPEX_연간한도(억)":250.0,"CAPEX_집행누적(억)":146.1,"CAPEX_잔여한도(억)":100.3,"CAPEX_잔여신규(억)":81.3},"risks":["하반기 예정지 16건 전부 오픈해도 연환산 +146억 — 목표 상단(200억) 대비 54억 부족, 26년 내 실제 반영은 +49억뿐(대부분 4Q 오픈)","CAPEX 승인 대비 +28% 초과집행 관행 — 예정지 투자비 88억의 실집행은 ~112억으로 잔여 한도(100.3억) 초과 가능","7월 한도 개정으로 애슐리 174.9억(+33.9)·델리 6.0(-19.6)·로운 27.9(-15.6) — 로운은 한도 27.9억 중 1.8억(6%)만 집행","신규점 87개 중 적자 9개(리미니 2·로운 2·델리 2 등) — 폐점 시 사용자본 회수 반영 필요(⑤⑥ 2605 기준)"],"decisions":["잔여 신규예산 81.3억 배분 — 애슐리·피자몰(CAPEX 효율 ~100%) 집중 여부 — 3분기 내","4Q 오픈 안건 선별(초과집행 감안 시 예산 초과 가능) — 3분기 내","리미니·월드델리 신규 출점 보류 여부(회수 2~3년)"]}
 </script>
 </body>
 </html>
