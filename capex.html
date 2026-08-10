@@ -59,6 +59,12 @@
   .resline{ display:flex; align-items:baseline; gap:8px; margin:6px 0; font-size:13px; }
   .resline b{ font-size:22px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.5px; }
   .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
+  .subhead{ font-size:13px; font-weight:600; margin:18px 0 2px; padding-top:14px; border-top:1px solid var(--line); }
+  .fbar{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:8px 0 10px; }
+  .fbar .lbl{ font-size:12px; color:var(--sub); font-weight:600; margin-right:2px; }
+  .pill{ border:1px solid var(--line2); background:#fff; color:var(--sub); font-size:12px; font-weight:600; padding:3px 12px; border-radius:9999px; cursor:pointer; font-family:inherit; }
+  .pill.on{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .badge.na{ background:var(--parchment); color:var(--sub); }
 </style>
 </head>
 <body>
@@ -145,42 +151,65 @@
   <!-- ⑤ 성적표 -->
   <div class="panel">
     <h2>⑤ 오픈매장 성적표 — 연도별·브랜드별 적중도 (이사회 약속 vs 실적)</h2>
-    <p class="sub">적중도 = 실적 ÷ 이사회 목표 · 단위 억원 · 24·25년 = 신규오픈점피드백_2606 [요약] · 26년 = 목표 이사회 26년_요약 + 실적 피드백 [CAPEX·오픈매장] · <b>CAPEX는 100% 넘으면 초과집행(나쁨), 매출·영업이익은 100% 넘으면 약속 초과달성(좋음)</b></p>
+    <p class="sub">적중도 = 실적 ÷ 이사회 목표 · 단위 억원 · 24·25년 = 신규오픈점피드백_2606 [요약] · 26년 = 목표 이사회 26년_요약 + 실적 피드백 [CAPEX·오픈매장] · <b>CAPEX는 100% 넘으면 초과집행(나쁨), 매출·영업이익은 100% 넘으면 약속 초과달성(좋음), 회수기간은 100% 넘으면 목표보다 빠른 회수(좋음)</b></p>
     <table>
       <thead>
-        <tr><th rowspan="2">브랜드</th><th rowspan="2">매장</th><th class="grp gb" colspan="2">CAPEX (투자비)</th><th class="grp gb" colspan="2">월매출</th><th class="grp gb" colspan="2">월영업이익</th><th rowspan="2" class="gb">적자</th></tr>
-        <tr><th class="gb">목표→실적</th><th>적중</th><th class="gb">목표→실적</th><th>적중</th><th class="gb">목표→실적</th><th>적중</th></tr>
+        <tr><th rowspan="2">브랜드</th><th rowspan="2">매장</th><th class="grp gb" colspan="2">CAPEX (투자비)</th><th class="grp gb" colspan="2">월매출</th><th class="grp gb" colspan="2">월영업이익</th><th rowspan="2" class="gb">적자</th><th class="grp gb" colspan="2">회수기간(개월)</th></tr>
+        <tr><th class="gb">목표→실적</th><th>적중</th><th class="gb">목표→실적</th><th>적중</th><th class="gb">목표→실적</th><th>적중</th><th class="gb">목표→실적</th><th>적중</th></tr>
       </thead>
       <tbody>
-        <tr class="yr"><td colspan="9">2024년 오픈 — 47개점</td></tr>
-        <tr><td>애슐리퀸즈</td><td>32</td><td class="gb">156.1→216.0</td><td class="up">138%</td><td class="gb">140.3→114.5</td><td>82%</td><td class="gb">24.9→15.9</td><td class="up">64%</td><td class="gb">0</td></tr>
-        <tr><td>델리(월드델리)</td><td>6</td><td class="gb">13.8→13.9</td><td>101%</td><td class="gb">13.0→9.9</td><td class="up">76%</td><td class="gb">0.78→0.27</td><td class="up">35%</td><td class="gb">0</td></tr>
-        <tr><td>리미니</td><td>4</td><td class="gb">8.6→9.1</td><td>105%</td><td class="gb">2.4→1.8</td><td class="up">75%</td><td class="gb">0.30→0.11</td><td class="up">37%</td><td class="gb up">2</td></tr>
-        <tr><td>피자몰</td><td>4</td><td class="gb">4.2→4.7</td><td>112%</td><td class="gb">3.6→3.0</td><td>82%</td><td class="gb">0.46→0.52</td><td class="dn">114%</td><td class="gb">0</td></tr>
-        <tr><td>로운</td><td>1</td><td class="gb"><span class="mnote">목표 미설정</span></td><td>–</td><td class="gb">–</td><td>–</td><td class="gb">–</td><td>–</td><td class="gb up">1</td></tr>
-        <tr class="tot"><td>24년 소계</td><td>47</td><td class="gb">182.7→243.7</td><td class="up">133%</td><td class="gb">159.3→129.2</td><td>81%</td><td class="gb">26.4→16.8</td><td class="up">64%</td><td class="gb">3</td></tr>
-        <tr class="yr"><td colspan="9">2025년 오픈 — 47개점</td></tr>
-        <tr><td>애슐리퀸즈</td><td>18</td><td class="gb">100.0→113.2</td><td>113%</td><td class="gb">74.0→70.5</td><td class="dn">95%</td><td class="gb">10.7→11.5</td><td class="dn">107%</td><td class="gb up">1</td></tr>
-        <tr><td>로운</td><td>6</td><td class="gb">19.4→22.9</td><td class="up">118%</td><td class="gb">11.2→9.5</td><td>85%</td><td class="gb">1.81→0.98</td><td class="up">54%</td><td class="gb up">1</td></tr>
-        <tr><td>델리(월드델리)</td><td>7</td><td class="gb">18.0→18.2</td><td>101%</td><td class="gb">21.3→15.2</td><td class="up">71%</td><td class="gb">1.39→0.63</td><td class="up">45%</td><td class="gb up">1</td></tr>
-        <tr><td>피자몰</td><td>11</td><td class="gb">9.4→9.0</td><td class="dn">95%</td><td class="gb">8.2→6.1</td><td class="up">75%</td><td class="gb">0.86→0.70</td><td>82%</td><td class="gb">0</td></tr>
-        <tr><td>리미니</td><td>2</td><td class="gb">4.3→2.9</td><td class="dn">67%</td><td class="gb">0.7→0.7</td><td class="dn">102%</td><td class="gb">0.11→0.11</td><td>97%</td><td class="gb">0</td></tr>
-        <tr><td>기타(테루 등)</td><td>3</td><td class="gb">1.0→1.0</td><td>100%</td><td class="gb"><span class="mnote">목표 미설정</span></td><td>–</td><td class="gb">–</td><td>–</td><td class="gb">0</td></tr>
-        <tr class="tot"><td>25년 소계</td><td>47</td><td class="gb">152.2→167.1</td><td>110%</td><td class="gb">115.3→101.9</td><td>88%</td><td class="gb">14.9→13.9</td><td class="dn">93%</td><td class="gb">3</td></tr>
-        <tr class="yr"><td colspan="9">2026년 오픈 — 14개점 (운영 1개월 이상)</td></tr>
-        <tr><td>애슐리퀸즈</td><td>8</td><td class="gb">60.4→75.7</td><td class="up">125%</td><td class="gb">32.8→41.6</td><td class="dn">127%</td><td class="gb">5.04→4.40</td><td>87%</td><td class="gb up">1</td></tr>
-        <tr><td>델리(월드델리)</td><td>2</td><td class="gb">5.6→5.6</td><td>100%</td><td class="gb">6.9→4.5</td><td class="up">66%</td><td class="gb">0.35→-0.04</td><td class="up">적자</td><td class="gb up">1</td></tr>
-        <tr><td>피자몰</td><td>2</td><td class="gb">2.1→3.1</td><td class="up">147%</td><td class="gb">1.9→2.7</td><td class="dn">142%</td><td class="gb">0.28→0.53</td><td class="dn">188%</td><td class="gb">0</td></tr>
-        <tr><td>기타(자연별곡·더카페)</td><td>2</td><td class="gb">0.9→2.1</td><td class="up">227%</td><td class="gb">2.1→1.9</td><td>91%</td><td class="gb">0.26→-0.27</td><td class="up">적자</td><td class="gb up">1</td></tr>
-        <tr class="tot"><td>26년 소계</td><td>14</td><td class="gb">69.0→86.5</td><td class="up">125%</td><td class="gb">43.7→50.7</td><td class="dn">116%</td><td class="gb">5.93→4.62</td><td class="up">78%</td><td class="gb">3</td></tr>
+        <tr class="yr"><td colspan="11">2024년 오픈 — 47개점</td></tr>
+        <tr><td>애슐리퀸즈</td><td>32</td><td class="gb">156.1→216.0</td><td class="up">138%</td><td class="gb">140.3→114.5</td><td>82%</td><td class="gb">24.9→15.9</td><td class="up">64%</td><td class="gb">0</td><td class="gb up">7→14.9</td><td class="up">47%</td></tr>
+        <tr><td>델리(월드델리)</td><td>6</td><td class="gb">13.8→13.9</td><td>101%</td><td class="gb">13.0→9.9</td><td class="up">76%</td><td class="gb">0.78→0.27</td><td class="up">35%</td><td class="gb">0</td><td class="gb up">11.5→19.6</td><td class="up">59%</td></tr>
+        <tr><td>리미니</td><td>4</td><td class="gb">8.6→9.1</td><td>105%</td><td class="gb">2.4→1.8</td><td class="up">75%</td><td class="gb">0.30→0.11</td><td class="up">37%</td><td class="gb up">2</td><td class="gb up">10.5→63.1</td><td class="up">17%</td></tr>
+        <tr><td>피자몰</td><td>4</td><td class="gb">4.2→4.7</td><td>112%</td><td class="gb">3.6→3.0</td><td>82%</td><td class="gb">0.46→0.52</td><td class="dn">114%</td><td class="gb">0</td><td class="gb dn">9→8.9</td><td class="dn">101%</td></tr>
+        <tr><td>로운</td><td>1</td><td class="gb"><span class="mnote">목표 미설정</span></td><td>–</td><td class="gb">–</td><td>–</td><td class="gb">–</td><td>–</td><td class="gb up">1</td><td class="gb">–</td><td>–</td></tr>
+        <tr class="tot"><td>24년 소계</td><td>47</td><td class="gb">182.7→243.7</td><td class="up">133%</td><td class="gb">159.3→129.2</td><td>81%</td><td class="gb">26.4→16.8</td><td class="up">64%</td><td class="gb">3</td><td class="gb up">7.5→15.2</td><td class="up">49%</td></tr>
+        <tr class="yr"><td colspan="11">2025년 오픈 — 47개점</td></tr>
+        <tr><td>애슐리퀸즈</td><td>18</td><td class="gb">100.0→113.2</td><td>113%</td><td class="gb">74.0→70.5</td><td class="dn">95%</td><td class="gb">10.7→11.5</td><td class="dn">107%</td><td class="gb up">1</td><td class="gb">11→11.1</td><td>99%</td></tr>
+        <tr><td>로운</td><td>6</td><td class="gb">19.4→22.9</td><td class="up">118%</td><td class="gb">11.2→9.5</td><td>85%</td><td class="gb">1.81→0.98</td><td class="up">54%</td><td class="gb up">1</td><td class="gb up">10→47.4</td><td class="up">21%</td></tr>
+        <tr><td>델리(월드델리)</td><td>7</td><td class="gb">18.0→18.2</td><td>101%</td><td class="gb">21.3→15.2</td><td class="up">71%</td><td class="gb">1.39→0.63</td><td class="up">45%</td><td class="gb up">1</td><td class="gb up">12→23</td><td class="up">52%</td></tr>
+        <tr><td>피자몰</td><td>11</td><td class="gb">9.4→9.0</td><td class="dn">95%</td><td class="gb">8.2→6.1</td><td class="up">75%</td><td class="gb">0.86→0.70</td><td>82%</td><td class="gb">0</td><td class="gb dn">9.5→9.2</td><td class="dn">104%</td></tr>
+        <tr><td>리미니</td><td>2</td><td class="gb">4.3→2.9</td><td class="dn">67%</td><td class="gb">0.7→0.7</td><td class="dn">102%</td><td class="gb">0.11→0.11</td><td>97%</td><td class="gb">0</td><td class="gb">9→9.7</td><td>93%</td></tr>
+        <tr><td>기타(테루 등)</td><td>3</td><td class="gb">1.0→1.0</td><td>100%</td><td class="gb"><span class="mnote">목표 미설정</span></td><td>–</td><td class="gb">–</td><td>–</td><td class="gb">0</td><td class="gb">–</td><td>–</td></tr>
+        <tr class="tot"><td>25년 소계</td><td>47</td><td class="gb">152.2→167.1</td><td>110%</td><td class="gb">115.3→101.9</td><td>88%</td><td class="gb">14.9→13.9</td><td class="dn">93%</td><td class="gb">3</td><td class="gb up">10→13.8</td><td class="up">73%</td></tr>
+        <tr class="yr"><td colspan="11">2026년 오픈 — 14개점 (운영 1개월 이상)</td></tr>
+        <tr><td>애슐리퀸즈</td><td>8</td><td class="gb">60.4→75.7</td><td class="up">125%</td><td class="gb">32.8→41.6</td><td class="dn">127%</td><td class="gb">5.04→4.40</td><td>87%</td><td class="gb up">1</td><td class="gb up">10→16.2</td><td class="up">62%</td></tr>
+        <tr><td>델리(월드델리)</td><td>2</td><td class="gb">5.6→5.6</td><td>100%</td><td class="gb">6.9→4.5</td><td class="up">66%</td><td class="gb">0.35→-0.04</td><td class="up">적자</td><td class="gb up">1</td><td class="gb up">14→27.6</td><td class="up">51%</td></tr>
+        <tr><td>피자몰</td><td>2</td><td class="gb">2.1→3.1</td><td class="up">147%</td><td class="gb">1.9→2.7</td><td class="dn">142%</td><td class="gb">0.28→0.53</td><td class="dn">188%</td><td class="gb">0</td><td class="gb up">7.5→191.2</td><td class="up">4%</td></tr>
+        <tr><td>기타(자연별곡·더카페)</td><td>2</td><td class="gb">0.9→2.1</td><td class="up">227%</td><td class="gb">2.1→1.9</td><td>91%</td><td class="gb">0.26→-0.27</td><td class="up">적자</td><td class="gb up">1</td><td class="gb">–</td><td>–</td></tr>
+        <tr class="tot"><td>26년 소계</td><td>14</td><td class="gb">69.0→86.5</td><td class="up">125%</td><td class="gb">43.7→50.7</td><td class="dn">116%</td><td class="gb">5.93→4.62</td><td class="up">78%</td><td class="gb">3</td><td class="gb up">10→17.5</td><td class="up">57%</td></tr>
       </tbody>
     </table>
+
+    <p class="subhead">매장별 상세 — CAPEX 회수기간 목표 vs 실적</p>
+    <div class="fbar" id="storeFbar">
+      <span class="lbl">연도</span>
+      <button class="pill" data-y="24">24년 오픈</button>
+      <button class="pill" data-y="25">25년 오픈</button>
+      <button class="pill on" data-y="26">26년 오픈</button>
+      <span class="lbl" style="margin-left:12px">브랜드</span>
+      <button class="pill on" data-b="전체">전체</button>
+      <button class="pill" data-b="애슐리퀸즈">애슐리퀸즈</button>
+      <button class="pill" data-b="델리(월드델리)">델리</button>
+      <button class="pill" data-b="피자몰">피자몰</button>
+      <button class="pill" data-b="로운">로운</button>
+      <button class="pill" data-b="리미니">리미니</button>
+      <button class="pill" data-b="기타">기타</button>
+    </div>
+    <table>
+      <thead><tr><th>매장명</th><th>브랜드</th><th>오픈</th><th class="gb">회수 목표(개월)</th><th>회수 실적(개월)</th><th style="width:110px">판정</th></tr></thead>
+      <tbody id="storeBody"></tbody>
+    </table>
+    <p class="mnote" id="storeCnt" style="margin-top:6px"></p>
+
     <p class="mnote" style="margin-top:8px">
       ※ 영업이익 = 직접비 기준(월평균) · 적자 = 월평균 영업이익 &lt; 0 · 일부 매장은 목표 미설정으로 해당 항목만 집계 제외(로운 24년 1곳, 기타 3곳 등)<br>
       ※ 26년은 <b>운영 1개월 미만 3곳(하월곡·포항·다산) 제외</b> — 오픈 초기 비용으로 월평균이 크게 왜곡됨 · <b>피드백 파일이 작업중</b>이라 갱신 시 변동 가능<br>
-      ※ (회수완료 건수는 오픈이 오래될수록 기계적으로 늘어 연도 비교를 왜곡하므로 표에서 제외 · 적자 건수도 26년은 오픈 초기 3곳이라 향후 줄어들 여지 있음)
+      ※ <b>회수기간</b> = 목표(이사회 승인, 24·25년은 피드백파일 [요약] X열 · 26년은 신규점승인내역관리_260806 [26년_요약] V열) · 실적(현재 추세 기준 CAPEX 회수 소요기간, 24·25년은 피드백파일 [요약] Y열 · 26년은 같은 파일 [CAPEX·오픈매장] 직접비 기준 회수가능기간 열) · 매장마다 CAPEX 회수 시점이 달라 <b>오픈 경과기간과 무관하게 비교 가능</b>(회수완료 매장 수를 세는 방식은 오래된 매장이 유리해 표에서 제외) · 단, 마진이 매우 낮은 일부 매장은 추세 전망이 비정상적으로 커져 <b>평균 대신 중앙값(median)</b>을 사용 · 적자 매장은 회수 계산에서 제외(위 적자 컬럼에 별도 반영) · <b>26년은 오픈 1~5개월차 초기 추세라 매달 크게 바뀔 수 있음</b> — 특히 피자몰 4%는 매장 1곳(울산, 저마진 초기 379.9개월 추정)이 좌우한 결과로 참고용<br>
+      ※ 위 요약표는 <b>브랜드별 중앙값</b>, 개별 매장은 <b>매장별 상세</b>에서 연도·브랜드 버튼으로 골라 볼 수 있습니다 · 매장별 상세의 "적자" = 누적 영업이익 마이너스로 회수기간 산출 불가
     </p>
-    <div class="insight"><span class="ttl">💡 결론</span>3년 흐름이 명확합니다: <b>매출·이익 적중은 크게 개선</b>(매출 81→88→116% · 이익 64→93→78%)됐지만, <b>CAPEX 초과집행은 3년 연속 미개선</b>(133→110→125%) — 26년 오픈분도 목표보다 <b>17.5억 더</b> 썼습니다. 브랜드별로는 <b>피자몰이 유일하게 3년 내내 예산 내 집행</b>(112→95→147%는 소액 변동), 반대로 <b>델리는 3년 연속 이익 미달</b>(35→45%→적자)이고 <b>로운도 25년 54%</b>로 부진. 26년 조기 적자 3곳은 6개월 후 재판정, 예가 관리(⑥)가 여전히 최대 과제.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>3년 흐름이 명확합니다: <b>매출·이익 적중은 크게 개선</b>(매출 81→88→116% · 이익 64→93→78%)됐지만, <b>CAPEX 초과집행은 3년 연속 미개선</b>(133→110→125%) — 26년 오픈분도 목표보다 <b>17.5억 더</b> 썼습니다. <b>회수기간도 같은 그림</b>: 목표 대비 실제 회수 소요기간이 24년 2.0배(적중 49%)→25년 1.4배(적중 73%)로 개선 중이나 여전히 목표보다 오래 걸립니다. 브랜드별로는 <b>피자몰이 유일하게 3년 내내 예산 내 집행이자 회수기간도 거의 목표대로</b>(24년 101%·25년 104%), 반대로 <b>델리는 3년 연속 이익 미달</b>(35→45%→적자)에 회수기간도 목표의 2배 이상(59%·52%) 걸리고, <b>로운도 25년 이익 54%·회수기간 적중 21%</b>로 가장 부진. 26년 조기 적자 3곳은 6개월 후 재판정, 예가 관리(⑥)가 여전히 최대 과제.</div>
   </div>
 
   <!-- ⑥ 방향 -->
@@ -366,8 +395,154 @@ var ALLOC_CAP = 104.0, BASE_OI = 594, BASE_CAP = 1026.8;
   allocCalc();
 })();
 </script>
+<script>
+// ⑤ 매장별 상세 — [연도, 브랜드(그룹), 매장명, 오픈, 회수목표(개월), 회수실적(개월|'L'=적자|null=없음), 제외플래그]
+(function(){
+const STORES=[
+[24,'애슐리퀸즈','애슐리퀸즈 화정점','24.01',5.5,23.1],
+[24,'애슐리퀸즈','애슐리퀸즈 동아 구미점','24.01',0,20.7],
+[24,'리미니','리미니 뉴코아 평택점','24.01',0,'L'],
+[24,'애슐리퀸즈','애슐리퀸즈 신세계백화점 의정부점','24.01',6,11.2],
+[24,'피자몰','피자몰V2 NC안산고잔점','24.01',11,8.8],
+[24,'애슐리퀸즈','애슐리퀸즈 시화성담스퀘어점','24.02',8,56.8],
+[24,'애슐리퀸즈','가산 퍼블릭','24.02',7,15],
+[24,'애슐리퀸즈','애슐리퀸즈 대학로점','24.02',7,30],
+[24,'애슐리퀸즈','롯데프리미엄아울렛 기흥','24.03',8,12.1],
+[24,'애슐리퀸즈','가락몰','24.03',8,23.9],
+[24,'애슐리퀸즈','당진 중앙메디컬타워','24.03',4,9.3],
+[24,'애슐리퀸즈','명지대 MCC관','24.04',5.5,19.8],
+[24,'애슐리퀸즈','경기광주 지에이타워','24.04',4,22.7],
+[24,'애슐리퀸즈','별내역 파라곤스퀘어','24.04',5.3,14.3],
+[24,'애슐리퀸즈','애슐리퀸즈 천호 2001 아울렛','24.05',12,68.2],
+[24,'애슐리퀸즈','창동씨드큐브','24.05',7,15.6],
+[24,'델리(월드델리)','애슐리 월드델리 부천킴스점','24.05',24,24.4],
+[24,'피자몰','피자몰 산본 nc','24.05',6,9.1],
+[24,'애슐리퀸즈','파주 운정','24.06',9,22.6],
+[24,'애슐리퀸즈','애슐리퀸즈 부산광복 롯데','24.06',9,13.6],
+[24,'애슐리퀸즈','상봉엔터식스','24.06',6,13.9],
+[24,'피자몰','해운대 NC','24.06',9,71.5],
+[24,'애슐리퀸즈','강남역 릿타워','24.07',5,20.5],
+[24,'애슐리퀸즈','일산 킨텍스점','24.07',9,13.5],
+[24,'애슐리퀸즈','애슐리퀸즈 대전PEER점','24.07',9,14.8],
+[24,'델리(월드델리)','애슐리투고 월드델리 강남 킴스','24.07',6,31.3],
+[24,'리미니','동아쇼핑점','24.07',0,'L'],
+[24,'피자몰','피자몰 홈플러스 칠곡','24.07',9,6.4],
+[24,'애슐리퀸즈','AK 기흥','24.08',8,9],
+[24,'애슐리퀸즈','애슐리퀸즈 대구역 롯데','24.08',6,13.1],
+[24,'애슐리퀸즈','스타밀드마켓죽전','24.08',6,11.4],
+[24,'리미니','이마트 월배','24.08',9,104.1],
+[24,'애슐리퀸즈','진주 혁신','24.09',40,30.6],
+[24,'애슐리퀸즈','이마트문현','24.09',8,15.2],
+[24,'애슐리퀸즈','동대문 롯데 피트인','24.09',6,10.6],
+[24,'델리(월드델리)','애슐리투고 월드델리 불광 킴스','24.09',11,17.3],
+[24,'리미니','이마트 광주','24.09',12,22.1],
+[24,'애슐리퀸즈','과천 프리즘스퀘어','24.10',5,10.4],
+[24,'애슐리퀸즈','평택 어반그로브','24.10',3,7.2],
+[24,'델리(월드델리)','델리 by 애슐리 야탑킴스점','24.10',12,21.8],
+[24,'애슐리퀸즈','현대백화점 신촌','24.11',0,32.4],
+[24,'애슐리퀸즈','김해신세계','24.11',8,15.3],
+[24,'델리(월드델리)','델리 by 애슐리 대전유성킴스점','24.11',0,4.8],
+[24,'로운','로운 뉴코아 인천논현점','24.11',0,'L'],
+[24,'애슐리퀸즈','신풍역 비스타에코','24.12',7,14.3],
+[24,'애슐리퀸즈','AK수원','24.12',11,9.9],
+[24,'델리(월드델리)','애슐리투고 월드델리 평촌 킴스','24.12',12,15.6],
+[25,'애슐리퀸즈','이마트 양주점','25.01',12,15.8],
+[25,'델리(월드델리)','애슐리델리 대구 동아쇼핑','25.01',11,25.2],
+[25,'피자몰','피자몰투고 강서 NC','25.01',null,19.2],
+[25,'피자몰','피자몰 투고 동아쇼핑','25.01',10,4.6],
+[25,'애슐리퀸즈','마곡 케이스퀘어','25.02',3,7.6],
+[25,'델리(월드델리)','애슐리투고 월드델리 송파 킴스','25.02',12,14.1],
+[25,'애슐리퀸즈','애슐리퀸즈 인천아인병원점','25.03',12,14],
+[25,'델리(월드델리)','신구로 킴스','25.03',10,23],
+[25,'애슐리퀸즈','덕천뉴코아','25.04',7,8.9],
+[25,'애슐리퀸즈','이마트월배점','25.04',12,19.1],
+[25,'로운','부산대NC점','25.04',14,259.5],
+[25,'델리(월드델리)','일산NC','25.04',12,37.5],
+[25,'피자몰','송파NC','25.04',9,6.9],
+[25,'피자몰','불광NC','25.04',10,4.9],
+[25,'리미니','NC불광','25.04',9,9.7],
+[25,'애슐리퀸즈','nc구의미스터폴','25.05',9,3.7],
+[25,'애슐리퀸즈','애슐리퀸즈 타임테라스 동탄점','25.05',7,13.5],
+[25,'델리(월드델리)','2001분당킴스','25.05',12,16.3],
+[25,'피자몰','평택 NO','25.05',12,21.8],
+[25,'애슐리퀸즈','이마트 목동점','25.06',9,8.8],
+[25,'애슐리퀸즈','애슐리퀸즈 동아쇼핑 대구점','25.06',9,11.1],
+[25,'델리(월드델리)','델리 by 애슐리 뉴코아 청주점','25.06',15,'L'],
+[25,'피자몰','피자몰V2 뉴코아평촌점','25.06',8,5.6],
+[25,'피자몰','피자몰V2 NC청주점','25.06',9,11.4],
+[25,'애슐리퀸즈','춘천M백화점','25.07',10,8.7],
+[25,'로운','로운샤브 프리미엄 스타필드마켓 동탄점','25.07',9,'L'],
+[25,'피자몰','피자몰 뷔페 NC강서점','25.07',15,417.4],
+[25,'리미니','리미니 NC 강서점','25.07',null,15.6],
+[25,'기타','테루 NC 강서점','25.07',null,45.9],
+[25,'애슐리퀸즈','애슐리퀸즈 이마트 남양주점','25.08',11,17.7],
+[25,'애슐리퀸즈','델리 by 애슐리 뉴코아 인천점','25.08',13,'L'],
+[25,'애슐리퀸즈','애슐리퀸즈 장안점','25.09',12,18.5],
+[25,'로운','로운샤브 프리미엄 이마트 의정부점','25.09',9,47.4],
+[25,'애슐리퀸즈','애슐리퀸즈 롯데마트 의왕점','25.10',11,28.9],
+[25,'피자몰','피자몰V2 뉴코아동수원점','25.10',8,1249.8],
+[25,'애슐리퀸즈','애슐리퀸즈 천안펜타포트','25.10',11,9.3],
+[25,'애슐리퀸즈','애슐리퀸즈 롯데백화점 청량리점','25.10',11,5.7],
+[25,'로운','로운 롯데백화점 청량리점','25.10',10,7],
+[25,'기타','프랑제리 마곡사옥점','25.12',null,null],
+[25,'애슐리퀸즈','애슐리퀸즈 인천검단점','25.12',null,null],
+[25,'애슐리퀸즈','애슐리퀸즈 성수뮤지엄','25.12',null,null],
+[25,'델리(월드델리)','델리 by 애슐리 구의 이스트폴점','25.12',null,null],
+[25,'기타','프랑제리 NC 강서점','25.12',null,null],
+[25,'피자몰','피자몰V2 뉴코아일산점','25.12',null,null],
+[25,'피자몰','피자몰V2 이마트 의정부점','25.12',null,null],
+[25,'로운','로운샤브 프리미엄 이마트 해운대점','25.12',null,null],
+[25,'로운','로운샤브 프리미엄 롯데몰 광명점','25.12',null,null],
+[26,'애슐리퀸즈','애슐리퀸즈 시흥 신세계아울렛점','26.01',11,28.7],
+[26,'애슐리퀸즈','애슐리퀸즈 롯데마트 양평점','26.01',11,70.1],
+[26,'델리(월드델리)','델리 by 애슐리 2001중계점','26.01',14,27.6],
+[26,'기타','자연별곡 NC야탑점','26.01',6.2,'L'],
+[26,'피자몰','피자몰V2 2001중계점','26.01',7,2.5],
+[26,'애슐리퀸즈','애슐리퀸즈 성수낙낙점','26.02',null,'L'],
+[26,'애슐리퀸즈','애슐리퀸즈 롯데몰 군산점','26.03',10,5.5],
+[26,'델리(월드델리)','델리 by 애슐리 동수원킴스점','26.03',14,'L'],
+[26,'피자몰','피자몰V2 신선도원몰 울산점','26.03',8,379.9],
+[26,'애슐리퀸즈','애슐리퀸즈 이마트 은평점','26.04',9,17.5],
+[26,'애슐리퀸즈','애슐리퀸즈 신세계 프리미엄아울렛 부산점','26.04',10,'L'],
+[26,'애슐리퀸즈','애슐리퀸즈 스타필드빌리지 운정점','26.05',10,9.1],
+[26,'애슐리퀸즈','애슐리퀸즈 AK원주점','26.05',10,14.9],
+[26,'기타','더카페 독산역1번출구점(직영)','26.05',null,4],
+[26,'애슐리퀸즈','애슐리퀸즈 이마트 하월곡점','26.06',8,null,1],
+[26,'애슐리퀸즈','애슐리퀸즈 롯데백화점 포항점','26.06',11,null,1],
+[26,'피자몰','피자몰V2 이마트 다산점','26.06',8,null,1]
+];
+const yrN={24:'24년',25:'25년',26:'26년'};
+let selY=26, selB='전체';
+function fm(v){ return (v==null)?'–':(v%1? v.toFixed(1): String(v)); }
+function render(){
+  document.querySelectorAll('#storeFbar [data-y]').forEach(function(p){ p.classList.toggle('on', +p.dataset.y===selY); });
+  document.querySelectorAll('#storeFbar [data-b]').forEach(function(p){ p.classList.toggle('on', p.dataset.b===selB); });
+  var rows=STORES.filter(function(s){ return s[0]===selY && (selB==='전체'||s[1]===selB); });
+  var html='', c={ok:0,over:0,loss:0,na:0};
+  rows.forEach(function(s){
+    var b=s[1],n=s[2],o=s[3],t=s[4],a=s[5],x=s[6];
+    var badge,res;
+    if(x){ badge='<span class="badge na">판정 제외</span>'; res='<span class="mnote">1개월 미만</span>'; c.na++; }
+    else if(a==null){ badge='<span class="badge na">데이터 없음</span>'; res='–'; c.na++; }
+    else if(a==='L'){ badge='<span class="badge no">적자</span>'; res='<span class="up">적자</span>'; c.loss++; }
+    else if(t==null||t===0){ badge='<span class="badge na">목표 없음</span>'; res=fm(a); c.na++; }
+    else if(a<=t){ badge='<span class="badge ok">목표 내</span>'; res=fm(a); c.ok++; }
+    else { var r=a/t; badge='<span class="badge no">'+(r>=10?'10배+':r.toFixed(1)+'배')+' 지연</span>'; res=fm(a); c.over++; }
+    html+='<tr><td>'+n+'</td><td>'+b+'</td><td>'+o+'</td><td class="gb">'+fm(t)+'</td><td>'+res+'</td><td>'+badge+'</td></tr>';
+  });
+  if(!rows.length) html='<tr><td colspan="6"><span class="mnote">해당 조건의 매장이 없습니다</span></td></tr>';
+  document.getElementById('storeBody').innerHTML=html;
+  document.getElementById('storeCnt').textContent='※ '+yrN[selY]+' 오픈 · '+selB+' — 총 '+rows.length+'개: 목표 내 '+c.ok+' · 지연 '+c.over+' · 적자 '+c.loss+' · 데이터없음·제외 '+c.na;
+}
+document.querySelectorAll('#storeFbar .pill').forEach(function(p){
+  p.addEventListener('click',function(){ if(p.dataset.y) selY=+p.dataset.y; else selB=p.dataset.b; render(); });
+});
+render();
+})();
+</script>
+
 <script type="application/json" id="fable-data">
-{"asof":"2026-06-30","kpi":{"영업이익_현재페이스_ACT(억)":594,"목표_추가영업이익(억)_하단":100,"목표_추가영업이익(억)_상단":200,"CAPEX_연간한도(억)":250.0,"CAPEX_집행누적(억)":146.1,"CAPEX_잔여한도(억)":104.0,"CAPEX_잔여신규(억)":82.7,"승인미오픈(건)":19,"예정지_투자비(억)":105.6,"예정지_연환산기여(억)":154.1,"예정지_26년내기여(억)":47.3},"risks":["이사회 승인·미오픈 19건의 신규 계획 95.1억이 잔여 신규한도 82.7억 대비 12.3억 빠듯 — 단, 잔여한도는 브랜드 집계라 매장별 소진 현황은 오픈매장 피드백 갱신 후 확인 필요","보고상 오픈예정월이 지난 지연 4건(충정로·광교·AK분당·고양, 11.8억) — 26년 기여 축소 위험","7월 한도 개정으로 애슐리 174.9억(+33.9)·델리 6.0(-19.6)·로운 27.9(-15.6) — 로운은 한도 27.9억 중 1.8억(6%)만 집행","CAPEX 초과집행 3년 연속 미개선: 이사회 목표 대비 24년 133%·25년 110%·26년 125% — 26년 오픈분만 +17.5억","델리 3년 연속 이익 적중 미달(35%→45%→적자)·로운 25년 54%·26년 조기 적자 3곳 — 폐점 시 사용자본 회수 반영 원칙"],"decisions":["잔여 신규예산 82.7억 배분 — 애슐리·피자몰(CAPEX 효율 ~100%) 집중 여부 — 3분기 내","오픈매장 피드백 갱신 후 매장별 CAPEX 소진 현황 재확인 — 3분기 내","리미니·월드델리 신규 출점 보류 여부(회수 2~3년)"]}
+{"asof":"2026-06-30","kpi":{"영업이익_현재페이스_ACT(억)":594,"목표_추가영업이익(억)_하단":100,"목표_추가영업이익(억)_상단":200,"CAPEX_연간한도(억)":250.0,"CAPEX_집행누적(억)":146.1,"CAPEX_잔여한도(억)":104.0,"CAPEX_잔여신규(억)":82.7,"승인미오픈(건)":19,"예정지_투자비(억)":105.6,"예정지_연환산기여(억)":154.1,"예정지_26년내기여(억)":47.3},"risks":["이사회 승인·미오픈 19건의 신규 계획 95.1억이 잔여 신규한도 82.7억 대비 12.3억 빠듯 — 단, 잔여한도는 브랜드 집계라 매장별 소진 현황은 오픈매장 피드백 갱신 후 확인 필요","보고상 오픈예정월이 지난 지연 4건(충정로·광교·AK분당·고양, 11.8억) — 26년 기여 축소 위험","7월 한도 개정으로 애슐리 174.9억(+33.9)·델리 6.0(-19.6)·로운 27.9(-15.6) — 로운은 한도 27.9억 중 1.8억(6%)만 집행","CAPEX 초과집행 3년 연속 미개선: 이사회 목표 대비 24년 133%·25년 110%·26년 125% — 26년 오픈분만 +17.5억","델리 3년 연속 이익 적중 미달(35%→45%→적자)·로운 25년 54%·26년 조기 적자 3곳 — 폐점 시 사용자본 회수 반영 원칙","CAPEX 회수기간(목표 대비 실제 소요, 중앙값)도 24년 적중 49%→25년 73%로 개선 중이나 여전히 목표 미달 — 델리 52~59%·로운 21%로 가장 느림, 피자몰만 거의 목표대로(101~104%)"],"decisions":["잔여 신규예산 82.7억 배분 — 애슐리·피자몰(CAPEX 효율 ~100%) 집중 여부 — 3분기 내","오픈매장 피드백 갱신 후 매장별 CAPEX 소진 현황 재확인 — 3분기 내","리미니·월드델리 신규 출점 보류 여부(회수 2~3년)"]}
 </script>
 </body>
 </html>
