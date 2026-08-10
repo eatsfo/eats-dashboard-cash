@@ -60,6 +60,7 @@
   .qline-y{ position:absolute; top:0; bottom:0; width:0; border-left:1.5px dashed var(--line2); }
   .dot{ position:absolute; border-radius:50%; background:rgba(0,102,204,.72); border:2px solid #fff; transform:translate(-50%,50%); }
   .dot-lb{ position:absolute; font-size:11px; color:var(--ink); transform:translate(-50%,50%); white-space:nowrap; font-weight:600; }
+  .dot-gap{ position:absolute; font-size:10px; color:var(--faint); transform:translate(-50%,50%); white-space:nowrap; }
   .ax{ position:absolute; font-size:10.5px; color:var(--faint); }
   /* ─ 차트 ─ */
   .chart{ margin-top:6px; }
@@ -75,10 +76,12 @@
   .grow .bars{ position:relative; }
   .brow{ display:flex; align-items:center; height:11px; margin:2px 0; }
   .brow i{ display:block; height:100%; border-radius:0 4px 4px 0; min-width:2px; }
-  .brow.b25 i{ background:var(--accent-lt); }
-  .brow.b26 i{ background:var(--accent); }
+  .brow.b25 i{ background:#d6d6db; }
+  .brow.b26a i{ background:var(--accent); }
+  .brow.b26 i{ background:transparent; border:1.5px dashed var(--accent); box-sizing:border-box; }
   .brow .val{ font-size:11px; color:var(--ink); font-weight:600; margin-left:6px; font-variant-numeric:tabular-nums; }
   .brow.b25 .val{ color:var(--faint); font-weight:400; }
+  .brow.b26 .val{ color:var(--accent); font-weight:400; }
 </style>
 </head>
 <body>
@@ -94,28 +97,29 @@
 
   <!-- ① 사용자본 분해 -->
   <div class="panel">
-    <h2>① 사용자본은 어디에 잠겨 있나 — 전년 대비 무엇이 늘었나</h2>
-    <p class="sub">재무식 사용자본(자본+순차입금) · 26.06 vs 25.06 전년동월 · 원천 L108 재무제표 2606 보고 · 단위 억원 · 운전자본 = 재고 + 매출채권 − 매입채무</p>
+    <h2>① 사용자본은 어디에 잠겨 있나 — 연초 대비 무엇이 늘었나</h2>
+    <p class="sub">재무식 사용자본(자본+순차입금) · 26.06 vs 25.12(연초) · 원천 L108 재무제표 2606 보고 · 단위 억원 · 운전자본 = 재고 + 매출채권 − 매입채무 − 미지급금 · 사용권자산·리스부채는 상쇄해 순효과 한 줄로만 표시</p>
     <table>
-      <thead><tr><th>구성요소</th><th>25.06</th><th>26.06</th><th>증감</th><th style="text-align:left">내용</th></tr></thead>
+      <thead><tr><th>구성요소</th><th>25.12(연초)</th><th>26.06</th><th>증감</th><th style="text-align:left">내용</th></tr></thead>
       <tbody>
-        <tr><td><b>유무형·사용권자산</b></td><td>889.3</td><td>933.2</td><td class="up">+43.9</td><td style="text-align:left">신규출점·리뉴얼 CAPEX — 증가분의 절반</td></tr>
-        <tr><td><b>운전자본</b> (재고+채권−채무)</td><td>398.3</td><td>394.6</td><td class="dn">−3.7</td><td style="text-align:left">총액은 선방 — 단, 아래 구성은 갈림</td></tr>
-        <tr><td style="padding-left:26px; color:var(--sub)">· 재고자산</td><td>185.5</td><td>200.3</td><td class="up">+14.9</td><td style="text-align:left">운영 허들(180억) 20.3억 초과</td></tr>
-        <tr><td style="padding-left:26px; color:var(--sub)">· 순매출채권 (채권−채무)</td><td>212.8</td><td>194.3</td><td class="dn">−18.5</td><td style="text-align:left">채권 486.9→449.4 · 채무 274.0→255.1</td></tr>
+        <tr><td><b>유무형자산</b> (사용권 제외)</td><td>703.8</td><td>743.2</td><td class="up">+39.4</td><td style="text-align:left">신규출점·리뉴얼 CAPEX — 증가분의 절반</td></tr>
+        <tr><td><b>운전자본</b> (재고+채권−채무·미지급)</td><td>140.6</td><td>180.0</td><td class="up">+39.4</td><td style="text-align:left">증가 = 현금 묶임 — 나머지 절반, 구성은 아래</td></tr>
+        <tr><td style="padding-left:26px; color:var(--sub)">· 재고자산</td><td>185.5</td><td>200.3</td><td class="up">+14.8</td><td style="text-align:left">운영 허들(180억) 20.3억 초과</td></tr>
+        <tr><td style="padding-left:26px; color:var(--sub)">· 순매출채권 (채권−채무−미지급)</td><td>-44.8</td><td>-20.3</td><td class="up">+24.5</td><td style="text-align:left">채권 486.9→449.4(회수 개선) · 채무·미지급 531.7→469.7(상환 −62.0)</td></tr>
         <tr><td><b>보증금</b></td><td>113.9</td><td>117.7</td><td class="up">+3.8</td><td style="text-align:left">신규 매장 임차보증금</td></tr>
         <tr><td><b>현금·단기금융상품</b></td><td>65.4</td><td>74.4</td><td class="up">+9.0</td><td style="text-align:left">현금성 자산</td></tr>
-        <tr><td><b>기타</b> (기타자산−비이자부채, 순)</td><td>-525.3</td><td>-497.6</td><td class="up">+27.7</td><td style="text-align:left">선급 등 기타자산 − 미지급금 등 차감</td></tr>
+        <tr><td><b>리스 순효과</b> (사용권자산−리스부채)</td><td>7.3</td><td>5.9</td><td class="dn">−1.4</td><td style="text-align:left">사용권 190.0 − 리스부채 184.1 — 거의 상쇄되는 회계효과</td></tr>
+        <tr><td><b>기타</b> (기타자산−비이자부채, 순)</td><td>-89.4</td><td>-98.9</td><td class="dn">−9.5</td><td style="text-align:left">이연법인세·선급 등 − 미지급비용·퇴직급여충당 등</td></tr>
         <tr class="tot"><td>사용자본</td><td>941.6</td><td>1,022.3</td><td class="up">+80.7 (+9%)</td><td style="text-align:left">자본 793.1 + 순차입금 229.2</td></tr>
       </tbody>
     </table>
     <div class="kv" style="margin-top:14px">
       <div class="k">사용자본 한도(게이트)<b>1,000억</b><small>현재 1,022.3억 — 22.3억 초과</small></div>
-      <div class="k">전년 대비<b>+80.7억</b><small>관리 목표 +60억 — 20.7억 상회</small></div>
+      <div class="k">연초 대비<b>+80.7억</b><small>연간 관리 목표 +60억 — 상반기에 이미 초과</small></div>
       <div class="k">리스제외 감가(연 환산)<b>190.4억</b><small>26년 상반기 실측 95.2억 × 2(추정)</small></div>
       <div class="k">순증 여력(연)<b>250.4억</b><small>감가 190.4억 + 허용 순증 60억 — CAPEX 실탄</small></div>
     </div>
-    <div class="insight"><span class="ttl">💡 결론</span>전년비 <b>+80.7억</b>의 주범은 <b>유무형·사용권 +43.9(CAPEX)</b>. <b>운전자본은 −3.7로 총액 선방</b>했지만 내용은 갈림 — 재고 +14.9(허들 180억을 20.3억 초과) vs 순매출채권 −18.5(개선). 재고를 목표(≤180억)로 줄이면 <b>약 20억 현금 확보</b>. 게이트(1,000억) 22.3억 초과 — 하반기 폐점·회수분 반영이 관건. <span style="color:var(--faint)">※ ③ 표의 26년 사용자본(1,026.8억, 시드머니 BS)과는 집계 기준 차이로 소폭 다름.</span></div>
+    <div class="insight"><span class="ttl">💡 결론</span>연초 대비 <b>+80.7억</b>은 <b>유무형 CAPEX +39.4</b>와 <b>운전자본 +39.4</b>가 정확히 절반씩. 운전자본 증가의 속살은 <b>재고 +14.8</b>(허들 180억을 20.3억 초과)과 <b>매입채무·미지급금 상환 −62.0</b>(채권 회수 −37.5로 일부 상쇄). 재고를 목표(≤180억)로 줄이면 <b>약 20억 현금 확보</b>. 게이트(1,000억) 22.3억 초과 — 하반기 폐점·회수분 반영이 관건. <span style="color:var(--faint)">※ 리스(사용권자산·리스부채)는 순효과 +5.9억만 반영 — 관리 관점에서 상쇄 처리. ③ 표의 26년 사용자본(1,026.8억, 시드머니 BS)과는 집계 기준 차이로 소폭 다름. 반올림으로 세부 합이 ±0.1 다를 수 있음.</span></div>
   </div>
 
   <!-- ② 법인 -->
@@ -134,7 +138,7 @@
   <!-- ③ 브랜드 테이블 -->
   <div class="panel">
     <h2>③ 브랜드별 ROTC — 작년 vs 올해 목표</h2>
-    <p class="sub">25년 사용자본 = 2512_BS_PL · 26년 사용자본·25년 영업이익 = 현금시드머니 · 26년 목표 = 롤링플랜 ACT · 단위 억원</p>
+    <p class="sub">25년 사용자본 = 2512_BS_PL · 26년 사용자본·25년 영업이익 = 현금시드머니 · 26년 목표 = 롤링플랜 ACT · 연환산 ROTC = 6월 누적 ×2 ÷ 26년 사용자본 · 단위 억원</p>
     <div class="formula">
       <span class="fx"><b>ROTC</b> =
         <span class="frac"><span class="num">영업이익</span><span>사용자본</span></span>
@@ -144,66 +148,67 @@
     </div>
     <table>
       <thead>
-        <tr><th rowspan="2">브랜드</th><th class="grp" colspan="3">25년 (결산)</th><th class="grp gb" colspan="5">26년</th><th rowspan="2" class="gb">전년비<br>(ROTC)</th><th rowspan="2">판정</th></tr>
-        <tr><th>사용<br>자본</th><th>영업<br>이익</th><th>ROTC</th><th class="gb">사용<br>자본</th><th>6월<br>누적</th><th>목표<br>(ACT)</th><th>목표<br>ROTC</th><th>영업이익<br>÷ 사용자본</th></tr>
+        <tr><th rowspan="2">브랜드</th><th class="grp" colspan="3">25년 (결산)</th><th class="grp gb" colspan="6">26년</th><th rowspan="2" class="gb">전년비<br>(ROTC)</th><th rowspan="2">판정</th></tr>
+        <tr><th>사용<br>자본</th><th>영업<br>이익</th><th>ROTC</th><th class="gb">사용<br>자본</th><th>6월<br>누적</th><th>연환산<br>ROTC</th><th>목표<br>(ACT)</th><th>목표<br>ROTC</th><th>영업이익<br>÷ 사용자본</th></tr>
       </thead>
       <tbody>
-        <tr><td>애슐리</td><td>613.2</td><td>472</td><td>77%</td><td class="gb">629.9</td><td>227.4</td><td>576</td><td><b>91%</b></td><td>576 ÷ 629.9</td><td class="gb dn">+14%p</td><td class="dn">▲ 더 투자 — 법인 이익의 주력</td></tr>
-        <tr><td>피자몰</td><td>18.3</td><td>22</td><td>121%</td><td class="gb">33.4</td><td>19.3</td><td>42</td><td><b>126%</b></td><td>42 ÷ 33.4</td><td class="gb dn">+5%p</td><td class="dn">▲ 더 투자 — 소액자본·고효율</td></tr>
-        <tr><td>리미니</td><td>27.7</td><td>7</td><td>25%</td><td class="gb">25.0</td><td>8.7</td><td>23</td><td><b>92%</b></td><td>23 ÷ 25.0</td><td class="gb dn">+67%p</td><td class="dn">▲ 회복 — 단, 신규점 성적은 저조(capex ⑥)</td></tr>
-        <tr><td>로운</td><td>48.7</td><td>10</td><td>21%</td><td class="gb">58.5</td><td>10.8</td><td>30</td><td><b>51%</b></td><td>30 ÷ 58.5</td><td class="gb dn">+30%p</td><td class="dn">▲ 더 투자 — 하반기 2건 예정</td></tr>
-        <tr><td>델리</td><td>84.7</td><td>2</td><td>2%</td><td class="gb">86.4</td><td>6.3</td><td>20</td><td><b>23%</b></td><td>20 ÷ 86.4</td><td class="gb dn">+21%p</td><td>개선 중 — 영업이익율 4.5%가 숙제</td></tr>
-        <tr><td>카페</td><td>16.5</td><td>8</td><td>50%</td><td class="gb">18.7</td><td>3.8</td><td>5</td><td><b>27%</b></td><td>5 ÷ 18.7</td><td class="gb up">−23%p</td><td class="up">▼ 둔화 — 회전 점검</td></tr>
-        <tr><td>프랑제리</td><td>17.6</td><td>-1</td><td>-7%</td><td class="gb">16.2</td><td>-0.9</td><td>2</td><td><b>12%</b></td><td>2 ÷ 16.2</td><td class="gb dn">+19%p</td><td>흑자 전환 초기(12%) — 회복 관찰</td></tr>
-        <tr><td>자연별곡</td><td>0.9</td><td>0.1</td><td>11%</td><td class="gb">7.3</td><td>-3.9</td><td>-4</td><td>전환 중</td><td>–</td><td class="gb">전환 중</td><td>신규 컨셉 전환 중 — 기존점 철수·재오픈, 안정화 후 재평가</td></tr>
-        <tr><td>프차</td><td>-9.7</td><td>8</td><td>n/m</td><td class="gb">-7.2</td><td>6.6</td><td>14</td><td>n/m</td><td>–</td><td class="gb">–</td><td>자본 음수 — ROTC 산정 제외</td></tr>
-        <tr class="tot"><td>법인</td><td>970.3</td><td>474</td><td>49%</td><td class="gb">1,026.8</td><td>251.0</td><td>594</td><td><b>58%</b></td><td>594 ÷ 1,026.8</td><td class="gb dn">+9%p</td><td>개선 추세</td></tr>
+        <tr><td>애슐리</td><td>613.2</td><td>472</td><td>77%</td><td class="gb">629.9</td><td>227.4</td><td>72%</td><td>576</td><td><b>91%</b></td><td>576 ÷ 629.9</td><td class="gb dn">+14%p</td><td class="dn">▲ 더 투자 — 법인 이익의 주력</td></tr>
+        <tr><td>피자몰</td><td>18.3</td><td>22</td><td>121%</td><td class="gb">33.4</td><td>19.3</td><td>116%</td><td>42</td><td><b>126%</b></td><td>42 ÷ 33.4</td><td class="gb dn">+5%p</td><td class="dn">▲ 더 투자 — 소액자본·고효율</td></tr>
+        <tr><td>리미니</td><td>27.7</td><td>7</td><td>25%</td><td class="gb">25.0</td><td>8.7</td><td>70%</td><td>23</td><td><b>92%</b></td><td>23 ÷ 25.0</td><td class="gb dn">+67%p</td><td class="dn">▲ 회복 — 단, 신규점 성적은 저조(capex ⑥)</td></tr>
+        <tr><td>로운</td><td>48.7</td><td>10</td><td>21%</td><td class="gb">58.5</td><td>10.8</td><td>37%</td><td>30</td><td><b>51%</b></td><td>30 ÷ 58.5</td><td class="gb dn">+30%p</td><td class="dn">▲ 더 투자 — 하반기 2건 예정</td></tr>
+        <tr><td>델리</td><td>84.7</td><td>2</td><td>2%</td><td class="gb">86.4</td><td>6.3</td><td>15%</td><td>20</td><td><b>23%</b></td><td>20 ÷ 86.4</td><td class="gb dn">+21%p</td><td>개선 중 — 영업이익율 4.5%가 숙제</td></tr>
+        <tr><td>카페</td><td>16.5</td><td>8</td><td>50%</td><td class="gb">18.7</td><td>3.8</td><td class="dn">41%</td><td>5</td><td><b>27%</b></td><td>5 ÷ 18.7</td><td class="gb up">−23%p</td><td class="up">▼ 둔화 — 회전 점검</td></tr>
+        <tr><td>프랑제리</td><td>17.6</td><td>-1</td><td>-7%</td><td class="gb">16.2</td><td>-0.9</td><td>-11%</td><td>2</td><td><b>12%</b></td><td>2 ÷ 16.2</td><td class="gb dn">+19%p</td><td>흑자 전환 초기(12%) — 회복 관찰</td></tr>
+        <tr><td>자연별곡</td><td>0.9</td><td>0.1</td><td>11%</td><td class="gb">7.3</td><td>-3.9</td><td>–</td><td>-4</td><td>전환 중</td><td>–</td><td class="gb">전환 중</td><td>신규 컨셉 전환 중 — 기존점 철수·재오픈, 안정화 후 재평가</td></tr>
+        <tr><td>프차</td><td>-9.7</td><td>8</td><td>n/m</td><td class="gb">-7.2</td><td>6.6</td><td>–</td><td>14</td><td>n/m</td><td>–</td><td class="gb">–</td><td>자본 음수 — ROTC 산정 제외</td></tr>
+        <tr class="tot"><td>법인</td><td>970.3</td><td>474</td><td>49%</td><td class="gb">1,026.8</td><td>251.0</td><td>49%</td><td>594</td><td><b>58%</b></td><td>594 ÷ 1,026.8</td><td class="gb dn">+9%p</td><td>개선 추세</td></tr>
       </tbody>
     </table>
-    <p class="mnote" style="margin-top:8px">※ 법인 총계는 파이낸스(지주·금융 부문, 사용자본 158.5억)를 포함합니다 — 브랜드가 아니라 ROTC 비교에서는 제외해, 위 브랜드 행 합계와는 차이가 있습니다.</p>
+    <p class="mnote" style="margin-top:8px">※ 법인 총계는 파이낸스(지주·금융 부문, 사용자본 158.5억)를 포함합니다 — 브랜드가 아니라 ROTC 비교에서는 제외해, 위 브랜드 행 합계와는 차이가 있습니다.<br>※ 연환산 ROTC는 하반기 신규 오픈 기여가 아직 없어 목표보다 낮게 보이는 것이 정상 — 카페(41%)는 목표(27%)를 이미 상회.</p>
     <div class="insight"><span class="ttl">💡 결론</span>고효율(피자몰 126%·리미니 92%)은 <b>자본을 더 줘도 되는 곳</b> — 단 절대액이 작아 법인 임팩트는 애슐리(91%)가 좌우. 낮은 쪽은 원인이 갈림: 델리는 <b>영업이익율 문제</b>(4.5%), 카페는 <b>회전 문제</b>(3.5) — 처방이 다름. 자연별곡은 <b>신규 컨셉 전환 중</b>(기존점 철수·재오픈)이라 ROTC 판단 유보.</div>
   </div>
 
   <!-- ④ 차트 -->
   <div class="panel">
-    <h2>④ 한눈에 — 25년(연한 파랑) vs 26년 목표(진한 파랑)</h2>
-    <p class="sub">막대 = ROTC(%) · 세로선 = 0% 기준 · 자연별곡·프차는 자본 특성상 차트 제외(표 참조)</p>
+    <h2>④ 한눈에 — 25년 실적 vs 26년 연환산(6월) vs 26년 목표</h2>
+    <p class="sub">막대 = ROTC(%) · <b>회색 = 작년</b> · <b>파랑 = 올해 현재 페이스</b>(6월 누적×2) · <b>점선 = 올해 목표</b> — 파란 막대가 점선 안을 채우는지가 관전 포인트 · 자연별곡·프차는 자본 특성상 차트 제외(표 참조)</p>
     <div class="chart">
       <div class="legend">
-        <span><span class="sw" style="background:var(--accent-lt)"></span>25년 실적</span>
-        <span><span class="sw" style="background:var(--accent)"></span>26년 목표(ACT)</span>
+        <span><span class="sw" style="background:#d6d6db"></span>25년 실적</span>
+        <span><span class="sw" style="background:var(--accent)"></span>26년 연환산(6월 누적×2)</span>
+        <span><span class="sw" style="background:transparent; border:1.5px dashed var(--accent); box-sizing:border-box"></span>26년 목표(ACT)</span>
       </div>
       <div class="plot" id="plot"></div>
     </div>
-    <div class="insight"><span class="ttl">💡 결론</span>대부분 브랜드가 오른쪽으로(ROTC 상승) 이동 중 — 유일한 역주행은 <b>카페(50→27%)</b>. 다음 분기 이 차트에서 막대가 오른쪽으로 갔는지가 자본 배분의 성적표.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>파란 막대(현재 페이스)가 <b>회색(25년)은 대부분 넘어섰지만 점선(26년 목표)에는 미달</b> — 하반기 오픈 기여 전이라 어느 정도 정상이나, <b>애슐리(72/91)·리미니(70/92)</b>는 하반기 가속이 필요. <b>카페는 목표(27%)는 이미 넘겼지만(41%) 25년(50%)보다는 둔화</b> — 목표 자체가 보수적. 다음 분기 이 차트에서 파란 막대가 점선을 채웠는지가 성적표.</div>
   </div>
 
   <!-- ⑤ 자본 배분 보드 -->
   <div class="panel">
     <h2>⑤ 자본 배분 보드 — 어느 브랜드에 돈을 더 주고, 어디서 회수하나</h2>
-    <p class="sub">가로 = 영업이익율(26년 목표, %) · 세로 = ROTC(26년 목표, %) · 원 크기 = 사용자본(억) · 분할선 = 법인 평균 · 대각선 = 법인 평균 회전(6.1회) 기준선(위=회전 빠름) · 브랜드 비교 목적 — 자연별곡·프차·파이낸스는 제외</p>
+    <p class="sub">원 = <b>26년 실적</b>(26.06 누적 · 가로 = 영업이익율 % · 세로 = 연환산 ROTC %) · 원 크기 = 사용자본(억) · 십자 분할선 = 법인 실적 평균 · 원 아래 회색 숫자 = 목표 ROTC(ACT) · 마우스를 올리면 실적·목표·회전 상세 · 자연별곡·프차·파이낸스는 제외</p>
     <div class="scatter" id="scatter"></div>
-    <div class="insight"><span class="ttl">💡 결론</span>옅은 <b>대각선 = 법인 평균 회전(6.1회) 기준선</b> — 브랜드가 이 선을 따라 <b>우상향</b>으로 늘어서, 법인 ROTC는 결국 <b>수익성(영업이익율)</b>이 좌우함을 보여줍니다. 선 <b>위</b>(회전 평균↑)는 피자몰·애슐리·리미니·로운, <b>아래</b>(회전 평균↓)는 델리·카페·프랑제리 — 델리는 이익율(4.5%), 카페는 회전(3.5)이 숙제(③ 표). 가장 큰 원 <b>애슐리(629.9억)</b>가 우상단이라 큰 자본이 제 몫을 함 — 큰 원이 선 아래로 내려오면 회수 1순위인데 현재는 없음. 실제 배분은 <a href="capex.html" style="color:var(--accent); text-decoration:none">CAPEX 페이지 ⑦ 배분 시뮬레이터</a>에서.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>십자선이 나누는 4개 방이 곧 처방입니다. <b>우상단(더 투자)</b> = 피자몰(115%)·애슐리(72%)·리미니(69%) — 가장 큰 원 애슐리가 여기 있어 큰 자본이 제 몫을 하는 상태. <b>우하단(회전 점검) = 카페</b> — 이익율 12.2%는 피자몰과 나란한 최상위인데 <b>회전 3.35회(전 브랜드 최저, 법인 5.96)</b> 탓에 ROTC 41%에 그침 → 매출 확대 또는 자본(18.7억) 축소가 처방. <b>좌하단(수익성 먼저)</b> = 델리(이익율 2.9%)·프랑제리(−2.1%). 각 원 아래 회색 숫자가 연말 목표 ROTC — <b>애슐리는 목표 91%까지 이익율 개선(10.2→12.2%)이 남은 갭의 전부</b>입니다. 실제 배분은 <a href="capex.html" style="color:var(--accent); text-decoration:none">CAPEX 페이지 ⑦ 배분 시뮬레이터</a>에서.</div>
   </div>
 
   <div class="src mnote" style="color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7">
-    데이터 기준: ① 사용자본 분해·③ 26년 누적 = 2026.06 · 25년 결산·26년 목표(ACT·ROTC)는 롤링플랜 목표 유지 — 원천: ① 분해 = L108_이랜드이츠_재무제표_2606_보고(전년동월비 확정치) · 25년 사용자본 = 2512_BS_PL(사용자본 ①+②=순차입금+자본, 법인 파이낸스 포함) · 26년 사용자본(재무식 26.06 BS)·25년 영업이익(12월 결산)·26년 6월 누적 = ★★외식_현금시드머니_260714 · 26년 연간목표(ACT) = 하반기롤링플랜_예산설정<br>
+    데이터 기준: ① 사용자본 분해·③ 26년 누적 = 2026.06 · 25년 결산·26년 목표(ACT·ROTC)는 롤링플랜 목표 유지 — 원천: ① 분해 = L108_이랜드이츠_재무제표_2606_보고(26.06) vs 2512_보고(연초) — 미지급금은 운전자본 차감에 포함, 사용권자산·리스부채는 순효과 한 줄 표시 · 25년 사용자본 = 2512_BS_PL(사용자본 ①+②=순차입금+자본, 법인 파이낸스 포함) · 26년 사용자본(재무식 26.06 BS)·25년 영업이익(12월 결산)·26년 6월 누적 = ★★외식_현금시드머니_260714 · 26년 연간목표(ACT) = 하반기롤링플랜_예산설정<br>
     갱신 방법: 클로드코드에게 "사용자본 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 숫자를 교체합니다.
   </div>
 </div>
 
 <script>
-// ═══ 데이터 (2026.05 기준 — 갱신 시 이 블록만 교체) ═══
-// [브랜드, 25년 ROTC%, 26년 목표 ROTC%]
+// ═══ 데이터 (2026.06 기준 — 갱신 시 이 블록만 교체) ═══
+// [브랜드, 25년 ROTC%, 26년 연환산(6월 누적×2)%, 26년 목표 ROTC%]
 var ROWS = [
-  ["피자몰", 121, 126],
-  ["애슐리", 77, 91],
-  ["리미니", 25, 92],
-  ["로운", 21, 51],
-  ["카페", 50, 27],
-  ["델리", 2, 23],
-  ["프랑제리", -7, 12],
-  ["법인", 49, 58]
+  ["피자몰", 121, 116, 126],
+  ["애슐리", 77, 72, 91],
+  ["리미니", 25, 70, 92],
+  ["로운", 21, 37, 51],
+  ["카페", 50, 41, 27],
+  ["델리", 2, 15, 23],
+  ["프랑제리", -7, -11, 12],
+  ["법인", 49, 49, 58]
 ];
 var MIN = -10, MAX = 140; // 축 범위(%)
 function x(v){ return (v - MIN) / (MAX - MIN) * 100; }
@@ -215,9 +220,10 @@ ROWS.forEach(function(r){
   var isTot = r[0]==="법인";
   h += '<div class="grow"'+(isTot?' style="border-top:1px solid var(--line); padding-top:6px"':'')+'>'
     + '<div class="nm"'+(isTot?' style="font-weight:600"':'')+'>'+r[0]+'</div><div class="bars">';
-  [ ["b25", r[1]], ["b26", r[2]] ].forEach(function(s){
+  [ ["b25", r[1]], ["b26a", r[2]], ["b26", r[3]] ].forEach(function(s){
     var v = s[1], w = Math.abs(x(v) - x(0)), lft = v >= 0 ? x(0) : x(v);
-    h += '<div class="brow '+s[0]+'" title="'+r[0]+' '+(s[0]==="b25"?"25년":"26년 목표")+' '+v+'%">'
+    var nm = s[0]==="b25" ? "25년" : (s[0]==="b26a" ? "26년 연환산(6월)" : "26년 목표");
+    h += '<div class="brow '+s[0]+'" title="'+r[0]+' '+nm+' '+v+'%">'
       + '<span style="width:'+lft+'%"></span><i style="width:'+w+'%"></i>'
       + '<span class="val">'+v+'%</span></div>';
   });
@@ -225,44 +231,52 @@ ROWS.forEach(function(r){
 });
 plot.innerHTML = h;
 
-// ⑤ 자본 배분 보드 — 산점도 [브랜드, 영업이익율목표(%), ROTC목표(%), 사용자본(억), 창출현금(억)]
+// ⑤ 자본 배분 보드 — 산점도
+// [브랜드, 실적이익율(%), 실적ROTC연환산(%), 사용자본(억), 실적회전(회), 목표이익율(%), 목표ROTC(%), 창출현금(억)]
+// 실적 = 26.06 누적(현금시드머니 브랜드공지) · 이익율=영익÷매출 · ROTC=영익×2÷사용자본 · 회전=매출×2÷사용자본
 var MAP = [
-  ["애슐리", 12.2, 91, 629.9, 117.3],
-  ["델리", 4.5, 23, 86.4, 2.4],
-  ["로운", 7.9, 51, 58.5, 12.4],
-  ["리미니", 10.0, 92, 25.0, 8.5],
-  ["피자몰", 12.5, 126, 33.4, 11.6],
-  ["카페", 7.7, 27, 18.7, 2.2],
-  ["프랑제리", 2.1, 12, 16.2, 1.7]
+  ["애슐리",   10.2,  72, 629.9, 7.07, 12.2,  91, 117.3],
+  ["델리",      2.9,  15,  86.4, 4.97,  4.5,  23,   2.4],
+  ["로운",      6.6,  37,  58.5, 5.65,  7.9,  51,  12.4],
+  ["리미니",    7.9,  69,  25.0, 8.75, 10.0,  92,   8.5],
+  ["피자몰",   12.3, 115,  33.4, 9.40, 12.5, 126,  11.6],
+  ["카페",     12.2,  41,  18.7, 3.35,  7.7,  27,   2.2],
+  ["프랑제리", -2.1, -11,  16.2, 5.40,  2.1,  12,   1.7]
 ];
 (function(){
-  var X0=0, X1=15, Y0=0, Y1=140;
+  var X0=-4, X1=15, Y0=-25, Y1=140;
   function px(v){ return (v-X0)/(X1-X0)*100; }
   function py(v){ return (v-Y0)/(Y1-Y0)*100; }
-  var CX=9.5, CY=58; // 분할선 = 법인 평균(영업이익율 9.5% · ROTC 58%)
+  var CX=8.2, CY=49; // 십자 분할선 = 법인 실적 평균(26.06 누적 기준)
   var s='';
-  s += '<svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none"><line x1="0" y1="100" x2="100" y2="'+(100-py((CY/CX)*X1))+'" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.4" vector-effect="non-scaling-stroke"/></svg>';
   s += '<div class="qline-x" style="bottom:'+py(CY)+'%"></div>';
   s += '<div class="qline-y" style="left:'+px(CX)+'%"></div>';
   s += '<div class="q" style="left:6px; top:4px">저이익율·고ROTC — 회전이 견인</div>';
   s += '<div class="q" style="right:6px; top:4px">고이익율·고ROTC — <b>더 투자</b></div>';
   s += '<div class="q" style="left:6px; bottom:4px">저이익율·저ROTC — 수익성 먼저</div>';
   s += '<div class="q" style="right:6px; bottom:4px">고이익율·저ROTC — 회전 점검</div>';
-  s += '<div class="ax" style="left:'+px(CX)+'%; bottom:-18px; transform:translateX(-50%)">법인 9.5%</div>';
+  s += '<div class="ax" style="left:'+px(CX)+'%; bottom:-18px; transform:translateX(-50%)">법인 8.2%</div>';
   s += '<div class="ax" style="right:0; bottom:-18px">영업이익율(%) →</div>';
-  s += '<div class="ax" style="left:-4px; bottom:'+py(CY)+'%; transform:translate(-100%,50%)">법인 58%</div>';
+  s += '<div class="ax" style="left:-4px; bottom:'+py(CY)+'%; transform:translate(-100%,50%)">법인 49%</div>';
   s += '<div class="ax" style="left:-4px; top:0; transform:translate(-100%,0)">ROTC ↑</div>';
   MAP.forEach(function(m){
+    var tip = m[0]+' — [실적 26.06] 영업이익율 '+m[1]+'% · ROTC(연환산) '+m[2]+'% · 회전 '+m[4]+'회'
+            + ' / [목표 ACT] 영업이익율 '+m[5]+'% · ROTC '+m[6]+'%'
+            + ' / 사용자본 '+m[3]+'억 · 창출현금 '+m[7]+'억';
     var d = 8 + Math.sqrt(m[3])*1.3;
-    s += '<div class="dot" title="'+m[0]+' — 영업이익율 '+m[1]+'% · ROTC '+m[2]+'% · 사용자본 '+m[3]+'억 · 창출현금 '+m[4]+'억" style="left:'+px(m[1])+'%; bottom:'+py(m[2])+'%; width:'+d+'px; height:'+d+'px"></div>';
-    var lbPos = m[2] > 110 ? 'bottom:calc('+py(m[2])+'% - '+(d/2+16)+'px)' : 'bottom:calc('+py(m[2])+'% + '+(d/2+3)+'px)';
+    s += '<div class="dot" title="'+tip+'" style="left:'+px(m[1])+'%; bottom:'+py(m[2])+'%; width:'+d+'px; height:'+d+'px"></div>';
+    var above = m[2] <= 105, lowY = m[2] < 10;
+    var lbPos = above ? 'bottom:calc('+py(m[2])+'% + '+(d/2+3)+'px)' : 'bottom:calc('+py(m[2])+'% - '+(d/2+16)+'px)';
+    var gapPos = !above ? 'bottom:calc('+py(m[2])+'% - '+(d/2+30)+'px)'
+               : (lowY ? 'bottom:calc('+py(m[2])+'% + '+(d/2+18)+'px)' : 'bottom:calc('+py(m[2])+'% - '+(d/2+15)+'px)');
     s += '<div class="dot-lb" style="left:'+px(m[1])+'%; '+lbPos+'">'+m[0]+'</div>';
+    s += '<div class="dot-gap" style="left:'+px(m[1])+'%; '+gapPos+'">목표 '+m[6]+'%</div>';
   });
   document.getElementById("scatter").innerHTML=s;
 })();
 </script>
 <script type="application/json" id="fable-data">
-{"asof":"2026-06-30","kpi":{"법인_ROTC_25년(%)":49,"법인_ROTC_26년목표(%)":58,"사용자본_26.06_재무제표(억)":1022.3,"사용자본_전년동월비(억)":80.7,"운전자본(억)":394.6,"사용자본_게이트(억)":1000,"영업이익_26년목표_ACT(억)":594},"risks":["사용자본 1,022.3억 — 게이트(1,000억) 22.3억 초과·전년동월비 +80.7억(+9%, 관리목표 +60억 상회)","증가분의 절반이 유무형·사용권자산 +43.9억(CAPEX) — 운전자본은 −3.7억 선방이나 재고 +14.9억(허들 초과)","카페 ROTC 둔화 50%→27%(회전 3.5 문제) · 프랑제리 흑자 전환 초기(12%)"],"decisions":["고효율 브랜드(피자몰 126%·리미니 92%) 자본 증액 여부","재고 200.3억 → 180억 감축(현금 +20억) 여부","게이트 초과 22.3억 — 하반기 폐점·자산 회수 계획 확정","델리 영업이익율(4.5%) 개선 vs 카페 회전(3.5) 개선 — 브랜드별 처방 확정"]}
+{"asof":"2026-06-30","kpi":{"법인_ROTC_25년(%)":49,"법인_ROTC_26년연환산(%)":49,"법인_ROTC_26년목표(%)":58,"사용자본_26.06_재무제표(억)":1022.3,"사용자본_연초대비(억)":80.7,"운전자본(억)":180.0,"사용자본_게이트(억)":1000,"영업이익_26년목표_ACT(억)":594},"risks":["사용자본 1,022.3억 — 게이트(1,000억) 22.3억 초과·연초 대비 +80.7억(+9%, 연간 관리목표 +60억을 상반기에 이미 초과)","증가분은 유무형 CAPEX +39.4억과 운전자본 +39.4억이 절반씩 — 재고 +14.8억(허들 180억 초과)·매입채무·미지급금 상환 −62.0억","법인 연환산 ROTC 49% — 목표(58%) 대비 하반기 이익 가속 필요 · 카페 ROTC 둔화 50%→41%(연환산) · 프랑제리 흑자 전환 초기"],"decisions":["고효율 브랜드(피자몰 126%·리미니 92%) 자본 증액 여부","재고 200.3억 → 180억 감축(현금 +20억) 여부","게이트 초과 22.3억 — 하반기 폐점·자산 회수 계획 확정","델리 영업이익율(4.5%) 개선 vs 카페 회전(3.5) 개선 — 브랜드별 처방 확정"]}
 </script>
 </body>
 </html>
