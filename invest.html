@@ -34,6 +34,11 @@
   th:first-child,td:first-child{ text-align:left; }
   td.l{ text-align:left; }
   thead th{ background:var(--parchment); color:var(--ink); font-weight:600; }
+  thead th.grp{ text-align:center; border-bottom:1px solid var(--line2); }
+  .gb{ border-left:1.5px solid var(--line2); }
+  tr.tot td{ background:var(--parchment); font-weight:600; }
+  tr.gtot td{ background:var(--parchment); font-weight:600; border-top:1.5px solid var(--line2); border-bottom:1.5px solid var(--line2); }
+  tr.sec td{ background:var(--accent-bg); color:var(--accent); font-weight:600; text-align:left; font-size:11.5px; }
   .up{ color:var(--bad-d); font-weight:600; }  .dn{ color:var(--good-d); font-weight:600; }
   .badge{ display:inline-block; font-size:11px; font-weight:600; padding:2px 10px; border-radius:9999px; }
   .badge.ok{ background:#e7f6ec; color:var(--good-d); }
@@ -156,10 +161,38 @@
     <div class="insight"><span class="ttl">💡 결론</span>세 페이지의 한 줄 종합: <b>"벌 자격(ROTC↑)과 실탄(231.9억)은 있는데, 남은 104.3억(신규는 73.0억뿐)의 배분과 부실 9개점 정리가 하반기 승부처."</b></div>
   </div>
 
-  <!-- ③ 심의 안건 현황 -->
+  <!-- ③ 26년 투자 포트폴리오 -->
   <div class="panel">
-    <h2>③ 심의 안건 현황 — 이사회 승인·미오픈 18건</h2>
-    <p class="sub">출처 ★★관리용 신규점이사회승인내역관리_<b>260806</b> [26년_요약] · 오픈예정월 오름차순 · 단위 억원 · <b>capex ④와 동일 목록</b></p>
+    <h2>③ 26년 투자 포트폴리오 — 이사회 승인 전체 현황</h2>
+    <p class="sub">출처 ★★관리용 신규점이사회승인내역관리_<b>260806</b> [26년_요약] 브랜드 블록 집계 · 단위 억원 · 순투입 = 보증금 + CAPEX 계획 − TI(임대인 부담분) · <b>아래 ④는 이 중 "미오픈" 18건의 안건별 명세</b></p>
+    <table>
+      <thead>
+        <tr><th rowspan="2">구분</th><th class="grp" colspan="3">매장 수</th><th class="grp gb" colspan="3">투입 계획</th><th rowspan="2" class="gb">순투입</th><th rowspan="2">월매출<br>목표</th></tr>
+        <tr><th>승인</th><th>오픈</th><th>미오픈</th><th class="gb">보증금</th><th>CAPEX</th><th>TI</th></tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><td colspan="9">Ⅰ. 신규오픈 — 브랜드별 (CAPEX 한도 193.8억)</td></tr>
+        <tr><td>애슐리퀸즈</td><td>18</td><td>10</td><td class="up">8</td><td class="gb">16.0</td><td>141.5</td><td>5.5</td><td class="gb">152.0</td><td>84.5</td></tr>
+        <tr><td>월드델리</td><td>2</td><td>2</td><td class="dn">0</td><td class="gb">–</td><td>5.6</td><td>–</td><td class="gb">5.6</td><td>6.9</td></tr>
+        <tr><td>로운</td><td>3</td><td>0</td><td class="up">3</td><td class="gb">3.0</td><td>15.4</td><td>–</td><td class="gb">18.4</td><td>9.0</td></tr>
+        <tr><td>피자몰</td><td>8</td><td>3</td><td class="up">5</td><td class="gb">2.7</td><td>10.6</td><td>–</td><td class="gb">13.3</td><td>8.2</td></tr>
+        <tr><td>기타브랜드</td><td>4</td><td>3</td><td>1</td><td class="gb">1.3</td><td>7.1</td><td>–</td><td class="gb">8.4</td><td>6.9</td></tr>
+        <tr class="tot"><td>신규오픈 소계</td><td>35</td><td>18</td><td class="up">17</td><td class="gb">23.0</td><td>180.2</td><td>5.5</td><td class="gb">197.7</td><td>115.5</td></tr>
+        <tr class="sec"><td colspan="9">Ⅱ. 그 외 — 리뉴얼 · 유지보수 · 점포 외</td></tr>
+        <tr><td>리뉴얼 <span class="mnote">(한도 31.6억)</span></td><td>7</td><td>6</td><td>1</td><td class="gb">–</td><td>31.6</td><td>–</td><td class="gb">31.6</td><td>28.5</td></tr>
+        <tr><td>유지보수 <span class="mnote">(한도 24.9억)</span></td><td colspan="3" style="text-align:center"><span class="mnote">매장 단위 아님</span></td><td class="gb">–</td><td>24.9</td><td>–</td><td class="gb">24.9</td><td>–</td></tr>
+        <tr><td>점포 외 <span class="mnote">(시스템·사옥)</span></td><td>3</td><td>–</td><td>–</td><td class="gb">–</td><td>13.7</td><td>0.2</td><td class="gb">13.5</td><td>–</td></tr>
+        <tr class="gtot"><td>총 합계</td><td>45</td><td>24</td><td class="up">18</td><td class="gb">23.0</td><td>250.3</td><td>5.7</td><td class="gb">267.6</td><td>144.0</td></tr>
+      </tbody>
+    </table>
+    <p class="mnote" style="margin-top:8px">※ CAPEX 계획 총 250.3억은 씨드머니 한도(250.3억)와 일치 — 승인 물량이 한도를 꽉 채운 상태 · 브랜드별 한도 대비 집행·잔여는 <a href="capex.html" style="color:var(--accent); text-decoration:none">capex ②</a>, 미오픈분의 한도 초과 판정은 <a href="capex.html" style="color:var(--accent); text-decoration:none">capex ③</a> · 소계·합계는 원자료 값이라 표시된 소수 첫째자리 합과 0.1억 차이가 날 수 있습니다<br>※ 리뉴얼 7건 = 애슐리 2(NC송파·잠실 확장, 22.0) · 자연별곡 2(4.9) · 프랑제리·리미니·페르케노 각 1 · 유지보수 24.9억 = 6월 누적(애슐리 10.2 · 기타 4.0) + 7~12월 계획 10.7 · 점포 외 = 모바일결제 1.2 · AI 고객조사 0.8 · 마곡사옥(B3) 11.7<br>※ 원자료 [26년_요약]의 CAPEX 집행(M)·잔액(Z) 열은 매장 행이 미입력 상태라 이 표에서 제외했습니다(집행·잔여는 [씨드머니] 시트 기준 = capex ②).</p>
+    <div class="insight"><span class="ttl">💡 결론</span>올해 이사회가 승인한 물량은 <b>매장 45건 · CAPEX 250.3억으로 씨드머니 한도를 정확히 소진</b>했고, 보증금·TI까지 반영한 <b>순현금 투입은 267.6억</b>입니다. 진도는 <b>승인 45건 중 24건 오픈(53%)</b> — 연 경과 50%와 나란하지만 <b>브랜드 편차가 큽니다</b>: <b>로운은 3건 전부 미오픈</b>(15.4억 전액 하반기 집중), <b>피자몰도 8건 중 5건 미오픈</b>. 반대로 월드델리는 승인 2건을 모두 열어 마감했습니다. 신규 승인 물량의 <b>월매출 목표 115.5억</b>이 전부 가동되면 연 매출 1,386억 규모 — 남은 18건의 실행 시점이 26년 손익을 좌우합니다(④).</div>
+  </div>
+
+  <!-- ④ 심의 안건 현황 -->
+  <div class="panel">
+    <h2>④ 심의 안건 현황 — 이사회 승인·미오픈 18건</h2>
+    <p class="sub">출처 ★★관리용 신규점이사회승인내역관리_<b>260806</b> [26년_요약] · 오픈예정월 오름차순 · 단위 억원 · <b>브랜드별 한도 게이트(초과 판정)는 <a href="capex.html" style="color:var(--accent); text-decoration:none">capex ③</a></b></p>
     <table>
       <thead><tr><th>위치</th><th>브랜드</th><th>구분</th><th>투자비</th><th>월매출 목표</th><th>이익률</th><th>회수목표</th><th>오픈예정</th></tr></thead>
       <tbody>
@@ -184,11 +217,30 @@
         <tr class="tot"><td>합계 18건</td><td>–</td><td>–</td><td>100.7</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
       </tbody>
     </table>
-    <div class="insight"><span class="ttl">💡 결론</span>회수목표는 4~12개월로 허들 안 — 관건은 <b>실행 시점</b>: 18건 대부분 4Q 오픈이라 26년 이익 기여는 제한적(연환산 +148.3억 vs 26년 내 +46.4억, capex ④). <b>신규 계획 90.2억은 잔여 신규한도(73.0억)를 17.2억 초과</b> — 260806 개정에서 신규 한도가 203.5→193.8억으로 줄고 유지보수가 17.4→24.9억으로 늘어난 영향(총액 250.3억은 유지). 단, 매장별 정확한 소진 현황은 오픈매장 피드백 갱신 후 확인 필요.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>회수목표는 4~12개월로 허들 안 — 관건은 <b>실행 시점</b>: 18건 대부분 4Q 오픈이라 26년 이익 기여는 제한적(연환산 +148.3억 vs 26년 내 +46.4억, capex ③). <b>신규 계획 90.2억은 잔여 신규한도(73.0억)를 17.2억 초과</b> — 260806 개정에서 신규 한도가 203.5→193.8억으로 줄고 유지보수가 17.4→24.9억으로 늘어난 영향(총액 250.3억은 유지). 단, 매장별 정확한 소진 현황은 오픈매장 피드백 갱신 후 확인 필요.</div>
+  </div>
+
+  <!-- ④ 오픈매장 성적표 요약 -->
+  <div class="panel">
+    <h2>⑤ 오픈매장 성적표 요약 — 브랜드별 3년 적중도와 가이드</h2>
+    <p class="sub">적중도 = 실적 ÷ 이사회 승인 목표 · 각 셀 = <b>24년 → 25년 → 26년 오픈 코호트</b> 순 · <b>CAPEX는 100% 넘으면 초과집행(나쁨), 영업이익·회수기간은 100%에 가까울수록 약속 이행</b> · 매장별 상세는 <a href="capex.html" style="color:var(--accent); text-decoration:none">CAPEX 페이지 ④</a></p>
+    <table>
+      <thead><tr><th>브랜드</th><th>매장 수<br>(24·25·26)</th><th class="gb">CAPEX 집행<br>(24→25→26)</th><th>영업이익<br>(24→25→26)</th><th>회수기간<br>(24→25→26)</th><th style="text-align:left">가이드</th></tr></thead>
+      <tbody>
+        <tr><td>애슐리</td><td>32 · 18 · 8</td><td class="gb">138→113→125%</td><td>64→107→87%</td><td>47→99→62%</td><td style="text-align:left"><span class="dn">▲ 더 투자</span> — 잔여 신규 재원의 주력, 단 CAPEX 초과 상습</td></tr>
+        <tr><td>피자몰</td><td>4 · 11 · 2</td><td class="gb">112→95→147%</td><td>114→82→188%</td><td>101→104→4%*</td><td style="text-align:left"><span class="dn">▲ 더 투자</span> — 3년 내내 소액·모범 (26년 회수 4%*는 초기 왜곡)</td></tr>
+        <tr><td>델리</td><td>6 · 7 · 2</td><td class="gb">101→101→100%</td><td>35→45%→<span class="up">적자</span></td><td>59→52→51%</td><td style="text-align:left"><span class="up">▼ 속도 조절</span> — 집행은 정확하나 이익·회수 모두 목표의 절반</td></tr>
+        <tr><td>로운</td><td>1 · 6 · –</td><td class="gb">–→118→–%</td><td>–→54→–%</td><td>–→21→–%</td><td style="text-align:left">판정 보류 — 하반기 예정 3건(수지·동부산·부천역사) 성적으로 결정</td></tr>
+        <tr><td>리미니</td><td>4 · 2 · –</td><td class="gb">105→67→–%</td><td>37→97→–%</td><td>17→93→–%</td><td style="text-align:left">조건부 파일럿 — <b>25년식 소형 입점 포맷만</b>(24년식 대형 중단, 26년 강남뉴코아 확장이 테스트)</td></tr>
+        <tr class="tot"><td>법인 계</td><td>47 · 47 · 14</td><td class="gb">133→110→125%</td><td>64→93→78%</td><td>49→73→57%</td><td style="text-align:left">매출 적중은 81→88→116%로 개선 — <b>예가 관리가 최대 과제</b></td></tr>
+      </tbody>
+    </table>
+    <p class="mnote" style="margin-top:8px">※ 26년 값은 오픈 1~5개월차 초기 추세라 변동 가능 · 로운 24년(1곳)·리미니 26년은 해당 코호트 없음 또는 목표 미설정으로 "–" · 기타 소액 브랜드(테루·자연별곡·더카페 등)는 capex ④ 참조</p>
+    <div class="insight"><span class="ttl">💡 결론</span><b>매출·이익 적중은 크게 개선됐지만 CAPEX 초과집행은 3년 연속 미개선</b>(법인 133→110→125%) — 26년 오픈분도 목표보다 <b>17.5억 더</b> 썼습니다. 표의 가이드가 곧 심의 원칙: <span style="color:var(--good-d); font-weight:600">▲ 애슐리·피자몰 더 투자</span> · <span style="color:var(--bad-d); font-weight:600">▼ 델리 속도 조절</span> · 로운은 하반기 3건 성적, 리미니는 강남뉴코아 확장 성적을 보고 결정합니다.</div>
   </div>
 
   <div class="src">
-    데이터 기준: Q5(시드머니·잔고)·②CAPEX집행·③ = 2026.06(③은 260806 개정본) · Q1·Q3는 2605 유지(피드백·AMIS 6월판 없음) · 원천: 신규오픈점피드백 2605(Q1·Q3) · AMIS 종합판 2605(Q2 매출·ROTC) · 동일매장 성장률=대시보드 실측 자동갱신(일자별매출 기준 sss_cum, AMIS 무관) · 현금시드머니 260714(Q5) · ★★관리용 신규점이사회승인내역관리_260806(②CAPEX한도·③) · 각 상세는 rotc/index/capex 페이지<br>
+    데이터 기준: Q5(시드머니·잔고)·②CAPEX집행·③·④·⑤ = 2026.06(③·④는 260806 개정본 [26년_요약] · ⑤는 신규오픈점피드백_2606 [요약]+[CAPEX·오픈매장], 상세 capex ④) · Q1·Q3는 2605 유지(피드백·AMIS 6월판 없음) · 원천: 신규오픈점피드백 2605(Q1·Q3) · AMIS 종합판 2605(Q2 매출·ROTC) · 동일매장 성장률=대시보드 실측 자동갱신(일자별매출 기준 sss_cum, AMIS 무관) · 현금시드머니 260714(Q5) · ★★관리용 신규점이사회승인내역관리_260806(②CAPEX한도·③ 포트폴리오·④ 안건) · 각 상세는 rotc/index/capex 페이지<br>
     갱신 방법: 클로드코드에게 "요약 페이지 26○○로 갱신해줘" — 3개 분석 페이지와 함께 숫자를 동기화합니다.
   </div>
 </div>
@@ -212,7 +264,7 @@
 })();
 </script>
 <script type="application/json" id="fable-data">
-{"asof":"2026-06-30","kpi":{"6대질문_통과":"O2·△1·X1·미점검2","법인_ROTC_26목표(%)":58,"시드머니_잔고(억)":231.9,"CAPEX_소진율(%)":58,"CAPEX_잔여한도(억)":104.3,"CAPEX_잔여신규(억)":73.0,"신규점_이익달성율(%)":73,"적자_신규점(개)":9},"risks":["Q3 부실매장 9개 미정리(목표 0) — 신규 승인의 선행조건 미충족","Q1 영업이익 달성율 73%·CAPEX 초과집행 128% — 심의 예가 신뢰도 저하","승인·미오픈 18건 대부분 4Q 오픈 — 26년 이익 기여 제한(+46.4억)·신규 계획 90.2억은 잔여 신규한도(73.0억)를 17.2억 초과(260806 개정으로 신규 한도 203.5→193.8억 축소·매장별 확인은 오픈매장 피드백 갱신 후)"],"decisions":["부실 9개점 정리 계획 확정(폐점 시 사용자본 회수 반영) — 3분기","Q4 평당공사비 30/50/80 기준 정의 확인 및 자동 점검 연결","재상신 안건 조건개선 원칙(동부산 사례) 심의 규정화"]}
+{"asof":"2026-06-30","kpi":{"6대질문_통과":"O2·△1·X1·미점검2","법인_ROTC_26목표(%)":58,"시드머니_잔고(억)":231.9,"CAPEX_소진율(%)":58,"CAPEX_잔여한도(억)":104.3,"CAPEX_잔여신규(억)":73.0,"신규점_이익달성율(%)":73,"적자_신규점(개)":9},"risks":["Q3 부실매장 9개 미정리(목표 0) — 신규 승인의 선행조건 미충족","CAPEX 초과집행 3년 연속 미개선(24년 133%·25년 110%·26년 125%) — 심의 예가 신뢰도 저하, 예가 관리가 최대 과제","승인·미오픈 18건 대부분 4Q 오픈 — 26년 이익 기여 제한(+46.4억)·신규 계획 90.2억은 잔여 신규한도(73.0억)를 17.2억 초과(260806 개정으로 신규 한도 203.5→193.8억 축소·매장별 확인은 오픈매장 피드백 갱신 후)"],"decisions":["브랜드 가이드 확정 — 애슐리·피자몰 더 투자 · 델리 속도 조절 · 로운 하반기 3건 성적 판정 · 리미니 소형 포맷 조건부 파일럿 — 3분기 심의 반영","부실 9개점 정리 계획 확정(폐점 시 사용자본 회수 반영) — 3분기","Q4 평당공사비 30/50/80 기준 정의 확인 및 자동 점검 연결","재상신 안건 조건개선 원칙(동부산 사례) 심의 규정화"]}
 </script>
 </body>
 </html>
