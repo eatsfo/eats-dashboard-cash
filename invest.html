@@ -62,6 +62,16 @@
   .pcard .pt{ font-size:13px; font-weight:600; color:var(--accent); margin-bottom:6px; }
   .pcard .pv{ font-size:20px; font-weight:600; letter-spacing:-.5px; font-variant-numeric:tabular-nums; }
   .pcard .pd{ font-size:11.5px; color:var(--sub); margin-top:4px; line-height:1.5; }
+  details.notes{ margin-top:10px; }
+  details.notes > summary{ list-style:none; cursor:pointer; display:inline-block;
+    font-size:11.5px; color:var(--sub); border:1px solid var(--line); border-radius:9999px;
+    padding:2px 11px; user-select:none; }
+  details.notes > summary::-webkit-details-marker{ display:none; }
+  details.notes > summary:hover{ color:var(--accent); border-color:var(--accent); }
+  details.notes > summary::before{ content:"▸ "; }
+  details.notes[open] > summary::before{ content:"▾ "; }
+  details.notes .nbody{ margin-top:8px; color:var(--sub); font-size:11.5px; line-height:1.75;
+    background:var(--parchment); padding:10px 13px; }
   .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
 </style>
 </head>
@@ -185,7 +195,7 @@
         <tr class="gtot"><td>총 합계</td><td>45</td><td>24</td><td class="up">18</td><td class="gb">23.0</td><td>250.3</td><td>5.7</td><td class="gb">267.6</td><td>144.0</td></tr>
       </tbody>
     </table>
-    <p class="mnote" style="margin-top:8px">※ CAPEX 계획 총 250.3억은 씨드머니 한도(250.3억)와 일치 — 승인 물량이 한도를 꽉 채운 상태 · 브랜드별 한도 대비 집행·잔여는 <a href="capex.html" style="color:var(--accent); text-decoration:none">capex ②</a>, 미오픈분의 집행 진도·실행 가능성은 <a href="capex.html" style="color:var(--accent); text-decoration:none">capex ③</a> · 소계·합계는 원자료 값이라 표시된 소수 첫째자리 합과 0.1억 차이가 날 수 있습니다<br>※ 리뉴얼 7건 = 애슐리 2(NC송파·잠실 확장, 22.0) · 자연별곡 2(4.9) · 프랑제리·리미니·페르케노 각 1 · 유지보수 24.9억 = 6월 누적(애슐리 10.2 · 기타 4.0) + 7~12월 계획 10.7 · 점포 외 = 모바일결제 1.2 · AI 고객조사 0.8 · 마곡사옥(B3) 11.7<br>※ 원자료 [26년_요약]의 CAPEX 집행(M)·잔액(Z) 열은 매장 행이 미입력 상태라 이 표에서 제외했습니다(집행·잔여는 [씨드머니] 시트 기준 = capex ②).</p>
+    <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">※ CAPEX 계획 총 250.3억은 씨드머니 한도(250.3억)와 일치 — 승인 물량이 한도를 꽉 채운 상태 · 브랜드별 한도 대비 집행·잔여는 <a href="capex.html" style="color:var(--accent); text-decoration:none">capex ②</a>, 미오픈분의 집행 진도·실행 가능성은 <a href="capex.html" style="color:var(--accent); text-decoration:none">capex ③</a> · 소계·합계는 원자료 값이라 표시된 소수 첫째자리 합과 0.1억 차이가 날 수 있습니다<br>※ 리뉴얼 7건 = 애슐리 2(NC송파·잠실 확장, 22.0) · 자연별곡 2(4.9) · 프랑제리·리미니·페르케노 각 1 · 유지보수 24.9억 = 6월 누적(애슐리 10.2 · 기타 4.0) + 7~12월 계획 10.7 · 점포 외 = 모바일결제 1.2 · AI 고객조사 0.8 · 마곡사옥(B3) 11.7<br>※ 원자료 [26년_요약]의 CAPEX 집행(M)·잔액(Z) 열은 매장 행이 미입력 상태라 이 표에서 제외했습니다(집행·잔여는 [씨드머니] 시트 기준 = capex ②).</div></details>
     <div class="insight"><span class="ttl">💡 결론</span>올해 이사회가 승인한 물량은 <b>매장 45건 · CAPEX 250.3억으로 씨드머니 한도를 정확히 소진</b>했고, 보증금·TI까지 반영한 <b>순현금 투입은 267.6억</b>입니다. 진도는 <b>승인 45건 중 24건 오픈(53%)</b> — 연 경과 50%와 나란하지만 <b>브랜드 편차가 큽니다</b>: <b>로운은 3건 전부 미오픈</b>(15.4억 전액 하반기 집중), <b>피자몰도 8건 중 5건 미오픈</b>. 반대로 월드델리는 승인 2건을 모두 열어 마감했습니다. 신규 승인 물량의 <b>월매출 목표 115.5억</b>이 전부 가동되면 연 매출 1,386억 규모 — 남은 18건의 실행 시점이 26년 손익을 좌우합니다(④).</div>
   </div>
 
@@ -235,13 +245,14 @@
         <tr class="tot"><td>법인 계</td><td>47 · 47 · 14</td><td class="gb">133→110→125%</td><td>64→93→78%</td><td>49→73→57%</td><td style="text-align:left">매출 적중은 81→88→116%로 개선 — <b>예가 관리가 최대 과제</b></td></tr>
       </tbody>
     </table>
-    <p class="mnote" style="margin-top:8px">※ 26년 값은 오픈 1~5개월차 초기 추세라 변동 가능 · 로운 24년(1곳)·리미니 26년은 해당 코호트 없음 또는 목표 미설정으로 "–" · 기타 소액 브랜드(테루·자연별곡·더카페 등)는 capex ④ 참조</p>
+    <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">※ 26년 값은 오픈 1~5개월차 초기 추세라 변동 가능 · 로운 24년(1곳)·리미니 26년은 해당 코호트 없음 또는 목표 미설정으로 "–" · 기타 소액 브랜드(테루·자연별곡·더카페 등)는 capex ④ 참조</div></details>
     <div class="insight"><span class="ttl">💡 결론</span><b>매출·이익 적중은 크게 개선됐지만 CAPEX 초과집행은 3년 연속 미개선</b>(법인 133→110→125%) — 26년 오픈분도 목표보다 <b>17.5억 더</b> 썼습니다. 표의 가이드가 곧 심의 원칙: <span style="color:var(--good-d); font-weight:600">▲ 애슐리·피자몰 더 투자</span> · <span style="color:var(--bad-d); font-weight:600">▼ 델리 속도 조절</span> · 로운은 하반기 3건 성적, 리미니는 강남뉴코아 확장 성적을 보고 결정합니다.</div>
   </div>
 
   <div class="src">
-    데이터 기준: Q5(시드머니·잔고)·②CAPEX집행·③·④·⑤ = 2026.06(③·④는 260806 개정본 [26년_요약] · ⑤는 신규오픈점피드백_2606 [요약]+[CAPEX·오픈매장], 상세 capex ④) · Q1·Q3는 2605 유지(피드백·AMIS 6월판 없음) · 원천: 신규오픈점피드백 2605(Q1·Q3) · AMIS 종합판 2605(Q2 매출·ROTC) · 동일매장 성장률=대시보드 실측 자동갱신(일자별매출 기준 sss_cum, AMIS 무관) · 현금시드머니 260714(Q5) · ★★관리용 신규점이사회승인내역관리_260806(②CAPEX한도·③ 포트폴리오·④ 안건) · 각 상세는 rotc/index/capex 페이지<br>
-    갱신 방법: 클로드코드에게 "요약 페이지 26○○로 갱신해줘" — 3개 분석 페이지와 함께 숫자를 동기화합니다.
+    데이터 기준 <b>2026.06</b>
+    <details class="notes"><summary>원천 파일 · 갱신 방법</summary><div class="nbody">데이터 기준: Q5(시드머니·잔고)·②CAPEX집행·③·④·⑤ = 2026.06(③·④는 260806 개정본 [26년_요약] · ⑤는 신규오픈점피드백_2606 [요약]+[CAPEX·오픈매장], 상세 capex ④) · Q1·Q3는 2605 유지(피드백·AMIS 6월판 없음) · 원천: 신규오픈점피드백 2605(Q1·Q3) · AMIS 종합판 2605(Q2 매출·ROTC) · 동일매장 성장률=대시보드 실측 자동갱신(일자별매출 기준 sss_cum, AMIS 무관) · 현금시드머니 260714(Q5) · ★★관리용 신규점이사회승인내역관리_260806(②CAPEX한도·③ 포트폴리오·④ 안건) · 각 상세는 rotc/index/capex 페이지<br>
+    갱신 방법: 클로드코드에게 "요약 페이지 26○○로 갱신해줘" — 3개 분석 페이지와 함께 숫자를 동기화합니다.</div></details>
   </div>
 </div>
 

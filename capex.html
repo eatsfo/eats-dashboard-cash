@@ -49,6 +49,16 @@
   .bar i{ position:absolute; left:0; top:0; height:100%; background:var(--accent); border-radius:9999px; }
   .bar i.warn{ background:var(--warn); }
   .bar i.bad{ background:var(--bad); }
+  details.notes{ margin-top:10px; }
+  details.notes > summary{ list-style:none; cursor:pointer; display:inline-block;
+    font-size:11.5px; color:var(--sub); border:1px solid var(--line); border-radius:9999px;
+    padding:2px 11px; user-select:none; }
+  details.notes > summary::-webkit-details-marker{ display:none; }
+  details.notes > summary:hover{ color:var(--accent); border-color:var(--accent); }
+  details.notes > summary::before{ content:"▸ "; }
+  details.notes[open] > summary::before{ content:"▾ "; }
+  details.notes .nbody{ margin-top:8px; color:var(--sub); font-size:11.5px; line-height:1.75;
+    background:var(--parchment); padding:10px 13px; }
   .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
   .subhead{ font-size:13px; font-weight:600; margin:18px 0 2px; padding-top:14px; border-top:1px solid var(--line); }
   .fbar{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin:8px 0 10px; }
@@ -110,7 +120,7 @@
         <tr class="tot"><td>합계</td><td>18건</td><td>100.7</td><td>지연 4건 · 11.8억</td><td class="gb">+148.3</td><td>+46.4</td></tr>
       </tbody>
     </table>
-    <p class="mnote" style="margin-top:8px">※ 투자비·기여는 이사회 승인 목표 기준(연간 승인 계획 내 물량이라 별도 재원 이슈 없음) · 오픈예정월이 지난 지연 4건(충정로·광교·AK분당·고양, 11.8억)의 26년 내 기여는 <b>7월 오픈 가정</b><br>※ 안건 예가 검증용 실측 기준선(24·25 오픈 87개점): 매장당 CAPEX <b>8.2억</b> · 월이익 <b>0.66억</b>(승인목표는 0.9억) — 예가가 크게 벗어나면 심의 시 확인.</p>
+    <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">※ 투자비·기여는 이사회 승인 목표 기준(연간 승인 계획 내 물량이라 별도 재원 이슈 없음) · 오픈예정월이 지난 지연 4건(충정로·광교·AK분당·고양, 11.8억)의 26년 내 기여는 <b>7월 오픈 가정</b><br>※ 안건 예가 검증용 실측 기준선(24·25 오픈 87개점): 매장당 CAPEX <b>8.2억</b> · 월이익 <b>0.66억</b>(승인목표는 0.9억) — 예가가 크게 벗어나면 심의 시 확인.</div></details>
     <div class="kv" style="margin-top:12px">
       <div class="k">연환산 기여 합계<b>+148.3억</b><small>목표 하단(100억) 통과 · 상단(200억) 미달</small></div>
       <div class="k">목표 상단 대비<b>−51.7억</b><small>연환산 기준 부족분</small></div>
@@ -175,18 +185,17 @@
     </table>
     <p class="mnote" id="storeCnt" style="margin-top:6px"></p>
 
-    <p class="mnote" style="margin-top:8px">
-      ※ 영업이익 = 직접비 기준(월평균) · 적자 = 월평균 영업이익 &lt; 0 · 일부 매장은 목표 미설정으로 해당 항목만 집계 제외(로운 24년 1곳, 기타 3곳 등)<br>
+    <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">※ 영업이익 = 직접비 기준(월평균) · 적자 = 월평균 영업이익 &lt; 0 · 일부 매장은 목표 미설정으로 해당 항목만 집계 제외(로운 24년 1곳, 기타 3곳 등)<br>
       ※ 26년은 <b>운영 1개월 미만 3곳(하월곡·포항·다산) 제외</b> — 오픈 초기 비용으로 월평균이 크게 왜곡됨 · <b>피드백 파일이 작업중</b>이라 갱신 시 변동 가능<br>
       ※ <b>회수기간</b> = 목표(이사회 승인, 24·25년은 피드백파일 [요약] X열 · 26년은 신규점승인내역관리_260806 [26년_요약] V열) · 실적(현재 추세 기준 CAPEX 회수 소요기간, 24·25년은 피드백파일 [요약] Y열 · 26년은 같은 파일 [CAPEX·오픈매장] 직접비 기준 회수가능기간 열) · 매장마다 CAPEX 회수 시점이 달라 <b>오픈 경과기간과 무관하게 비교 가능</b>(회수완료 매장 수를 세는 방식은 오래된 매장이 유리해 표에서 제외) · 단, 마진이 매우 낮은 일부 매장은 추세 전망이 비정상적으로 커져 <b>평균 대신 중앙값(median)</b>을 사용 · 적자 매장은 회수 계산에서 제외(위 적자 컬럼에 별도 반영) · <b>26년은 오픈 1~5개월차 초기 추세라 매달 크게 바뀔 수 있음</b> — 특히 피자몰 4%는 매장 1곳(울산, 저마진 초기 379.9개월 추정)이 좌우한 결과로 참고용<br>
-      ※ 위 요약표는 <b>브랜드별 중앙값</b>, 개별 매장은 <b>매장별 상세</b>에서 연도·브랜드 버튼으로 골라 볼 수 있습니다 · 매장별 상세의 "적자" = 누적 영업이익 마이너스로 회수기간 산출 불가
-    </p>
+      ※ 위 요약표는 <b>브랜드별 중앙값</b>, 개별 매장은 <b>매장별 상세</b>에서 연도·브랜드 버튼으로 골라 볼 수 있습니다 · 매장별 상세의 "적자" = 누적 영업이익 마이너스로 회수기간 산출 불가</div></details>
     <div class="insight"><span class="ttl">💡 결론</span>3년 흐름이 명확합니다: <b>매출·이익 적중은 크게 개선</b>(매출 81→88→116% · 이익 64→93→78%)됐지만, <b>CAPEX 초과집행은 3년 연속 미개선</b>(133→110→125%) — 26년 오픈분도 목표보다 <b>17.5억 더</b> 썼습니다. <b>회수기간도 같은 그림</b>: 목표 대비 실제 회수 소요기간이 24년 2.0배(적중 49%)→25년 1.4배(적중 73%)로 개선 중이나 여전히 목표보다 오래 걸립니다. 브랜드별로는 <b>피자몰이 유일하게 3년 내내 예산 내 집행이자 회수기간도 거의 목표대로</b>(24년 101%·25년 104%), 반대로 <b>델리는 3년 연속 이익 미달</b>(35→45%→적자)에 회수기간도 목표의 2배 이상(59%·52%) 걸리고, <b>로운도 25년 이익 54%·회수기간 적중 21%</b>로 가장 부진. 26년 조기 적자 3곳은 6개월 후 재판정, 예가 관리가 여전히 최대 과제. <b>브랜드 가이드</b>: <span class="dn">▲ 애슐리·피자몰 — 더 투자</span>(회수 거의 목표 수준, 잔여 신규 재원의 주력) · <span class="up">▼ 델리 — 속도 조절</span>(이익·회수 모두 목표의 절반) · 로운 — 하반기 예정 3건(수지·동부산·부천역사)의 성적으로 판정 · 리미니 — <b>25년식 소형 입점 포맷만 조건부 파일럿</b>(24년식 대형 포맷은 중단, 26년 강남뉴코아 확장이 테스트 케이스).</div>
   </div>
 
   <div class="src">
-    데이터 기준: ①~④ = 2026.06 · 원천: <b>★★관리용 신규점이사회승인내역관리_260806</b>(② 한도·집행 [씨드머니] · ③ 예정지 [26년_요약] · ④ 26년 매장별 목표) · <b>★★EATS 신규오픈점피드백_2606_작업중</b>(④ 실적 [요약]·[CAPEX·오픈매장]) · 하반기롤링플랜_예산설정(ACT 목표)<br>
-    갱신 방법: 클로드코드에게 "capex 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 이 페이지의 숫자를 교체합니다.
+    데이터 기준 <b>2026.06</b>
+    <details class="notes"><summary>원천 파일 · 갱신 방법</summary><div class="nbody">데이터 기준: ①~④ = 2026.06 · 원천: <b>★★관리용 신규점이사회승인내역관리_260806</b>(② 한도·집행 [씨드머니] · ③ 예정지 [26년_요약] · ④ 26년 매장별 목표) · <b>★★EATS 신규오픈점피드백_2606_작업중</b>(④ 실적 [요약]·[CAPEX·오픈매장]) · 하반기롤링플랜_예산설정(ACT 목표)<br>
+    갱신 방법: 클로드코드에게 "capex 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 이 페이지의 숫자를 교체합니다.</div></details>
   </div>
 </div>
 
@@ -375,7 +384,7 @@ function render(){
   });
   if(!rows.length) html='<tr><td colspan="6"><span class="mnote">해당 조건의 매장이 없습니다</span></td></tr>';
   document.getElementById('storeBody').innerHTML=html;
-  document.getElementById('storeCnt').textContent='※ '+yrN[selY]+' 오픈 · '+selB+' — 총 '+rows.length+'개: 목표 내 '+c.ok+' · 지연 '+c.over+' · 적자 '+c.loss+' · 데이터없음·제외 '+c.na;
+  document.getElementById('storeCnt').textContent=yrN[selY]+' 오픈 · '+selB+' — 총 '+rows.length+'개: 목표 내 '+c.ok+' · 지연 '+c.over+' · 적자 '+c.loss+' · 데이터없음·제외 '+c.na;
 }
 document.querySelectorAll('#storeFbar .pill').forEach(function(p){
   p.addEventListener('click',function(){ if(p.dataset.y) selY=+p.dataset.y; else selB=p.dataset.b; render(); });
