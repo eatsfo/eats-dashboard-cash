@@ -62,6 +62,20 @@
   .pcard .pt{ font-size:13px; font-weight:600; color:var(--accent); margin-bottom:6px; }
   .pcard .pv{ font-size:20px; font-weight:600; letter-spacing:-.5px; font-variant-numeric:tabular-nums; }
   .pcard .pd{ font-size:11.5px; color:var(--sub); margin-top:4px; line-height:1.5; }
+  /* ⑤ 성적표 카드 */
+  .bgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px; margin-top:4px; }
+  .bcard{ background:var(--parchment); border-radius:0; padding:12px 14px; }
+  .bcard.corp{ background:#fff; border:1px solid var(--accent); }
+  .bh{ display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+  .bh .bn{ font-size:13px; font-weight:600; }
+  .bh .bs{ font-size:11px; color:var(--faint); }
+  .bh .badge{ margin-left:auto; white-space:nowrap; }
+  .mrow{ display:grid; grid-template-columns:46px 1fr 108px; align-items:center; gap:8px; }
+  .mrow .ml{ font-size:11.5px; color:var(--sub); }
+  .mrow .mv{ font-size:11.5px; text-align:right; color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .bft{ font-size:11px; color:var(--sub); margin-top:6px; line-height:1.5; border-top:1px solid var(--line); padding-top:6px; }
+  .lgd{ font-size:11px; color:var(--sub); margin:8px 0 0; }
+  .lgd i{ display:inline-block; width:9px; height:9px; border-radius:50%; vertical-align:-1px; margin:0 3px 0 8px; }
   details.notes{ margin-top:10px; }
   details.notes > summary{ list-style:none; cursor:pointer; display:inline-block;
     font-size:11.5px; color:var(--sub); border:1px solid var(--line); border-radius:9999px;
@@ -233,20 +247,11 @@
   <!-- ④ 오픈매장 성적표 요약 -->
   <div class="panel">
     <h2>⑤ 오픈매장 성적표 요약 — 브랜드별 3년 적중도와 가이드</h2>
-    <p class="sub">적중도 = 실적 ÷ 이사회 승인 목표 · 각 셀 = <b>24년 → 25년 → 26년 오픈 코호트</b> 순 · <b>CAPEX는 100% 넘으면 초과집행(나쁨), 영업이익·회수기간은 100%에 가까울수록 약속 이행</b> · 매장별 상세는 <a href="capex.html" style="color:var(--accent); text-decoration:none">CAPEX 페이지 ④</a></p>
-    <table>
-      <thead><tr><th>브랜드</th><th>매장 수<br>(24·25·26)</th><th class="gb">CAPEX 집행<br>(24→25→26)</th><th>영업이익<br>(24→25→26)</th><th>회수기간<br>(24→25→26)</th><th style="text-align:left">가이드</th></tr></thead>
-      <tbody>
-        <tr><td>애슐리</td><td>32 · 18 · 8</td><td class="gb">138→113→125%</td><td>64→107→87%</td><td>47→99→62%</td><td style="text-align:left"><span class="dn">▲ 더 투자</span> — 잔여 신규 재원의 주력, 단 CAPEX 초과 상습</td></tr>
-        <tr><td>피자몰</td><td>4 · 11 · 2</td><td class="gb">112→95→147%</td><td>114→82→188%</td><td>101→104→4%*</td><td style="text-align:left"><span class="dn">▲ 더 투자</span> — 3년 내내 소액·모범 (26년 회수 4%*는 초기 왜곡)</td></tr>
-        <tr><td>델리</td><td>6 · 7 · 2</td><td class="gb">101→101→100%</td><td>35→45%→<span class="up">적자</span></td><td>59→52→51%</td><td style="text-align:left"><span class="up">▼ 속도 조절</span> — 집행은 정확하나 이익·회수 모두 목표의 절반</td></tr>
-        <tr><td>로운</td><td>1 · 6 · –</td><td class="gb">–→118→–%</td><td>–→54→–%</td><td>–→21→–%</td><td style="text-align:left">판정 보류 — 하반기 예정 3건(수지·동부산·부천역사) 성적으로 결정</td></tr>
-        <tr><td>리미니</td><td>4 · 2 · –</td><td class="gb">105→67→–%</td><td>37→97→–%</td><td>17→93→–%</td><td style="text-align:left">조건부 파일럿 — <b>25년식 소형 입점 포맷만</b>(24년식 대형 중단, 26년 강남뉴코아 확장이 테스트)</td></tr>
-        <tr class="tot"><td>법인 계</td><td>47 · 47 · 14</td><td class="gb">133→110→125%</td><td>64→93→78%</td><td>49→73→57%</td><td style="text-align:left">매출 적중은 81→88→116%로 개선 — <b>예가 관리가 최대 과제</b></td></tr>
-      </tbody>
-    </table>
+    <p class="sub">적중도 = 실적 ÷ 이사회 승인 목표 · 점 3개 = <b>24 → 25 → 26년 오픈 코호트</b> · 세로 점선 = <b>100%(약속 이행선)</b> · <b>CAPEX는 선을 넘으면 초과집행(빨강), 영업이익·회수기간은 선에 닿을수록 약속 이행</b> · 매장별 상세는 <a href="capex.html" style="color:var(--accent); text-decoration:none">CAPEX 페이지 ④</a></p>
+    <div class="bgrid" id="scoreCards"></div>
+    <p class="lgd">읽는 법: 점이 <b>오른쪽으로 갈수록 목표에 근접</b> · <i style="background:var(--good-d)"></i>양호 <i style="background:var(--warn)"></i>주의 <i style="background:var(--bad-d)"></i>미달·초과 · 점선 왼쪽(미달) / 오른쪽(초과)</p>
     <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">※ 26년 값은 오픈 1~5개월차 초기 추세라 변동 가능 · 로운 24년(1곳)·리미니 26년은 해당 코호트 없음 또는 목표 미설정으로 "–" · 기타 소액 브랜드(테루·자연별곡·더카페 등)는 capex ④ 참조</div></details>
-    <div class="insight"><span class="ttl">💡 결론</span><b>매출·이익 적중은 크게 개선됐지만 CAPEX 초과집행은 3년 연속 미개선</b>(법인 133→110→125%) — 26년 오픈분도 목표보다 <b>17.5억 더</b> 썼습니다. 표의 가이드가 곧 심의 원칙: <span style="color:var(--good-d); font-weight:600">▲ 애슐리·피자몰 더 투자</span> · <span style="color:var(--bad-d); font-weight:600">▼ 델리 속도 조절</span> · 로운은 하반기 3건 성적, 리미니는 강남뉴코아 확장 성적을 보고 결정합니다.</div>
+    <div class="insight"><span class="ttl">💡 결론</span><b>매출·이익 적중은 크게 개선됐지만 CAPEX 초과집행은 3년 연속 미개선</b>(법인 133→110→125%) — 26년 오픈분도 목표보다 <b>17.5억 더</b> 썼습니다. 카드에서 <b>CAPEX 줄만 점이 오른쪽(초과)으로 몰려 있고</b> 영업이익·회수기간 줄은 왼쪽에서 오른쪽으로 이동 중인 것이 그 그림입니다. 각 카드의 배지가 곧 심의 원칙: <span style="color:var(--good-d); font-weight:600">▲ 애슐리·피자몰 더 투자</span> · <span style="color:var(--bad-d); font-weight:600">▼ 델리 속도 조절</span> · 로운은 하반기 3건 성적, 리미니는 강남뉴코아 확장 성적을 보고 결정합니다.</div>
   </div>
 
   <div class="src">
@@ -257,6 +262,89 @@
 </div>
 
 <script>
+// ⑤ 오픈매장 성적표 — 브랜드 카드 + 미니 추세 차트
+// [브랜드, 매장수(24·25·26), 판정배지, 배지클래스, {지표: [24,25,26]}, 가이드문구]
+// 값 = 적중도(%) · null = 해당 코호트 없음/목표 미설정 · 'L' = 적자로 산출 불가
+(function(){
+  var CARDS = [
+    ["애슐리","32 · 18 · 8","▲ 더 투자","ok",
+      {CAPEX:[138,113,125], 영업이익:[64,107,87], 회수기간:[47,99,62]},
+      "잔여 신규 재원의 주력 — 단 CAPEX 초과집행이 3년 내내 상습"],
+    ["피자몰","4 · 11 · 2","▲ 더 투자","ok",
+      {CAPEX:[112,95,147], 영업이익:[114,82,188], 회수기간:[101,104,4]},
+      "3년 내내 소액·모범 — 26년 회수 4%는 매장 1곳(울산)이 좌우한 초기 왜곡"],
+    ["델리","6 · 7 · 2","▼ 속도 조절","no",
+      {CAPEX:[101,101,100], 영업이익:[35,45,'L'], 회수기간:[59,52,51]},
+      "집행은 정확하나 이익·회수가 3년 연속 목표의 절반"],
+    ["로운","1 · 6 · –","판정 보류","na",
+      {CAPEX:[null,118,null], 영업이익:[null,54,null], 회수기간:[null,21,null]},
+      "하반기 예정 3건(수지·동부산·부천역사) 성적으로 결정"],
+    ["리미니","4 · 2 · –","조건부 파일럿","mid",
+      {CAPEX:[105,67,null], 영업이익:[37,97,null], 회수기간:[17,93,null]},
+      "25년식 소형 입점 포맷만 — 24년식 대형 중단, 26년 강남뉴코아 확장이 테스트"],
+    ["법인 계","47 · 47 · 14","예가 관리가 최대 과제","na",
+      {CAPEX:[133,110,125], 영업이익:[64,93,78], 회수기간:[49,73,57]},
+      "매출 적중은 81 → 88 → 116%로 개선 — CAPEX 초과집행만 3년 미개선"]
+  ];
+  var X0=0, X1=200;                        // 0~200% 스케일 (200 초과는 끝에 고정)
+  function px(v){ return Math.max(2, Math.min(98, (Math.min(v,X1)-X0)/(X1-X0)*100)); }
+  // 색 판정: CAPEX는 100 초과가 나쁨 / 나머지는 100 미달이 나쁨
+  function tone(metric, v){
+    if (v==='L') return 'var(--bad-d)';
+    if (metric==='CAPEX'){
+      if (v<=105) return 'var(--good-d)';
+      if (v<=120) return 'var(--warn)';
+      return 'var(--bad-d)';
+    }
+    if (v>=95) return 'var(--good-d)';
+    if (v>=70) return 'var(--warn)';
+    return 'var(--bad-d)';
+  }
+  var YRS=['24','25','26'];
+  function track(metric, arr){
+    var pts='', last=null;
+    // 연결선(있는 값들만)
+    var idx=[]; arr.forEach(function(v,i){ if(v!==null && v!=='L') idx.push(i); });
+    var line='';
+    if (idx.length>1){
+      var a=px(arr[idx[0]]), b=px(arr[idx[idx.length-1]]);
+      line = '<i style="position:absolute; top:50%; left:'+Math.min(a,b)+'%; width:'+Math.abs(b-a)+'%; height:1px; background:var(--line2); transform:translateY(-50%)"></i>';
+    }
+    arr.forEach(function(v,i){
+      if (v===null) return;
+      var isL = (v==='L');
+      var left = isL ? 2 : px(v);
+      var sz = 5 + i*1.5;                                   // 최근 코호트일수록 크게
+      pts += '<i title="'+YRS[i]+'년 오픈 · '+metric+' '+(isL?'적자':v+'%')+'" style="position:absolute; top:50%; left:'+left+'%; width:'+sz*2+'px; height:'+sz*2+'px; margin-left:-'+sz+'px; border-radius:50%; background:'+tone(metric,v)+'; opacity:'+(0.45+i*0.275)+'; transform:translateY(-50%); border:1.5px solid #fff"></i>';
+      last = v;
+    });
+    var hundred = '<i style="position:absolute; top:0; bottom:0; left:'+px(100)+'%; width:0; border-left:1px dashed var(--line2)"></i>';
+    return {
+      html:'<div style="position:relative; height:18px">'+hundred+line+pts+'</div>',
+      last:last
+    };
+  }
+  function fmtSeries(arr){
+    return arr.map(function(v){ return v===null?'–':(v==='L'?'<span class="up">적자</span>':v+'%'); }).join('<span style="color:var(--faint)"> › </span>');
+  }
+  var h='';
+  CARDS.forEach(function(c){
+    var name=c[0], stores=c[1], badge=c[2], bcls=c[3], mets=c[4], guide=c[5];
+    var body='';
+    ['CAPEX','영업이익','회수기간'].forEach(function(m){
+      var t = track(m, mets[m]);
+      body += '<div class="mrow"><span class="ml">'+m+'</span>'+t.html+'<span class="mv">'+fmtSeries(mets[m])+'</span></div>';
+    });
+    h += '<div class="bcard'+(name==='법인 계'?' corp':'')+'">'
+       +   '<div class="bh"><span class="bn">'+name+'</span><span class="bs">'+stores+'개점</span>'
+       +     '<span class="badge '+bcls+'">'+badge+'</span></div>'
+       +   body
+       +   '<div class="bft">'+guide+'</div>'
+       + '</div>';
+  });
+  document.getElementById('scoreCards').innerHTML = h;
+})();
+
 // 동일매장 성장률 — 대시보드 검증 계산값(sss_cum) 자동 반영. 헤더 "기준월" 태그 텍스트로 대상 월 결정.
 (function(){
   var tag = document.getElementById("baseYmTag"), el = document.getElementById("sssVal");
