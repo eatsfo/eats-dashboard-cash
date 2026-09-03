@@ -6,6 +6,9 @@
 <title>투자심의 · 요약</title>
 <style>
   :root{
+  --head:#f4f3ef;   /* 표 헤더 배경 = 종이톤(2026-09-03 디자인 통일) */
+  --navy:#1f3864;   /* 문서 잉크 — 제목·표 헤더 글자·선택된 탭. 파랑(--accent)은 링크·버튼 전용 */
+
     --bg:#fbfbfd; --card:#ffffff; --parchment:#f5f5f7;
     --ink:#1d1d1f; --sub:#6e6e73; --faint:#86868b;
     --line:#e0e0e0; --line2:#d2d2d7;
@@ -87,6 +90,16 @@
   details.notes .nbody{ margin-top:8px; color:var(--sub); font-size:11.5px; line-height:1.75;
     background:var(--parchment); padding:10px 13px; }
   .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
+
+/* ═══ 디자인 통일(2026-09-03) — 메인 대시보드와 같은 문서 테마. 상세는 DESIGN-SYSTEM.md ═══
+   이 페이지는 메인에 iframe으로 박혀 보이므로 색·모서리·표 서식을 맞춘다.
+   네이비=읽는 색(제목·표 헤더) · Action Blue=누르는 색(링크·버튼). */
+h1,h2,h3{color:var(--navy)}
+th{background:var(--head)!important; color:var(--navy)!important; font-weight:700}
+table{font-variant-numeric:tabular-nums}
+button,select,input,textarea,.tab,.chip,.btn,[class*="tab"],[class*="chip"]{border-radius:0!important}
+/* 선택된 탭 = 네이비(읽는 색). 클릭 가능한 링크·액션 버튼만 Action Blue로 남긴다 */
+.tab.active,.tab.on,button.active,button.on{background:var(--navy)!important; border-color:var(--navy)!important; color:#fff!important}
 </style>
 </head>
 <body>
