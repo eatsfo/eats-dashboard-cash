@@ -53,6 +53,36 @@
   .bar i{ position:absolute; left:0; top:0; height:100%; background:var(--accent); border-radius:9999px; }
   .bar i.warn{ background:var(--warn); }
   .bar i.bad{ background:var(--bad); }
+  /* ③ 투자 포트폴리오 · ⑤ 성적표 카드 (2026-09-04 투자심의 페이지에서 이동) */
+  .badge.mid{ background:#fdf3e3; color:var(--warn); }
+  tr.gtot td{ background:var(--parchment); font-weight:700; border-top:1.5px solid var(--line2); border-bottom:1.5px solid var(--line2); }
+  tr.sec td{ background:var(--accent-bg); color:var(--accent); font-weight:600; text-align:left; font-size:11.5px; }
+  .bgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px; margin-top:4px; }
+  .bcard{ background:var(--parchment); border-radius:0; padding:12px 14px; }
+  .bcard.corp{ background:#fff; border:1px solid var(--accent); }
+  .bh{ display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+  .bh .bn{ font-size:13px; font-weight:600; }
+  .bh .bs{ font-size:11px; color:var(--faint); }
+  .bh .badge{ margin-left:auto; white-space:nowrap; }
+  .mrow{ display:grid; grid-template-columns:46px 1fr 148px; align-items:center; gap:8px; }
+  .mrow .ml{ font-size:11.5px; color:var(--sub); }
+  .mrow .mv{ font-size:11px; text-align:right; color:var(--ink); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .bft{ font-size:11px; color:var(--sub); margin-top:6px; line-height:1.5; border-top:1px solid var(--line); padding-top:6px; }
+  .lgd{ font-size:11px; color:var(--sub); margin:8px 0 0; }
+  .lgd i{ display:inline-block; width:9px; height:9px; border-radius:50%; vertical-align:-1px; margin:0 3px 0 8px; }
+
+  /* 패널 접기 (2026-09-04 신설) — ⑤ 매장별 상세표가 페이지의 절반을 차지해 기본 접힘.
+     브랜드별 요약·추세는 투자심의 ⑤ 카드가 담당하고, 여기는 매장 단위로 찾아보는 화면. */
+  details.fold > summary{ list-style:none; cursor:pointer; display:flex; align-items:baseline;
+    gap:9px; flex-wrap:wrap; background:var(--head); border:1px solid var(--line); border-radius:0;
+    padding:9px 13px; user-select:none; }
+  details.fold > summary::-webkit-details-marker{ display:none; }
+  details.fold > summary::before{ content:"▸"; color:var(--accent); font-weight:700; }
+  details.fold[open] > summary::before{ content:"▾"; }
+  details.fold > summary:hover{ border-color:var(--accent); }
+  details.fold > summary .fh2{ font-size:15px; font-weight:600; color:var(--navy); }
+  details.fold > summary .fmeta{ font-size:11.5px; color:var(--sub); margin-left:auto; }
+  details.fold[open] > summary{ margin-bottom:14px; }
   details.notes{ margin-top:10px; }
   details.notes > summary{ list-style:none; cursor:pointer; display:inline-block;
     font-size:11.5px; color:var(--sub); border:1px solid var(--line); border-radius:9999px;
@@ -110,7 +140,7 @@ button,select,input,textarea,.tab,.chip,.btn,[class*="tab"],[class*="chip"]{bord
       <div class="k">집행 누적(7월)<b>170.2억</b><small>소진율 68% (연 경과 58%)</small></div>
       <div class="k">잔여 한도<b>79.3억</b><small>신규 55.1 · 리뉴얼 7.0 · 유지보수 17.2</small></div>
     </div>
-    <div class="insight"><span class="ttl">💡 결론</span>집행(68%)이 연 경과(58%)를 <b>10%p 앞섰습니다</b> — 지난달까지는 나란했던 두 비율이 벌어진 것. 남은 5개월은 <b>잔여 79.3억</b>(신규 55.1 · 리뉴얼 7.0 · 유지보수 17.2)으로 추가 영업이익 +100~200억의 신규 기여분을 만들어야 함. 한도가 이사회 승인 계획에서 산출되는 구조라 재원 부족은 이슈가 아니지만, <b>지난달(265.2억)보다 한도가 15.7억 줄었습니다 — 애슐리 2건(수유역·롯데프리미엄아울렛 김해)이 27년 오픈으로 이월</b>됐기 때문. 관건은 <b>남은 미오픈 17건이 언제 열려 얼마를 버느냐</b> — 아래 ③·④에서 판정.</div>
+    <div class="insight"><span class="ttl">💡 결론</span>집행(68%)이 연 경과(58%)를 <b>10%p 앞섰습니다</b> — 지난달까지는 나란했던 두 비율이 벌어진 것. 남은 5개월은 <b>잔여 79.3억</b>(신규 55.1 · 리뉴얼 7.0 · 유지보수 17.2)으로 추가 영업이익 +100~200억의 신규 기여분을 만들어야 함. 한도가 이사회 승인 계획에서 산출되는 구조라 재원 부족은 이슈가 아니지만, <b>지난달(265.2억)보다 한도가 15.7억 줄었습니다 — 애슐리 2건(수유역·롯데프리미엄아울렛 김해)이 27년 오픈으로 이월</b>됐기 때문. 관건은 <b>남은 미오픈 17건이 언제 열려 얼마를 버느냐</b> — 아래 ④·⑤에서 판정.</div>
   </div>
 
   <!-- ② 예산 vs 집행 -->
@@ -127,10 +157,40 @@ button,select,input,textarea,.tab,.chip,.btn,[class*="tab"],[class*="chip"]{bord
     <div class="insight"><span class="ttl">💡 결론</span>8월 개정의 방향은 <b>출점 재원을 유지보수로 옮긴 것</b>입니다 — 총한도는 250.3→249.5억으로 거의 그대로인데 <b>유지보수가 24.9→34.9억(+10.0)</b>으로 늘고 <b>신규가 203.5→183.0억(−20.5)</b>으로 줄었습니다(리뉴얼 31.5 유지). 브랜드별로는 <b>애슐리 신규 한도가 141.5→128.6억</b>인데, 이는 <b>수유역·롯데프리미엄아울렛 김해 2건(15.7억)이 27년 오픈으로 이월</b>돼 26년 한도에서 제외된 결과입니다(③ 참조). 신규 집행 128.0억의 <b>75%가 애슐리(96.4)</b>이고, <b>로운은 한도 15.4억 중 0.1억(1%)만 집행</b> — 하반기 예정지(동부산·부천역사·롯데몰수지 15.4억)로 한도를 거의 다 쓰게 됩니다. <b>자연별곡(−1.2)·기타CK(−1.0)·카페(−0.2)·프랜차이즈(−0.0)는 한도 초과</b> 상태이고, 특히 <b>자연별곡은 시드머니 X(창출현금 −15.2억)인데 한도를 넘겨 집행</b>했습니다 — 별도 확인이 필요합니다. 델리는 잔여 0.1억으로 사실상 소진.</div>
   </div>
 
-  <!-- ③ 미오픈 기여 판정 -->
+  <!-- ③ 26년 투자 포트폴리오 (2026-09-04 투자심의 페이지에서 이동) -->
   <div class="panel">
-    <h2>③ 미오픈 17건이 만드는 이익 — 이대로면 목표 달성?</h2>
-    <p class="sub">기여 = 월매출 목표 × 목표 이익률 · 연환산 = ×12개월 · 26년 내 = 오픈월~12월 반영분(기준월 7월 이후 오픈 가정) · 단위 억원 · <b>안건별 명세(회수목표·오픈예정월)는 <a href="invest.html" style="color:var(--accent); text-decoration:none">투자심의 ④</a></b></p>
+    <h2>③ 26년 투자 포트폴리오 — 승인 물량은 무엇으로 이뤄졌나</h2>
+    <p class="sub">단위 억원 · 순투입 = 보증금 + CAPEX 계획 − TI(임대인 부담분) · <b>미오픈 17건의 이익 기여는 아래 ④, 안건별 명세는 <a href="invest.html#pf" style="color:var(--accent); text-decoration:none">투자심의 · 심의 안건</a></b></p>
+    <p class="story" style="margin:0 0 12px">이사회가 승인한 물량이 계획대로 다 나가면 <b>26년 CAPEX는 249.5억</b>입니다 — 신규 매장 169.4 · 리뉴얼 31.6 · 유지보수 34.9 · 점포 외 13.7. 보증금과 임대인 부담분(TI)까지 넣은 <b>순현금 투입은 268.3억</b>. 7월까지 <b>170.2억</b>을 썼으니 <b>남은 5개월에 79.3억</b>이 나가고, 그중 55.1억이 미오픈 17건의 신규 투자입니다. 27년으로 넘어간 애슐리 2건(15.7억)은 이 숫자에 들어 있지 않습니다.</p>
+    <table>
+      <thead>
+        <tr><th rowspan="2">구분</th><th class="grp" colspan="3">매장 수</th><th class="grp gb" colspan="3">투입 계획</th><th rowspan="2" class="gb">순투입</th><th rowspan="2">월매출<br>목표</th></tr>
+        <tr><th>승인</th><th>오픈</th><th>미오픈</th><th class="gb">보증금</th><th>CAPEX</th><th>TI</th></tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><td colspan="9">Ⅰ. 신규오픈 — 브랜드별 (씨드머니 신규 한도 183.0억 = 매장 169.4 + 점포 외 13.7)</td></tr>
+        <tr><td>애슐리퀸즈</td><td>16</td><td>10</td><td class="up">6</td><td class="gb">14.0</td><td>128.6</td><td>3.0</td><td class="gb">139.6</td><td>79.3</td></tr>
+        <tr><td>월드델리</td><td>2</td><td>2</td><td class="dn">0</td><td class="gb">–</td><td>5.6</td><td>–</td><td class="gb">5.6</td><td>6.9</td></tr>
+        <tr><td>로운</td><td>3</td><td>0</td><td class="up">3</td><td class="gb">3.0</td><td>15.4</td><td>–</td><td class="gb">18.4</td><td>9.0</td></tr>
+        <tr><td>피자몰</td><td>9</td><td>3</td><td class="up">6</td><td class="gb">3.7</td><td>12.7</td><td>–</td><td class="gb">16.4</td><td>9.2</td></tr>
+        <tr><td>기타브랜드 <span class="mnote">(자연별곡 2 · 더카페 · 프랑제리)</span></td><td>4</td><td>3</td><td>1</td><td class="gb">1.3</td><td>7.1</td><td>–</td><td class="gb">8.4</td><td>6.9</td></tr>
+        <tr class="tot"><td>신규오픈 소계</td><td>34</td><td>18</td><td class="up">16</td><td class="gb">22.0</td><td>169.4</td><td>3.0</td><td class="gb">188.4</td><td>111.3</td></tr>
+        <tr class="sec"><td colspan="9">Ⅱ. 그 외 — 리뉴얼 · 유지보수 · 점포 외</td></tr>
+        <tr><td>리뉴얼 <span class="mnote">(한도 31.5억)</span></td><td>7</td><td>6</td><td>1</td><td class="gb">–</td><td>31.6</td><td>–</td><td class="gb">31.6</td><td>28.5</td></tr>
+        <tr><td>유지보수 <span class="mnote">(한도 34.9억)</span></td><td colspan="3" style="text-align:center"><span class="mnote">매장 단위 아님</span></td><td class="gb">–</td><td>34.9</td><td>–</td><td class="gb">34.9</td><td>–</td></tr>
+        <tr><td>점포 외 <span class="mnote">(시스템·마곡사무실)</span></td><td>3</td><td>–</td><td>–</td><td class="gb">–</td><td>13.7</td><td>0.2</td><td class="gb">13.5</td><td>–</td></tr>
+        <tr class="gtot"><td>총 합계</td><td>44</td><td>24</td><td class="up">17</td><td class="gb">22.0</td><td>249.5</td><td>3.2</td><td class="gb">268.3</td><td>139.8</td></tr>
+        <tr><td>27년 이월 <span class="mnote">(애슐리 수유역 6.2 · 롯데프리미엄아울렛 김해 9.5)</span></td><td>2</td><td>–</td><td><span class="mnote">27년</span></td><td class="gb">2.0</td><td>15.7</td><td>2.5</td><td class="gb">15.2</td><td>9.2</td></tr>
+      </tbody>
+    </table>
+    <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">※ CAPEX 계획 총 249.5억은 씨드머니 한도(249.5억)와 일치 — 승인 물량이 한도를 꽉 채운 상태 · 브랜드별 한도 대비 집행·잔여는 위 ②, 미오픈분의 기여·목표 달성 판정은 아래 ④ · 소계·합계는 원자료 값이라 표시된 소수 첫째자리 합과 0.1억 차이가 날 수 있습니다<br>※ <b>애슐리 수유역점·롯데프리미엄아울렛 김해점(합 15.7억)은 27년 오픈으로 이월</b>돼 26년 소계·합계에서 빠졌습니다 — 참고용으로 맨 아래 별도 행에 표시 · 이 영향으로 지난 갱신 대비 <b>총 CAPEX 265.2→249.5억, 애슐리 승인 18→16건</b><br>※ 리뉴얼 7건 = 애슐리 2(NC송파 확장·잠실롯데캐슬 확장) · 자연별곡 2(평촌뉴코아·NC송파) · 프랑제리·페르케노·리미니 각 1 — 이 중 6건은 7월까지 오픈 완료, 미오픈은 잠실롯데캐슬점(11월 예정) 1건<br>※ 유지보수 34.9억은 매장 단위 안건이 아니라 6월 누적 17.75억 + 7~12월 계획 17.17억의 합</div></details>
+    <div class="insight"><span class="ttl">💡 결론</span>올해 이사회가 승인한 물량은 <b>매장 41건 + 점포 외 3건 · CAPEX 249.5억으로 씨드머니 한도를 정확히 소진</b>했고, 보증금·TI까지 반영한 <b>순현금 투입은 268.3억</b>입니다. 진도는 <b>매장 41건 중 24건 오픈(59%)</b>으로 연 경과(58%)와 나란하지만 <b>브랜드 편차가 큽니다</b>: <b>로운은 3건 전부 미오픈</b>(15.4억 전액 하반기 집중), <b>피자몰도 9건 중 6건 미오픈</b>. 반대로 월드델리는 승인 2건을 모두 열어 마감했습니다. 신규 승인 물량의 <b>월매출 목표 111.3억</b>이 전부 가동되면 연 매출 1,336억 규모 — 남은 17건의 실행 시점이 26년 손익을 좌우합니다(④).</div>
+  </div>
+
+  <!-- ④ 미오픈 기여 판정 -->
+  <div class="panel">
+    <h2>④ 미오픈 17건이 만드는 이익 — 이대로면 목표 달성?</h2>
+    <p class="sub">기여 = 월매출 목표 × 목표 이익률 · 연환산 = ×12개월 · 26년 내 = 오픈월~12월 반영분(기준월 7월 이후 오픈 가정) · 단위 억원 · <b>안건별 명세(회수목표·오픈예정월)는 <a href="invest.html#pf" style="color:var(--accent); text-decoration:none">투자심의 · 심의 안건</a></b></p>
     <table>
       <thead><tr><th>브랜드</th><th>미오픈</th><th>투자비</th><th>오픈 예정</th><th class="gb">연환산 기여</th><th>26년 내 기여</th></tr></thead>
       <tbody>
@@ -141,7 +201,7 @@ button,select,input,textarea,.tab,.chip,.btn,[class*="tab"],[class*="chip"]{bord
         <tr class="tot"><td>합계</td><td>17건</td><td>89.9</td><td>지연 6건 · 28.2억</td><td class="gb">+144.5</td><td>+39.5</td></tr>
       </tbody>
     </table>
-    <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">※ <b>수유역점(6.2억)·롯데프리미엄아울렛 김해점(9.5억)은 27년 오픈 예정</b>이라 26년 한도 집계와 기여 계산에서 제외했습니다 — 이사회 파일 [26년_요약] 애슐리 소계가 이 두 행을 뺀 범위로 집계돼 있어 그 기준을 따랐습니다(②의 애슐리 신규 한도 128.6억도 동일 기준). 표·기여 합계에는 포함하지 않았습니다(안건별 명세는 <a href="invest.html" style="color:var(--accent); text-decoration:none">투자심의 ④</a>).<br>※ 투자비·기여는 이사회 승인 목표 기준 · 오픈예정월이 이미 지난 <b>지연 6건(28.2억: 스타필드고양·롯데마트광교·AK분당·충정로·이마트성남·영등포)</b>의 26년 내 기여는 <b>8월 오픈 가정</b>으로 계산<br>※ 안건 예가 검증용 실측 기준선(23~26 오픈, 공사비 기준) — <b>애슐리 매장당 CAPEX 7.29억 · 월이익 0.24억</b>(승인목표 0.76억 — 공통비 안분 후 기준) / 전브랜드 <b>5.05억 · 0.13억</b>(승인목표 0.52억) · 단 애슐리는 <b>26년 오픈분이 매장당 8.83억으로 대형화 추세</b>(23년 7.03 → 24년 7.25 → 25년 6.78 → 26년 8.83)라 예가가 이 밴드를 크게 벗어나면 심의 시 확인.</div></details>
+    <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">※ <b>수유역점(6.2억)·롯데프리미엄아울렛 김해점(9.5억)은 27년 오픈 예정</b>이라 26년 한도 집계와 기여 계산에서 제외했습니다 — 이사회 파일 [26년_요약] 애슐리 소계가 이 두 행을 뺀 범위로 집계돼 있어 그 기준을 따랐습니다(②의 애슐리 신규 한도 128.6억도 동일 기준). 표·기여 합계에는 포함하지 않았습니다(안건별 명세는 <a href="invest.html#pf" style="color:var(--accent); text-decoration:none">투자심의 · 심의 안건</a>).<br>※ 투자비·기여는 이사회 승인 목표 기준 · 오픈예정월이 이미 지난 <b>지연 6건(28.2억: 스타필드고양·롯데마트광교·AK분당·충정로·이마트성남·영등포)</b>의 26년 내 기여는 <b>8월 오픈 가정</b>으로 계산<br>※ 안건 예가 검증용 실측 기준선(23~26 오픈, 공사비 기준) — <b>애슐리 매장당 CAPEX 7.29억 · 월이익 0.24억</b>(승인목표 0.76억 — 공통비 안분 후 기준) / 전브랜드 <b>5.05억 · 0.13억</b>(승인목표 0.52억) · 단 애슐리는 <b>26년 오픈분이 매장당 8.83억으로 대형화 추세</b>(23년 7.03 → 24년 7.25 → 25년 6.78 → 26년 8.83)라 예가가 이 밴드를 크게 벗어나면 심의 시 확인.</div></details>
     <div class="kv" style="margin-top:12px">
       <div class="k">연환산 기여 합계<b>+144.5억</b><small>26년 오픈예정 17건 · 목표 하단(100억) 통과</small></div>
       <div class="k">목표 상단 대비<b>−55.5억</b><small>연환산 기준 부족분</small></div>
@@ -153,7 +213,17 @@ button,select,input,textarea,.tab,.chip,.btn,[class*="tab"],[class*="chip"]{bord
 
   <!-- ④ 성적표 -->
   <div class="panel">
-    <h2>④ 오픈매장 성적표 — 연도별·브랜드별 적중도 (이사회 약속 vs 실적)</h2>
+    <h2>⑤ 오픈매장 성적표 — 브랜드별 4년(23~26) 적중도와 가이드</h2>
+    <p class="sub">적중도 = 실적 ÷ 이사회 승인 목표 · <b>영업이익·회수기간 실적 = 브랜드공통비 안분 후</b> · 점 4개 = <b>23 → 24 → 25 → 26년 오픈 코호트</b>(오래된 순, 최근일수록 크고 진함) · 세로 점선 = <b>100%(약속 이행선)</b> · <b>CAPEX는 선을 넘으면 초과집행(빨강), 영업이익·회수기간은 선에 닿을수록 약속 이행</b></p>
+    <div class="bgrid" id="scoreCards"></div>
+    <p class="lgd">읽는 법: 점이 <b>오른쪽으로 갈수록 목표에 근접</b> · <i style="background:var(--good-d)"></i>양호 <i style="background:var(--warn)"></i>주의 <i style="background:var(--bad-d)"></i>미달·초과 · 점선 왼쪽(미달) / 오른쪽(초과)</p>
+    <div class="insight" style="margin-bottom:16px"><span class="ttl">💡 결론</span><b>브랜드 공통비를 얹으면 신규점 이익은 4년 내내 약속의 3할</b>(31 → 29 → 28 → 33%)입니다. 카드에서는 <b>영업이익 줄의 점이 전 브랜드 왼쪽(미달)에 몰려 있고</b>, CAPEX 줄은 여전히 오른쪽(초과 4년 연속: 123 → 133 → 110 → 116%). 회수기간도 목표 8~11개월 대비 실제 26~33개월. <b>배분 결론</b>: 공통비 기준으로 이익 적중 3할 중반 이상인 브랜드는 <span class="dn">애슐리</span>뿐이라 잔여 신규 55.1억은 애슐리에 두되 <b>예가 승인 단계에서 실측 기준선(애슐리 매장당 CAPEX 7.3억 · 월이익 0.24억, 승인목표 0.76억)과 대조</b>, <span class="up">델리는 신규 중단 검토</span>, <span class="up">로운 하반기 3건은 재심의</span>, 피자몰·리미니는 <b>소형 포맷이 공통비를 감당하는지 재검증</b>이 조건입니다.</div>
+
+    <details class="fold">
+    <summary>
+      <span class="fh2">연도별·브랜드별 적중도 표 · 매장별 상세</span>
+      <span class="fmeta">23~26년 오픈 146개점 · 눌러서 펼치기</span>
+    </summary>
     <p class="sub">적중도 = 실적 ÷ 이사회 목표 · 단위 억원 · <b>23~26년 오픈 4개 코호트</b> · <b>영업이익·회수기간 실적 = 브랜드공통비 안분 후 기준</b> · <b>CAPEX 실적은 목표와 같은 정의로 맞추기 위해 공사비 기준(보증금 제외)</b> · <b>CAPEX는 100% 넘으면 초과집행(나쁨), 매출·영업이익은 100% 넘으면 약속 초과달성(좋음), 회수기간은 100% 넘으면 목표보다 빠른 회수(좋음)</b></p>
     <table>
       <thead>
@@ -225,11 +295,12 @@ button,select,input,textarea,.tab,.chip,.btn,[class*="tab"],[class*="chip"]{bord
       ※ <b>회수기간</b> = 목표(이사회 승인, 24·25년은 피드백파일 [요약] X열 · 26년은 신규점승인내역관리_260820 [26년_요약] V열) · 실적(현재 추세 기준 CAPEX 회수 소요기간) · 매장마다 CAPEX 회수 시점이 달라 <b>오픈 경과기간과 무관하게 비교 가능</b>(회수완료 매장 수를 세는 방식은 오래된 매장이 유리해 표에서 제외) · 단, 마진이 매우 낮은 일부 매장은 추세 전망이 비정상적으로 커져 <b>평균 대신 중앙값(median)</b>을 사용 · 적자 매장은 회수 계산에서 제외(적자 컬럼에 별도 반영) · <b>26년은 오픈 1~7개월차 초기 추세라 매달 크게 바뀔 수 있음</b> — 애슐리 하월곡점은 7월 흑자 전환에도 마진이 극히 얇아 회수기간이 516개월로 추정되는 등 초기 매장 수치는 참고용<br>
       ※ 위 요약표는 <b>브랜드별 중앙값(회수기간)·합계(CAPEX·매출·영익)</b>, 개별 매장은 <b>매장별 상세</b>에서 연도·브랜드 버튼으로 골라 볼 수 있습니다<br>※ 매장별 상세 — 목표가 없는 항목은 목표칸에 "없음", 실적은 그대로 표시(적중률만 "–") · 브랜드를 고르면 브랜드 열은 자동으로 숨겨집니다<br>※ 적중률 방향 — <b>CAPEX는 실적÷목표라 100% 초과가 초과집행(빨강)</b> · 매출·영업이익은 실적÷목표라 100%에 가까울수록 좋음 · <b>회수기간은 목표÷실적이라 100% 이상이면 목표보다 빠른 회수</b> · 영업이익 실적이 0 이하면 "적자" 표기 · 매장별 합계는 매장 단위 반올림 때문에 요약표와 0.1억 내외 차이가 날 수 있습니다</div></details>
     <div class="insight"><span class="ttl">💡 결론</span><b>브랜드 공통비를 얹으면 신규점 이익은 4년 내내 약속의 3할</b>입니다 — 이익 적중 23년 31% · 24년 29% · 25년 28% · 26년 33%, 그리고 <b>146개점 중 42곳(29%)이 적자</b>. 직전 갱신까지 실적을 직접비 기준으로 잘못 비교해 "25년부터 약속 이행"으로 보였던 것이고, <b>이사회 목표와 같은 공통비 안분 후 기준으로 맞추면 4년간 개선 추세 자체가 없습니다</b>. 매출(84 → 81 → 87 → 111%)과 CAPEX(123 → 133 → 110 → 116%)는 <b>애슐리 32개를 한 해에 연 24년이 바닥</b>인 것이 여전하고, CAPEX는 <b>4년 연속 초과집행</b>(23년 +30.0억 · 24년 +61.0억 · 25년 +14.9억 · 26년 +14.2억). 회수기간도 공통비 기준으로는 목표 8~11개월 대비 <b>실제 26~33개월</b>(적중 30~50%)로, 회수 완료 매장이 129곳 중 33곳뿐입니다. 적자가 가장 몰린 곳은 <b>25년 오픈 16곳</b>(델리 6 · 로운 3 · 피자몰 3 · 애슐리 2 · 기타 2). 브랜드별로는 <b>애슐리가 4년 36 → 30 → 37 → 40%로 유일하게 3할 중반 이상</b>(적자 10곳 중 26년 4곳은 초기), <b>델리는 24년 0% · 25·26년 적자</b>, <b>로운 23년 27% · 25년 7%</b>, <b>피자몰 21 → 50 → 14% → 26년 적자</b>, <b>리미니 23·24년 적자 → 25년 소형 27%</b>. <b>브랜드 가이드</b>: <span class="dn">▲ 애슐리 — 유지</span>(상대적으로 유일한 이익 창출원이나 절대 수준은 목표의 4할, 잔여 신규 55.1억은 예가·목표 재검증 후) · <span class="up">▼ 델리 — 신규 중단 검토</span>(공통비 부담 시 3년 연속 이익 없음) · <span class="up">▼ 로운 — 하반기 3건(15.4억) 재심의</span> · 피자몰·리미니 — 소형 포맷도 공통비 기준으로는 이익이 안 남아 <b>포맷 자체 재검증</b>.</div>
+    </details>
   </div>
 
   <div class="src">
     데이터 기준 <b>2026.07</b>
-    <details class="notes"><summary>원천 파일 · 갱신 방법</summary><div class="nbody">데이터 기준: ①~④ = 2026.07 · 원천: <b>★★관리용 신규점이사회승인내역관리_260820</b>(② 한도·집행 [씨드머니] · ③ 예정지 [26년_요약] · ④ 26년 매장별 목표) · <b>★★EATS 신규오픈점피드백_2607</b>(④ 실적 [요약]·[CAPEX·오픈매장]) · 하반기롤링플랜_예산설정(ACT 목표, 이번 갱신에서는 미변경)<br>
+    <details class="notes"><summary>원천 파일 · 갱신 방법</summary><div class="nbody">데이터 기준: ①~⑤ = 2026.07 · 원천: <b>★★관리용 신규점이사회승인내역관리_260820</b>(② 한도·집행 [씨드머니] · ③ 포트폴리오·④ 예정지 [26년_요약] · ⑤ 26년 매장별 목표) · <b>★★EATS 신규오픈점피드백_2607</b>(⑤ 실적 [요약]·[CAPEX·오픈매장]) · 하반기롤링플랜_예산설정(ACT 목표, 이번 갱신에서는 미변경)<br>
     갱신 방법: 클로드코드에게 "capex 페이지 26○○로 갱신해줘" — 엑셀을 다시 읽어 이 페이지의 숫자를 교체합니다.</div></details>
   </div>
 </div>
@@ -283,7 +354,78 @@ function f1(x){ return (Math.round(x*10)/10).toLocaleString(); }
 })();
 </script>
 <script>
-// ④ 매장별 상세 — [연도, 브랜드, 매장명, 오픈, CAPEX목표, CAPEX실적, 매출목표, 매출실적, 영익목표, 영익실적, 회수목표, 회수실적, 제외플래그]
+// ⑤ 오픈매장 성적표 — 브랜드 카드 + 미니 추세 차트 (2026-09-04 투자심의 페이지에서 이동)
+// [브랜드, 매장수(23·24·25·26), 판정배지, 배지클래스, {지표: [23,24,25,26]}, 가이드문구] · 23년 = 이사회 목표 확인 34개점만
+// 값 = 적중도(%) · null = 해당 코호트 없음/목표 미설정 · 'L' = 적자로 산출 불가
+(function(){
+  var CARDS = [
+    ["애슐리","19 · 32 · 18 · 10","▲ 유지 · 재검증","ok",
+      {CAPEX:[125,138,113,116], 영업이익:[36,30,37,40], 회수기간:[50,27,35,58]},
+      "공통비 부담 후에도 유일하게 이익 적중 3할 중반 이상 — 단 절대 수준은 목표의 4할, 잔여 신규 55.1억은 예가·목표 재검증 후 집행"],
+    ["피자몰","3 · 4 · 11 · 3","△ 포맷 재검증","mid",
+      {CAPEX:[85,112,95,132], 영업이익:[21,50,14,'L'], 회수기간:[36,38,34,40]},
+      "이익 적중 21 → 50 → 14% → 26년 적자 — 소형 점포가 브랜드 공통비를 감당하는지 재검증"],
+    ["델리","– · 7 · 7 · 2","▼ 신규 중단 검토","no",
+      {CAPEX:[null,101,101,102], 영업이익:[null,0,'L','L'], 회수기간:[null,14,18,1]},
+      "24년 0% · 25·26년 적자 — 공통비 부담 시 3년 연속 이익 없음, 25년 오픈 7곳 중 6곳 적자"],
+    ["로운","4 · 1 · 6 · –","▼ 하반기 3건 재심의","no",
+      {CAPEX:[136,null,118,null], 영업이익:[27,null,7,null], 회수기간:[7,null,47,null]},
+      "23년 27% · 25년 7%(6곳 중 3곳 적자) — 하반기 예정 3건(수지·동부산·부천역사 15.4억)은 오픈 전 재심의"],
+    ["리미니","4 · 4 · 2 · –","조건부 파일럿","mid",
+      {CAPEX:[104,105,67,null], 영업이익:['L','L',27,null], 회수기간:[10,18,26,null]},
+      "23·24년 대형 포맷 적자, 25년 소형 포맷도 공통비 기준 27% — 소형 포맷의 이익성 재검증 후 결정"],
+    ["법인 계","34 · 48 · 47 · 17","공통비 얹으면 약속의 3할","na",
+      {CAPEX:[123,133,110,116], 영업이익:[31,29,28,33], 회수기간:[41,30,30,50]},
+      "이익 31 → 29 → 28 → 33%로 4년 내내 평평 · 적자 146곳 중 42곳 · 매출 84 → 81 → 87 → 111% · CAPEX 초과 4년 미개선"]
+  ];
+  var X0=0, X1=200;
+  function px(v){ return Math.max(2, Math.min(98, (Math.min(v,X1)-X0)/(X1-X0)*100)); }
+  function tone(metric, v){
+    if (v==='L') return 'var(--bad-d)';
+    if (metric==='CAPEX'){ if (v<=105) return 'var(--good-d)'; if (v<=120) return 'var(--warn)'; return 'var(--bad-d)'; }
+    if (v>=95) return 'var(--good-d)';
+    if (v>=70) return 'var(--warn)';
+    return 'var(--bad-d)';
+  }
+  var YRS=['23','24','25','26'];
+  function track(metric, arr){
+    var pts='';
+    var idx=[]; arr.forEach(function(v,i){ if(v!==null && v!=='L') idx.push(i); });
+    var line='';
+    if (idx.length>1){
+      var a=px(arr[idx[0]]), b=px(arr[idx[idx.length-1]]);
+      line = '<i style="position:absolute; top:50%; left:'+Math.min(a,b)+'%; width:'+Math.abs(b-a)+'%; height:1px; background:var(--line2); transform:translateY(-50%)"></i>';
+    }
+    arr.forEach(function(v,i){
+      if (v===null) return;
+      var isL = (v==='L');
+      var left = isL ? 2 : px(v);
+      var sz = 4 + i*1.3;
+      pts += '<i title="'+YRS[i]+'년 오픈 · '+metric+' '+(isL?'적자':v+'%')+'" style="position:absolute; top:50%; left:'+left+'%; width:'+sz*2+'px; height:'+sz*2+'px; margin-left:-'+sz+'px; border-radius:50%; background:'+tone(metric,v)+'; opacity:'+(0.4+i*0.2)+'; transform:translateY(-50%); border:1.5px solid #fff"></i>';
+    });
+    var hundred = '<i style="position:absolute; top:0; bottom:0; left:'+px(100)+'%; width:0; border-left:1px dashed var(--line2)"></i>';
+    return '<div style="position:relative; height:18px">'+hundred+line+pts+'</div>';
+  }
+  function fmtSeries(arr){
+    return arr.map(function(v){ return v===null?'–':(v==='L'?'<span class="up">적자</span>':v+'%'); }).join('<span style="color:var(--faint)"> › </span>');
+  }
+  var h='';
+  CARDS.forEach(function(c){
+    var name=c[0], stores=c[1], badgeTxt=c[2], bcls=c[3], mets=c[4], guide=c[5];
+    var body='';
+    ['CAPEX','영업이익','회수기간'].forEach(function(m){
+      body += '<div class="mrow"><span class="ml">'+m+'</span>'+track(m, mets[m])+'<span class="mv">'+fmtSeries(mets[m])+'</span></div>';
+    });
+    h += '<div class="bcard'+(name==='법인 계'?' corp':'')+'">'
+       +   '<div class="bh"><span class="bn">'+name+'</span><span class="bs">'+stores+'개점</span>'
+       +     '<span class="badge '+bcls+'">'+badgeTxt+'</span></div>'
+       +   body + '<div class="bft">'+guide+'</div></div>';
+  });
+  document.getElementById('scoreCards').innerHTML = h;
+})();
+</script>
+<script>
+// ⑤ 매장별 상세 — [연도, 브랜드, 매장명, 오픈, CAPEX목표, CAPEX실적, 매출목표, 매출실적, 영익목표, 영익실적, 회수목표, 회수실적, 제외플래그]
 // 영업이익·회수기간 실적 = 브랜드공통비 안분 후(hub AI · AL/AJ) — 2609 전환, 직전까지는 직접비(AC·AE/AG)
 // 23년 오픈 34개점 추가(2607 재업로드본 [요약]·[CAPEX·오픈매장], 이사회 목표 확인분만 — 면적 미기재 11곳 제외)
 // 2607 재업로드본(함수 수정) 반영: CAPEX 실적 = 공사비 기준(보증금 제외) — 목표 정의와 일치시킴 · 24년 델리 강서킴스 오픈일자 반영으로 24년 48개점 · 7월 오픈(자연별곡 이마트은평·NC송파 확장·리미니 강남뉴코아 확장)은 운영 1개월 미만이라 미포함
