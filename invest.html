@@ -344,7 +344,7 @@
   <section data-pane="pf" hidden>
     <div class="panel">
       <h2>심의 안건 현황 — 이사회 승인·미오픈 17건</h2>
-      <p class="sub">오픈예정월 오름차순 · 단위 억원 · <b>브랜드별 기여 요약·목표 달성 판정은 <a href="capex.html" style="color:var(--accent); text-decoration:none">CAPEX ④</a></b></p>
+      <p class="sub">오픈예정월 오름차순 · 단위 억원 · <b>브랜드별 기여 요약·목표 달성 판정은 <a href="capex.html" style="color:var(--accent); text-decoration:none">CAPEX ③</a></b></p>
       <div class="scroll"><table>
         <thead><tr><th>위치</th><th>브랜드</th><th>구분</th><th>투자비</th><th>월매출 목표</th><th>이익률</th><th>회수목표</th><th>오픈예정</th></tr></thead>
         <tbody>
@@ -380,7 +380,7 @@
     데이터 기준 <b>2026.07</b> · 판정 기준은 <b>§3.3 확정 기준값</b>입니다
     <details class="notes"><summary>원천 파일 · 갱신 방법</summary><div class="nbody">
     <b>자가점검(Q1·Q2·Q3·Q5)</b>은 <code>invest-data.json</code>을 읽어 화면에서 판정합니다 — 원천: 신규오픈점피드백 <b>2607</b> [요약]·[CAPEX·오픈매장](Q1) · 매장별 아미스 <b>2607</b> [26]·[25](Q2·Q3) · 현금시드머니 <b>260812</b> [7월_260813](Q5) · 관리용 신규점이사회승인내역관리 <b>260806</b> [25년_요약]·[26년_요약](Q1 이사회 목표)<br>
-    <b>심의 안건</b> 탭은 ★★관리용 신규점이사회승인내역관리 260820 기준으로 페이지에 직접 기재돼 있습니다 · <b>26년 투자 포트폴리오와 오픈매장 성적표는 2026-09-04 <a href="capex.html" style="color:var(--accent)">CAPEX 페이지 ③·⑤</a>로 이동</b>했습니다 · 각 상세는 rotc / index / capex 페이지<br>
+    <b>심의 안건</b> 탭은 ★★관리용 신규점이사회승인내역관리 260820 기준으로 페이지에 직접 기재돼 있습니다 · <b>26년 투자 포트폴리오와 오픈매장 성적표는 2026-09-04 <a href="capex.html" style="color:var(--accent)">CAPEX 페이지 ①·④</a>로 이동</b>했습니다 · 각 상세는 rotc / index / capex 페이지<br>
     <b>범위</b>: CFO 시스템 6대 질문 중 <b>Q1·Q2·Q3·Q5</b>만 다룹니다. Q4(평당공사비 30/50/80 기준)와 Q6(계약상 리스크)은 이번 버전 범위에서 제외했습니다 — 평당 인테리어 비용은 애슐리만 자료가 있어 Q1 주석에 참고로 남겼습니다<br>
     <b>갱신 방법</b>: 클로드코드에게 "자가점검 26○○로 갱신해줘" — 원천 엑셀을 다시 읽어 <code>invest-data.json</code>을 새로 만들고 3개 분석 페이지와 숫자를 동기화합니다.
     </div></details>
@@ -612,7 +612,7 @@ function renderQ1(){
   var b=D.brands[curKey()], vs=q1Verdict(b);
   var nm=(BRAND==='전체'?'전사':BRAND);
   document.getElementById('q1Insight').innerHTML = b.q1.n===0
-    ? '<b>'+nm+'</b>은 최근 12개월 내 오픈한 매장이 없어 Q1을 판정하지 않습니다 — 직전 코호트 성적은 <a href="capex.html" style="color:var(--accent)">CAPEX ⑤ 성적표</a>를 보십시오.'
+    ? '<b>'+nm+'</b>은 최근 12개월 내 오픈한 매장이 없어 Q1을 판정하지 않습니다 — 직전 코호트 성적은 <a href="capex.html" style="color:var(--accent)">CAPEX ④ 성적표</a>를 보십시오.'
     : '<b>'+nm+' — '+VTXT[vs.v]+'</b>. 최근 12개월 오픈 '+b.q1.n+'개점의 월매출은 목표의 <b>'+pc(b.q1.sr)+'</b>, '+
       '<b>공통비를 안분한 영업이익은 목표의 '+pc(b.q1.orr)+'</b>, CAPEX는 <b>'+pc(b.q1.cr)+'</b> 집행했습니다. '+
       '회수기간 목표를 지킨 매장은 '+b.q1.payOk+'/'+b.q1.payN+'개점입니다. '+
