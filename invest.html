@@ -220,7 +220,7 @@
   <section data-pane="q1" hidden>
     <div class="panel">
       <h2>Q1. 지난 1년간 투자의사결정으로 실행한 결과는 어떤가요?</h2>
-      <p class="sub">CHECK POINT — 목표 달성율(매출·이익·현금회수·총투자비·평당인테리어) · 대상 <b>2508~2607 오픈 35개점</b> · 목표 = 이사회 승인값 · <b>영업이익 실적은 브랜드공통비 안분 후</b></p>
+      <p class="sub">CHECK POINT — 목표 달성율(매출·이익·현금회수·총투자비·평당인테리어) · 대상 <b>2508~2607 오픈 35개점</b> · 목표 = 이사회 승인값<br>실적 기준 — 월매출은 <b>오픈 첫 달 제외</b>, 영업이익은 <b>브랜드공통비 안분 후 + 투자 초기 적자월(오픈 1~2개월) 제외</b></p>
       <div class="scroll"><table><thead>
         <tr><th rowspan="2">브랜드</th><th rowspan="2">매장수</th>
             <th class="grp gb" colspan="2">매출달성율(평균)</th>
@@ -235,15 +235,25 @@
       <h2>매장별 상세 — 목표 vs 실적</h2>
       <p class="sub" id="q1DetSub">단위 억원 · 월평균 기준 · 회수기간 개월</p>
       <div class="scroll"><table><thead>
-        <tr><th>매장</th><th class="c">오픈</th><th class="c">운영<br>개월</th>
-            <th class="gb">목표매출</th><th>목표이익</th><th>CAPEX목표</th>
-            <th class="gb">월평균매출</th><th>월평균이익<br>(안분후)</th><th>CAPEX실적</th>
-            <th class="gb">매출<br>달성율</th><th>영업이익<br>달성율</th><th>CAPEX<br>달성율</th>
-            <th class="gb">회수<br>목표</th><th>회수<br>실적</th></tr>
+        <tr><th rowspan="2">매장</th><th rowspan="2" class="c">오픈</th><th rowspan="2" class="c">운영<br>개월</th>
+            <th class="grp gb" colspan="3">월매출 (억)</th>
+            <th class="grp gb" colspan="3">월영업이익 (억, 안분후)</th>
+            <th class="grp gb" colspan="3">CAPEX (억)</th>
+            <th class="grp gb" colspan="3">회수기간 (개월)</th></tr>
+        <tr><th class="gb">목표</th><th>실적</th><th>달성율</th>
+            <th class="gb">목표</th><th>실적</th><th>달성율</th>
+            <th class="gb">목표</th><th>실적</th><th>달성율</th>
+            <th class="gb">목표</th><th>실적</th><th>잔여</th></tr>
       </thead><tbody id="q1Det"></tbody></table></div>
       <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">
-        ※ 대상 = 기준월(2607) 기준 <b>최근 12개월 내 오픈</b>한 매장 35개점 · 출처 신규오픈점피드백_2607 [요약]<br>
-        ※ <b>영업이익 실적은 브랜드공통비 안분 후</b>([CAPEX·오픈매장] AH열) — 이사회 목표와 같은 정의. 회수기간 실적도 안분후(AI열)<br>
+        ※ 대상 = 기준월(2607) 기준 <b>최근 12개월 내 오픈</b>한 매장 35개점 · 출처 신규오픈점피드백_2607(개정본) [요약]·[CAPEX·오픈매장]<br>
+        ※ <b>월매출 실적 — 오픈 첫 달 제외</b>. 오픈일이 월 중이면 첫 달 매출이 정상 영업을 반영하지 못하므로 누적·월평균에서 뺍니다<br>
+        ※ <b>영업이익 실적 — 브랜드공통비 안분 후 + 투자 초기 적자월 제외</b>([CAPEX·오픈매장] AG~AK열). 오픈 직후 투자비 때문에 적자가 나는 1~2개월을 빼고 재산출한 값으로, <b>입지의 적중도</b>를 보기 위한 기준입니다. 회수기간 실적·잔여도 같은 기준<br>
+        ※ 같은 파일의 <b>BF~BJ열은 원본 기준</b>(오픈 첫 달부터 전체 포함)이며 <a href="capex.html" style="color:var(--accent)">CAPEX ④ 성적표</a>가 그 기준을 씁니다 — <b>두 페이지의 영업이익 숫자가 다른 것은 기준 차이</b>입니다<br>
+        ※ <b>월평균 = 파일 계산식 그대로</b>입니다 — 누적매출(오픈월 이후만 합산) ÷ 완전월 수(DATEDIF). <b>폐점 매장은 폐점월 말일까지</b>로 기간을 끊습니다<br>
+        ※ 누적매출이 <b>오픈월 이후만</b> 합산하도록 통일돼, 리뉴얼·이전으로 기존 코스트센터를 재사용한 매장(롯데백화점 청량리점 등)에 과거 매출이 섞이지 않습니다<br>
+        ※ <b>운영 3개월 미만 매장은 "초기"</b>로 표시합니다. 평균에는 포함하지만 월평균이 아직 안정되지 않아 달성율 변동이 큽니다 — 2604~2606 오픈 8개점 해당<br>
+        ※ 회수 <b>잔여</b>가 "회수완료"면 회수기간 목표를 초과했더라도 <b>달성</b>으로 봅니다(PRD 3.3)<br>
         ※ 목표(월매출·영업이익율·CAPEX·회수기간)는 <b>관리용 신규점이사회승인내역관리_260806</b> [25년_요약]·[26년_요약]에서 코스트센터로 매핑. 목표가 비어 있는 항목은 <b>–</b>로 표시하고 평균에서 제외합니다 — 매출·이익 목표가 없는 매장은 <b>애슐리 성수뮤지엄 · 애슐리 성수낙낙 · 프랑제리 마곡사옥</b> 3곳, 회수기간 목표가 없는 매장은 여기에 <b>더카페 독산역</b>을 더한 4곳입니다. 이사회 승인 목표를 소급 입력해야 판정이 완전해집니다<br>
         ※ 목표이익 = 월매출목표 × 영업이익율목표 · CAPEX 달성율은 100% 초과가 예산 초과(부정)<br>
         ※ 26년 상반기 오픈 매장은 운영 1~7개월차 초기 추세라 달성율 변동이 큽니다<br>
@@ -379,7 +389,7 @@
   <div class="src">
     데이터 기준 <b>2026.07</b> · 판정 기준은 <b>§3.3 확정 기준값</b>입니다
     <details class="notes"><summary>원천 파일 · 갱신 방법</summary><div class="nbody">
-    <b>자가점검(Q1·Q2·Q3·Q5)</b>은 <code>invest-data.json</code>을 읽어 화면에서 판정합니다 — 원천: 신규오픈점피드백 <b>2607</b> [요약]·[CAPEX·오픈매장](Q1) · 매장별 아미스 <b>2607</b> [26]·[25](Q2·Q3) · 현금시드머니 <b>260812</b> [7월_260813](Q5) · 관리용 신규점이사회승인내역관리 <b>260806</b> [25년_요약]·[26년_요약](Q1 이사회 목표)<br>
+    <b>자가점검(Q1·Q2·Q3·Q5)</b>은 <code>invest-data.json</code>을 읽어 화면에서 판정합니다 — 원천: 신규오픈점피드백 <b>2607 개정본</b> [요약]·[CAPEX·오픈매장](Q1 — 매출은 오픈 첫 달 제외, 영업이익은 안분후 초기 적자월 제외) · 매장별 아미스 <b>2607</b> [26]·[25](Q2·Q3) · 현금시드머니 <b>260812</b> [7월_260813](Q5) · 관리용 신규점이사회승인내역관리 <b>260806</b> [25년_요약]·[26년_요약](Q1 이사회 목표)<br>
     <b>심의 안건</b> 탭은 ★★관리용 신규점이사회승인내역관리 260820 기준으로 페이지에 직접 기재돼 있습니다 · <b>26년 투자 포트폴리오와 오픈매장 성적표는 2026-09-04 <a href="capex.html" style="color:var(--accent)">CAPEX 페이지 ①·④</a>로 이동</b>했습니다 · 각 상세는 rotc / index / capex 페이지<br>
     <b>범위</b>: CFO 시스템 6대 질문 중 <b>Q1·Q2·Q3·Q5</b>만 다룹니다. Q4(평당공사비 30/50/80 기준)와 Q6(계약상 리스크)은 이번 버전 범위에서 제외했습니다 — 평당 인테리어 비용은 애슐리만 자료가 있어 Q1 주석에 참고로 남겼습니다<br>
     <b>갱신 방법</b>: 클로드코드에게 "자가점검 26○○로 갱신해줘" — 원천 엑셀을 다시 읽어 <code>invest-data.json</code>을 새로 만들고 3개 분석 페이지와 숫자를 동기화합니다.
@@ -511,8 +521,8 @@ function renderVerdict(){
   var s=seedOf(bk)||{};
   var cards=[
     ['Q1','지난 1년 투자 실행 결과는?',vs.q1.v,[
-      ['월매출 달성율 <span class="mnote">(대상 '+b.q1.n+'개점)</span>', pc(b.q1.sr)],
-      ['월영업이익 달성율 <span class="mnote">(안분후)</span>', pc(b.q1.orr)],
+      ['월매출 달성율 <span class="mnote">(대상 '+b.q1.n+'개점'+(b.q1.nEarly?' · 초기 '+b.q1.nEarly:'')+')</span>', pc(b.q1.sr)],
+      ['월영업이익 달성율 <span class="mnote">(안분후·초기적자월 제외)</span>', pc(b.q1.orr)],
       ['CAPEX 달성율 <span class="mnote">(100% 초과 = 예산 초과)</span>', pc(b.q1.cr)],
       ['회수기간 목표 달성', b.q1.payN? (b.q1.payOk+' / '+b.q1.payN+'개점') : '–']
     ],'q1'],
@@ -593,27 +603,48 @@ function renderQ1(){
 
   var rows = D.q1rows.filter(function(r){ return BRAND==='전체' || r.b===BRAND; })
                      .sort(function(a,b){ return a.ym-b.ym; });
-  document.getElementById('q1DetSub').innerHTML='단위 억원 · 월평균 기준 · 회수기간 개월 · <b>'+rows.length+'개점</b>'+(BRAND==='전체'?'':' ('+BRAND+')');
+  var nEarly=rows.filter(function(x){return x.early;}).length;
+  document.getElementById('q1DetSub').innerHTML='단위 억원 · 월평균 기준 · 회수기간 개월 · <b>'+rows.length+'개점</b>'
+    +(BRAND==='전체'?'':' ('+BRAND+')')
+    +(nEarly?' · <span class="badge mid">초기</span> <b class="mnote">'+nEarly+'개점은 운영 3개월 미만이라 달성율 변동이 큽니다</b>':'');
   document.getElementById('q1Det').innerHTML = rows.length ? rows.map(function(r){
     var vS=jHigher(r.sr,t.salesAchv[0],t.salesAchv[1]),
         vO=jHigher(r.orr,t.opAchv[0],t.opAchv[1]),
         vC=jLower(r.cr,t.capexAchv[0],t.capexAchv[1]);
-    var payCls = (typeof r.pa==='number' && r.pt) ? (r.pa<=r.pt?'dn':'up') : (r.pa==='적자'?'up':'');
-    return '<tr><td class="l">'+esc(r.name)+'</td>'+
+    var payCls = r.done ? 'dn' : ((typeof r.pa==='number' && r.pt) ? (r.pa<=r.pt?'dn':'up') : (r.pa==='적자'?'up':''));
+    var remCls = r.done ? 'dn' : (r.pr==='적자'?'up':'');
+    var early = r.early
+      ? ' <span class="badge mid" title="오픈 다음 달부터 기준월까지 완전월이 3개월 미만 — 월평균이 아직 안정되지 않아 달성율 변동이 큽니다(평균에는 포함)">초기</span>'
+      : '';
+    if (r.closed) early += ' <span class="badge no" title="폐점 매장 — 월평균은 오픈부터 폐점월까지 운영한 기간으로 나눕니다">폐점</span>';
+    return '<tr'+(r.early?' style="opacity:.62"':'')+'><td class="l">'+esc(r.name)+early+'</td>'+
       '<td class="c mnote">'+String(r.ym).slice(2,4)+'.'+String(r.ym).slice(4)+'</td>'+
       '<td class="c mnote">'+fx(r.mo)+'</td>'+
-      '<td class="gb">'+fx(r.st,1)+'</td><td>'+fx(r.ot,2)+'</td><td>'+fx(r.ct,1)+'</td>'+
-      '<td class="gb">'+fx(r.sa,2)+'</td><td class="'+(r.oa!==null&&r.oa<0?'up':'')+'">'+fx(r.oa,2)+'</td><td>'+fx(r.ca,2)+'</td>'+
-      '<td class="gb '+tint(vS)+'">'+pc(r.sr)+'</td><td class="'+tint(vO)+'">'+pc(r.orr)+'</td><td class="'+tint(vC)+'">'+pc(r.cr)+'</td>'+
+      /* 월매출 */
+      '<td class="gb">'+fx(r.st,1)+'</td>'+
+      '<td>'+fx(r.sa,2)+'</td>'+
+      '<td class="'+tint(vS)+'">'+pc(r.sr)+'</td>'+
+      /* 월영업이익 */
+      '<td class="gb">'+fx(r.ot,2)+'</td>'+
+      '<td class="'+(r.oa!==null&&r.oa<0?'up':'')+'">'+fx(r.oa,2)+'</td>'+
+      '<td class="'+tint(vO)+'">'+pc(r.orr)+'</td>'+
+      /* CAPEX */
+      '<td class="gb">'+fx(r.ct,1)+'</td>'+
+      '<td>'+fx(r.ca,2)+'</td>'+
+      '<td class="'+tint(vC)+'">'+pc(r.cr)+'</td>'+
+      /* 회수기간 */
       '<td class="gb">'+(r.pt===null?'–':fx(r.pt,0))+'</td>'+
-      '<td class="'+payCls+'">'+(r.pa===null?'–':(typeof r.pa==='number'?fx(r.pa,1):esc(r.pa)))+'</td></tr>';
-  }).join('') : '<tr><td colspan="14" class="c mnote" style="padding:18px">최근 12개월 내 오픈한 매장이 없습니다.</td></tr>';
+      '<td class="'+payCls+'">'+(r.pa==null?'–':(typeof r.pa==='number'?fx(r.pa,1):esc(r.pa)))+'</td>'+
+      '<td class="'+remCls+'">'+(r.pr==null?'–':(typeof r.pr==='number'?fx(r.pr,1):'<b>'+esc(r.pr)+'</b>'))+'</td></tr>';
+  }).join('') : '<tr><td colspan="15" class="c mnote" style="padding:18px">최근 12개월 내 오픈한 매장이 없습니다.</td></tr>';
 
   var b=D.brands[curKey()], vs=q1Verdict(b);
   var nm=(BRAND==='전체'?'전사':BRAND);
   document.getElementById('q1Insight').innerHTML = b.q1.n===0
     ? '<b>'+nm+'</b>은 최근 12개월 내 오픈한 매장이 없어 Q1을 판정하지 않습니다 — 직전 코호트 성적은 <a href="capex.html" style="color:var(--accent)">CAPEX ④ 성적표</a>를 보십시오.'
-    : '<b>'+nm+' — '+VTXT[vs.v]+'</b>. 최근 12개월 오픈 '+b.q1.n+'개점의 월매출은 목표의 <b>'+pc(b.q1.sr)+'</b>, '+
+    : '<b>'+nm+' — '+VTXT[vs.v]+'</b>. 최근 12개월 오픈 '+b.q1.n+'개점'
+      +(b.q1.nEarly?'<span class="mnote">(이 중 '+b.q1.nEarly+'개점은 운영 3개월 미만)</span>':'')
+      +'의 월매출은 목표의 <b>'+pc(b.q1.sr)+'</b>, '+
       '<b>공통비를 안분한 영업이익은 목표의 '+pc(b.q1.orr)+'</b>, CAPEX는 <b>'+pc(b.q1.cr)+'</b> 집행했습니다. '+
       '회수기간 목표를 지킨 매장은 '+b.q1.payOk+'/'+b.q1.payN+'개점입니다. '+
       '매출은 목표에 근접하는데 이익이 따라오지 않는 구조라면 <b>예가 단계의 목표 이익률 자체가 과대</b>했거나 공통비 부담이 반영되지 않은 것입니다.';
