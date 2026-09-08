@@ -225,7 +225,7 @@
         <tr><th rowspan="2">브랜드</th><th rowspan="2">매장수</th>
             <th class="grp gb" colspan="2">매출달성율(평균)</th>
             <th class="grp gb" colspan="2">영업이익달성율(평균)</th>
-            <th class="grp gb" colspan="2">CAPEX달성율(평균)</th>
+            <th class="grp gb" colspan="2">CAPEX집행율(평균)</th>
             <th rowspan="2" class="gb">회수기간<br>달성</th><th rowspan="2">Q1 종합</th></tr>
         <tr><th class="gb">값</th><th>등급</th><th class="gb">값</th><th>등급</th><th class="gb">값</th><th>등급</th></tr>
       </thead><tbody id="q1Sum"></tbody></table></div>
@@ -242,7 +242,7 @@
             <th class="grp gb" colspan="3">회수기간 (개월)</th></tr>
         <tr><th class="gb">목표</th><th>실적</th><th>달성율</th>
             <th class="gb">목표</th><th>실적</th><th>달성율</th>
-            <th class="gb">목표</th><th>실적</th><th>달성율</th>
+            <th class="gb">목표</th><th>실적</th><th>집행율</th>
             <th class="gb">목표</th><th>실적</th><th>잔여</th></tr>
       </thead><tbody id="q1Det"></tbody></table></div>
       <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">
@@ -255,7 +255,9 @@
         ※ <b>운영 3개월 미만 매장은 "초기"</b>로 표시합니다. 평균에는 포함하지만 월평균이 아직 안정되지 않아 달성율 변동이 큽니다 — 2604~2606 오픈 8개점 해당<br>
         ※ 회수 <b>잔여</b>가 "회수완료"면 회수기간 목표를 초과했더라도 <b>달성</b>으로 봅니다(PRD 3.3)<br>
         ※ 목표(월매출·영업이익율·CAPEX·회수기간)는 <b>관리용 신규점이사회승인내역관리_260806</b> [25년_요약]·[26년_요약]에서 코스트센터로 매핑. 목표가 비어 있는 항목은 <b>–</b>로 표시하고 평균에서 제외합니다 — 매출·이익 목표가 없는 매장은 <b>애슐리 성수뮤지엄 · 애슐리 성수낙낙 · 프랑제리 마곡사옥</b> 3곳, 회수기간 목표가 없는 매장은 여기에 <b>더카페 독산역</b>을 더한 4곳입니다. 이사회 승인 목표를 소급 입력해야 판정이 완전해집니다<br>
-        ※ 목표이익 = 월매출목표 × 영업이익율목표 · CAPEX 달성율은 100% 초과가 예산 초과(부정)<br>
+        ※ 목표이익 = 월매출목표 × 영업이익율목표<br>
+        ※ <b>CAPEX만 "집행율"</b>입니다 — 실적 ÷ 목표라 <b>100% 초과가 예산 초과(부정)</b>이고, 매출·영업이익 달성율과 좋고 나쁨의 방향이 반대입니다. 원천 신규오픈점피드백 [요약] U열·PRD와 같은 정의입니다<br>
+        ※ <b>오픈확산팀 관리 파일은 목표 ÷ 실적</b>으로 계산해 방향이 반대입니다(예산 초과 시 100% 아래). 같은 매장의 수치를 대조할 때 서로 역수라는 점을 감안하십시오<br>
         ※ 26년 상반기 오픈 매장은 운영 1~7개월차 초기 추세라 달성율 변동이 큽니다<br>
         ※ <b>평당 인테리어 비용은 애슐리만 자료가 있어</b>(피드백 [예가(애슐리)]) 브랜드 비교가 불가능해 v1 판정에서 제외했습니다 — 참고: 애슐리 매장당 CAPEX 실측 7.29억(23~26년 79곳, 공사비 기준)
       </div></details>
@@ -472,7 +474,7 @@ function reasons(bk){
     var d=[];
     if(q1.parts.sales!=='ok'&&q1.parts.sales!=='na') d.push('매출달성율 '+pc(b.q1.sr));
     if(q1.parts.op!=='ok'&&q1.parts.op!=='na') d.push('영업이익달성율 '+pc(b.q1.orr));
-    if(q1.parts.capex!=='ok'&&q1.parts.capex!=='na') d.push('CAPEX달성율 '+pc(b.q1.cr));
+    if(q1.parts.capex!=='ok'&&q1.parts.capex!=='na') d.push('CAPEX집행율 '+pc(b.q1.cr));
     if(q1.parts.pay!=='ok'&&q1.parts.pay!=='na') d.push('회수기간 달성 '+b.q1.payOk+'/'+b.q1.payN+'개점');
     out.push('<b>Q1 '+VTXT[q1.v]+'</b> — '+(d.join(' · ')||'세부 미달')+' <span class="mnote">(대상 '+b.q1.n+'개점)</span>');
   }
@@ -493,7 +495,7 @@ function renderLegend(){
   document.getElementById('legend').innerHTML =
     '<b>판정 기준</b>'+
     '<span>매출·영업이익 달성율 <span class="lchip ok">'+t.salesAchv[0]+'%↑</span><span class="lchip mid">'+t.salesAchv[1]+'~'+(t.salesAchv[0]-0.1).toFixed(1)+'%</span><span class="lchip no">'+t.salesAchv[1]+'%↓</span></span>'+
-    '<span>CAPEX 달성율 <span class="lchip ok">'+t.capexAchv[0]+'%↓</span><span class="lchip mid">~'+t.capexAchv[1]+'%</span><span class="lchip no">'+t.capexAchv[1]+'%↑</span></span>'+
+    '<span>CAPEX 집행율 <span class="lchip ok">'+t.capexAchv[0]+'%↓</span><span class="lchip mid">~'+t.capexAchv[1]+'%</span><span class="lchip no">'+t.capexAchv[1]+'%↑</span></span>'+
     '<span>동일매장성장률 <span class="lchip ok">0%↑</span><span class="lchip mid">−3~0%</span><span class="lchip no">−3%↓</span></span>'+
     '<span>부실매장 <span class="lchip ok">0개</span><span class="lchip mid">전년비 감소</span><span class="lchip no">전년비 증가</span></span>'+
     '<span>시드머니 <span class="lchip ok">잔고&gt;0 &amp; O</span><span class="lchip mid">잔고&gt;0 &amp; X</span><span class="lchip no">잔고≤0</span></span>';
@@ -523,7 +525,7 @@ function renderVerdict(){
     ['Q1','지난 1년 투자 실행 결과는?',vs.q1.v,[
       ['월매출 달성율 <span class="mnote">(대상 '+b.q1.n+'개점'+(b.q1.nEarly?' · 초기 '+b.q1.nEarly:'')+')</span>', pc(b.q1.sr)],
       ['월영업이익 달성율 <span class="mnote">(안분후·초기적자월 제외)</span>', pc(b.q1.orr)],
-      ['CAPEX 달성율 <span class="mnote">(100% 초과 = 예산 초과)</span>', pc(b.q1.cr)],
+      ['CAPEX 집행율 <span class="mnote">(100% 초과 = 예산 초과)</span>', pc(b.q1.cr)],
       ['회수기간 목표 달성', b.q1.payN? (b.q1.payOk+' / '+b.q1.payN+'개점') : '–']
     ],'q1'],
     ['Q2','브랜드 질적 KPI는 성장 중인가?',vs.q2.v,[
