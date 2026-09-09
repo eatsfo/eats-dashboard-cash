@@ -16,28 +16,86 @@
    "관리용 신규점이사회승인내역관리 260806 [25년_요약]·[26년_요약]"
   ]
  },
- "thresholds": {
-  "salesAchv": [
-   95,
-   90
+ "grades": {
+  "labels": [
+   "부진",
+   "미흡",
+   "보통",
+   "양호",
+   "우수"
   ],
-  "opAchv": [
-   95,
-   90
+  "overall": [
+   "투자 보류",
+   "재검토",
+   "보완 필요",
+   "조건부 가능",
+   "투자 가능"
   ],
-  "capexAchv": [
-   110,
-   130
-  ],
-  "paybackOverMonths": 6,
-  "sssg": [
-   0,
-   -5
-  ],
-  "lossRatio": [
-   10,
-   25
-  ]
+  "salesAchv": {
+   "cuts": [
+    110,
+    95,
+    85,
+    70
+   ],
+   "higher": true,
+   "weight": 2,
+   "unit": "%"
+  },
+  "opAchv": {
+   "cuts": [
+    110,
+    95,
+    80,
+    50
+   ],
+   "higher": true,
+   "weight": 2,
+   "unit": "%"
+  },
+  "capexAchv": {
+   "cuts": [
+    100,
+    110,
+    125,
+    140
+   ],
+   "higher": false,
+   "weight": 1,
+   "unit": "%"
+  },
+  "payRate": {
+   "cuts": [
+    80,
+    50,
+    30,
+    0.01
+   ],
+   "higher": true,
+   "weight": 1,
+   "unit": "%"
+  },
+  "sssg": {
+   "cuts": [
+    3,
+    0,
+    -3,
+    -7
+   ],
+   "higher": true,
+   "unit": "%"
+  },
+  "lossRatio": {
+   "cuts": [
+    5,
+    10,
+    20,
+    35
+   ],
+   "higher": false,
+   "unit": "%"
+  },
+  "seedBalGood": 50
  },
  "brandOrder": [
   "애슐리",

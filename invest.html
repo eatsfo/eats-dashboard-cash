@@ -130,6 +130,9 @@
   .src{ color:var(--faint); font-size:11px; margin-top:24px; line-height:1.7; }
   .pend{ background:var(--parchment); border:1px dashed var(--line2); padding:12px 14px; font-size:12px; color:var(--sub); }
   [hidden]{ display:none !important; }
+  .verdict .vt .rl{ display:inline-block; margin-top:2px; line-height:1.9; }
+  .verdict .vt .ovs{ display:block; font-weight:600; color:var(--navy); margin-bottom:4px; }
+  .legend{ line-height:2.1; }
 </style>
 </head>
 <body>
@@ -140,7 +143,7 @@
     <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
   </header>
   <p class="story">투자 원칙: <b>사내은행 사전 자가점검</b>을 통과해야 투심위·이사회에 상정할 수 있습니다.
-    브랜드를 고르면 <b>Q1 투자실행결과 · Q2 질적KPI · Q3 부실매장 · Q5 시드머니</b> 4개 질문의 판정과 미달 사유를 숫자로 확인합니다.</p>
+    브랜드를 고르면 <b>Q1 투자실행결과 · Q2 질적KPI · Q3 부실매장 · Q5 시드머니</b> 4개 질문의 등급과 근거를 숫자로 확인합니다.</p>
 
   <!-- 탭 -->
   <div class="tabbar" id="tabbar">
@@ -178,8 +181,10 @@
   <section data-pane="v">
     <div class="panel">
       <h2>브랜드 종합판정</h2>
-      <p class="sub" id="vSub"><b>4개 질문 모두 통과</b> = 투자 가능 · <b>주의 1개 이상, 미달 없음</b> = 조건부 · <b>미달 1개 이상</b> = 투자 보류<br>
-        각 질문의 판정은 아래 판정 기준 막대의 경계값으로 정해집니다. Q1은 세부 4개 항목 중 <b>미달 2개 이상이면 미달, 1개면 주의</b>입니다</p>
+      <p class="sub" id="vSub">각 항목을 <b>우수 4점 · 양호 3점 · 보통 2점 · 미흡 1점 · 부진 0점</b>으로 채점하고,
+        Q1·Q2·Q3·Q5 네 점수의 평균으로 종합 등급을 정합니다. Q1은 세부 4개 항목의 가중평균이며 <b>매출·영업이익에 2배 가중</b>을 둡니다<br>
+        종합 등급 — <b>3.5점↑ 투자 가능 · 2.5점↑ 조건부 가능 · 1.5점↑ 보완 필요 · 0.5점↑ 재검토 · 0.5점↓ 투자 보류</b>.
+        단 <b class="up">시드머니 잔고가 0 이하면 재원이 없으므로 점수와 무관하게 투자 보류</b>입니다</p>
       <div class="verdict" id="verdictBox"></div>
       <div class="qgrid" id="qcards"></div>
     </div>
@@ -259,7 +264,7 @@
         ※ <b>매출·영업이익 목표가 모두 없는 매장은 집계에서 제외</b>합니다 — 달성율을 낼 수 없기 때문입니다. 현재 <b>애슐리 성수뮤지엄 · 애슐리 성수낙낙 · 프랑제리 마곡사옥</b> 3곳이 해당하며, 대상 35개점 중 <b>32개점</b>으로 집계합니다. 상세표에는 그대로 표시하되 <b>목표없음</b> 배지를 붙입니다<br>
         ※ 더카페 독산역은 매출·이익 목표가 있어 집계에 포함하되, CAPEX·회수 목표가 없어 해당 항목만 <b>–</b>입니다<br>
         ※ 목표이익 = 월매출목표 × 영업이익율목표<br>
-        ※ <b>2026-09-09 CAPEX 집행율 기준 완화</b> — 종전 100% 이하 통과 / 110% 초과 미달에서 <b>110% 이하 통과 / 130% 초과 미달</b>로 넓혔습니다. <a href="capex.html" style="color:var(--accent)">CAPEX 페이지</a>가 초과집행을 4년 연속 이어지는 만성 패턴으로 다루는데, 자가점검에서만 110%로 곧바로 미달 처리되어 기준이 어긋나 있었습니다<br>
+        ※ <b>2026-09-09 5단계 등급제로 개편</b> — CAPEX 집행율은 <b>100% 이하 우수 · 110% 이하 양호 · 125% 이하 보통 · 140% 이하 미흡 · 140% 초과 부진</b>입니다. 종전 3단계에서는 110%만 넘어도 곧바로 미달이었습니다. <a href="capex.html" style="color:var(--accent)">CAPEX 페이지</a>가 초과집행을 4년 연속 이어지는 만성 패턴으로 다루는데, 자가점검에서만 110%로 곧바로 미달 처리되어 기준이 어긋나 있었습니다<br>
         ※ <b>CAPEX만 "집행율"</b>입니다 — 실적 ÷ 목표라 <b>100% 초과가 예산 초과(부정)</b>이고, 매출·영업이익 달성율과 좋고 나쁨의 방향이 반대입니다. 원천 신규오픈점피드백 [요약] U열·PRD와 같은 정의입니다<br>
         ※ <b>오픈확산팀 관리 파일은 목표 ÷ 실적</b>으로 계산해 방향이 반대입니다(예산 초과 시 100% 아래). 같은 매장의 수치를 대조할 때 서로 역수라는 점을 감안하십시오<br>
         ※ 26년 상반기 오픈 매장은 운영 1~7개월차 초기 추세라 달성율 변동이 큽니다<br>
@@ -291,7 +296,7 @@
       <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">
         ※ 동일매장성장률(SSSG) = 올해 매출 ÷ 전년 매출 − 1 · <b>전년도 매출이 존재하는 매장만</b> 대상 · 신규·폐점 매장 제외<br>
         ※ <b>전년·올해 어느 쪽이든 실매출이 0 이하면 제외</b>합니다(2026-09-09 반영). 종전에는 0과 빈 값만 걸러서, 반올림 잔여로 음수가 찍힌 매장이 사실상 0인 전년 매출과 비교돼 성장률이 부풀려졌습니다(애슐리 롯데백화점 청량리점 2507 = −0.45원, 이 영향으로 애슐리 −4.3%가 −3.0%로 표시됐음)<br>
-        ※ <b>2026-09-09 판정 기준 완화</b> — 미달선을 −3%에서 <b>−5%</b>로 내렸습니다. 성숙한 대형 브랜드의 4% 안팎 역성장과 델리(−9.9%)·자연별곡(−38.6%) 수준의 하락을 −3% 선이 구분하지 못했습니다<br>
+        ※ <b>2026-09-09 5단계 등급제로 개편</b> — <b>+3% 이상 우수 · 0% 이상 양호 · −3% 이상 보통 · −7% 이상 미흡 · −7% 미만 부진</b>입니다. 성숙한 대형 브랜드의 4% 안팎 역성장과 델리(−9.9%)·자연별곡(−38.6%) 수준의 하락을 종전 −3% 단일선이 구분하지 못했습니다<br>
         ※ 기준월(2607)이 마감된 월이므로 <b>월 단위 비교</b>(2607 vs 2507). 기준월이 진행 중이면 동요일 일 단위 비교가 필요하며, 일별 매출 파일이 연결되면 확장합니다<br>
         ※ 영업이익률은 <b>안분후</b> 기준 · 비율의 증감은 %p<br>
         ※ 출처 매장별 아미스_2607 [26]·[25] · 영업중 매장 기준
@@ -304,7 +309,7 @@
     <div class="panel">
       <h2>Q3. 부실매장은 정리되었나요?</h2>
       <p class="sub">CHECK POINT — 부실매장 개수 0, 손실액 등의 변화 · <b>영업중 직영점</b> 대상 · <b>영업이익(안분후)</b> 기준 · 판정은 <b>누적(당해 1~7월) 적자</b> 기준<br>
-        판정 — 영업중 직영점 대비 <b>누적 적자매장 비율</b>이 <b class="dn">10% 이하면 통과</b>, <b style="color:var(--warn)">10~25%면 주의</b>, <b class="up">25%를 넘으면서 전년보다 늘면 미달</b></p>
+        판정 — 영업중 직영점 대비 <b>누적 적자매장 비율</b>로 5단계 채점합니다. <b class="dn">5% 이하 우수 · 10% 이하 양호</b> · <span style="color:var(--warn)">20% 이하 보통</span> · <b class="up">35% 이하 미흡 · 35% 초과 부진</b></p>
       <div class="scroll"><table><thead>
         <tr><th rowspan="2">브랜드</th><th rowspan="2">영업중<br>직영점</th>
             <th class="grp gb" colspan="4">누적 적자매장 (판정 기준)</th>
@@ -325,7 +330,7 @@
         ※ 적자매장 = 영업이익(안분후) &lt; 0 인 <b>영업중 직영점</b> · 대리점·폐업 매장 제외<br>
         ※ <b>누적</b> = 당해 1월~기준월(2607) 합계 · <b>당월</b> = 2607 단월 · 전년 동기는 같은 코스트센터의 2501~2507 / 2507<br>
         ※ 판정은 <b>누적 적자매장 비율</b>(누적 적자매장 ÷ 영업중 직영점)로 합니다. 당월 적자는 계절성·일시적 요인이 섞여 구조적 부실과 구분되지 않아 쓰지 않습니다<br>
-        ※ <b>2026-09-09 기준 완화</b> — 종전에는 적자매장이 0개여야 통과, 전년보다 <b>1개라도 늘면 무조건 미달</b>이었습니다. 매장이 많은 브랜드가 소폭 증가만으로 통째로 미달이 되어, 규모를 반영한 <b>비율 기준</b>으로 바꿨습니다. 25%를 넘으면서 전년보다 늘어야 미달입니다<br>
+        ※ <b>2026-09-09 5단계 등급제로 개편</b> — 종전에는 적자매장이 0개여야 통과, 전년보다 <b>1개라도 늘면 무조건 미달</b>이었습니다. 매장이 많은 브랜드가 소폭 증가만으로 통째로 미달이 되어, 규모를 반영한 <b>비율 5단계</b>로 바꿨습니다. 전년 대비 증감은 참고 표시로만 남깁니다<br>
         ※ 연속 적자 = 기준월부터 거슬러 올라가며 연속으로 적자인 개월 수(최대 7)<br>
         ※ 손익 매장 기준(아미스 [26] 265개 손익센터)이라 정의집 store-list 444개와 매장수가 다릅니다 · 대리점은 통합 손익센터로 잡혀 개별 매장으로 세지 않습니다
       </div></details>
@@ -421,109 +426,126 @@ function pc(v,d){ return (v===null||v===undefined||isNaN(v)) ? '–' : fx(v,(d==
 function sgn(v,d,unit){ if(v===null||v===undefined||isNaN(v)) return '–'; var s=(v>0?'+':''); return s+fx(v,(d===undefined?1:d))+(unit||''); }
 function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
 /* 판정 → 배지. 색만으로 전달하지 않도록 텍스트를 함께 넣는다(접근성) */
-var VTXT = { ok:'통과', mid:'주의', no:'미달', na:'대상없음' };
-function badge(v){ return '<span class="badge '+v+'">'+VTXT[v]+'</span>'; }
+/* 등급 배지는 아래 gBadge()가 담당한다. 구 3단계 배지는 제거됨. */
 
-/* ── 판정 규칙 (§3.3 확정 기준값) ── */
-function jHigher(v,pass,warn){ if(v===null||v===undefined) return 'na'; if(v>=pass) return 'ok'; if(v>=warn) return 'mid'; return 'no'; }
-function jLower(v,pass,warn){ if(v===null||v===undefined) return 'na'; if(v<=pass) return 'ok'; if(v<=warn) return 'mid'; return 'no'; }
-function jPayback(ok,n){ if(!n) return 'na'; if(ok===n) return 'ok'; if(ok>0) return 'mid'; return 'no'; }
-function worst(list){ if(list.indexOf('no')>=0) return 'no'; if(list.indexOf('mid')>=0) return 'mid'; if(list.indexOf('ok')>=0) return 'ok'; return 'na'; }
+/* ── 5단계 등급 판정 (2026-09-09 개편) ───────────────────────────────
+   종전 3단계는 미달 1개만으로 종합이 투자 보류가 되어 브랜드 간 서열이
+   드러나지 않았다. 항목마다 우수4·양호3·보통2·미흡1·부진0으로 점수를 매기고
+   가중평균으로 종합 등급을 낸다. 단, 시드머니 잔고가 0 이하면 재원이 없으므로
+   평균과 무관하게 투자 보류로 고정한다. */
+var GTXT=['부진','미흡','보통','양호','우수'];
+var GCLS=['no','no','mid','ok','ok'];              // 배지 색: 0~1 빨강 · 2 노랑 · 3~4 초록
+var OTXT2=['투자 보류','재검토','보완 필요','조건부 가능','투자 가능'];
 
-function q1Verdict(b){
-  var t=D.thresholds, q=b.q1;
-  var parts={
-    sales: jHigher(q.sr,t.salesAchv[0],t.salesAchv[1]),
-    op:    jHigher(q.orr,t.opAchv[0],t.opAchv[1]),
-    capex: jLower(q.cr,t.capexAchv[0],t.capexAchv[1]),
-    pay:   jPayback(q.payOk,q.payN)
-  };
-  var fails=0, any=0;
-  for(var k in parts){ if(parts[k]==='no') fails++; if(parts[k]!=='na') any++; }
-  var v = !any ? 'na' : (fails>=2 ? 'no' : (fails===1 ? 'mid' : (worst([parts.sales,parts.op,parts.capex,parts.pay])==='mid'?'mid':'ok')));
-  return {v:v, parts:parts, fails:fails};
+function band(v,spec){
+  if(v===null||v===undefined||isNaN(v)||!spec) return null;
+  var c=spec.cuts;
+  for(var i=0;i<c.length;i++){ if(spec.higher ? v>=c[i] : v<=c[i]) return 4-i; }
+  return 0;
 }
-function q2Verdict(b){ var t=D.thresholds; return {v: jHigher(b.q2.sssg,t.sssg[0],t.sssg[1])}; }
-/* Q3 부실매장 — 개수 증감만 보면 매장이 많은 브랜드가 소폭 증가만으로 통째로 미달이 된다.
-   영업중 직영점 대비 '누적 적자매장 비율'을 먼저 보고, 증감은 미달 판정에만 쓴다. */
-function q3Verdict(b){
-  var q=b.q3, t=D.thresholds.lossRatio||[10,25];
-  if(!q.tot) return {v:'na', ratio:null};
-  var ratio = q.cu/q.tot*100, worse = q.cu>q.cuy;
-  if(q.cu===0)               return {v:'ok',  ratio:ratio};
-  if(ratio<=t[0])            return {v:'ok',  ratio:ratio};
-  if(ratio>t[1] && worse)    return {v:'no',  ratio:ratio};
-  return {v:'mid', ratio:ratio};
+function gTxt(g){ return g===null?'대상없음':GTXT[g]; }
+function gCls(g){ return g===null?'na':GCLS[g]; }
+function gBadge(g){ return '<span class="badge '+gCls(g)+'">'+gTxt(g)+'</span>'; }
+
+/* Q1 — 매출·영업이익은 핵심(가중 2), CAPEX·회수기간은 보조(가중 1) */
+function q1Grade(b){
+  var G=D.grades, q=b.q1, parts={}, tot=0, wt=0;
+  function add(key,val,spec){
+    var g=band(val,spec); parts[key]=g;
+    if(g!==null){ var w=spec.weight||1; tot+=g*w; wt+=w; }
+  }
+  add('sales',q.sr,G.salesAchv);
+  add('op',q.orr,G.opAchv);
+  add('capex',q.cr,G.capexAchv);
+  var payR = q.payN ? q.payOk/q.payN*100 : null;
+  add('pay',payR,G.payRate);
+  return { score: wt? tot/wt : null, parts:parts, payRate:payR,
+           g: wt? Math.round(tot/wt) : null };
 }
-function q5Verdict(bk){
-  var s = seedOf(bk);
-  if(!s) return {v:'na'};
-  if(s.bal===null||s.bal===undefined) return {v:'na'};
-  if(s.bal<=0) return {v:'no'};
-  return {v: (s.has==='O' ? 'ok' : 'mid')};
-}
+function q2Grade(b){ return band(b.q2.sssg, D.grades.sssg); }
+function q3Grade(b){ return b.q3.tot ? band(b.q3.cu/b.q3.tot*100, D.grades.lossRatio) : null; }
 function seedOf(bk){
   var q=D.q5[VER]; if(!q) return null;
   return (bk==='전사') ? q.corp : q.brands[bk];
 }
-function allVerdicts(bk){
+function q5Grade(bk){
+  var s=seedOf(bk);
+  if(!s||s.bal===null||s.bal===undefined) return null;
+  if(s.bal<=0) return 0;                                   // 잔고 없음 = 부진
+  if(s.has!=='O') return 2;                                // 잔고는 있으나 시드머니 X
+  return s.bal>=(D.grades.seedBalGood||50) ? 4 : 3;
+}
+function allGrades(bk){
   var b=D.brands[bk];
-  return { q1:q1Verdict(b), q2:q2Verdict(b), q3:q3Verdict(b), q5:q5Verdict(bk) };
+  return { q1:q1Grade(b), q2:q2Grade(b), q3:q3Grade(b), q5:q5Grade(bk) };
 }
-function overall(vs){
-  var a=[vs.q1.v,vs.q2.v,vs.q3.v,vs.q5.v].filter(function(x){return x!=='na';});
-  if(!a.length) return 'na';
-  if(a.indexOf('no')>=0) return 'no';
-  if(a.indexOf('mid')>=0) return 'mid';
-  return 'ok';
+function overallGrade(gs){
+  var a=[gs.q1?gs.q1.score:null, gs.q2, gs.q3, gs.q5].filter(function(x){return x!==null;});
+  if(!a.length) return {g:null, avg:null};
+  var avg=a.reduce(function(x,y){return x+y;},0)/a.length;
+  var g=Math.min(4,Math.max(0,Math.round(avg)));
+  if(gs.q5===0) g=0;                                       // 재원 없음 = 무조건 보류
+  return {g:g, avg:avg};
 }
-var OTXT={ok:'투자 가능',mid:'조건부',no:'투자 보류',na:'판정 불가'};
 
-/* ── 미달·주의 사유 문장 ── */
+/* ── 등급 사유 문장 — 실제값과 등급 경계를 함께 보여준다 ── */
+function cutText(spec){
+  if(!spec) return '';
+  var c=spec.cuts, u=spec.unit||'', dir=spec.higher?'이상':'이하';
+  return '우수 '+c[0]+u+' '+dir+' · 양호 '+c[1]+u+' · 보통 '+c[2]+u+' · 미흡 '+c[3]+u;
+}
 function reasons(bk){
-  var b=D.brands[bk], vs=allVerdicts(bk), out=[];
-  var q1=vs.q1;
-  if(q1.v==='no'||q1.v==='mid'){
-    var d=[];
-    var ts=D.thresholds;
-    if(q1.parts.sales!=='ok'&&q1.parts.sales!=='na')
-      d.push('매출달성율 <b>'+pc(b.q1.sr)+'</b> <span class="mnote">(기준 '+ts.salesAchv[0]+'% 이상)</span>');
-    if(q1.parts.op!=='ok'&&q1.parts.op!=='na')
-      d.push('영업이익달성율 <b>'+pc(b.q1.orr)+'</b> <span class="mnote">(기준 '+ts.opAchv[0]+'% 이상)</span>');
-    if(q1.parts.capex!=='ok'&&q1.parts.capex!=='na')
-      d.push('CAPEX집행율 <b>'+pc(b.q1.cr)+'</b> <span class="mnote">(기준 '+ts.capexAchv[0]+'% 이하)</span>');
-    if(q1.parts.pay!=='ok'&&q1.parts.pay!=='na')
-      d.push('회수기간 달성 <b>'+b.q1.payOk+'/'+b.q1.payN+'개점</b> <span class="mnote">(기준 전 매장 달성)</span>');
-    out.push('<b>Q1 '+VTXT[q1.v]+'</b> · '+(d.join(' · ')||'세부 미달')
-      +' <span class="mnote">(대상 '+b.q1.n+'개점 · 미달 항목 '+q1.fails+'개)</span>');
+  var b=D.brands[bk], gs=allGrades(bk), G=D.grades, out=[];
+  if(gs.q1 && gs.q1.score!==null){
+    var p=gs.q1.parts, d=[];
+    function item(key,label,val,spec,fmt){
+      if(p[key]===null||p[key]===undefined) return;
+      d.push(label+' <b>'+fmt+'</b> '+gBadge(p[key]));
+    }
+    item('sales','매출달성율',b.q1.sr,G.salesAchv,pc(b.q1.sr));
+    item('op','영업이익달성율',b.q1.orr,G.opAchv,pc(b.q1.orr));
+    item('capex','CAPEX집행율',b.q1.cr,G.capexAchv,pc(b.q1.cr));
+    item('pay','회수기간 달성',gs.q1.payRate,G.payRate,
+         b.q1.payN? b.q1.payOk+'/'+b.q1.payN+'개점('+pc(gs.q1.payRate,0)+')' : '–');
+    out.push('<b>Q1 '+gTxt(gs.q1.g)+'</b> <span class="mnote">(가중평균 '+fx(gs.q1.score,2)
+      +'점 · 매출·영업이익 2배 가중 · 대상 '+b.q1.n+'개점)</span><br><span class="rl">'+d.join(' · ')+'</span>');
   }
-  if(vs.q2.v==='no'||vs.q2.v==='mid')
-    out.push('<b>Q2 '+VTXT[vs.q2.v]+'</b> · 동일매장성장률 <b>'+sgn(b.q2.sssg,1,'%')+'</b>'
-      +' <span class="mnote">(기준 0% 이상 통과 · '+D.thresholds.sssg[1]+'% 미만 미달 · 대상 '+b.q2.n+'개점)</span>');
-  if(vs.q3.v==='no'||vs.q3.v==='mid'){
-    var lr=D.thresholds.lossRatio||[10,25], rt=vs.q3.ratio;
-    out.push('<b>Q3 '+VTXT[vs.q3.v]+'</b> · 누적 적자매장 <b>'+b.q3.cu+'개 / '+b.q3.tot+'개점 ('+fx(rt)+'%)</b>'
-      +' · 전년 '+b.q3.cuy+'개('+sgn(b.q3.cu-b.q3.cuy,0,'개')+') · 누적 손실 '+fx(b.q3.lcu)+'억'
-      +' <span class="mnote">(기준 '+lr[0]+'% 이하 통과 · '+lr[1]+'% 초과하며 전년비 증가 시 미달)</span>');
-  }
-  if(vs.q5.v==='no'||vs.q5.v==='mid'){
-    var s=seedOf(bk)||{};
-    out.push('<b>Q5 '+VTXT[vs.q5.v]+'</b> · 사용가능 잔고 <b>'+fx(s.bal)+'억</b> · 시드머니 '+(s.has||'–')
-      +' <span class="mnote">(기준 잔고 0억 초과 &amp; 시드머니 O)</span>');
+  if(gs.q2!==null)
+    out.push('<b>Q2 '+gTxt(gs.q2)+'</b> · 동일매장성장률 <b>'+sgn(b.q2.sssg,1,'%')+'</b>'
+      +' <span class="mnote">('+cutText(G.sssg)+' · 대상 '+b.q2.n+'개점)</span>');
+  if(gs.q3!==null)
+    out.push('<b>Q3 '+gTxt(gs.q3)+'</b> · 누적 적자매장 <b>'+b.q3.cu+'개 / '+b.q3.tot+'개점 ('
+      +pc(b.q3.cu/b.q3.tot*100)+')</b> · 전년 '+b.q3.cuy+'개('+sgn(b.q3.cu-b.q3.cuy,0,'개')+')'
+      +' · 누적 손실 '+fx(b.q3.lcu)+'억 <span class="mnote">('+cutText(G.lossRatio)+')</span>');
+  if(gs.q5!==null){
+    var s5=seedOf(bk)||{};
+    out.push('<b>Q5 '+gTxt(gs.q5)+'</b> · 사용가능 잔고 <b>'+fx(s5.bal)+'억</b> · 시드머니 '+(s5.has||'–')
+      +' <span class="mnote">(우수 잔고 '+(G.seedBalGood||50)+'억 이상 · 양호 잔고 0억 초과'
+      +' · 보통 시드머니 X · 부진 잔고 0억 이하)</span>');
   }
   return out;
 }
 
 /* ── 레전드 ── */
 function renderLegend(){
-  var t=D.thresholds;
+  var G=D.grades;
+  function row(label,spec){
+    var c=spec.cuts, u=spec.unit||'', d=spec.higher?'↑':'↓';
+    return '<span><b>'+label+'</b> '
+      + '<span class="lchip ok">우수 '+c[0]+u+d+'</span>'
+      + '<span class="lchip ok">양호 '+c[1]+u+'</span>'
+      + '<span class="lchip mid">보통 '+c[2]+u+'</span>'
+      + '<span class="lchip no">미흡 '+c[3]+u+'</span>'
+      + '<span class="lchip no">부진</span></span>';
+  }
   document.getElementById('legend').innerHTML =
-    '<b>판정 기준</b>'+
-    '<span>매출·영업이익 달성율 <span class="lchip ok">'+t.salesAchv[0]+'%↑</span><span class="lchip mid">'+t.salesAchv[1]+'~'+(t.salesAchv[0]-0.1).toFixed(1)+'%</span><span class="lchip no">'+t.salesAchv[1]+'%↓</span></span>'+
-    '<span>CAPEX 집행율 <span class="lchip ok">'+t.capexAchv[0]+'%↓</span><span class="lchip mid">~'+t.capexAchv[1]+'%</span><span class="lchip no">'+t.capexAchv[1]+'%↑</span></span>'+
-    '<span>동일매장성장률 <span class="lchip ok">0%↑</span><span class="lchip mid">−3~0%</span><span class="lchip no">−3%↓</span></span>'+
-    '<span>부실매장(비율) <span class="lchip ok">'+(t.lossRatio||[10,25])[0]+'%↓</span><span class="lchip mid">~'+(t.lossRatio||[10,25])[1]+'%</span><span class="lchip no">'+(t.lossRatio||[10,25])[1]+'%↑ &amp; 증가</span></span>'+
-    '<span>시드머니 <span class="lchip ok">잔고&gt;0 &amp; O</span><span class="lchip mid">잔고&gt;0 &amp; X</span><span class="lchip no">잔고≤0</span></span>';
+    '<b>등급 기준</b>'
+    + row('매출달성율',G.salesAchv) + row('영업이익달성율',G.opAchv)
+    + row('CAPEX집행율',G.capexAchv) + row('회수기간달성',G.payRate)
+    + row('동일매장성장률',G.sssg) + row('적자매장비율',G.lossRatio)
+    + '<span><b>시드머니</b><span class="lchip ok">우수 잔고 '+(G.seedBalGood||50)+'억↑</span>'
+    + '<span class="lchip ok">양호 잔고&gt;0</span><span class="lchip mid">보통 시드머니 X</span>'
+    + '<span class="lchip no">부진 잔고≤0</span></span>';
 }
 
 /* ── 브랜드 칩 ── */
@@ -539,34 +561,37 @@ function curKey(){ return BRAND==='전체' ? '전사' : BRAND; }
 
 /* ══════════ 종합판정 ══════════ */
 function renderVerdict(){
-  var bk=curKey(), b=D.brands[bk], vs=allVerdicts(bk), ov=overall(vs), rs=reasons(bk);
+  var bk=curKey(), b=D.brands[bk], gs=allGrades(bk), ov=overallGrade(gs), rs=reasons(bk);
   var label = (BRAND==='전체'?'전사':BRAND);
+  var cls = ov.g===null?'na':(ov.g<=1?'no':(ov.g===2?'mid':'ok'));
   document.getElementById('verdictBox').innerHTML =
-    '<span class="vb '+ov+'">'+label+' · '+OTXT[ov]+'</span>'+
-    '<span class="vt">'+(rs.length ? rs.join('<br>') : '4개 질문 모두 통과 — 투심위·이사회 상정 요건을 충족합니다.')+'</span>';
+    '<span class="vb '+cls+'">'+label+' · '+(ov.g===null?'판정 불가':OTXT2[ov.g])+'</span>'+
+    '<span class="vt"><span class="ovs">종합 '+(ov.avg===null?'–':fx(ov.avg,2))+'점 '
+    +'<span class="mnote">(Q1·Q2·Q3·Q5 평균 · 4점 만점)</span></span>'
+    +(rs.length ? rs.join('<br>') : '전 항목 우수')+'</span>';
 
   var s=seedOf(bk)||{};
   var cards=[
-    ['Q1','지난 1년 투자 실행 결과는?',vs.q1.v,[
+    ['Q1','지난 1년 투자 실행 결과는?',gs.q1?gs.q1.g:null,[
       ['월매출 달성율 <span class="mnote">(대상 '+b.q1.n+'개점'+(b.q1.nNoTarget?' · 목표없음 '+b.q1.nNoTarget+' 제외':'')+')</span>', pc(b.q1.sr)],
       ['월영업이익 달성율 <span class="mnote">(안분후·초기적자월 제외)</span>', pc(b.q1.orr)],
       ['CAPEX 집행율 <span class="mnote">(100% 초과 = 예산 초과)</span>', pc(b.q1.cr)],
       ['회수기간 목표 달성', b.q1.payN? (b.q1.payOk+' / '+b.q1.payN+'개점') : '–']
     ],'q1'],
-    ['Q2','브랜드 질적 KPI는 성장 중인가?',vs.q2.v,[
+    ['Q2','브랜드 질적 KPI는 성장 중인가?',gs.q2,[
       ['동일매장성장률 <span class="mnote">(2607 vs 2507)</span>', sgn(b.q2.sssg,1,'%')],
       ['대상 매장수 <span class="mnote">(제외 '+b.q2.ex+')</span>', b.q2.n+'개점'],
       ['영업이익률 <span class="mnote">(안분후)</span>', pc(b.q2.mgn)],
       ['영업이익률 전년비', sgn(b.q2.mgnGap,1,'%p')],
       ['회전율', '<span class="mnote">데이터 연동 대기</span>']
     ],'q2'],
-    ['Q3','부실매장은 정리되었나?',vs.q3.v,[
+    ['Q3','부실매장은 정리되었나?',gs.q3,[
       ['누적 적자매장 <span class="mnote">(당해 1~7월)</span>', b.q3.cu+' / '+b.q3.tot+'개점'],
       ['전년 동기 <span class="mnote">(25년 1~7월)</span>', b.q3.cuy+'개점 ('+sgn(b.q3.cu-b.q3.cuy,0,'개')+')'],
       ['당월 적자매장 <span class="mnote">(2607)</span>', b.q3.c+'개점 (전년 '+b.q3.cy+')'],
       ['누적 손실액', fx(b.q3.lcu)+'억']
     ],'q3'],
-    ['Q5','투자할 현금(시드머니)은 준비됐나?',vs.q5.v,[
+    ['Q5','투자할 현금(시드머니)은 준비됐나?',gs.q5,[
       ['사용가능 잔고 <span class="mnote">('+VER+')</span>', fx(s.bal)+'억'],
       ['시드머니 유무', s.has||'–'],
       ['26년 7월 창출현금', fx(s.cash)+'억'],
@@ -575,7 +600,7 @@ function renderVerdict(){
   ];
   document.getElementById('qcards').innerHTML = cards.map(function(c){
     return '<div class="qcard" data-goto="'+c[4]+'">'+
-      '<div class="qt"><span class="qn">'+c[0]+'</span>'+c[1]+'<span class="qb">'+badge(c[2])+'</span></div><ul>'+
+      '<div class="qt"><span class="qn">'+c[0]+'</span>'+c[1]+'<span class="qb">'+gBadge(c[2])+'</span></div><ul>'+
       c[3].map(function(r){ return '<li><span>'+r[0]+'</span><b>'+r[1]+'</b></li>'; }).join('')+
       '</ul></div>';
   }).join('');
@@ -584,24 +609,27 @@ function renderVerdict(){
   });
 }
 function renderMatrix(){
-  var h='', cnt={ok:0,mid:0,no:0,na:0};
+  var h='', cnt={};
   ORD.concat(['전사']).forEach(function(bk){
-    var vs=allVerdicts(bk), ov=overall(vs);
-    if(bk!=='전사') cnt[ov]++;
+    var gs=allGrades(bk), ov=overallGrade(gs);
+    if(bk!=='전사' && ov.g!==null) cnt[ov.g]=(cnt[ov.g]||0)+1;
     var nm = bk==='전사' ? '전사 (법인)' : bk;
     h+='<tr'+(bk==='전사'?' class="gtot"':'')+'>'+
       '<td class="'+(bk==='전사'?'':'bn')+'" data-b="'+bk+'">'+nm+'</td>'+
-      '<td class="c">'+badge(vs.q1.v)+'</td><td class="c">'+badge(vs.q2.v)+'</td>'+
-      '<td class="c">'+badge(vs.q3.v)+'</td><td class="c">'+badge(vs.q5.v)+'</td>'+
-      '<td class="c gb"><b>'+OTXT[ov]+'</b></td></tr>';
+      '<td class="c">'+gBadge(gs.q1?gs.q1.g:null)+'</td><td class="c">'+gBadge(gs.q2)+'</td>'+
+      '<td class="c">'+gBadge(gs.q3)+'</td><td class="c">'+gBadge(gs.q5)+'</td>'+
+      '<td class="c gb"><b>'+(ov.g===null?'–':OTXT2[ov.g])+'</b>'
+      +'<span class="mnote"> '+(ov.avg===null?'':fx(ov.avg,2)+'점')+'</span></td></tr>';
   });
   document.getElementById('mxBody').innerHTML=h;
   Array.prototype.forEach.call(document.querySelectorAll('#mxBody td.bn'),function(td){
     td.onclick=function(){ BRAND=td.getAttribute('data-b'); renderChips(); renderAll(); window.scrollTo(0,0); };
   });
   var t=D.brands['전사'];
+  var seg=[4,3,2,1,0].filter(function(g){return cnt[g];})
+          .map(function(g){return OTXT2[g]+' '+cnt[g];}).join(' · ');
   document.getElementById('mxInsight').innerHTML =
-    '8개 브랜드 중 <b>투자 가능 '+cnt.ok+' · 조건부 '+cnt.mid+' · 투자 보류 '+cnt.no+'</b>. '+
+    '8개 브랜드 등급 분포 — <b>'+seg+'</b>. '+
     '전사 기준으로 막히는 항목은 <b>Q1 영업이익 달성율 '+pc(t.q1.orr)+'</b>(공통비 안분 후, 대상 '+t.q1.n+'개점)와 '+
     '<b>Q3 누적 적자매장 '+t.q3.cu+'개</b>(전년 '+t.q3.cuy+'개, 누적 손실 '+fx(t.q3.lcu)+'억), '+
     '<b>Q2 동일매장성장률 '+sgn(t.q2.sssg,1,'%')+'</b>입니다. '+
@@ -616,15 +644,15 @@ function renderQ1(){
   var t=D.thresholds, h='';
   var list = BRAND==='전체' ? ORD.concat(['전사']) : [curKey()];
   list.forEach(function(bk){
-    var b=D.brands[bk], q=b.q1, vs=q1Verdict(b);
+    var b=D.brands[bk], q=b.q1, gs=q1Grade(b);
     var nm = bk==='전사' ? '전사 (법인)' : bk;
     h+='<tr'+(bk==='전사'?' class="gtot"':'')+'>'+
       '<td>'+nm+'</td><td>'+(q.n||'–')+'</td>'+
-      '<td class="gb '+tint(vs.parts.sales)+'">'+pc(q.sr)+'</td><td class="c">'+badge(vs.parts.sales)+'</td>'+
-      '<td class="gb '+tint(vs.parts.op)+'">'+pc(q.orr)+'</td><td class="c">'+badge(vs.parts.op)+'</td>'+
-      '<td class="gb '+tint(vs.parts.capex)+'">'+pc(q.cr)+'</td><td class="c">'+badge(vs.parts.capex)+'</td>'+
+      '<td class="gb '+tintG(gs.parts.sales)+'">'+pc(q.sr)+'</td><td class="c">'+gBadge(gs.parts.sales)+'</td>'+
+      '<td class="gb '+tintG(gs.parts.op)+'">'+pc(q.orr)+'</td><td class="c">'+gBadge(gs.parts.op)+'</td>'+
+      '<td class="gb '+tintG(gs.parts.capex)+'">'+pc(q.cr)+'</td><td class="c">'+gBadge(gs.parts.capex)+'</td>'+
       '<td class="gb">'+(q.payN? q.payOk+' / '+q.payN : '–')+'</td>'+
-      '<td class="c">'+badge(vs.v)+'</td></tr>';
+      '<td class="c">'+gBadge(gs.g)+'<span class="mnote"> '+(gs.score===null?'':fx(gs.score,2))+'</span></td></tr>';
   });
   document.getElementById('q1Sum').innerHTML=h;
 
@@ -635,9 +663,8 @@ function renderQ1(){
     +(BRAND==='전체'?'':' ('+BRAND+')')
     +(nEarly?' · <span class="badge mid">초기</span> <b class="mnote">'+nEarly+'개점은 운영 3개월 미만이라 달성율 변동이 큽니다</b>':'');
   document.getElementById('q1Det').innerHTML = rows.length ? rows.map(function(r){
-    var vS=jHigher(r.sr,t.salesAchv[0],t.salesAchv[1]),
-        vO=jHigher(r.orr,t.opAchv[0],t.opAchv[1]),
-        vC=jLower(r.cr,t.capexAchv[0],t.capexAchv[1]);
+    var G=D.grades,
+        vS=band(r.sr,G.salesAchv), vO=band(r.orr,G.opAchv), vC=band(r.cr,G.capexAchv);
     var payCls = r.done ? 'dn' : ((typeof r.pa==='number' && r.pt) ? (r.pa<=r.pt?'dn':'up') : (r.pa==='적자'?'up':''));
     var remCls = r.done ? 'dn' : (r.pr==='적자'?'up':'');
     var early = r.early
@@ -651,26 +678,26 @@ function renderQ1(){
       /* 월매출 */
       '<td class="gb">'+fx(r.st,1)+'</td>'+
       '<td>'+fx(r.sa,2)+'</td>'+
-      '<td class="'+tint(vS)+'">'+pc(r.sr)+'</td>'+
+      '<td class="'+tintG(vS)+'">'+pc(r.sr)+'</td>'+
       /* 월영업이익 */
       '<td class="gb">'+fx(r.ot,2)+'</td>'+
       '<td class="'+(r.oa!==null&&r.oa<0?'up':'')+'">'+fx(r.oa,2)+'</td>'+
-      '<td class="'+tint(vO)+'">'+pc(r.orr)+'</td>'+
+      '<td class="'+tintG(vO)+'">'+pc(r.orr)+'</td>'+
       /* CAPEX */
       '<td class="gb">'+fx(r.ct,1)+'</td>'+
       '<td>'+fx(r.ca,2)+'</td>'+
-      '<td class="'+tint(vC)+'">'+pc(r.cr)+'</td>'+
+      '<td class="'+tintG(vC)+'">'+pc(r.cr)+'</td>'+
       /* 회수기간 */
       '<td class="gb">'+(r.pt===null?'–':fx(r.pt,0))+'</td>'+
       '<td class="'+payCls+'">'+(r.pa==null?'–':(typeof r.pa==='number'?fx(r.pa,1):esc(r.pa)))+'</td>'+
       '<td class="'+remCls+'">'+(r.pr==null?'–':(typeof r.pr==='number'?fx(r.pr,1):'<b>'+esc(r.pr)+'</b>'))+'</td></tr>';
   }).join('') : '<tr><td colspan="15" class="c mnote" style="padding:18px">최근 12개월 내 오픈한 매장이 없습니다.</td></tr>';
 
-  var b=D.brands[curKey()], vs=q1Verdict(b);
+  var b=D.brands[curKey()], gs=q1Grade(b);
   var nm=(BRAND==='전체'?'전사':BRAND);
   document.getElementById('q1Insight').innerHTML = b.q1.n===0
     ? '<b>'+nm+'</b>은 최근 12개월 내 오픈한 매장이 없어 Q1을 판정하지 않습니다 — 직전 코호트 성적은 <a href="capex.html" style="color:var(--accent)">CAPEX ④ 성적표</a>를 보십시오.'
-    : '<b>'+nm+' — '+VTXT[vs.v]+'</b>. 최근 12개월 오픈 '+b.q1.n+'개점'
+    : '<b>'+nm+' · '+gTxt(gs.g)+'</b> <span class="mnote">(가중평균 '+fx(gs.score,2)+'점)</span>. 최근 12개월 오픈 '+b.q1.n+'개점'
       +(b.q1.nNoTarget?'<span class="mnote">(이사회 목표가 없는 '+b.q1.nNoTarget+'개점 제외)</span>':'')
       +(b.q1.nEarly?'<span class="mnote">(이 중 '+b.q1.nEarly+'개점은 운영 3개월 미만)</span>':'')
       +'의 월매출은 목표의 <b>'+pc(b.q1.sr)+'</b>, '+
@@ -678,20 +705,21 @@ function renderQ1(){
       '회수기간 목표를 지킨 매장은 '+b.q1.payOk+'/'+b.q1.payN+'개점입니다. '+
       '매출은 목표에 근접하는데 이익이 따라오지 않는 구조라면 <b>예가 단계의 목표 이익률 자체가 과대</b>했거나 공통비 부담이 반영되지 않은 것입니다.';
 }
-function tint(v){ return v==='no'?'tint-bad':(v==='ok'?'tint-good':''); }
+/* 등급별 셀 배경 — 0~1 빨강 · 3~4 초록 · 2(보통)는 무색 */
+function tintG(g){ return (g===null||g===undefined)?'':(g<=1?'tint-bad':(g>=3?'tint-good':'')); }
 
 /* ══════════ Q2 ══════════ */
 function renderQ2(){
   var t=D.thresholds, h='';
   var list = BRAND==='전체' ? ORD.concat(['전사']) : [curKey()];
   list.forEach(function(bk){
-    var q=D.brands[bk].q2, v=jHigher(q.sssg,t.sssg[0],t.sssg[1]);
+    var q=D.brands[bk].q2, v=band(q.sssg,D.grades.sssg);
     var nm = bk==='전사' ? '전사 (법인)' : bk;
     h+='<tr'+(bk==='전사'?' class="gtot"':'')+'>'+
       '<td>'+nm+'</td><td>'+q.n+'</td><td class="mnote">'+q.ex+'</td>'+
       '<td class="gb">'+fx(q.pre)+'</td><td>'+fx(q.cur)+'</td>'+
-      '<td class="gb '+tint(v)+'"><b class="'+(q.sssg>=0?'dn':'up')+'">'+sgn(q.sssg,1,'%')+'</b></td>'+
-      '<td class="c">'+badge(v)+'</td>'+
+      '<td class="gb '+tintG(v)+'"><b class="'+(q.sssg>=0?'dn':'up')+'">'+sgn(q.sssg,1,'%')+'</b></td>'+
+      '<td class="c">'+gBadge(v)+'</td>'+
       '<td class="gb">'+pc(q.mgn)+'</td><td class="mnote">'+pc(q.mgnPre)+'</td>'+
       '<td class="'+(q.mgnGap>=0?'dn':'up')+'">'+sgn(q.mgnGap,1,'%p')+'</td></tr>';
   });
@@ -709,9 +737,9 @@ function renderQ2(){
   }).join('') || '<tr><td colspan="5" class="c mnote" style="padding:18px">대상 매장이 없습니다.</td></tr>';
 
   var q=D.brands[curKey()].q2, nm=(BRAND==='전체'?'전사':BRAND);
-  var v=jHigher(q.sssg,t.sssg[0],t.sssg[1]);
+  var v=band(q.sssg,D.grades.sssg);
   document.getElementById('q2Insight').innerHTML =
-    '<b>'+nm+' — '+VTXT[v]+'</b>. 전년·올해 매출이 모두 있는 '+q.n+'개점의 동일매장성장률은 <b>'+sgn(q.sssg,1,'%')+'</b>'+
+    '<b>'+nm+' · '+gTxt(v)+'</b>. 전년·올해 매출이 모두 있는 '+q.n+'개점의 동일매장성장률은 <b>'+sgn(q.sssg,1,'%')+'</b>'+
     '('+fx(q.pre)+'억 → '+fx(q.cur)+'억)이고, 안분후 영업이익률은 '+pc(q.mgn)+'로 전년 대비 <b>'+sgn(q.mgnGap,1,'%p')+'</b>입니다. '+
     (q.sssg<0 ? '기존점이 역성장 중이라면 외형 성장은 <b>신규 출점이 만든 것</b>이며, 출점을 멈추면 성장도 멈춥니다.' :
                 '기존점이 자력으로 성장하고 있어 신규 출점 없이도 외형이 유지됩니다.')+
@@ -723,17 +751,17 @@ function renderQ3(){
   var h='';
   var list = BRAND==='전체' ? ORD.concat(['전사']) : [curKey()];
   list.forEach(function(bk){
-    var q=D.brands[bk].q3, vs=q3Verdict(D.brands[bk]);
+    var q=D.brands[bk].q3, g=q3Grade(D.brands[bk]);
     var nm = bk==='전사' ? '전사 (법인)' : bk;
     var dCu=q.cu-q.cuy, dC=q.c-q.cy;
     h+='<tr'+(bk==='전사'?' class="gtot"':'')+'>'+
       '<td>'+nm+'</td><td class="mnote">'+q.tot+'</td>'+
-      '<td class="gb '+(vs.v==='no'?'tint-bad':(vs.v==='ok'?'tint-good':''))+'"><b>'+q.cu+'</b></td>'+
-      '<td class="'+(vs.v==='no'?'up':(vs.v==='ok'?'dn':''))+'">'+(vs.ratio==null?'–':pc(vs.ratio))+'</td>'+
+      '<td class="gb '+tintG(g)+'"><b>'+q.cu+'</b></td>'+
+      '<td class="'+(g===null?'':(g<=1?'up':(g>=3?'dn':'')))+'">'+(q.tot?pc(q.cu/q.tot*100):'–')+'</td>'+
       '<td class="mnote">'+q.cuy+'</td><td class="'+(dCu>0?'up':(dCu<0?'dn':''))+'">'+sgn(dCu,0,'개')+'</td>'+
       '<td class="gb">'+q.c+'</td><td class="mnote">'+q.cy+'</td>'+
       '<td class="'+(dC>0?'up':(dC<0?'dn':''))+'">'+sgn(dC,0,'개')+'</td>'+
-      '<td class="c gb">'+badge(vs.v)+'</td></tr>';
+      '<td class="c gb">'+gBadge(g)+'</td></tr>';
   });
   document.getElementById('q3Sum').innerHTML=h;
 
@@ -749,14 +777,15 @@ function renderQ3(){
       '<td>'+(r.streak?r.streak+'개월':'–')+'</td></tr>';
   }).join('') || '<tr><td colspan="7" class="c mnote" style="padding:18px">적자매장이 없습니다.</td></tr>';
 
-  var q=D.brands[curKey()].q3, vs=q3Verdict(D.brands[curKey()]), nm=(BRAND==='전체'?'전사':BRAND);
+  var q=D.brands[curKey()].q3, g=q3Grade(D.brands[curKey()]), nm=(BRAND==='전체'?'전사':BRAND);
   var d=q.cu-q.cuy;
   document.getElementById('q3Insight').innerHTML = !q.tot ? '해당 브랜드의 영업중 직영점이 없습니다.' :
-    '<b>'+nm+' — '+VTXT[vs.v]+'</b>. 영업중 직영점 '+q.tot+'개 가운데 <b>누적 적자 '+q.cu+'개</b>(전년 동기 '+q.cuy+'개, '+sgn(d,0,'개')+')이고 '+
+    '<b>'+nm+' · '+gTxt(g)+'</b>. 영업중 직영점 '+q.tot+'개 가운데 <b>누적 적자 '+q.cu+'개</b>(전년 동기 '+q.cuy+'개, '+sgn(d,0,'개')+')이고 '+
     '누적 손실은 <b>'+fx(q.lcu)+'억</b>입니다. 당월(2607) 적자는 '+q.c+'개로 전년 '+q.cy+'개 대비 '+sgn(q.c-q.cy,0,'개')+'입니다. '+
-    (q.cu===0 ? '부실매장이 없어 이 항목은 통과입니다.' :
-     d>0 ? '<b>전년보다 늘었으므로 미달</b>입니다 — 폐점·전환 계획을 확정해야 상정 요건을 회복합니다.' :
-           '전년보다 줄었으나 <b>0이 아니므로 주의</b>입니다 — 잔존 매장의 정리 시한을 명시하십시오.');
+    (q.cu===0 ? '부실매장이 없어 최고 등급입니다.' :
+     (g>=3 ? '비율이 낮아 등급은 양호 이상입니다. 잔존 매장의 정리 시한만 관리하면 됩니다.' :
+      g===2 ? '비율이 중간 구간이라 <b>보통</b>입니다. 비율을 10% 아래로 낮추면 양호로 올라갑니다.' :
+              '<b>비율이 높아 등급이 낮습니다</b>. 폐점·전환 계획을 확정해야 등급이 올라갑니다.'));
 }
 
 /* ══════════ Q5 ══════════ */
@@ -764,15 +793,15 @@ function renderQ5(){
   var h='';
   var list = BRAND==='전체' ? ORD.concat(['전사']) : [curKey()];
   list.forEach(function(bk){
-    var s=seedOf(bk)||{}, v=q5Verdict(bk).v;
+    var s=seedOf(bk)||{}, v=q5Grade(bk);
     var nm = bk==='전사' ? '전사 (법인)' : bk;
     h+='<tr'+(bk==='전사'?' class="gtot"':'')+'>'+
       '<td>'+nm+(s.parts&&s.parts.length>1?' <span class="mnote">('+s.parts.join('·')+')</span>':'')+'</td>'+
       '<td class="gb">'+fx(s.inv)+'</td><td>'+fx(s.used)+'</td>'+
       '<td class="'+(s.op<0?'up':'')+'">'+fx(s.op)+'</td><td class="'+(s.cash<0?'up':'dn')+'">'+fx(s.cash)+'</td>'+
       '<td class="gb">'+fx(s.base)+'</td><td>'+fx(s.cur50)+'</td><td>'+fx(s.growth)+'</td><td>'+fx(s.div)+'</td>'+
-      '<td class="gb '+(v==='no'?'tint-bad':(v==='ok'?'tint-good':''))+'"><b class="'+(s.bal<0?'up':'dn')+'">'+fx(s.bal)+'</b></td>'+
-      '<td class="c"><b>'+(s.has||'–')+'</b></td><td class="c">'+badge(v)+'</td></tr>';
+      '<td class="gb '+tintG(v)+'"><b class="'+(s.bal<0?'up':'dn')+'">'+fx(s.bal)+'</b></td>'+
+      '<td class="c"><b>'+(s.has||'–')+'</b></td><td class="c">'+gBadge(v)+'</td></tr>';
   });
   document.getElementById('q5Sum').innerHTML=h;
   document.getElementById('q5Ver').textContent=VER;
@@ -800,9 +829,9 @@ function renderQ5(){
     return '<tr><td class="mnote">'+r[0]+'</td><td class="l">'+r[1]+'</td><td class="'+(r[2]<0?'up':'')+'">'+fx(r[2])+'</td></tr>';
   }).join('');
 
-  var v=q5Verdict(bk).v;
+  var v=q5Grade(bk);
   document.getElementById('q5Insight').innerHTML =
-    '<b>'+nm+' — '+VTXT[v]+'</b>. '+VER+' 기준 사용가능 잔고는 <b>'+fx(s.bal)+'억</b>이고 시드머니 판정은 <b>'+(s.has||'–')+'</b>입니다. '+
+    '<b>'+nm+' · '+gTxt(v)+'</b>. '+VER+' 기준 사용가능 잔고는 <b>'+fx(s.bal)+'억</b>이고 시드머니 판정은 <b>'+(s.has||'–')+'</b>입니다. '+
     '26년 7월 누적 창출현금은 '+fx(s.cash)+'억입니다. '+
     (BRAND==='전체'
       ? '브랜드별로 보면 잔고가 애슐리 '+fx((seedOf('애슐리')||{}).bal)+'억에 몰려 있고, <b>자연별곡 '+fx((seedOf('자연별곡')||{}).bal)+'억 · 프랑제리 '+fx((seedOf('프랑제리')||{}).bal)+'억은 마이너스</b>라 신규 투자를 낼 수 없습니다. 법인 잔고를 근거로 개별 브랜드의 상정을 허용할지가 배분 원칙의 쟁점입니다.'
@@ -848,7 +877,7 @@ fetch('invest-data.json',{cache:'no-store'}).then(function(r){
 </script>
 
 <script type="application/json" id="fable-data">
-{"asof":"2026-07-31","kpi":{"자가점검_투자가능_브랜드":"0/8","자가점검_조건부_브랜드":"1/8","자가점검_투자보류_브랜드":"7/8","Q1_대상매장_최근12개월(개)":35,"Q1_매출달성율_평균(%)":98.7,"Q1_영업이익달성율_안분후_평균(%)":9.6,"Q1_CAPEX달성율_평균(%)":112.9,"Q1_회수기간달성(개점)":"1/31","Q2_동일매장성장률_전사(%)":-1.1,"Q2_대상매장(개)":212,"Q3_누적적자매장_안분후(개)":44,"Q3_전년동기_누적적자매장(개)":47,"Q3_누적손실액(억)":-23.8,"Q3_당월적자매장(개)":32,"Q5_사용가능잔고_지주제출(억)":288.2,"Q5_사용가능잔고_브랜드공지(억)":242.2,"Q5_애슐리단독잔고_지주제출(억)":242.6,"Q5_시드머니X_브랜드":"자연별곡·프랑제리","CAPEX_소진율(%)":68,"CAPEX_잔여한도(억)":79.3,"승인미오픈_26년오픈예정(건)":17},"risks":["Q1 — 최근 12개월 오픈 35개점의 매출은 목표의 98.7%인데 공통비 안분 후 영업이익은 목표의 9.6%뿐. 회수기간 목표를 지킨 매장은 31개 중 1개. 매출은 맞추는데 이익이 안 나오는 구조라 예가 단계의 목표 이익률이 과대하거나 공통비 부담이 승인 모델에 반영되지 않았음","Q3 — 영업중 직영 246개 중 누적 적자 44개(전년 47개, 3개 감소). 애슐리 14 · 리미니 7 · 로운 6 · 자연별곡 4 · 프랑제리 4 · 피자몰 4. 감소했으나 0이 아니라 전 브랜드가 통과 요건 미충족","Q2 — 전사 동일매장성장률 -1.1%(2607 vs 2507, 212개점). 애슐리 -3.0% · 델리 -9.9% · 자연별곡 -38.6%. 외형 성장은 신규 출점이 만든 것이고 기존점은 역성장","Q5 — 자연별곡(-3.4억)·프랑제리(-0.1억) 잔고 마이너스로 시드머니 X. 지주제출 기준 법인 288.2억 중 애슐리가 242.6억으로 사실상 단독 보유","Q5 버전 차이 — 지주제출과 브랜드공지의 법인 잔고가 288.2억 vs 242.2억으로 46억 차이. 판정 결과가 버전에 따라 달라질 수 있어 상정 근거로 쓸 버전을 CFO실이 확정해야 함","Q1 목표 미설정 매장 3곳(애슐리 성수뮤지엄·성수낙낙, 프랑제리 마곡사옥)이 달성율 평균에서 빠져 있음 — 이사회 승인 목표를 소급 입력해야 판정이 완전해짐","회전율(객수÷테이블수)은 객수 데이터가 4개 원천 파일 어디에도 없어 Q2 판정에서 제외 중"],"decisions":["Q5 기준 버전을 지주제출로 고정할지 확정 — 즉시","Q3 부실매장 정리 계획 확정(누적 적자 44곳, 폐점 시 사용자본 회수 반영) — 3분기","Q1 목표 미설정 3개점의 이사회 승인 목표 소급 입력 — 즉시","브랜드 가이드 재확정 — 애슐리 유지(예가·목표 재검증 후) · 델리 신규 중단 검토 · 로운 하반기 3건 재심의 · 피자몰·리미니 소형 포맷 이익성 재검증 — 3분기","회전율용 객수 데이터 확보 경로(POS·멤버십) 확인 — 미정"]}
+{"asof":"2026-07-31","kpi":{"자가점검_5단계_조건부가능(개)":3,"자가점검_5단계_보완필요(개)":1,"자가점검_5단계_재검토(개)":2,"자가점검_5단계_투자보류(개)":2,"자가점검_종합점수_전사(4점만점)":2.38,"Q1_대상매장_최근12개월(개)":35,"Q1_매출달성율_평균(%)":98.7,"Q1_영업이익달성율_안분후_평균(%)":9.6,"Q1_CAPEX달성율_평균(%)":112.9,"Q1_회수기간달성(개점)":"1/31","Q2_동일매장성장률_전사(%)":-1.1,"Q2_대상매장(개)":212,"Q3_누적적자매장_안분후(개)":44,"Q3_전년동기_누적적자매장(개)":47,"Q3_누적손실액(억)":-23.8,"Q3_당월적자매장(개)":32,"Q5_사용가능잔고_지주제출(억)":288.2,"Q5_사용가능잔고_브랜드공지(억)":242.2,"Q5_애슐리단독잔고_지주제출(억)":242.6,"Q5_시드머니X_브랜드":"자연별곡·프랑제리","CAPEX_소진율(%)":68,"CAPEX_잔여한도(억)":79.3,"승인미오픈_26년오픈예정(건)":17},"risks":["Q1 — 최근 12개월 오픈 35개점의 매출은 목표의 98.7%인데 공통비 안분 후 영업이익은 목표의 9.6%뿐. 회수기간 목표를 지킨 매장은 31개 중 1개. 매출은 맞추는데 이익이 안 나오는 구조라 예가 단계의 목표 이익률이 과대하거나 공통비 부담이 승인 모델에 반영되지 않았음","Q3 — 영업중 직영 246개 중 누적 적자 44개(전년 47개, 3개 감소). 애슐리 14 · 리미니 7 · 로운 6 · 자연별곡 4 · 프랑제리 4 · 피자몰 4. 감소했으나 0이 아니라 전 브랜드가 통과 요건 미충족","Q2 — 전사 동일매장성장률 -1.1%(2607 vs 2507, 212개점). 애슐리 -3.0% · 델리 -9.9% · 자연별곡 -38.6%. 외형 성장은 신규 출점이 만든 것이고 기존점은 역성장","Q5 — 자연별곡(-3.4억)·프랑제리(-0.1억) 잔고 마이너스로 시드머니 X. 지주제출 기준 법인 288.2억 중 애슐리가 242.6억으로 사실상 단독 보유","Q5 버전 차이 — 지주제출과 브랜드공지의 법인 잔고가 288.2억 vs 242.2억으로 46억 차이. 판정 결과가 버전에 따라 달라질 수 있어 상정 근거로 쓸 버전을 CFO실이 확정해야 함","Q1 목표 미설정 매장 3곳(애슐리 성수뮤지엄·성수낙낙, 프랑제리 마곡사옥)이 달성율 평균에서 빠져 있음 — 이사회 승인 목표를 소급 입력해야 판정이 완전해짐","회전율(객수÷테이블수)은 객수 데이터가 4개 원천 파일 어디에도 없어 Q2 판정에서 제외 중"],"decisions":["Q5 기준 버전을 지주제출로 고정할지 확정 — 즉시","Q3 부실매장 정리 계획 확정(누적 적자 44곳, 폐점 시 사용자본 회수 반영) — 3분기","Q1 목표 미설정 3개점의 이사회 승인 목표 소급 입력 — 즉시","브랜드 가이드 재확정 — 애슐리 유지(예가·목표 재검증 후) · 델리 신규 중단 검토 · 로운 하반기 3건 재심의 · 피자몰·리미니 소형 포맷 이익성 재검증 — 3분기","회전율용 객수 데이터 확보 경로(POS·멤버십) 확인 — 미정"]}
 </script>
 </body>
 </html>
