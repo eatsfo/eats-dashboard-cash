@@ -178,7 +178,8 @@
   <section data-pane="v">
     <div class="panel">
       <h2>브랜드 종합판정</h2>
-      <p class="sub" id="vSub">4개 질문 모두 통과 = 투자 가능 · 주의 1개 이상 = 조건부 · 미달 1개 이상 = 투자 보류</p>
+      <p class="sub" id="vSub"><b>4개 질문 모두 통과</b> = 투자 가능 · <b>주의 1개 이상, 미달 없음</b> = 조건부 · <b>미달 1개 이상</b> = 투자 보류<br>
+        각 질문의 판정은 아래 판정 기준 막대의 경계값으로 정해집니다. Q1은 세부 4개 항목 중 <b>미달 2개 이상이면 미달, 1개면 주의</b>입니다</p>
       <div class="verdict" id="verdictBox"></div>
       <div class="qgrid" id="qcards"></div>
     </div>
@@ -258,6 +259,7 @@
         ※ <b>매출·영업이익 목표가 모두 없는 매장은 집계에서 제외</b>합니다 — 달성율을 낼 수 없기 때문입니다. 현재 <b>애슐리 성수뮤지엄 · 애슐리 성수낙낙 · 프랑제리 마곡사옥</b> 3곳이 해당하며, 대상 35개점 중 <b>32개점</b>으로 집계합니다. 상세표에는 그대로 표시하되 <b>목표없음</b> 배지를 붙입니다<br>
         ※ 더카페 독산역은 매출·이익 목표가 있어 집계에 포함하되, CAPEX·회수 목표가 없어 해당 항목만 <b>–</b>입니다<br>
         ※ 목표이익 = 월매출목표 × 영업이익율목표<br>
+        ※ <b>2026-09-09 CAPEX 집행율 기준 완화</b> — 종전 100% 이하 통과 / 110% 초과 미달에서 <b>110% 이하 통과 / 130% 초과 미달</b>로 넓혔습니다. <a href="capex.html" style="color:var(--accent)">CAPEX 페이지</a>가 초과집행을 4년 연속 이어지는 만성 패턴으로 다루는데, 자가점검에서만 110%로 곧바로 미달 처리되어 기준이 어긋나 있었습니다<br>
         ※ <b>CAPEX만 "집행율"</b>입니다 — 실적 ÷ 목표라 <b>100% 초과가 예산 초과(부정)</b>이고, 매출·영업이익 달성율과 좋고 나쁨의 방향이 반대입니다. 원천 신규오픈점피드백 [요약] U열·PRD와 같은 정의입니다<br>
         ※ <b>오픈확산팀 관리 파일은 목표 ÷ 실적</b>으로 계산해 방향이 반대입니다(예산 초과 시 100% 아래). 같은 매장의 수치를 대조할 때 서로 역수라는 점을 감안하십시오<br>
         ※ 26년 상반기 오픈 매장은 운영 1~7개월차 초기 추세라 달성율 변동이 큽니다<br>
@@ -299,13 +301,14 @@
   <section data-pane="q3" hidden>
     <div class="panel">
       <h2>Q3. 부실매장은 정리되었나요?</h2>
-      <p class="sub">CHECK POINT — 부실매장 개수 0, 손실액 등의 변화 · <b>영업중 직영점</b> 대상 · <b>영업이익(안분후)</b> 기준 · 판정은 <b>누적(당해 1~7월) 적자</b> 기준</p>
+      <p class="sub">CHECK POINT — 부실매장 개수 0, 손실액 등의 변화 · <b>영업중 직영점</b> 대상 · <b>영업이익(안분후)</b> 기준 · 판정은 <b>누적(당해 1~7월) 적자</b> 기준<br>
+        판정 — 영업중 직영점 대비 <b>누적 적자매장 비율</b>이 <b class="dn">10% 이하면 통과</b>, <b style="color:var(--warn)">10~25%면 주의</b>, <b class="up">25%를 넘으면서 전년보다 늘면 미달</b></p>
       <div class="scroll"><table><thead>
         <tr><th rowspan="2">브랜드</th><th rowspan="2">영업중<br>직영점</th>
-            <th class="grp gb" colspan="3">누적 적자매장 (판정 기준)</th>
+            <th class="grp gb" colspan="4">누적 적자매장 (판정 기준)</th>
             <th class="grp gb" colspan="3">당월 적자매장</th>
             <th rowspan="2" class="gb">Q3<br>판정</th></tr>
-        <tr><th class="gb">26년</th><th>전년</th><th>증감</th><th class="gb">26.07</th><th>25.07</th><th>증감</th></tr>
+        <tr><th class="gb">26년</th><th>비율</th><th>전년</th><th>증감</th><th class="gb">26.07</th><th>25.07</th><th>증감</th></tr>
       </thead><tbody id="q3Sum"></tbody></table></div>
       <div class="insight"><span class="ttl">💡 결론</span><span id="q3Insight"></span></div>
     </div>
@@ -319,7 +322,8 @@
       <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">
         ※ 적자매장 = 영업이익(안분후) &lt; 0 인 <b>영업중 직영점</b> · 대리점·폐업 매장 제외<br>
         ※ <b>누적</b> = 당해 1월~기준월(2607) 합계 · <b>당월</b> = 2607 단월 · 전년 동기는 같은 코스트센터의 2501~2507 / 2507<br>
-        ※ 판정은 <b>누적 적자매장 수</b>로 합니다 — 당월 적자는 계절성·일시적 요인이 섞여 구조적 부실과 구분되지 않기 때문입니다<br>
+        ※ 판정은 <b>누적 적자매장 비율</b>(누적 적자매장 ÷ 영업중 직영점)로 합니다. 당월 적자는 계절성·일시적 요인이 섞여 구조적 부실과 구분되지 않아 쓰지 않습니다<br>
+        ※ <b>2026-09-09 기준 완화</b> — 종전에는 적자매장이 0개여야 통과, 전년보다 <b>1개라도 늘면 무조건 미달</b>이었습니다. 매장이 많은 브랜드가 소폭 증가만으로 통째로 미달이 되어, 규모를 반영한 <b>비율 기준</b>으로 바꿨습니다. 25%를 넘으면서 전년보다 늘어야 미달입니다<br>
         ※ 연속 적자 = 기준월부터 거슬러 올라가며 연속으로 적자인 개월 수(최대 7)<br>
         ※ 손익 매장 기준(아미스 [26] 265개 손익센터)이라 정의집 store-list 444개와 매장수가 다릅니다 · 대리점은 통합 손익센터로 잡혀 개별 매장으로 세지 않습니다
       </div></details>
@@ -438,11 +442,16 @@ function q1Verdict(b){
   return {v:v, parts:parts, fails:fails};
 }
 function q2Verdict(b){ var t=D.thresholds; return {v: jHigher(b.q2.sssg,t.sssg[0],t.sssg[1])}; }
+/* Q3 부실매장 — 개수 증감만 보면 매장이 많은 브랜드가 소폭 증가만으로 통째로 미달이 된다.
+   영업중 직영점 대비 '누적 적자매장 비율'을 먼저 보고, 증감은 미달 판정에만 쓴다. */
 function q3Verdict(b){
-  var q=b.q3;
-  if(!q.tot) return {v:'na'};
-  if(q.cu===0) return {v:'ok'};
-  return {v: (q.cu>q.cuy ? 'no' : 'mid')};
+  var q=b.q3, t=D.thresholds.lossRatio||[10,25];
+  if(!q.tot) return {v:'na', ratio:null};
+  var ratio = q.cu/q.tot*100, worse = q.cu>q.cuy;
+  if(q.cu===0)               return {v:'ok',  ratio:ratio};
+  if(ratio<=t[0])            return {v:'ok',  ratio:ratio};
+  if(ratio>t[1] && worse)    return {v:'no',  ratio:ratio};
+  return {v:'mid', ratio:ratio};
 }
 function q5Verdict(bk){
   var s = seedOf(bk);
@@ -474,19 +483,31 @@ function reasons(bk){
   var q1=vs.q1;
   if(q1.v==='no'||q1.v==='mid'){
     var d=[];
-    if(q1.parts.sales!=='ok'&&q1.parts.sales!=='na') d.push('매출달성율 '+pc(b.q1.sr));
-    if(q1.parts.op!=='ok'&&q1.parts.op!=='na') d.push('영업이익달성율 '+pc(b.q1.orr));
-    if(q1.parts.capex!=='ok'&&q1.parts.capex!=='na') d.push('CAPEX집행율 '+pc(b.q1.cr));
-    if(q1.parts.pay!=='ok'&&q1.parts.pay!=='na') d.push('회수기간 달성 '+b.q1.payOk+'/'+b.q1.payN+'개점');
-    out.push('<b>Q1 '+VTXT[q1.v]+'</b> — '+(d.join(' · ')||'세부 미달')+' <span class="mnote">(대상 '+b.q1.n+'개점)</span>');
+    var ts=D.thresholds;
+    if(q1.parts.sales!=='ok'&&q1.parts.sales!=='na')
+      d.push('매출달성율 <b>'+pc(b.q1.sr)+'</b> <span class="mnote">(기준 '+ts.salesAchv[0]+'% 이상)</span>');
+    if(q1.parts.op!=='ok'&&q1.parts.op!=='na')
+      d.push('영업이익달성율 <b>'+pc(b.q1.orr)+'</b> <span class="mnote">(기준 '+ts.opAchv[0]+'% 이상)</span>');
+    if(q1.parts.capex!=='ok'&&q1.parts.capex!=='na')
+      d.push('CAPEX집행율 <b>'+pc(b.q1.cr)+'</b> <span class="mnote">(기준 '+ts.capexAchv[0]+'% 이하)</span>');
+    if(q1.parts.pay!=='ok'&&q1.parts.pay!=='na')
+      d.push('회수기간 달성 <b>'+b.q1.payOk+'/'+b.q1.payN+'개점</b> <span class="mnote">(기준 전 매장 달성)</span>');
+    out.push('<b>Q1 '+VTXT[q1.v]+'</b> · '+(d.join(' · ')||'세부 미달')
+      +' <span class="mnote">(대상 '+b.q1.n+'개점 · 미달 항목 '+q1.fails+'개)</span>');
   }
   if(vs.q2.v==='no'||vs.q2.v==='mid')
-    out.push('<b>Q2 '+VTXT[vs.q2.v]+'</b> — 동일매장성장률 '+sgn(b.q2.sssg,1,'%')+' <span class="mnote">(대상 '+b.q2.n+'개점)</span>');
-  if(vs.q3.v==='no'||vs.q3.v==='mid')
-    out.push('<b>Q3 '+VTXT[vs.q3.v]+'</b> — 누적 적자매장 '+b.q3.cu+'개(전년 '+b.q3.cuy+'개, '+sgn(b.q3.cu-b.q3.cuy,0,'개')+'), 누적 손실 '+fx(b.q3.lcu)+'억');
+    out.push('<b>Q2 '+VTXT[vs.q2.v]+'</b> · 동일매장성장률 <b>'+sgn(b.q2.sssg,1,'%')+'</b>'
+      +' <span class="mnote">(기준 0% 이상 통과 · '+D.thresholds.sssg[1]+'% 미만 미달 · 대상 '+b.q2.n+'개점)</span>');
+  if(vs.q3.v==='no'||vs.q3.v==='mid'){
+    var lr=D.thresholds.lossRatio||[10,25], rt=vs.q3.ratio;
+    out.push('<b>Q3 '+VTXT[vs.q3.v]+'</b> · 누적 적자매장 <b>'+b.q3.cu+'개 / '+b.q3.tot+'개점 ('+fx(rt)+'%)</b>'
+      +' · 전년 '+b.q3.cuy+'개('+sgn(b.q3.cu-b.q3.cuy,0,'개')+') · 누적 손실 '+fx(b.q3.lcu)+'억'
+      +' <span class="mnote">(기준 '+lr[0]+'% 이하 통과 · '+lr[1]+'% 초과하며 전년비 증가 시 미달)</span>');
+  }
   if(vs.q5.v==='no'||vs.q5.v==='mid'){
     var s=seedOf(bk)||{};
-    out.push('<b>Q5 '+VTXT[vs.q5.v]+'</b> — 사용가능 잔고 '+fx(s.bal)+'억, 시드머니 '+(s.has||'–'));
+    out.push('<b>Q5 '+VTXT[vs.q5.v]+'</b> · 사용가능 잔고 <b>'+fx(s.bal)+'억</b> · 시드머니 '+(s.has||'–')
+      +' <span class="mnote">(기준 잔고 0억 초과 &amp; 시드머니 O)</span>');
   }
   return out;
 }
@@ -499,7 +520,7 @@ function renderLegend(){
     '<span>매출·영업이익 달성율 <span class="lchip ok">'+t.salesAchv[0]+'%↑</span><span class="lchip mid">'+t.salesAchv[1]+'~'+(t.salesAchv[0]-0.1).toFixed(1)+'%</span><span class="lchip no">'+t.salesAchv[1]+'%↓</span></span>'+
     '<span>CAPEX 집행율 <span class="lchip ok">'+t.capexAchv[0]+'%↓</span><span class="lchip mid">~'+t.capexAchv[1]+'%</span><span class="lchip no">'+t.capexAchv[1]+'%↑</span></span>'+
     '<span>동일매장성장률 <span class="lchip ok">0%↑</span><span class="lchip mid">−3~0%</span><span class="lchip no">−3%↓</span></span>'+
-    '<span>부실매장 <span class="lchip ok">0개</span><span class="lchip mid">전년비 감소</span><span class="lchip no">전년비 증가</span></span>'+
+    '<span>부실매장(비율) <span class="lchip ok">'+(t.lossRatio||[10,25])[0]+'%↓</span><span class="lchip mid">~'+(t.lossRatio||[10,25])[1]+'%</span><span class="lchip no">'+(t.lossRatio||[10,25])[1]+'%↑ &amp; 증가</span></span>'+
     '<span>시드머니 <span class="lchip ok">잔고&gt;0 &amp; O</span><span class="lchip mid">잔고&gt;0 &amp; X</span><span class="lchip no">잔고≤0</span></span>';
 }
 
@@ -705,7 +726,8 @@ function renderQ3(){
     var dCu=q.cu-q.cuy, dC=q.c-q.cy;
     h+='<tr'+(bk==='전사'?' class="gtot"':'')+'>'+
       '<td>'+nm+'</td><td class="mnote">'+q.tot+'</td>'+
-      '<td class="gb '+(vs.v==='no'?'tint-bad':(q.cu===0?'tint-good':''))+'"><b>'+q.cu+'</b></td>'+
+      '<td class="gb '+(vs.v==='no'?'tint-bad':(vs.v==='ok'?'tint-good':''))+'"><b>'+q.cu+'</b></td>'+
+      '<td class="'+(vs.v==='no'?'up':(vs.v==='ok'?'dn':''))+'">'+(vs.ratio==null?'–':pc(vs.ratio))+'</td>'+
       '<td class="mnote">'+q.cuy+'</td><td class="'+(dCu>0?'up':(dCu<0?'dn':''))+'">'+sgn(dCu,0,'개')+'</td>'+
       '<td class="gb">'+q.c+'</td><td class="mnote">'+q.cy+'</td>'+
       '<td class="'+(dC>0?'up':(dC<0?'dn':''))+'">'+sgn(dC,0,'개')+'</td>'+

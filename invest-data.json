@@ -26,13 +26,17 @@
    90
   ],
   "capexAchv": [
-   100,
-   110
+   110,
+   130
   ],
   "paybackOverMonths": 6,
   "sssg": [
    0,
    -3
+  ],
+  "lossRatio": [
+   10,
+   25
   ]
  },
  "brandOrder": [
