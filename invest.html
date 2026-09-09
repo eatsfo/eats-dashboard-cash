@@ -133,6 +133,21 @@
   .verdict .vt .rl{ display:inline-block; margin-top:2px; line-height:1.9; }
   .verdict .vt .ovs{ display:block; font-weight:600; color:var(--navy); margin-bottom:4px; }
   .legend{ line-height:2.1; }
+  /* 종합판정 5단계 안내 */
+  .gscale{ display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin:2px 0 14px;
+    border:1px solid var(--line); }
+  .gscale .gs{ padding:9px 10px; border-right:1px solid var(--line); background:#fff; }
+  .gscale .gs:last-child{ border-right:none; }
+  .gscale .gs.go{ background:#f2f9f4; }          /* 도전 가능 구간 */
+  .gscale .gs .gn{ font-size:12.5px; font-weight:700; color:var(--navy); display:block; }
+  .gscale .gs .gp{ font-size:11px; color:var(--faint); font-variant-numeric:tabular-nums; }
+  .gscale .gs .gd{ font-size:11px; color:var(--sub); margin-top:4px; line-height:1.5; display:block; }
+  .gatebar{ display:flex; align-items:center; gap:8px; font-size:12px; margin:0 0 4px; }
+  .gatebar .go{ background:#e7f6ec; color:var(--good-d); font-weight:700;
+    padding:3px 11px; border-radius:9999px; }
+  .gatebar .no{ background:var(--parchment); color:var(--faint); font-weight:600;
+    padding:3px 11px; border-radius:9999px; }
+  .vb .gate{ display:block; font-size:11.5px; font-weight:600; margin-top:3px; }
 </style>
 </head>
 <body>
@@ -143,7 +158,8 @@
     <span style="margin-left:auto"><a class="back" href="javascript:history.back()">◀ 메인으로</a></span>
   </header>
   <p class="story">투자 원칙: <b>사내은행 사전 자가점검</b>을 통과해야 투심위·이사회에 상정할 수 있습니다.
-    브랜드를 고르면 <b>Q1 투자실행결과 · Q2 질적KPI · Q3 부실매장 · Q5 시드머니</b> 4개 질문의 등급과 근거를 숫자로 확인합니다.</p>
+    브랜드를 고르면 <b>Q1 투자실행결과 · Q2 질적KPI · Q3 부실매장 · Q5 시드머니</b> 4개 질문의 등급과 근거를 숫자로 확인합니다.<br>
+    종합 등급이 <b class="dn">조건부 가능 이상이면 투심위에 도전할 수 있습니다.</b></p>
 
   <!-- 탭 -->
   <div class="tabbar" id="tabbar">
@@ -183,15 +199,20 @@
       <h2>브랜드 종합판정</h2>
       <p class="sub" id="vSub">각 항목을 <b>우수 4점 · 양호 3점 · 보통 2점 · 미흡 1점 · 부진 0점</b>으로 채점하고,
         Q1·Q2·Q3·Q5 네 점수의 평균으로 종합 등급을 정합니다. Q1은 세부 4개 항목의 가중평균이며 <b>매출·영업이익에 2배 가중</b>을 둡니다<br>
-        종합 등급 — <b>3.5점↑ 투자 가능 · 2.5점↑ 조건부 가능 · 1.5점↑ 보완 필요 · 0.5점↑ 재검토 · 0.5점↓ 투자 보류</b>.
         단 <b class="up">시드머니 잔고가 0 이하면 재원이 없으므로 점수와 무관하게 투자 보류</b>입니다</p>
+      <div class="gatebar">
+        <span class="go">조건부 가능 이상 = 투심위 도전 가능</span>
+        <span class="no">보완 필요 이하 = 도전 전 보완</span>
+        <span class="mnote">아래 5단계 중 초록 배경 두 칸이 도전 가능 구간입니다</span>
+      </div>
+      <div class="gscale" id="gscale"></div>
       <div class="verdict" id="verdictBox"></div>
       <div class="qgrid" id="qcards"></div>
     </div>
 
     <div class="panel">
       <h2>브랜드 × 질문 매트릭스</h2>
-      <p class="sub">브랜드명을 누르면 해당 브랜드로 전환합니다 · 기준월 26년 7월</p>
+      <p class="sub">브랜드명을 누르면 해당 브랜드로 전환합니다 · 기준월 26년 7월 · <b class="dn">초록색 종합판정이 투심위 도전 가능</b></p>
       <div class="scroll"><table class="mx"><thead>
         <tr><th>브랜드</th><th class="c">Q1 투자실행결과</th><th class="c">Q2 질적KPI</th><th class="c">Q3 부실매장</th><th class="c">Q5 시드머니</th><th class="c gb">종합판정</th></tr>
       </thead><tbody id="mxBody"></tbody></table></div>
@@ -527,6 +548,26 @@ function reasons(bk){
 }
 
 /* ── 레전드 ── */
+/* 종합 5단계 안내 — 점수 구간과 그에 따른 행동을 함께 보여준다.
+   조건부 가능(2.5점) 이상이 투심위 도전 가능선이다. */
+var GATE = 3;                       // OTXT2 인덱스 3 = 조건부 가능
+var OSCALE = [
+  {g:4, band:'3.5점 이상',      desc:'전 항목이 목표 수준. 바로 상정'},
+  {g:3, band:'2.5 ~ 3.4점',    desc:'도전 가능. 미흡 항목의 보완 계획을 함께 제출'},
+  {g:2, band:'1.5 ~ 2.4점',    desc:'도전 전 보완 필요. 미흡·부진 항목을 먼저 개선'},
+  {g:1, band:'0.5 ~ 1.4점',    desc:'투자 방향 재검토. 신규보다 기존점 정상화가 우선'},
+  {g:0, band:'0.5점 미만',      desc:'상정 보류. 시드머니 잔고가 0 이하면 점수와 무관하게 여기'}
+];
+function renderScale(){
+  var el=document.getElementById('gscale');
+  if(!el) return;
+  el.innerHTML = OSCALE.map(function(o){
+    return '<div class="gs'+(o.g>=GATE?' go':'')+'">'
+      + '<span class="gn">'+OTXT2[o.g]+(o.g>=GATE?' <span class="mnote" style="color:var(--good-d)">도전 가능</span>':'')+'</span>'
+      + '<span class="gp">'+o.band+'</span>'
+      + '<span class="gd">'+o.desc+'</span></div>';
+  }).join('');
+}
 function renderLegend(){
   var G=D.grades;
   function row(label,spec){
@@ -564,8 +605,10 @@ function renderVerdict(){
   var bk=curKey(), b=D.brands[bk], gs=allGrades(bk), ov=overallGrade(gs), rs=reasons(bk);
   var label = (BRAND==='전체'?'전사':BRAND);
   var cls = ov.g===null?'na':(ov.g<=1?'no':(ov.g===2?'mid':'ok'));
+  var gate = (ov.g!==null && ov.g>=GATE);
   document.getElementById('verdictBox').innerHTML =
-    '<span class="vb '+cls+'">'+label+' · '+(ov.g===null?'판정 불가':OTXT2[ov.g])+'</span>'+
+    '<span class="vb '+cls+'">'+label+' · '+(ov.g===null?'판정 불가':OTXT2[ov.g])
+    +(ov.g===null?'':'<span class="gate">'+(gate?'투심위 도전 가능':'도전 전 보완 필요')+'</span>')+'</span>'+
     '<span class="vt"><span class="ovs">종합 '+(ov.avg===null?'–':fx(ov.avg,2))+'점 '
     +'<span class="mnote">(Q1·Q2·Q3·Q5 평균 · 4점 만점)</span></span>'
     +(rs.length ? rs.join('<br>') : '전 항목 우수')+'</span>';
@@ -618,7 +661,8 @@ function renderMatrix(){
       '<td class="'+(bk==='전사'?'':'bn')+'" data-b="'+bk+'">'+nm+'</td>'+
       '<td class="c">'+gBadge(gs.q1?gs.q1.g:null)+'</td><td class="c">'+gBadge(gs.q2)+'</td>'+
       '<td class="c">'+gBadge(gs.q3)+'</td><td class="c">'+gBadge(gs.q5)+'</td>'+
-      '<td class="c gb"><b>'+(ov.g===null?'–':OTXT2[ov.g])+'</b>'
+      '<td class="c gb"><b'+(ov.g!==null&&ov.g>=GATE?' class="dn"':'')+'>'
+      +(ov.g===null?'–':OTXT2[ov.g])+'</b>'
       +'<span class="mnote"> '+(ov.avg===null?'':fx(ov.avg,2)+'점')+'</span></td></tr>';
   });
   document.getElementById('mxBody').innerHTML=h;
@@ -870,7 +914,7 @@ fetch('invest-data.json',{cache:'no-store'}).then(function(r){
   D=j; VER=j.meta.seedDefault||'지주제출';
   document.getElementById('fVer').value=VER;
   document.getElementById('baseYmTag').textContent='기준월 — '+j.meta.ymLabel;
-  renderLegend(); renderChips(); renderAll();
+  renderScale(); renderLegend(); renderChips(); renderAll();
 }).catch(function(){
   document.getElementById('loadErr').hidden=false;
 });
