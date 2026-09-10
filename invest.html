@@ -156,6 +156,27 @@
   .calc .cq b{ color:var(--ink); }
   .calc .eq{ color:var(--faint); margin:0 6px; }
   .calc .res{ font-weight:700; color:var(--navy); }
+  /* 판정 절차 — 어떤 매장이 왜 부실로 잡히는지 단계로 보여준다 */
+  .flow{ display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border:1px solid var(--line); margin:8px 0; }
+  .flow .fs{ padding:9px 11px; border-right:1px solid var(--line); background:#fff; }
+  .flow .fs:last-child{ border-right:none; background:var(--accent-bg); }
+  .flow .fn{ display:block; font-size:10.5px; font-weight:700; color:var(--faint); }
+  .flow .ft{ display:block; font-size:12.5px; font-weight:700; color:var(--navy); margin:2px 0 4px; }
+  .flow .fd{ display:block; font-size:11px; color:var(--sub); line-height:1.6;
+    font-variant-numeric:tabular-nums; }
+  .flow .fd b{ color:var(--ink); }
+  .flow .fr{ display:block; font-size:13px; font-weight:700; color:var(--accent);
+    margin-top:5px; font-variant-numeric:tabular-nums; }
+  /* 등급 구간 막대 — 값이 어느 칸에 들어가 그 등급이 됐는지 표시한다 */
+  .cutbar{ display:flex; border:1px solid var(--line); margin:0 0 10px; font-size:11px; }
+  .cutbar .cb{ flex:1; text-align:center; padding:6px 3px; background:#fff;
+    border-right:1px solid var(--line); color:var(--sub); font-variant-numeric:tabular-nums; }
+  .cutbar .cb:last-child{ border-right:none; }
+  .cutbar .cb b{ display:block; font-size:12px; color:var(--navy); }
+  .cutbar .cb.on{ background:var(--accent-bg); }
+  .cutbar .cb.on b{ color:var(--accent); }
+  .cutbar .cb .pin{ display:block; font-size:10.5px; font-weight:700; color:var(--accent); margin-top:2px; }
   .gmap{ display:flex; gap:0; margin:6px 0 0; border:1px solid var(--line); font-size:11px; }
   .gmap div{ flex:1; text-align:center; padding:4px 2px; border-right:1px solid var(--line); }
   .gmap div:last-child{ border-right:none; }
@@ -351,15 +372,15 @@
   <section data-pane="q3" hidden>
     <div class="panel">
       <h2>Q3. 부실매장은 정리되었나요?</h2>
-      <p class="sub">CHECK POINT — 부실매장 개수 0, 손실액 등의 변화 · <b>영업중 직영점</b> 대상 · <b>영업이익(안분후)</b> 기준 · 판정은 <b>누적(당해 1~7월) 적자</b> 기준<br>
-        누적 = 당해 1~7월 · <b class="dn">오픈 초기 2개월(오픈 비용 포함분)은 제외</b><br>
-        판정 — 영업중 직영점 대비 <b>누적 적자매장 비율</b>로 5단계 채점합니다. <b class="dn">5% 이하 우수 · 10% 이하 양호</b> · <span style="color:var(--warn)">20% 이하 보통</span> · <b class="up">35% 이하 미흡 · 35% 초과 부진</b></p>
+      <p class="sub">CHECK POINT — 부실매장 개수 0, 손실액 등의 변화 · 이사회 원칙대로 <b>신규점만이 아니라 기존점을 포함한 전 매장</b>에서 봅니다</p>
+      <div class="flow" id="q3Flow"></div>
+      <div class="cutbar" id="q3Cut"></div>
       <div class="scroll"><table><thead>
         <tr><th rowspan="2">브랜드</th><th rowspan="2">영업중<br>직영점</th>
-            <th class="grp gb" colspan="4">누적 적자매장 (판정 기준)</th>
+            <th class="grp gb" colspan="4">부실매장 = 초기 2개월 뺀 누적 영업이익 &lt; 0 <span class="mnote">(판정 기준)</span></th>
             <th class="grp gb" colspan="3">당월 적자매장</th>
             <th rowspan="2" class="gb">Q3<br>판정</th></tr>
-        <tr><th class="gb">26년</th><th>비율</th><th>전년</th><th>증감</th><th class="gb">26.07</th><th>25.07</th><th>증감</th></tr>
+        <tr><th class="gb">개수</th><th>÷ 대상 = 비율</th><th>전년</th><th>증감</th><th class="gb">26.07</th><th>25.07</th><th>증감</th></tr>
       </thead><tbody id="q3Sum"></tbody></table></div>
       <div class="insight"><span class="ttl">💡 결론</span><span id="q3Insight"></span></div>
     </div>
@@ -852,8 +873,67 @@ function renderQ2(){
     ' 회전율은 객수 데이터가 없어 판정에서 제외했습니다.';
 }
 
+/* 등급 구간을 겹치지 않는 범위로 풀어 쓴다 — i=0이 우수, i=4가 부진 */
+function cutRange(spec,i){
+  var c=spec.cuts, u=spec.unit||'';
+  if(spec.higher){
+    if(i===0) return c[0]+u+' 이상';
+    if(i===4) return c[3]+u+' 미만';
+    return c[i]+u+' ~ '+c[i-1]+u;
+  }
+  if(i===0) return c[0]+u+' 이하';
+  if(i===4) return c[3]+u+' 초과';
+  return c[i-1]+u+' ~ '+c[i]+u;
+}
+/* 값이 어느 칸에 떨어져 그 등급이 됐는지 눈으로 보여준다 */
+function renderCutBar(id,spec,val,label){
+  var el=document.getElementById(id); if(!el) return;
+  var g=band(val,spec);
+  el.innerHTML=[0,1,2,3,4].map(function(i){
+    var gi=4-i, on=(g===gi);
+    return '<div class="cb'+(on?' on':'')+'">'
+      +'<b>'+GTXT[gi]+' '+(gi*25)+'점</b>'+cutRange(spec,i)
+      +(on?'<span class="pin">▲ '+label+'</span>':'')+'</div>';
+  }).join('');
+}
+
 /* ══════════ Q3 ══════════ */
+/* 부실매장이 어떻게 골라지고 등급이 되는지 4단계로 드러낸다.
+   숫자는 선택한 브랜드 기준으로 실제 값을 그대로 쓴다. */
+function renderQ3Flow(){
+  var b=D.brands[curKey()], q=b.q3, g=q3Grade(b);
+  var raw=q.tot+(q.noData||0);                  // 초기 2개월을 빼기 전 손익센터 수
+  var ratio=q.tot? q.cu/q.tot*100 : null;
+  var only=D.q3stores.filter(function(r){
+    return (BRAND==='전체'||r.b===BRAND) && r.kind!=='누적'; }).length;
+  var steps=[
+    ['STEP 1','판정 대상 고르기',
+     '아미스 손익센터의 <b>영업중 직영점</b>만 봅니다. 대리점·폐업 매장은 뺍니다.',
+     raw+'개점'],
+    ['STEP 2','오픈 초기 2개월 빼기',
+     '오픈 비용이 처음 잡히는 달과 그다음 달을 누적에서 뺍니다(이사회 원칙). '
+     +(q.noData? '빼고 나면 영업한 달이 남지 않는 <b>'+q.noData+'개점</b>은 판정하지 않습니다.'
+               : '빼고 나면 영업한 달이 남지 않는 매장은 없습니다.'),
+     q.tot+'개점'],
+    ['STEP 3','부실매장 세기',
+     '남은 달의 <b>누적(1~7월) 영업이익(안분후)</b>이 0보다 작으면 부실매장입니다. '
+     +(only? '누적은 흑자인데 <b>7월 한 달만 적자</b>인 '+only+'개점은 계절성이라 세지 않습니다.'
+           : '누적은 흑자인데 당월만 적자인 매장은 없습니다.'),
+     q.cu+'개점'],
+    ['STEP 4','비율로 등급 매기기',
+     '부실매장을 판정 대상으로 나눈 <b>비율</b>로 채점합니다. 매장 수가 많은 브랜드가 '
+     +'몇 개 늘었다고 통째로 미달이 되지 않게 개수가 아니라 비율을 씁니다.',
+     (ratio===null?'–':q.cu+' ÷ '+q.tot+' = '+pc(ratio)+' → '+gTxt(g)+' '+(g*25)+'점')]
+  ];
+  document.getElementById('q3Flow').innerHTML=steps.map(function(t){
+    return '<div class="fs"><span class="fn">'+t[0]+'</span><span class="ft">'+t[1]+'</span>'
+      +'<span class="fd">'+t[2]+'</span><span class="fr">'+t[3]+'</span></div>';
+  }).join('');
+  renderCutBar('q3Cut',D.grades.lossRatio,ratio,
+    (BRAND==='전체'?'전사':BRAND)+' '+(ratio===null?'–':pc(ratio)));
+}
 function renderQ3(){
+  renderQ3Flow();
   var h='';
   var list = BRAND==='전체' ? ORD.concat(['전사']) : [curKey()];
   list.forEach(function(bk){
@@ -898,7 +978,9 @@ function renderQ3(){
   var q=D.brands[curKey()].q3, g=q3Grade(D.brands[curKey()]), nm=(BRAND==='전체'?'전사':BRAND);
   var d=q.cu-q.cuy;
   document.getElementById('q3Insight').innerHTML = !q.tot ? '해당 브랜드의 영업중 직영점이 없습니다.' :
-    '<b>'+nm+' · '+gTxt(g)+'</b>. 영업중 직영점 '+q.tot+'개 가운데 <b>누적 적자 '+q.cu+'개</b>(전년 동기 '+q.cuy+'개, '+sgn(d,0,'개')+')이고 '+
+    '<b>'+nm+' · '+gTxt(g)+' '+(g*25)+'점</b> <span class="mnote">('+q.cu+' ÷ '+q.tot+' = '
+    +pc(q.cu/q.tot*100)+' · '+cutRange(D.grades.lossRatio,4-g)+' 구간)</span>. '+
+    '판정 대상 '+q.tot+'개 가운데 <b>부실매장 '+q.cu+'개</b>(전년 동기 '+q.cuy+'개, '+sgn(d,0,'개')+')이고 '+
     '누적 손실은 <b>'+fx(q.lcu)+'억</b>입니다. 당월(2607) 적자는 '+q.c+'개로 전년 '+q.cy+'개 대비 '+sgn(q.c-q.cy,0,'개')+'입니다. '+
     (q.cu===0 ? '부실매장이 없어 최고 등급입니다.' :
      (g>=3 ? '비율이 낮아 등급은 양호 이상입니다. 잔존 매장의 정리 시한만 관리하면 됩니다.' :
