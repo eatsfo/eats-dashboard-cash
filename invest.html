@@ -148,6 +148,23 @@
   .gatebar .no{ background:var(--parchment); color:var(--faint); font-weight:600;
     padding:3px 11px; border-radius:9999px; }
   .vb .gate{ display:block; font-size:11.5px; font-weight:600; margin-top:3px; }
+  /* 점수 계산 과정 */
+  .calc{ background:#fff; border:1px solid var(--line); padding:9px 12px; margin:0 0 8px;
+    font-size:11.5px; font-variant-numeric:tabular-nums; }
+  .calc .ct{ font-weight:700; color:var(--navy); margin-right:8px; }
+  .calc .cq{ display:inline-block; margin-right:10px; }
+  .calc .cq b{ color:var(--ink); }
+  .calc .eq{ color:var(--faint); margin:0 6px; }
+  .calc .res{ font-weight:700; color:var(--navy); }
+  .gmap{ display:flex; gap:0; margin:6px 0 0; border:1px solid var(--line); font-size:11px; }
+  .gmap div{ flex:1; text-align:center; padding:4px 2px; border-right:1px solid var(--line); }
+  .gmap div:last-child{ border-right:none; }
+  .gmap div b{ display:block; font-size:12px; }
+  .gmap .s4{ background:#e7f6ec; color:var(--good-d); }
+  .gmap .s3{ background:#f2f9f4; color:var(--good-d); }
+  .gmap .s2{ background:#fdf3e3; color:var(--warn); }
+  .gmap .s1{ background:#fdecec; color:var(--bad-d); }
+  .gmap .s0{ background:#fbe3e3; color:var(--bad-d); }
 </style>
 </head>
 <body>
@@ -197,7 +214,12 @@
   <section data-pane="v">
     <div class="panel">
       <h2>브랜드 종합판정</h2>
-      <p class="sub" id="vSub">각 항목을 <b>우수 4점 · 양호 3점 · 보통 2점 · 미흡 1점 · 부진 0점</b>으로 채점하고,
+      <div class="gmap">
+        <div class="s4"><b>우수</b>4점</div><div class="s3"><b>양호</b>3점</div>
+        <div class="s2"><b>보통</b>2점</div><div class="s1"><b>미흡</b>1점</div>
+        <div class="s0"><b>부진</b>0점</div>
+      </div>
+      <p class="sub" id="vSub">각 항목을 위 <b>5단계 0~4점</b>으로 채점하고,
         Q1·Q2·Q3·Q5 네 점수의 평균으로 종합 등급을 정합니다. Q1은 세부 4개 항목의 가중평균이며 <b>매출·영업이익에 2배 가중</b>을 둡니다<br>
         단 <b class="up">시드머니 잔고가 0 이하면 재원이 없으므로 점수와 무관하게 투자 보류</b>입니다</p>
       <div class="gatebar">
@@ -214,7 +236,7 @@
       <h2>브랜드 × 질문 매트릭스</h2>
       <p class="sub">브랜드명을 누르면 해당 브랜드로 전환합니다 · 기준월 26년 7월 · <b class="dn">초록색 종합판정이 투심위 도전 가능</b></p>
       <div class="scroll"><table class="mx"><thead>
-        <tr><th>브랜드</th><th class="c">Q1 투자실행결과</th><th class="c">Q2 질적KPI</th><th class="c">Q3 부실매장</th><th class="c">Q5 시드머니</th><th class="c gb">종합판정</th></tr>
+        <tr><th>브랜드</th><th class="c">Q1 투자실행결과</th><th class="c">Q2 질적KPI</th><th class="c">Q3 부실매장</th><th class="c">Q5 시드머니</th><th class="c gb">종합판정 <span class="mnote">(4점 만점)</span></th></tr>
       </thead><tbody id="mxBody"></tbody></table></div>
       <div class="insight"><span class="ttl">💡 결론</span><span id="mxInsight"></span></div>
     </div>
@@ -253,7 +275,7 @@
             <th class="grp gb" colspan="2">매출달성율(평균)</th>
             <th class="grp gb" colspan="2">영업이익달성율(평균)</th>
             <th class="grp gb" colspan="2">CAPEX집행율(평균)</th>
-            <th rowspan="2" class="gb">회수기간<br>달성</th><th rowspan="2">Q1 종합</th></tr>
+            <th rowspan="2" class="gb">회수기간<br>달성</th><th rowspan="2">Q1 종합 <span class="mnote">(4점)</span></th></tr>
         <tr><th class="gb">값</th><th>등급</th><th class="gb">값</th><th>등급</th><th class="gb">값</th><th>등급</th></tr>
       </thead><tbody id="q1Sum"></tbody></table></div>
       <div class="insight"><span class="ttl">💡 결론</span><span id="q1Insight"></span></div>
@@ -535,8 +557,16 @@ function reasons(bk){
     item('capex','CAPEX집행율',b.q1.cr,G.capexAchv,pc(b.q1.cr));
     item('pay','회수기간 달성',gs.q1.payRate,G.payRate,
          b.q1.payN? b.q1.payOk+'/'+b.q1.payN+'개점('+pc(gs.q1.payRate,0)+')' : '–');
-    out.push('<b>Q1 '+gTxt(gs.q1.g)+'</b> <span class="mnote">(가중평균 '+fx(gs.q1.score,2)
-      +'점 · 매출·영업이익 2배 가중 · 대상 '+b.q1.n+'개점)</span><br><span class="rl">'+d.join(' · ')+'</span>');
+    var wsum=0, wtot=0, wexp=[];
+    [['매출','sales',2],['영업이익','op',2],['CAPEX','capex',1],['회수','pay',1]].forEach(function(t){
+      var g=p[t[1]];
+      if(g===null||g===undefined) return;
+      wsum+=g*t[2]; wtot+=t[2];
+      wexp.push(g+'×'+t[2]);
+    });
+    out.push('<b>Q1 '+gTxt(gs.q1.g)+' '+fx(gs.q1.score,2)+'점</b> '
+      +'<span class="mnote">('+wexp.join(' + ')+' = '+wsum+' ÷ 가중치합 '+wtot+' · 매출·영업이익 2배 가중 · 대상 '+b.q1.n+'개점)</span>'
+      +'<br><span class="rl">'+d.join(' · ')+'</span>');
   }
   if(gs.q2!==null)
     out.push('<b>Q2 '+gTxt(gs.q2)+'</b> · 동일매장성장률 <b>'+sgn(b.q2.sssg,1,'%')+'</b>'
@@ -613,12 +643,23 @@ function renderVerdict(){
   var label = (BRAND==='전체'?'전사':BRAND);
   var cls = ov.g===null?'na':(ov.g<=1?'no':(ov.g===2?'mid':'ok'));
   var gate = (ov.g!==null && ov.g>=GATE);
+  // 점수가 어떻게 나왔는지 식을 그대로 보여준다
+  var terms=[], sum=0, cnt=0;
+  [['Q1',gs.q1?gs.q1.score:null],['Q2',gs.q2],['Q3',gs.q3],['Q5',gs.q5]].forEach(function(t){
+    if(t[1]===null||t[1]===undefined){ terms.push('<span class="cq">'+t[0]+' <b>대상없음</b></span>'); return; }
+    terms.push('<span class="cq">'+t[0]+' <b>'+fx(t[1],2)+'</b>'+'<span class="mnote">('+gTxt(Math.round(t[1]))+')</span></span>');
+    sum+=t[1]; cnt++;
+  });
+  var calc = '<div class="calc"><span class="ct">종합 점수 계산</span>'+terms.join('')
+    +'<span class="eq">→</span>합계 '+fx(sum,2)+' ÷ '+cnt+'개 항목'
+    +'<span class="eq">=</span><span class="res">'+(ov.avg===null?'–':fx(ov.avg,2))+'점</span>'
+    +'<span class="mnote"> / 4점 만점 → '+(ov.g===null?'판정 불가':OTXT2[ov.g])+'</span>'
+    +(gs.q5===0?'<br><span class="up">시드머니 잔고가 0 이하라 점수와 무관하게 투자 보류입니다</span>':'')
+    +'</div>';
   document.getElementById('verdictBox').innerHTML =
     '<span class="vb '+cls+'">'+label+' · '+(ov.g===null?'판정 불가':OTXT2[ov.g])
     +(ov.g===null?'':'<span class="gate">'+(gate?'투심위 도전 가능':'도전 전 보완 필요')+'</span>')+'</span>'+
-    '<span class="vt"><span class="ovs">종합 '+(ov.avg===null?'–':fx(ov.avg,2))+'점 '
-    +'<span class="mnote">(Q1·Q2·Q3·Q5 평균 · 4점 만점)</span></span>'
-    +(rs.length ? rs.join('<br>') : '전 항목 우수')+'</span>';
+    '<span class="vt">'+calc+(rs.length ? rs.join('<br>') : '전 항목 우수')+'</span>';
 
   var s=seedOf(bk)||{};
   var cards=[
