@@ -132,9 +132,13 @@
     "pre": 351.1,
     "cur": 335.9,
     "sssg": -4.3,
-    "mgn": 12.9,
-    "mgnPre": 14.9,
-    "mgnGap": -2.0
+    "bSale": 403.3,
+    "bSalePre": 363.7,
+    "bOp": 54.9,
+    "bOpPre": 52.4,
+    "mgn": 13.6,
+    "mgnPre": 14.4,
+    "mgnGap": -0.8
    },
    "q3": {
     "tot": 119,
@@ -174,9 +178,13 @@
     "pre": 17.1,
     "cur": 19.8,
     "sssg": 15.6,
-    "mgn": 2.1,
-    "mgnPre": 4.9,
-    "mgnGap": -2.7
+    "bSale": 19.8,
+    "bSalePre": 17.3,
+    "bOp": 0.4,
+    "bOpPre": 0.8,
+    "mgn": 2.2,
+    "mgnPre": 4.8,
+    "mgnGap": -2.6
    },
    "q3": {
     "tot": 28,
@@ -216,9 +224,13 @@
     "pre": 21.6,
     "cur": 24.9,
     "sssg": 15.5,
-    "mgn": 16.4,
-    "mgnPre": 9.4,
-    "mgnGap": 7.0
+    "bSale": 30.5,
+    "bSalePre": 22.0,
+    "bOp": 5.1,
+    "bOpPre": 1.9,
+    "mgn": 16.7,
+    "mgnPre": 8.8,
+    "mgnGap": 7.9
    },
    "q3": {
     "tot": 33,
@@ -258,9 +270,13 @@
     "pre": 33.2,
     "cur": 29.9,
     "sssg": -9.9,
-    "mgn": 7.6,
-    "mgnPre": 2.5,
-    "mgnGap": 5.1
+    "bSale": 35.9,
+    "bSalePre": 33.5,
+    "bOp": 2.5,
+    "bOpPre": 0.8,
+    "mgn": 6.9,
+    "mgnPre": 2.2,
+    "mgnGap": 4.7
    },
    "q3": {
     "tot": 21,
@@ -300,9 +316,13 @@
     "pre": 15.2,
     "cur": 20.8,
     "sssg": 36.5,
-    "mgn": 1.1,
-    "mgnPre": 1.6,
-    "mgnGap": -0.5
+    "bSale": 26.3,
+    "bSalePre": 15.4,
+    "bOp": 0.7,
+    "bOpPre": 0.1,
+    "mgn": 2.7,
+    "mgnPre": 0.7,
+    "mgnGap": 2.1
    },
    "q3": {
     "tot": 17,
@@ -342,9 +362,13 @@
     "pre": 4.5,
     "cur": 2.8,
     "sssg": -38.6,
-    "mgn": -16.2,
+    "bSale": 4.1,
+    "bSalePre": 4.5,
+    "bOp": -1.2,
+    "bOpPre": 0.3,
+    "mgn": -27.9,
     "mgnPre": 5.6,
-    "mgnGap": -21.9
+    "mgnGap": -33.5
    },
    "q3": {
     "tot": 2,
@@ -384,9 +408,13 @@
     "pre": 4.8,
     "cur": 4.8,
     "sssg": -0.6,
-    "mgn": -1.1,
-    "mgnPre": 1.2,
-    "mgnGap": -2.3
+    "bSale": 6.5,
+    "bSalePre": 7.0,
+    "bOp": 0.0,
+    "bOpPre": -0.1,
+    "mgn": 0.2,
+    "mgnPre": -1.2,
+    "mgnGap": 1.3
    },
    "q3": {
     "tot": 7,
@@ -426,9 +454,13 @@
     "pre": 15.3,
     "cur": 14.3,
     "sssg": -6.5,
-    "mgn": 12.6,
-    "mgnPre": 8.2,
-    "mgnGap": 4.4
+    "bSale": 14.7,
+    "bSalePre": 16.5,
+    "bOp": 1.7,
+    "bOpPre": 1.4,
+    "mgn": 11.9,
+    "mgnPre": 8.4,
+    "mgnGap": 3.5
    },
    "q3": {
     "tot": 9,
@@ -468,9 +500,13 @@
     "pre": 462.9,
     "cur": 453.2,
     "sssg": -2.1,
-    "mgn": 11.4,
-    "mgnPre": 12.5,
-    "mgnGap": -1.1
+    "bSale": 547.2,
+    "bSalePre": 489.3,
+    "bOp": 59.3,
+    "bOpPre": 54.1,
+    "mgn": 10.8,
+    "mgnPre": 11.1,
+    "mgnGap": -0.2
    },
    "q3": {
     "tot": 236,
