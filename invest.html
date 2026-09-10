@@ -399,7 +399,9 @@
         ※ 연속 적자 = 기준월부터 거슬러 올라가며 연속으로 적자인 개월 수(최대 7)<br>
         ※ <b>오픈 초기 2개월은 누적에서 제외</b>합니다(2026-09-09 반영). 이사회 원칙상 부실매장은 기존점을 포함한 전 매장에서 보되, 오픈 비용이 섞인 첫 2개월은 빼고 판정합니다. <b>오픈월이 아니라 비용이 처음 잡히는 달</b>이 기준입니다 — 피자몰V2 이마트 다산점은 6월 오픈인데 5월부터 비용이 잡혀 2605·2606을 빼면 <b>2607 영업이익 0.21억만 남아 흑자</b>가 됩니다. 두 달 합이 흑자인 매장은 제외하지 않습니다<br>
         ※ 초기 2개월을 빼고 나면 <b>영업한 달이 남지 않는 매장은 판정 대상에서 뺍니다</b> — 자연별곡 이마트 은평점(2607 오픈)이 해당합니다<br>
-        ※ <b>딱지는 26년 누적에서 그 달을 뺐다는 표시</b>입니다 — 딱지가 없으면 뺀 달이 없다는 뜻이고 그 숫자는 1~7월 그대로의 영업 적자입니다. <b>25년에 걸친 초기월은 빼지 않습니다</b>. 26년 누적은 2601~2607 합계라 25년 숫자가 애초에 들어있지 않기 때문입니다 — 자연별곡 야탑점(26.01 오픈)은 초기 2개월이 25.12~26.01이지만 실제로 뺀 것은 <b>26.01의 -0.53억뿐</b>이고, 25.12분은 26년 누적에 없어 손대지 않았습니다. 규칙 자체는 <b>전 매장 공통</b>이며 이번 달 21개점의 26년 누적에 반영됐습니다<br>
+        ※ <b>25년에 걸친 초기월은 빼지 않습니다</b> — 26년 누적은 2601~2607 합계라 25년 숫자가 애초에 들어있지 않기 때문입니다. 자연별곡 야탑점(26.01 오픈)은 초기 2개월이 25.12~26.01이지만 실제로 뺀 것은 <b>26.01의 -0.53억뿐</b>입니다<br>
+        ※ <b>26년 누적에서 초기 2개월을 뺀 매장 전수</b>입니다. 규칙은 전 매장 공통이고, 아래는 그 규칙이 26년 숫자를 실제로 바꾼 매장입니다 — 아미스 원자료와 대사할 때 이 금액만큼 차이가 납니다
+        <div id="q3ExclList"></div>
         ※ 이 규칙으로 누적 적자매장이 <b>44개점에서 37개점</b>으로 줄었습니다. 오래된 매장은 초기 2개월이 올해 범위 밖이라 영향이 없습니다<br>
         ※ <b>등급 판정은 누적 적자 매장만</b>으로 합니다. 표에는 <b>당월만 적자</b>인 매장도 참고로 함께 싣되 배지를 붙이고 흐리게 표시하며, 개수 집계에서 분리합니다(2026-09-09 반영). 종전에는 둘을 섞어 세어 표 머리글의 매장 수가 등급 판정 수와 달랐습니다 — 피자몰V2 대구이월드점은 누적 영업이익 +0.67억·이익률 21.7%인데 7월 한 달 적자만으로 적자매장 리스트에 올라 있었습니다<br>
         ※ <b>오픈일은 신규오픈점피드백 [CAPEX·오픈매장]을 정본</b>으로 씁니다(2026-09-09 반영). 아미스 [26] 오픈일자는 계약일·최초오픈일이 섞여 있어 154개점 중 110개점이 어긋났습니다. 피자몰V2 이마트 다산점이 아미스에는 2026-04-27로 잡혀 있었으나 4~5월 매출이 0이라 <b>2026-06-26</b>이 맞습니다. 리뉴얼 매장은 아미스가 최초 오픈일을 들고 있어 롯데백화점 청량리점이 2015년으로 표시되기도 했습니다<br>
@@ -939,8 +941,26 @@ function renderQ3Flow(){
   renderCutBar('q3Cut',D.grades.lossRatio,ratio,
     (BRAND==='전체'?'전사':BRAND)+' '+(ratio===null?'–':pc(ratio)));
 }
+/* 초기 2개월을 실제로 뺀 매장 전수 — 표에는 표시하지 않고 주석에만 둔다.
+   매장마다 딱지를 달면 '이 매장만 오픈비용을 뺐다'로 읽혀 규칙이 전 매장
+   공통이라는 사실과 어긋나기 때문이다(2026-09-10 딱지 제거). */
+function renderQ3Excl(){
+  var el=document.getElementById('q3ExclList'); if(!el) return;
+  var rows=(D.q3excl||[]).filter(function(r){ return BRAND==='전체'||r.b===BRAND; });
+  if(!rows.length){ el.innerHTML='<p class="mnote" style="margin:6px 0 0">해당 매장이 없습니다 — 누적은 1~7월 합계 그대로입니다.</p>'; return; }
+  el.innerHTML='<div class="scroll" style="margin:6px 0 0"><table><thead><tr>'
+    +'<th>매장</th><th>브랜드</th><th class="c">오픈일</th><th class="c">뺀 달</th>'
+    +'<th class="gb">뺀 금액</th><th>뺀 뒤 누적</th><th class="c">결과</th></tr></thead><tbody>'
+    +rows.map(function(r){
+      return '<tr><td class="l">'+esc(r.name)+'</td><td class="mnote" style="text-align:center">'+r.b+'</td>'
+        +'<td class="c mnote">'+esc(r.open||'–')+'</td><td class="c">'+ymTxt(r.m)+'</td>'
+        +'<td class="gb up">'+fx(r.amt,2)+'</td>'
+        +'<td class="'+(r.cum<0?'up':'dn')+'">'+fx(r.cum,2)+'</td>'
+        +'<td class="c mnote">'+r.state+'</td></tr>';
+    }).join('')+'</tbody></table></div>';
+}
 function renderQ3(){
-  renderQ3Flow();
+  renderQ3Flow(); renderQ3Excl();
   var h='';
   var list = BRAND==='전체' ? ORD.concat(['전사']) : [curKey()];
   list.forEach(function(bk){
@@ -969,24 +989,13 @@ function renderQ3(){
     +(BRAND==='전체'?'':' · '+BRAND)
     +' · <b>누적 적자 '+nCum+'개점</b><span class="mnote">(등급 판정 대상)</span>'
     +(nCur?' · <b>당월만 적자 '+nCur+'개점</b><span class="mnote">(누적은 흑자 — 참고용, 판정 제외)</span>':'')
-    +'<br><span class="mnote"><b>딱지</b> = 그 달을 26년 누적에서 뺐다는 표시입니다(오픈 초기 2개월 규칙). '
-    +'딱지가 없으면 뺀 달이 없다는 뜻이고, 그 숫자는 <b>1~7월 그대로의 영업 적자</b>입니다. '
-    +'25년에 걸친 초기월은 애초에 26년 누적에 없으므로 빼지 않습니다.</span>';
+    +'<br><span class="mnote">누적 영업이익은 <b>전 매장 같은 규칙</b>으로 산정했습니다 — 오픈 초기 2개월은 모두 뺐습니다. '
+    +'어느 매장에서 몇 월치가 빠졌는지는 아래 <b>산출 기준 · 주석</b>에 전수로 있습니다.</span>';
   document.getElementById('q3Det').innerHTML = rows.map(function(r){
     var only = (r.kind!=='누적');
     var tag = only ? ' <span class="badge na" title="누적은 흑자이고 당월만 적자입니다 — 등급 판정에서 제외">당월만</span>' : '';
     // 초기 2개월 제외는 전 매장 공통 규칙이고, 딱지는 그 규칙이 26년 누적 숫자를
     // 실제로 바꾼 매장에만 붙는다. 오래된 매장은 초기 2개월이 올해 밖이라 바꿀 것이 없다.
-    // 딱지에는 26년 누적에서 '실제로 뺀 달'만 적는다.
-    // 초기 2개월이 25년에 걸친 매장은 그 25년분이 애초에 26년 누적에 없어 뺀 적이 없다.
-    if (r.excl) {
-      var same = (r.pairM===r.exclM);
-      tag += ' <span class="badge mid" title="오픈 초기 2개월은 '+ymTxt(r.pairM)+'입니다. '
-        +(same ? '두 달 모두 26년 누적에 들어 있어 '+fx(r.excl,2)+'억을 뺐습니다.'
-               : '그중 26년 누적에 들어 있는 '+ymTxt(r.exclM)+'의 '+fx(r.excl,2)+'억만 뺐습니다 — '
-                 +ymTxt(r.pairM).split('~')[0]+'분은 25년이라 26년 누적에 원래 포함되지 않습니다.')
-        +'">'+ymTxt(r.exclM)+' 제외 '+fx(r.excl,2)+'억</span>';
-    }
     return '<tr'+(only?' style="opacity:.6"':'')+'><td class="l">'+esc(r.name)+tag+'</td><td class="mnote" style="text-align:center">'+r.b+'</td>'+
       '<td class="c mnote"'+(r.openSrc==='아미스'?' title="신규오픈점피드백에 없는 매장이라 아미스 오픈일자를 씁니다"':'')+'>'
         +(r.open?esc(r.open):'–')+(r.openSrc==='아미스'?'<span style="color:var(--faint)"> *</span>':'')+'</td>'+
