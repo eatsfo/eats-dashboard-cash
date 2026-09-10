@@ -215,11 +215,11 @@
     <div class="panel">
       <h2>브랜드 종합판정</h2>
       <div class="gmap">
-        <div class="s4"><b>우수</b>4점</div><div class="s3"><b>양호</b>3점</div>
-        <div class="s2"><b>보통</b>2점</div><div class="s1"><b>미흡</b>1점</div>
+        <div class="s4"><b>우수</b>100점</div><div class="s3"><b>양호</b>75점</div>
+        <div class="s2"><b>보통</b>50점</div><div class="s1"><b>미흡</b>25점</div>
         <div class="s0"><b>부진</b>0점</div>
       </div>
-      <p class="sub" id="vSub">각 항목을 위 <b>5단계 0~4점</b>으로 채점하고,
+      <p class="sub" id="vSub">각 항목을 위 <b>5단계 100점 만점</b>으로 채점하고,
         Q1·Q2·Q3·Q5 네 점수의 평균으로 종합 등급을 정합니다. Q1은 세부 4개 항목의 가중평균이며 <b>매출·영업이익에 2배 가중</b>을 둡니다<br>
         단 <b class="up">시드머니 잔고가 0 이하면 재원이 없으므로 점수와 무관하게 투자 보류</b>입니다</p>
       <div class="gatebar">
@@ -236,7 +236,7 @@
       <h2>브랜드 × 질문 매트릭스</h2>
       <p class="sub">브랜드명을 누르면 해당 브랜드로 전환합니다 · 기준월 26년 7월 · <b class="dn">초록색 종합판정이 투심위 도전 가능</b></p>
       <div class="scroll"><table class="mx"><thead>
-        <tr><th>브랜드</th><th class="c">Q1 투자실행결과</th><th class="c">Q2 질적KPI</th><th class="c">Q3 부실매장</th><th class="c">Q5 시드머니</th><th class="c gb">종합판정 <span class="mnote">(4점 만점)</span></th></tr>
+        <tr><th>브랜드</th><th class="c">Q1 투자실행결과</th><th class="c">Q2 질적KPI</th><th class="c">Q3 부실매장</th><th class="c">Q5 시드머니</th><th class="c gb">종합판정 <span class="mnote">(100점 만점)</span></th></tr>
       </thead><tbody id="mxBody"></tbody></table></div>
       <div class="insight"><span class="ttl">💡 결론</span><span id="mxInsight"></span></div>
     </div>
@@ -275,7 +275,7 @@
             <th class="grp gb" colspan="2">매출달성율(평균)</th>
             <th class="grp gb" colspan="2">영업이익달성율(평균)</th>
             <th class="grp gb" colspan="2">CAPEX집행율(평균)</th>
-            <th rowspan="2" class="gb">회수기간<br>달성</th><th rowspan="2">Q1 종합 <span class="mnote">(4점)</span></th></tr>
+            <th rowspan="2" class="gb">회수기간<br>달성</th><th rowspan="2">Q1 종합 <span class="mnote">(100점)</span></th></tr>
         <tr><th class="gb">값</th><th>등급</th><th class="gb">값</th><th>등급</th><th class="gb">값</th><th>등급</th></tr>
       </thead><tbody id="q1Sum"></tbody></table></div>
       <div class="insight"><span class="ttl">💡 결론</span><span id="q1Insight"></span></div>
@@ -484,6 +484,18 @@ function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return
    가중평균으로 종합 등급을 낸다. 단, 시드머니 잔고가 0 이하면 재원이 없으므로
    평균과 무관하게 투자 보류로 고정한다. */
 var GTXT=['부진','미흡','보통','양호','우수'];
+/* 채점은 0~4단계로 하되 화면에는 100점 만점으로 환산해 보여준다.
+   부진 0 · 미흡 25 · 보통 50 · 양호 75 · 우수 100점.
+   종합 구간 경계는 85 / 65 / 40 / 15점 — 4점 기준(3.5·2.5·1.5·0.5)과
+   판정 결과가 모든 브랜드에서 같은 것을 확인하고 정한 값이다. */
+var OCUT=[85,65,40,15];             // 투자 가능 / 조건부 가능 / 보완 필요 / 재검토
+function to100(v){ return (v===null||v===undefined)?null:v/4*100; }
+function r1(v){ return v===null?null:Math.round(v*10)/10; }
+function gradeBy100(pt){
+  if(pt===null||pt===undefined) return null;
+  for(var i=0;i<OCUT.length;i++){ if(pt>=OCUT[i]) return 4-i; }
+  return 0;
+}
 var GCLS=['no','no','mid','ok','ok'];              // 배지 색: 0~1 빨강 · 2 노랑 · 3~4 초록
 var OTXT2=['투자 보류','재검토','보완 필요','조건부 가능','투자 가능'];
 
@@ -531,11 +543,12 @@ function allGrades(bk){
 }
 function overallGrade(gs){
   var a=[gs.q1?gs.q1.score:null, gs.q2, gs.q3, gs.q5].filter(function(x){return x!==null;});
-  if(!a.length) return {g:null, avg:null};
+  if(!a.length) return {g:null, avg:null, pt:null};
   var avg=a.reduce(function(x,y){return x+y;},0)/a.length;
-  var g=Math.min(4,Math.max(0,Math.round(avg)));
+  var pt=to100(avg);
+  var g=gradeBy100(pt);
   if(gs.q5===0) g=0;                                       // 재원 없음 = 무조건 보류
-  return {g:g, avg:avg};
+  return {g:g, avg:avg, pt:pt};
 }
 
 /* ── 등급 사유 문장 — 실제값과 등급 경계를 함께 보여준다 ── */
@@ -561,10 +574,10 @@ function reasons(bk){
     [['매출','sales',2],['영업이익','op',2],['CAPEX','capex',1],['회수','pay',1]].forEach(function(t){
       var g=p[t[1]];
       if(g===null||g===undefined) return;
-      wsum+=g*t[2]; wtot+=t[2];
-      wexp.push(g+'×'+t[2]);
+      wsum+=to100(g)*t[2]; wtot+=t[2];
+      wexp.push(to100(g)+'점×'+t[2]);
     });
-    out.push('<b>Q1 '+gTxt(gs.q1.g)+' '+fx(gs.q1.score,2)+'점</b> '
+    out.push('<b>Q1 '+gTxt(gs.q1.g)+' '+fx(to100(gs.q1.score),1)+'점</b> '
       +'<span class="mnote">('+wexp.join(' + ')+' = '+wsum+' ÷ 가중치합 '+wtot+' · 매출·영업이익 2배 가중 · 대상 '+b.q1.n+'개점)</span>'
       +'<br><span class="rl">'+d.join(' · ')+'</span>');
   }
@@ -586,14 +599,14 @@ function reasons(bk){
 
 /* ── 레전드 ── */
 /* 종합 5단계 안내 — 점수 구간과 그에 따른 행동을 함께 보여준다.
-   조건부 가능(2.5점) 이상이 투심위 도전 가능선이다. */
+   조건부 가능(65점) 이상이 투심위 도전 가능선이다. */
 var GATE = 3;                       // OTXT2 인덱스 3 = 조건부 가능
 var OSCALE = [
-  {g:4, band:'3.5점 이상',      desc:'전 항목이 목표 수준. 바로 상정'},
-  {g:3, band:'2.5 ~ 3.4점',    desc:'도전 가능. 미흡 항목의 보완 계획을 함께 제출'},
-  {g:2, band:'1.5 ~ 2.4점',    desc:'도전 전 보완 필요. 미흡·부진 항목을 먼저 개선'},
-  {g:1, band:'0.5 ~ 1.4점',    desc:'투자 방향 재검토. 신규보다 기존점 정상화가 우선'},
-  {g:0, band:'0.5점 미만',      desc:'상정 보류. 시드머니 잔고가 0 이하면 점수와 무관하게 여기'}
+  {g:4, band:'85점 이상',    desc:'전 항목이 목표 수준. 바로 상정'},
+  {g:3, band:'65 ~ 84점',   desc:'도전 가능. 미흡 항목의 보완 계획을 함께 제출'},
+  {g:2, band:'40 ~ 64점',   desc:'도전 전 보완 필요. 미흡·부진 항목을 먼저 개선'},
+  {g:1, band:'15 ~ 39점',   desc:'투자 방향 재검토. 신규보다 기존점 정상화가 우선'},
+  {g:0, band:'15점 미만',    desc:'상정 보류. 시드머니 잔고가 0 이하면 점수와 무관하게 여기'}
 ];
 function renderScale(){
   var el=document.getElementById('gscale');
@@ -647,13 +660,14 @@ function renderVerdict(){
   var terms=[], sum=0, cnt=0;
   [['Q1',gs.q1?gs.q1.score:null],['Q2',gs.q2],['Q3',gs.q3],['Q5',gs.q5]].forEach(function(t){
     if(t[1]===null||t[1]===undefined){ terms.push('<span class="cq">'+t[0]+' <b>대상없음</b></span>'); return; }
-    terms.push('<span class="cq">'+t[0]+' <b>'+fx(t[1],2)+'</b>'+'<span class="mnote">('+gTxt(Math.round(t[1]))+')</span></span>');
-    sum+=t[1]; cnt++;
+    var v=r1(to100(t[1]));   // 화면 셈이 딱 맞도록 표시값 기준으로 합산한다
+    terms.push('<span class="cq">'+t[0]+' <b>'+fx(v,1)+'점</b>'+'<span class="mnote">('+gTxt(Math.round(t[1]))+')</span></span>');
+    sum+=v; cnt++;
   });
   var calc = '<div class="calc"><span class="ct">종합 점수 계산</span>'+terms.join('')
-    +'<span class="eq">→</span>합계 '+fx(sum,2)+' ÷ '+cnt+'개 항목'
-    +'<span class="eq">=</span><span class="res">'+(ov.avg===null?'–':fx(ov.avg,2))+'점</span>'
-    +'<span class="mnote"> / 4점 만점 → '+(ov.g===null?'판정 불가':OTXT2[ov.g])+'</span>'
+    +'<span class="eq">→</span>합계 '+fx(sum,1)+'점 ÷ '+cnt+'개 항목'
+    +'<span class="eq">=</span><span class="res">'+(ov.pt===null?'–':fx(sum/cnt,1)+'점')+'</span>'
+    +'<span class="mnote"> / 100점 만점 → '+(ov.g===null?'판정 불가':OTXT2[ov.g])+'</span>'
     +(gs.q5===0?'<br><span class="up">시드머니 잔고가 0 이하라 점수와 무관하게 투자 보류입니다</span>':'')
     +'</div>';
   document.getElementById('verdictBox').innerHTML =
@@ -711,7 +725,7 @@ function renderMatrix(){
       '<td class="c">'+gBadge(gs.q3)+'</td><td class="c">'+gBadge(gs.q5)+'</td>'+
       '<td class="c gb"><b'+(ov.g!==null&&ov.g>=GATE?' class="dn"':'')+'>'
       +(ov.g===null?'–':OTXT2[ov.g])+'</b>'
-      +'<span class="mnote"> '+(ov.avg===null?'':fx(ov.avg,2)+'점')+'</span></td></tr>';
+      +'<span class="mnote"> '+(ov.pt===null?'':fx(ov.pt,1)+'점')+'</span></td></tr>';
   });
   document.getElementById('mxBody').innerHTML=h;
   Array.prototype.forEach.call(document.querySelectorAll('#mxBody td.bn'),function(td){
@@ -744,7 +758,7 @@ function renderQ1(){
       '<td class="gb '+tintG(gs.parts.op)+'">'+pc(q.orr)+'</td><td class="c">'+gBadge(gs.parts.op)+'</td>'+
       '<td class="gb '+tintG(gs.parts.capex)+'">'+pc(q.cr)+'</td><td class="c">'+gBadge(gs.parts.capex)+'</td>'+
       '<td class="gb">'+(q.payN? q.payOk+' / '+q.payN : '–')+'</td>'+
-      '<td class="c">'+gBadge(gs.g)+'<span class="mnote"> '+(gs.score===null?'':fx(gs.score,2))+'</span></td></tr>';
+      '<td class="c">'+gBadge(gs.g)+'<span class="mnote"> '+(gs.score===null?'':fx(to100(gs.score),0)+'점')+'</span></td></tr>';
   });
   document.getElementById('q1Sum').innerHTML=h;
 
@@ -789,7 +803,7 @@ function renderQ1(){
   var nm=(BRAND==='전체'?'전사':BRAND);
   document.getElementById('q1Insight').innerHTML = b.q1.n===0
     ? '<b>'+nm+'</b>은 최근 12개월 내 오픈한 매장이 없어 Q1을 판정하지 않습니다 — 직전 코호트 성적은 <a href="capex.html" style="color:var(--accent)">CAPEX ④ 성적표</a>를 보십시오.'
-    : '<b>'+nm+' · '+gTxt(gs.g)+'</b> <span class="mnote">(가중평균 '+fx(gs.score,2)+'점)</span>. 최근 12개월 오픈 '+b.q1.n+'개점'
+    : '<b>'+nm+' · '+gTxt(gs.g)+'</b> <span class="mnote">(가중평균 '+fx(to100(gs.score),1)+'점 / 100점)</span>. 최근 12개월 오픈 '+b.q1.n+'개점'
       +(b.q1.nNoTarget?'<span class="mnote">(이사회 목표가 없는 '+b.q1.nNoTarget+'개점 제외)</span>':'')
       +(b.q1.nEarly?'<span class="mnote">(이 중 '+b.q1.nEarly+'개점은 운영 3개월 미만)</span>':'')
       +'의 월매출은 목표의 <b>'+pc(b.q1.sr)+'</b>, '+
@@ -981,7 +995,7 @@ fetch('invest-data.json',{cache:'no-store'}).then(function(r){
 </script>
 
 <script type="application/json" id="fable-data">
-{"asof":"2026-07-31","kpi":{"자가점검_5단계_조건부가능(개)":3,"자가점검_5단계_보완필요(개)":1,"자가점검_5단계_재검토(개)":2,"자가점검_5단계_투자보류(개)":2,"자가점검_종합점수_전사(4점만점)":2.38,"Q1_대상매장_최근12개월(개)":35,"Q1_매출달성율_평균(%)":98.7,"Q1_영업이익달성율_안분후_평균(%)":9.6,"Q1_CAPEX달성율_평균(%)":112.9,"Q1_회수기간달성(개점)":"1/31","Q2_동일매장성장률_전사(%)":-1.1,"Q2_대상매장(개)":212,"Q3_누적적자매장_안분후(개)":44,"Q3_전년동기_누적적자매장(개)":47,"Q3_누적손실액(억)":-23.8,"Q3_당월적자매장(개)":32,"Q5_사용가능잔고_지주제출(억)":288.2,"Q5_사용가능잔고_브랜드공지(억)":242.2,"Q5_애슐리단독잔고_지주제출(억)":242.6,"Q5_시드머니X_브랜드":"자연별곡·프랑제리","CAPEX_소진율(%)":68,"CAPEX_잔여한도(억)":79.3,"승인미오픈_26년오픈예정(건)":17},"risks":["Q1 — 최근 12개월 오픈 35개점의 매출은 목표의 98.7%인데 공통비 안분 후 영업이익은 목표의 9.6%뿐. 회수기간 목표를 지킨 매장은 31개 중 1개. 매출은 맞추는데 이익이 안 나오는 구조라 예가 단계의 목표 이익률이 과대하거나 공통비 부담이 승인 모델에 반영되지 않았음","Q3 — 영업중 직영 246개 중 누적 적자 44개(전년 47개, 3개 감소). 애슐리 14 · 리미니 7 · 로운 6 · 자연별곡 4 · 프랑제리 4 · 피자몰 4. 감소했으나 0이 아니라 전 브랜드가 통과 요건 미충족","Q2 — 전사 동일매장성장률 -1.1%(2607 vs 2507, 212개점). 애슐리 -3.0% · 델리 -9.9% · 자연별곡 -38.6%. 외형 성장은 신규 출점이 만든 것이고 기존점은 역성장","Q5 — 자연별곡(-3.4억)·프랑제리(-0.1억) 잔고 마이너스로 시드머니 X. 지주제출 기준 법인 288.2억 중 애슐리가 242.6억으로 사실상 단독 보유","Q5 버전 차이 — 지주제출과 브랜드공지의 법인 잔고가 288.2억 vs 242.2억으로 46억 차이. 판정 결과가 버전에 따라 달라질 수 있어 상정 근거로 쓸 버전을 CFO실이 확정해야 함","Q1 목표 미설정 매장 3곳(애슐리 성수뮤지엄·성수낙낙, 프랑제리 마곡사옥)이 달성율 평균에서 빠져 있음 — 이사회 승인 목표를 소급 입력해야 판정이 완전해짐","회전율(객수÷테이블수)은 객수 데이터가 4개 원천 파일 어디에도 없어 Q2 판정에서 제외 중"],"decisions":["Q5 기준 버전을 지주제출로 고정할지 확정 — 즉시","Q3 부실매장 정리 계획 확정(누적 적자 44곳, 폐점 시 사용자본 회수 반영) — 3분기","Q1 목표 미설정 3개점의 이사회 승인 목표 소급 입력 — 즉시","브랜드 가이드 재확정 — 애슐리 유지(예가·목표 재검증 후) · 델리 신규 중단 검토 · 로운 하반기 3건 재심의 · 피자몰·리미니 소형 포맷 이익성 재검증 — 3분기","회전율용 객수 데이터 확보 경로(POS·멤버십) 확인 — 미정"]}
+{"asof":"2026-07-31","kpi":{"자가점검_5단계_조건부가능(개)":3,"자가점검_5단계_보완필요(개)":1,"자가점검_5단계_재검토(개)":2,"자가점검_5단계_투자보류(개)":2,"자가점검_종합점수_전사(100점만점)":59.4,"자가점검_도전가능선(점)":65,"Q1_대상매장_최근12개월(개)":32,"Q1_매출달성율_평균(%)":94.5,"Q1_영업이익달성율_안분후_평균(%)":74.2,"Q1_CAPEX집행율_평균(%)":114.0,"Q1_회수기간달성(개점)":"9/31","Q2_동일매장성장률_전사(%)":-2.1,"Q2_대상매장(개)":211,"Q3_누적적자매장_안분후_초기2개월제외(개)":37,"Q3_전년동기_누적적자매장(개)":47,"Q3_누적손실액(억)":-18.7,"Q3_당월적자매장(개)":31,"Q5_사용가능잔고_지주제출(억)":288.2,"Q5_사용가능잔고_브랜드공지(억)":242.2,"Q5_애슐리단독잔고_지주제출(억)":242.6,"Q5_시드머니X_브랜드":"자연별곡·프랑제리","CAPEX_소진율(%)":68,"CAPEX_잔여한도(억)":79.3,"승인미오픈_26년오픈예정(건)":17},"risks":["Q1 — 최근 12개월 오픈 32개점(이사회 목표 있는 매장)의 매출은 목표의 94.5%인데 공통비 안분 후 영업이익은 목표의 74.2%. 회수기간 목표를 지킨 매장은 31개 중 9개뿐이라 회수 시점이 승인 모델보다 뒤로 밀리고 있음","Q3 — 영업중 직영 245개 중 누적 적자 37개(전년 47개, 10개 감소, 누적손실 -18.7억). 오픈 초기 2개월(오픈비용 포함)은 이사회 원칙대로 제외한 수치. 애슐리 10 · 리미니 7 · 로운 6 · 프랑제리 4 · 자연별곡 3 · 델리 3. 0이 아니라 전 브랜드가 통과 요건 미충족","Q2 — 전사 동일매장성장률 -2.1%(2607 vs 2507, 211개점). 애슐리 -4.3% · 델리·자연별곡 큰 폭 역성장. 외형 성장은 신규 출점이 만든 것이고 기존점은 역성장","Q5 — 자연별곡·프랑제리 잔고 마이너스로 시드머니 X. 점수와 무관하게 투자 보류로 고정됨. 지주제출 기준 법인 288.2억 중 애슐리가 242.6억으로 사실상 단독 보유","Q5 버전 차이 — 지주제출과 브랜드공지의 법인 잔고가 288.2억 vs 242.2억으로 46억 차이. 판정 결과가 버전에 따라 달라질 수 있어 상정 근거로 쓸 버전을 CFO실이 확정해야 함","Q1 목표 미설정 매장 3곳이 달성율 평균에서 빠져 있음 — 이사회 승인 목표를 소급 입력해야 판정이 완전해짐","회전율(객수÷테이블수)은 객수 데이터가 4개 원천 파일 어디에도 없어 Q2 판정에서 제외 중"],"decisions":["Q5 기준 버전을 지주제출로 고정할지 확정 — 즉시","Q3 부실매장 정리 계획 확정(누적 적자 37곳, 폐점 시 사용자본 회수 반영) — 3분기","Q1 목표 미설정 3개점의 이사회 승인 목표 소급 입력 — 즉시","브랜드 가이드 재확정 — 애슐리·피자몰·리미니는 조건부 가능(65점 이상)이라 보완 계획과 함께 상정 가능 · 로운은 보완 후 재도전 · 델리·기타는 재검토 · 자연별곡·프랑제리는 재원 부재로 상정 보류 — 3분기","회전율용 객수 데이터 확보 경로(POS·멤버십) 확인 — 미정"]}
 </script>
 </body>
 </html>
