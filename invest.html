@@ -177,6 +177,8 @@
   .cutbar .cb.on{ background:var(--accent-bg); }
   .cutbar .cb.on b{ color:var(--accent); }
   .cutbar .cb .pin{ display:block; font-size:10.5px; font-weight:700; color:var(--accent); margin-top:2px; }
+  .sub2{ font-size:12.5px; font-weight:700; color:var(--navy);
+    margin:16px 0 4px; padding-top:12px; border-top:1px solid var(--line); }
   .gmap{ display:flex; gap:0; margin:6px 0 0; border:1px solid var(--line); font-size:11px; }
   .gmap div{ flex:1; text-align:center; padding:4px 2px; border-right:1px solid var(--line); }
   .gmap div:last-child{ border-right:none; }
@@ -235,14 +237,6 @@
   <section data-pane="v">
     <div class="panel">
       <h2>브랜드 종합판정</h2>
-      <div class="gmap">
-        <div class="s4"><b>우수</b>100점</div><div class="s3"><b>양호</b>75점</div>
-        <div class="s2"><b>보통</b>50점</div><div class="s1"><b>미흡</b>25점</div>
-        <div class="s0"><b>부진</b>0점</div>
-      </div>
-      <p class="sub" id="vSub">각 항목을 위 <b>5단계 100점 만점</b>으로 채점하고,
-        Q1·Q2·Q3·Q5 네 점수의 평균으로 종합 등급을 정합니다. Q1은 세부 4개 항목의 가중평균이며 <b>매출·영업이익에 2배 가중</b>을 둡니다<br>
-        단 <b class="up">시드머니 잔고가 0 이하면 재원이 없으므로 점수와 무관하게 투자 보류</b>입니다</p>
       <div class="gatebar">
         <span class="go">조건부 가능 이상 = 투심위 도전 가능</span>
         <span class="no">보완 필요 이하 = 도전 전 보완</span>
@@ -250,6 +244,15 @@
       </div>
       <div class="gscale" id="gscale"></div>
       <div class="verdict" id="verdictBox"></div>
+      <h3 class="sub2">종합 점수는 이렇게 나옵니다</h3>
+      <p class="sub" id="vSub">Q1·Q2·Q3·Q5 <b>네 항목을 아래 5단계 100점 만점</b>으로 채점하고 그 평균을 종합 점수로 씁니다.
+        Q1은 세부 4개 항목의 가중평균이며 <b>매출·영업이익에 2배 가중</b>을 둡니다<br>
+        단 <b class="up">시드머니 잔고가 0 이하면 재원이 없으므로 점수와 무관하게 투자 보류</b>입니다</p>
+      <div class="gmap">
+        <div class="s4"><b>우수</b>100점</div><div class="s3"><b>양호</b>75점</div>
+        <div class="s2"><b>보통</b>50점</div><div class="s1"><b>미흡</b>25점</div>
+        <div class="s0"><b>부진</b>0점</div>
+      </div>
       <div class="qgrid" id="qcards"></div>
     </div>
 
