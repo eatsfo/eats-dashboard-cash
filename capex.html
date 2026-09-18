@@ -58,6 +58,18 @@
   tr.gtot td{ background:var(--parchment); font-weight:700; border-top:1.5px solid var(--line2); border-bottom:1.5px solid var(--line2); }
   tr.sec td{ background:var(--accent-bg); color:var(--accent); font-weight:600; text-align:left; font-size:11.5px; }
   .bgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px; margin-top:4px; }
+  /* ⑤ 채널 히트맵 */
+  .hm td{ text-align:center; font-variant-numeric:tabular-nums; }
+  .hm td.g{ background:#e7f6ec; color:var(--good-d); font-weight:600; }
+  .hm td.w{ background:#fdf3e3; color:var(--warn); font-weight:600; }
+  .hm td.b{ background:#fdecec; color:var(--bad-d); font-weight:600; }
+  .hm td.na{ color:var(--faint); }
+  .hm td .n{ display:block; font-size:10px; font-weight:400; color:var(--faint); }
+  .hm tr.tot td{ border-top:2px solid var(--line2); }
+  .hm th.own{ background:#eef3fa; }
+  .pillbar{ display:flex; gap:6px; flex-wrap:wrap; margin:6px 0 10px; }
+  .pillbar .pill{ border:1px solid var(--line2); background:#fff; padding:4px 12px; font-size:12px; cursor:pointer; color:var(--sub); }
+  .pillbar .pill.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
   .bcard{ background:var(--parchment); border-radius:0; padding:12px 14px; }
   .bcard.corp{ background:#fff; border:1px solid var(--accent); }
   .bh{ display:flex; align-items:center; gap:8px; margin-bottom:4px; }
@@ -282,6 +294,33 @@ button,select,input,textarea,.tab,.chip,.btn,[class*="tab"],[class*="chip"]{bord
       ※ 위 요약표는 <b>브랜드별 중앙값(회수기간)·합계(CAPEX·매출·영익)</b>, 개별 매장은 <b>매장별 상세</b>에서 연도·브랜드 버튼으로 골라 볼 수 있습니다<br>※ 매장별 상세 — 목표가 없는 항목은 목표칸에 "없음", 실적은 그대로 표시(적중률만 "–") · 브랜드를 고르면 브랜드 열은 자동으로 숨겨집니다<br>※ 적중률 방향 — <b>CAPEX는 실적÷목표라 100% 초과가 초과집행(빨강)</b> · 매출·영업이익은 실적÷목표라 100%에 가까울수록 좋음 · <b>회수기간은 목표÷실적이라 100% 이상이면 목표보다 빠른 회수</b> · 영업이익 실적이 0 이하면 "적자" 표기 · 매장별 합계는 매장 단위 반올림 때문에 요약표와 0.1억 내외 차이가 날 수 있습니다</div></details>
     <div class="insight"><span class="ttl">💡 결론</span><b>브랜드 공통비를 얹으면 신규점 이익은 4년 내내 약속의 3할</b>입니다 — 이익 적중 23년 31% · 24년 29% · 25년 28% · 26년 33%, 그리고 <b>146개점 중 42곳(29%)이 적자</b>. 직전 갱신까지 실적을 직접비 기준으로 잘못 비교해 "25년부터 약속 이행"으로 보였던 것이고, <b>이사회 목표와 같은 공통비 안분 후 기준으로 맞추면 4년간 개선 추세 자체가 없습니다</b>. 매출(84 → 81 → 87 → 111%)과 CAPEX(123 → 133 → 110 → 116%)는 <b>애슐리 32개를 한 해에 연 24년이 바닥</b>인 것이 여전하고, CAPEX는 <b>4년 연속 초과집행</b>(23년 +30.0억 · 24년 +61.0억 · 25년 +14.9억 · 26년 +14.2억). 회수기간도 공통비 기준으로는 목표 8~11개월 대비 <b>실제 26~33개월</b>(적중 30~50%)로, 회수 완료 매장이 129곳 중 33곳뿐입니다. 적자가 가장 몰린 곳은 <b>25년 오픈 16곳</b>(델리 6 · 로운 3 · 피자몰 3 · 애슐리 2 · 기타 2). 브랜드별로는 <b>애슐리가 4년 36 → 30 → 37 → 40%로 유일하게 3할 중반 이상</b>(적자 10곳 중 26년 4곳은 초기), <b>델리는 24년 0% · 25·26년 적자</b>, <b>로운 23년 27% · 25년 7%</b>, <b>피자몰 21 → 50 → 14% → 26년 적자</b>, <b>리미니 23·24년 적자 → 25년 소형 27%</b>. <b>브랜드 가이드</b>: <span class="dn">▲ 애슐리 — 유지</span>(상대적으로 유일한 이익 창출원이나 절대 수준은 목표의 4할, 잔여 신규 55.1억은 예가·목표 재검증 후) · <span class="up">▼ 델리 — 신규 중단 검토</span>(공통비 부담 시 3년 연속 이익 없음) · <span class="up">▼ 로운 — 하반기 3건(15.4억) 재심의</span> · 피자몰·리미니 — 소형 포맷도 공통비 기준으로는 이익이 안 남아 <b>포맷 자체 재검증</b>.</div>
     </details>
+  </div>
+
+  <!-- ⑤ 채널별 적중도 -->
+  <div class="panel">
+    <h2>⑤ 출점 채널별 적중도 — 자사 유통 vs 타사 vs 로드</h2>
+    <p class="sub">④와 같은 171개점(23~26년 오픈)을 <b>입점 채널</b>로 다시 자른 것 · 적중도 = 실적 ÷ 이사회 목표 · 목표가 있는 매장만 집계 · 채널은 매장명으로 분류</p>
+    <div class="pillbar" id="chBar">
+      <span class="pill on" data-m="op">영업이익 적중도</span>
+      <span class="pill" data-m="sales">매출 적중도</span>
+      <span class="pill" data-m="capex">CAPEX 집행율</span>
+      <span class="pill" data-m="loss">적자 매장 비율</span>
+    </div>
+    <table class="hm">
+      <thead>
+        <tr><th rowspan="2">브랜드</th><th class="grp own" colspan="1">자사 유통</th><th class="grp" colspan="3">타사 유통</th><th class="grp" colspan="1">그 외</th><th rowspan="2" class="gb">전체</th></tr>
+        <tr><th class="own">NC·뉴코아·2001<br>킴스·동아</th><th>신세계<br>이마트·스타필드</th><th>롯데<br>백화점·마트·몰</th><th>기타<br>AK·현대·홈플러스 등</th><th>로드·복합몰<br>기타</th></tr>
+      </thead>
+      <tbody id="chBody"></tbody>
+    </table>
+    <p class="lgd" id="chLgd"></p>
+    <div class="insight"><span class="ttl">💡 결론</span><span id="chInsight"></span></div>
+    <details class="notes"><summary>산출 기준 · 주석</summary><div class="nbody">
+      ※ <b>채널 분류는 매장명 키워드</b>로 합니다 — 자사 = NC·뉴코아·2001·NO(뉴코아아울렛)·킴스·동아(백화점·쇼핑)·이월드 / 신세계 = 이마트·신세계·스타필드(마켓·빌리지 포함, 일산 킨텍스·죽전은 스타필드마켓) / 롯데 = 롯데 / 기타 타사 = AK·현대·홈플러스·메가마트·엔터식스·스퀘어원·PEER 등 / 나머지는 로드·복합몰<br>
+      ※ 적중도는 <b>채널 안 매장의 목표 합 대비 실적 합</b>입니다(매장별 비율의 평균이 아님). 셀 아래 작은 숫자가 매장 수이며 <b>3개점 미만은 참고만</b> 하십시오<br>
+      ※ 색 기준 — 영업이익·매출 적중: 95% 이상 초록 · 70~94% 주황 · 70% 미만 빨강 / CAPEX 집행: 105% 이하 초록 · 106~120% 주황 · 120% 초과 빨강 / 적자 비율: 15% 이하 초록 · 16~30% 주황 · 30% 초과 빨강<br>
+      ※ 브랜드 구성이 채널마다 다르므로 <b>채널 합계(전체 행)만 보고 채널 우열을 말하면 안 됩니다</b> — 같은 브랜드의 행을 가로로 비교하십시오
+    </div></details>
   </div>
 
   <div class="src">
@@ -645,11 +684,86 @@ document.querySelectorAll('#storeFbar .pill').forEach(function(p){
   p.addEventListener('click',function(){ if(p.dataset.y) selY=+p.dataset.y; else selB=p.dataset.b; render(); });
 });
 render();
+
+/* ⑤ 채널별 적중도 — 같은 STORES를 입점 채널로 다시 자른다.
+   채널은 매장명 키워드로 분류한다(코스트센터에는 채널 정보가 없다). */
+var CH_RULES=[
+  ['own',  /NC|뉴코아|2001|킴스|이월드|동아|NO점|NO$|NO /i],
+  ['ssg',  /이마트|신세계|스타필드|스타밀드|킨텍스|트레이더스/i],   // 킨텍스·스타밀드 = 스타필드마켓(오타 포함)
+  ['lotte',/롯데/i],
+  ['oth',  /AK|현대|홈플러스|메가마트|갤러리아|하나로|엔터식스|앤터식스|스퀘어원|PEER|피어|아브뉴프랑|M백화점|타임빌라스|IFC/i]
+];
+var CH=['own','ssg','lotte','oth','road'];
+function channelOf(nm){
+  for(var i=0;i<CH_RULES.length;i++){ if(CH_RULES[i][1].test(nm)) return CH_RULES[i][0]; }
+  return 'road';
+}
+var CH_BR=['애슐리퀸즈','피자몰','델리(월드델리)','로운','리미니','기타'];
+var chM='op';
+function chAgg(rs,m){
+  if(!rs.length) return null;
+  if(m==='loss'){
+    var l=rs.filter(function(r){ return r[9]==='L'||(typeof r[9]==='number'&&r[9]<=0); }).length;
+    return Math.round(l/rs.length*100);
+  }
+  var ti={op:8,sales:6,capex:4}[m], ai=ti+1, t=0,a=0;
+  rs.forEach(function(r){ if(typeof r[ti]==='number'&&typeof r[ai]==='number'){ t+=r[ti]; a+=r[ai]; } });
+  return t? Math.round(a/t*100) : null;
+}
+function chCls(v,m){
+  if(v===null) return 'na';
+  if(m==='capex') return v<=105?'g':(v<=120?'w':'b');
+  if(m==='loss')  return v<=15?'g':(v<=30?'w':'b');
+  return v>=95?'g':(v>=70?'w':'b');
+}
+function renderCh(){
+  var tg=STORES.filter(function(r){ return r[4]||r[6]||r[8]; });
+  tg.forEach(function(r){ if(!r._ch) r._ch=channelOf(r[2]); });
+  var h='';
+  function row(label,rs,cls){
+    h+='<tr'+(cls?' class="'+cls+'"':'')+'><td style="text-align:left"><b>'+label+'</b></td>';
+    CH.forEach(function(c){
+      var sub=rs.filter(function(r){ return r._ch===c; });
+      var v=chAgg(sub,chM);
+      h+='<td class="'+chCls(v,chM)+'">'+(v===null?'–':v+'%')+(sub.length?'<span class="n">'+sub.length+'개점</span>':'')+'</td>';
+    });
+    var v=chAgg(rs,chM);
+    h+='<td class="gb '+chCls(v,chM)+'">'+(v===null?'–':v+'%')+'<span class="n">'+rs.length+'개점</span></td></tr>';
+  }
+  CH_BR.forEach(function(b){ var rs=tg.filter(function(r){ return r[1]===b; }); if(rs.length) row(b,rs); });
+  row('전체',tg,'tot');
+  document.getElementById('chBody').innerHTML=h;
+  var lg={op:'영업이익 적중도 = 월영업이익 실적 합 ÷ 목표 합 · 95% 이상 초록 · 70% 미만 빨강',
+          sales:'매출 적중도 = 월매출 실적 합 ÷ 목표 합 · 95% 이상 초록 · 70% 미만 빨강',
+          capex:'CAPEX 집행율 = 공사비 실적 합 ÷ 계획 합 · 105% 이하 초록 · 120% 초과 빨강(초과집행)',
+          loss:'적자 매장 비율 = 월영업이익 0 이하 매장 ÷ 채널 매장 수 · 15% 이하 초록 · 30% 초과 빨강'};
+  document.getElementById('chLgd').textContent=lg[chM];
+
+  // 결론 — 영업이익 기준으로 고정해 쓴다(토글과 무관하게 같은 말을 한다)
+  var tot={}, loss={};
+  CH.forEach(function(c){ var rs=tg.filter(function(r){ return r._ch===c; }); tot[c]=chAgg(rs,'op'); loss[c]=chAgg(rs,'loss'); });
+  var al=tg.filter(function(r){ return r[1]==='애슐리퀸즈'; });
+  var alo={}; CH.forEach(function(c){ alo[c]=chAgg(al.filter(function(r){return r._ch===c;}),'op'); });
+  var nm={own:'자사 유통',ssg:'신세계·이마트',lotte:'롯데',oth:'기타 타사',road:'로드·복합몰'};
+  var order=CH.slice().filter(function(c){return tot[c]!==null;}).sort(function(a,b){return tot[b]-tot[a];});
+  document.getElementById('chInsight').innerHTML=
+    '채널 합계로는 <b>'+nm[order[0]]+'('+tot[order[0]]+'%)</b>이 가장 높고 <b>'+nm[order[order.length-1]]+'('+tot[order[order.length-1]]+'%)</b>이 가장 낮습니다. '
+    +'자사 유통 매장은 <b>'+loss.own+'%가 적자</b>로 타사(신세계 '+loss.ssg+'% · 롯데 '+loss.lotte+'%)보다 훨씬 높은데, 여기에는 <b>델리·리미니·기타 소형 브랜드가 자사 채널에 몰려 있는</b> 구성 효과가 섞여 있습니다. '
+    +'같은 애슐리만 놓고 보면 자사 '+alo.own+'% · 신세계 '+alo.ssg+'% · 롯데 '+alo.lotte+'% · 기타 타사 '+alo.oth+'% · 로드 '+alo.road+'%로 <b>롯데·기타 타사 입점이 가장 잘 맞고 로드와 자사가 뒤처집니다</b>. '
+    +'출점 심의 때 채널을 변수로 넣을 근거가 됩니다 — 특히 소형 브랜드의 자사 채널 출점은 이익 적중이 한 자릿수라 재검증이 필요합니다.';
+}
+document.querySelectorAll('#chBar .pill').forEach(function(p){
+  p.addEventListener('click',function(){
+    document.querySelectorAll('#chBar .pill').forEach(function(q){ q.classList.remove('on'); });
+    p.classList.add('on'); chM=p.dataset.m; renderCh();
+  });
+});
+renderCh();
 })();
 </script>
 
 <script type="application/json" id="fable-data">
-{"asof":"2026-08-31","kpi":{"CAPEX_26년계획(억)":250.1,"CAPEX_26.08누적집행(억)":188.3,"CAPEX_소진율(%)":75,"CAPEX_잔여한도(억)":61.8,"CAPEX_잔여_신규(억)":31.8,"순투입_26년(억)":267.4,"승인매장(건)":39,"오픈완료(건)":26,"미오픈(건)":13,"미오픈_투자비(억)":70.8,"미오픈_연환산기여(억)":120.2,"미오픈_26년내기여(억)":12.4,"지연안건(건)":4,"지연안건_투자비(억)":16.2,"오픈매장_23~26년(개)":171,"④_이익적중도_23년(%)":35,"④_이익적중도_24년(%)":40,"④_이익적중도_25년(%)":53,"④_이익적중도_26년(%)":61,"④_CAPEX적중도_26년(%)":117},"risks":["소진율 75%(188.3/250.1억)로 연 경과 67%를 8%p 앞섬. 남은 61.8억 중 신규는 31.8억뿐","한도 초과 브랜드 — 자연별곡 -1.4억 · 기타CK -1.8억 · 카페 -0.2억","로운은 한도 17.9억 중 3.7억만 집행(21%). 신규 3건이 전부 9~12월 오픈이라 올해 이익 기여가 1.9억뿐","미오픈 13건의 연환산 기여 +120.2억으로 목표 하단(100억)은 통과하나 상단(200억)에 79.8억 부족","26년 내 반영은 12.4억으로 연환산의 10%뿐 — 남은 13건이 대부분 4분기 오픈이라 이익은 27년 몫","지연 4건 16.2억(애슐리 이마트 성남 · 로운 롯데몰 수지 · 피자몰 이마트 김해·롯데마트 광교)","④ 신규 오픈 코호트의 회수기간은 원본 기준(오픈 첫 달부터 전체 포함)이라 오픈비용이 통째로 들어가 크게 늘어남 — 26년 델리 373.8개월·피자몰 102.3개월(중앙값). 초기 2개월 제외 기준으로 보면 각각 훨씬 짧아짐"],"decisions":["잔여 신규 한도 31.8억의 배분 확정 — 4분기","한도 초과 3개 브랜드(자연별곡·기타CK·카페) 처리 방침 — 즉시","지연 4건의 오픈 일정 확정 — 즉시","④ 최근 코호트 회수기간 기준 확정(원본 vs 초기 2개월 제외) — 즉시"]}
+{"asof":"2026-08-31","kpi":{"CAPEX_26년계획(억)":250.1,"CAPEX_26.08누적집행(억)":188.3,"CAPEX_소진율(%)":75,"CAPEX_잔여한도(억)":61.8,"CAPEX_잔여_신규(억)":31.8,"순투입_26년(억)":267.4,"승인매장(건)":39,"오픈완료(건)":26,"미오픈(건)":13,"미오픈_투자비(억)":70.8,"미오픈_연환산기여(억)":120.2,"미오픈_26년내기여(억)":12.4,"지연안건(건)":4,"지연안건_투자비(억)":16.2,"오픈매장_23~26년(개)":171,"④_이익적중도_23년(%)":35,"④_이익적중도_24년(%)":40,"④_이익적중도_25년(%)":53,"④_이익적중도_26년(%)":61,"④_CAPEX적중도_26년(%)":117,"⑤_영업이익적중_자사유통(%)":28,"⑤_영업이익적중_신세계(%)":39,"⑤_영업이익적중_롯데(%)":72,"⑤_영업이익적중_기타타사(%)":67,"⑤_영업이익적중_로드(%)":38,"⑤_적자비율_자사유통(%)":43},"risks":["소진율 75%(188.3/250.1억)로 연 경과 67%를 8%p 앞섬. 남은 61.8억 중 신규는 31.8억뿐","한도 초과 브랜드 — 자연별곡 -1.4억 · 기타CK -1.8억 · 카페 -0.2억","로운은 한도 17.9억 중 3.7억만 집행(21%). 신규 3건이 전부 9~12월 오픈이라 올해 이익 기여가 1.9억뿐","미오픈 13건의 연환산 기여 +120.2억으로 목표 하단(100억)은 통과하나 상단(200억)에 79.8억 부족","26년 내 반영은 12.4억으로 연환산의 10%뿐 — 남은 13건이 대부분 4분기 오픈이라 이익은 27년 몫","지연 4건 16.2억(애슐리 이마트 성남 · 로운 롯데몰 수지 · 피자몰 이마트 김해·롯데마트 광교)","④ 신규 오픈 코호트의 회수기간은 원본 기준(오픈 첫 달부터 전체 포함)이라 오픈비용이 통째로 들어가 크게 늘어남 — 26년 델리 373.8개월·피자몰 102.3개월(중앙값). 초기 2개월 제외 기준으로 보면 각각 훨씬 짧아짐","⑤ 자사 유통(NC·뉴코아·2001·킴스) 입점 56개점의 영업이익 적중 28%·적자 43% — 델리·리미니·기타 소형 브랜드 26개점이 자사 채널에 몰려 있고 이들이 한 자릿수 또는 적자. 애슐리만 보면 자사 56%로 최악은 아니며 로드 39%가 가장 낮음"],"decisions":["잔여 신규 한도 31.8억의 배분 확정 — 4분기","한도 초과 3개 브랜드(자연별곡·기타CK·카페) 처리 방침 — 즉시","지연 4건의 오픈 일정 확정 — 즉시","④ 최근 코호트 회수기간 기준 확정(원본 vs 초기 2개월 제외) — 즉시","소형 브랜드(델리·리미니·기타)의 자사 유통 출점 기준 재검증 — 임차 조건이 유리해도 이익 적중이 나오지 않음 — 4분기"]}
 </script>
 </body>
 </html>
